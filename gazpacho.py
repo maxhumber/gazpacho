@@ -1,9 +1,12 @@
+from copy import copy
 from html.parser import HTMLParser
 import re
 from urllib.parse import urlencode
 from urllib.request import urlopen, build_opener
 
 DEFAULT_USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:69.0) Gecko/20100101 Firefox/69.0'
+
+METHODS_TO_HIDE = set(dir(HTMLParser()))
 
 def get(url, params=None, headers=None):
     '''Get the content from a URL
@@ -41,20 +44,11 @@ def match(dict_query, dict_to_match):
             bools.append(False)
     return all(bools)
 
-class SoupCan:
-    def __init__(self, tag, attrs=None, data=None):
-        self.tag = tag
-        self.attrs = attrs
-        self.data = data
-        self.html = self.format(self.tag, self.attrs, self.data)
-        if attrs:
-            for k, v in attrs.items():
-                if k == 'class':
-                    k = 'class_'
-                setattr(self, k, v)
-
-    def __str__(self):
-        return self.html
+class Soup(HTMLParser):
+    def __init__(self, html):
+        super().__init__()
+        self.html = html
+        self.capture = False
 
     def __repr__(self):
         return self.html
@@ -69,12 +63,6 @@ class SoupCan:
         else:
             attrs = ''
         return f'<{tag}{attrs}>{data}</{tag}>'
-
-class Soup(HTMLParser):
-    def __init__(self, html):
-        super().__init__()
-        self.html = html
-        self.capture = False
 
     def handle_starttag(self, tag, attrs):
         if tag != self.tag:
@@ -92,36 +80,24 @@ class Soup(HTMLParser):
 
     def handle_data(self, data):
         if self.capture:
-            data = SoupCan(self.capture_tag, self.capture_attrs, data)
-            self.data.append(data)
+            html = self.format(self.capture_tag, self.capture_attrs, data)
+            soup = Soup(html)
+            if self.capture_attrs:
+                for k, v in self.capture_attrs.items():
+                    if k == 'class':
+                        k = 'class_'
+                    setattr(soup, k, v)
+            soup.attrs = copy(self.capture_attrs)
+            soup.data = copy(data)
+            self.data.append(soup)
 
     def find(self, tag, attrs=None):
+        '''Find a tag with optional attributes'''
         self.tag = tag
         self.attrs = attrs
         self.data = []
         super().feed(self.html)
         return self.data
 
-if __name__ == '__main__':
-
-    url = 'https://en.wikipedia.org/wiki/Fantasy_hockey'
-    html = get(url)
-    soup = Soup(html)
-
-    results = soup.find('span', {'class': 'mw-headline'})
-    results[0]
-
-    url = 'https://www.goodreads.com/quotes/search'
-    params = {'commit': 'Search', 'page': 2, 'q': 'blake crouch'}
-    html = get(url, params)
-
-    soup = Soup(html)
-    soup.find('a')
-
-    results = soup.find('div', {'class': 'quoteText'})
-    results
-
-    # add all attrs to the data container? could be handy
-    # hide bad methods
-    # return with original wrapping tags
-    # get href attributes, text attributes,
+# TODO:
+# hide methods

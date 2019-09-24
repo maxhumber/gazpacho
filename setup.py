@@ -5,7 +5,7 @@ with open('README.md', encoding='utf8') as f:
 
 setup(
     name='gazpacho',
-    version='0.0.2',
+    version='0.5.0',
     description='No BeautifulSoup For You',
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -15,15 +15,16 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
         'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.6',
     ],
     keywords=[
-        'web', 'web scraping', 'beautifulsoup'
+        'web', 'web scraping', 'scraping', 'beautifulsoup'
     ],
     url='https://github.com/maxhumber/gazpacho',
     author='Max Humber',
     author_email='max.humber@gmail.com',
     license='MIT',
-    py_modules=['requests_html'],
+    py_modules=['gazpacho'],
     python_requires='>=3.6',
     setup_requires=['setuptools>=38.6.0']
 )
