@@ -23,7 +23,7 @@ setup(
     author='Max Humber',
     author_email='max.humber@gmail.com',
     license='MIT',
-    packages=['gazpacho'],
+    py_modules=['requests_html'],
     python_requires='>=3.6',
     setup_requires=['setuptools>=38.6.0']
 )

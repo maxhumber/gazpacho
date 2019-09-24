@@ -3,41 +3,50 @@ import re
 from urllib.parse import urlencode
 from urllib.request import urlopen, build_opener
 
+DEFAULT_USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:69.0) Gecko/20100101 Firefox/69.0'
+
 def get(url, params=None, headers=None):
+    '''Get the content from a URL
+
+    url: The URL for the webpage
+    params: A dictionary of the param payload
+    headers: A dictionary for the headers to be added
+
+    Example:
+    get('https://httpbin.org/anything', {'soup': 'gazpacho'})
+    '''
+    opener = build_opener()
     if params:
         url += '?' + urlencode(params)
-    if not headers:
-        with urlopen(url) as f:
-            html = f.read().decode('utf-8')
-    else:
-        opener = build_opener()
+    if headers:
         for h in headers.items():
             opener.addheaders = [h]
-        with opener.open(url) as f:
-            html = f.read().decode('utf-8')
-    return html
-
-# TODO:
-# FIX PARTIAL MATCH
-dict_to_match = {'class': "teamName teamId-1"}
-dict_query = {'class': 'teamName'}
-match(dict_query, dict_to_match)
+    else:
+        opener.addheaders = [('User-Agent', DEFAULT_USER_AGENT)]
+    with opener.open(url) as f:
+        content = f.read().decode('utf-8')
+    return content
 
 def match(dict_query, dict_to_match):
+    '''Match a query to a reference dictionary'''
     if dict_query is None:
         return True
+    bools = []
     for k, v in dict_query.items():
-        if dict_to_match.get(k) != v:
-            return False
-    return True
+        if not dict_to_match.get(k):
+            bools.append(False)
+        elif v in dict_to_match.get(k):
+            bools.append(True)
+        else:
+            bools.append(False)
+    return all(bools)
 
-# Figure out how to make a unified interface
 class SoupCan:
     def __init__(self, tag, attrs=None, data=None):
         self.tag = tag
         self.attrs = attrs
         self.data = data
-        self.html = format(self.tag, self.attrs, self.data)
+        self.html = self.format(self.tag, self.attrs, self.data)
         if attrs:
             for k, v in attrs.items():
                 if k == 'class':
@@ -93,39 +102,26 @@ class Soup(HTMLParser):
         super().feed(self.html)
         return self.data
 
-url = 'https://en.wikipedia.org/wiki/Fantasy_hockey'
-html = get(url)
-soup = Soup(html)
+if __name__ == '__main__':
 
-results = soup.find('span', {'class': 'mw-headline'})
-results[0]
+    url = 'https://en.wikipedia.org/wiki/Fantasy_hockey'
+    html = get(url)
+    soup = Soup(html)
 
-url = 'https://www.goodreads.com/quotes/search'
-params = {'commit': 'Search', 'page': 2, 'q': 'blake crouch'}
-html = get(url, params)
+    results = soup.find('span', {'class': 'mw-headline'})
+    results[0]
 
-soup = Soup(html)
-soup.find('a')
+    url = 'https://www.goodreads.com/quotes/search'
+    params = {'commit': 'Search', 'page': 2, 'q': 'blake crouch'}
+    html = get(url, params)
 
-@staticmethod
-def format_html(tag, attrs, data):
-    attrs = [f'{k}="{v}"' for k, v in attrs.items()]
-    return f'<{tag} {" ".join(attrs)}>{data}</{tag}>'
+    soup = Soup(html)
+    soup.find('a')
 
-tag = 'a'
-attrs = {'href': '/genres', 'class': 'siteHeader__subNavLink siteHeader__subNavLink--genresIndex', 'data-reactid': '.1638wh2cfls.1.0.3.0.2.0.1.0.0.2.0'}
+    results = soup.find('div', {'class': 'quoteText'})
+    results
 
-attrs = [f'{k}="{v}"' for k, v in attrs.items()]
-
-content = 'hi'
-f'<{tag} {" ".join(attrs)}>{content}</{tag}>'
-
-
-
-results = soup.find('div', {'class': 'quoteText'})
-results
-
-# add all attrs to the data container? could be handy
-# hide bad methods
-# return with original wrapping tags
-# get href attributes, text attributes,
+    # add all attrs to the data container? could be handy
+    # hide bad methods
+    # return with original wrapping tags
+    # get href attributes, text attributes,
