@@ -8,23 +8,23 @@
   <a href="https://pypi.python.org/pypi/gazpacho"><img alt="Downloads" src="https://img.shields.io/pypi/dm/gazpacho.svg"></a>
 </p>
 
-#### ⚠️ Warning 
-
- gazpacho is in Beta right now. Expect some things to change.
-
 
 
 #### About
 
-gazpacho is not BeautifulSoup. 
+gazpacho is a pure python web scraping library. 
 
-Though gazpacho *is* a web scraping library, it's not a full-service web scraping library. Really, gazpacho just does two things: `get` and `.find`.
+It replaces requests and BeautifulSoup for most projects, but not all projects.
+
+gazpacho is small, simple, and predictable.
 
 
 
 #### Usage
 
-gazpacho is easy to use:
+To use gazpacho you need two things: `get` and `.find`. 
+
+Here's a quick example:
 
 ```python
 from gazpacho import get, Soup
