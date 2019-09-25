@@ -29,7 +29,7 @@ def get(url, params=None, headers=None):
     return content
 
 def match(query_attrs, attrs):
-    '''Match an attrs dictionary to a query dictionary'''
+    '''Match a query dictionary to an attrs dictionary'''
     if not query_attrs:
         return True
     if not query_attrs and not attrs:
@@ -47,7 +47,7 @@ def match(query_attrs, attrs):
     return all(bools)
 
 def html_starttag_and_attrs(tag, attrs, startendtag=False):
-    '''Reform HTML starttag and convert attrs to a dictionary'''
+    '''Reconstruct starttag and convert attrs to a dictionary'''
     if attrs:
         attrs = dict(attrs)
         af = [f'{k}="{v}"' for k, v in attrs.items()]
@@ -65,6 +65,9 @@ class Soup(HTMLParser):
     def __init__(self, html):
         super().__init__()
         self.html = html
+        self.tag = None
+        self.attrs = None
+        self.data = None
 
     def __repr__(self):
         return self.html
@@ -75,15 +78,14 @@ class Soup(HTMLParser):
         if tag == self.tag and match(self.attrs, attrs):
             self.count += 1
             self.group += 1
-            self.html_.append('')
-            self.html_[self.group - 1] += html
-            self.tag_ = tag
-            self.attrs_ = attrs
+            self.groups.append(Soup(''))
+            self.groups[self.group - 1].html += html
+            self.groups[self.group - 1].tag = tag
+            self.groups[self.group - 1].attrs = attrs
             return
-        # if recording
         if self.count:
             self.count += 1
-            self.html_[self.group - 1] += html
+            self.groups[self.group - 1].html += html
             return
         else:
             return
@@ -91,14 +93,15 @@ class Soup(HTMLParser):
     def handle_startendtag(self, tag, attrs):
         html, attrs = html_starttag_and_attrs(tag, attrs, True)
         if self.count:
-            self.html_[self.group - 1] += html
+            self.groups[self.group - 1].html += html
             return
         else:
             return
 
+    # TODO: set data attribute
     def handle_data(self, data):
         if self.count:
-            self.html_[self.group - 1] += data
+            self.groups[self.group - 1].html += data
             return
         else:
             return
@@ -106,7 +109,7 @@ class Soup(HTMLParser):
     def handle_endtag(self, tag):
         if self.count:
             end_tag = f'</{tag}>'
-            self.html_[self.group - 1] += end_tag
+            self.groups[self.group - 1].html += end_tag
             self.count -= 1
             return
         else:
@@ -118,31 +121,11 @@ class Soup(HTMLParser):
         self.attrs = attrs
         self.count = 0
         self.group = 0
-        self.html_ = []
+        self.groups = []
         super().feed(self.html)
-        soups = [Soup(hi_) for hi_ in self.html_]
-        return soups
-        # soup = Soup(self.html_)
-        # return soup
+        return self.groups
 
-html = '''<div class="foo" id="bar">
-  <p>'IDK!'</p>
-  <br/>
-  <div class='baz'>
-    <div>
-      <span>Hi</span>
-    </div>
-  </div>
-  <p>Try for 2</p>
-  <div class='baz'>Oh No!</div>
-</div>'''
-
-soup = Soup(html)
-result = soup.find('div', {'class': 'baz'})
-result[0]
-result[1]
-
-
-# hide methods
+# TODO:
+# attribute setting? maybe not...
+# hide methods from HTMLParser
 # fix indenting (pretty print html)
-# handle multiple groups
