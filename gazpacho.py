@@ -128,5 +128,5 @@ class Soup(HTMLParser):
         return self.groups
 
 # TODO:
-# hide methods from HTMLParser
+# hide HTMLParser methods
 # pretty html
