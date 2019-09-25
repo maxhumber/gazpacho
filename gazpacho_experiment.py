@@ -75,7 +75,7 @@ html = '''
 </div>'''
 
 soup = Soup(html)
-soup2 = soup.find('p')
+soup.find('div')
 soup2
 soup.recording
 print(soup.html)
