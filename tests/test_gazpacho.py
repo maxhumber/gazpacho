@@ -40,34 +40,37 @@ def test_match_partial():
     d2 = {'foo': 'bar baz'}
     assert match(d1, d2)
 
-url = 'https://news.ycombinator.com/'
-html = get(url)
-p = Announce()
-p.feed(html)
-
-soup = Soup(html)
-results = soup.find('tr', {'class': 'athing'})
-results
-
-url = 'https://en.wikipedia.org/wiki/Fantasy_hockey'
-
-soup = Soup(html)
-soup.__dir__()
-results = soup.find('span', {'class': 'mw-headline'})
-results[0]
-results[0].data
-
-url = 'https://www.goodreads.com/quotes/search'
-params = {'commit': 'Search', 'page': 2, 'q': 'blake crouch'}
-html = get(url, params)
-
-soup = Soup(html)
-soup.find('a')
-
-results = soup.find('div', {'class': 'quoteText'})
-results
-
-
 
 
 #
+# url = 'https://news.ycombinator.com/'
+# html = get(url)
+# p = Announce()
+# p.feed(html)
+#
+# soup = Soup(html)
+# results = soup.find('tr', {'class': 'athing'})
+# results
+#
+# url = 'https://en.wikipedia.org/wiki/Fantasy_hockey'
+#
+# soup = Soup(html)
+# soup.__dir__()
+# results = soup.find('span', {'class': 'mw-headline'})
+# results[0]
+# results[0].data
+#
+# url = 'https://www.goodreads.com/quotes/search'
+# params = {'commit': 'Search', 'page': 2, 'q': 'blake crouch'}
+# html = get(url, params)
+#
+# soup = Soup(html)
+# soup.find('a')
+#
+# results = soup.find('div', {'class': 'quoteText'})
+# results
+#
+#
+#
+#
+# #
