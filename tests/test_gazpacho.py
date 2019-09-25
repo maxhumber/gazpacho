@@ -40,10 +40,17 @@ def test_match_partial():
     d2 = {'foo': 'bar baz'}
     assert match(d1, d2)
 
+url = 'https://news.ycombinator.com/'
+html = get(url)
+p = Announce()
+p.feed(html)
 
+soup = Soup(html)
+results = soup.find('tr', {'class': 'athing'})
+results
 
 url = 'https://en.wikipedia.org/wiki/Fantasy_hockey'
-html = get(url)
+
 soup = Soup(html)
 soup.__dir__()
 results = soup.find('span', {'class': 'mw-headline'})
