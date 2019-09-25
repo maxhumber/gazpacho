@@ -71,17 +71,19 @@ class Soup(HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         html, attrs = html_starttag_and_attrs(tag, attrs)
-        # first see if we need to activate record
+        # activate recording
         if tag == self.tag and match(self.attrs, attrs):
             self.count += 1
-            self.html_ += html
-            print(html, self.count)
+            self.group += 1
+            self.html_.append('')
+            self.html_[self.group - 1] += html
+            self.tag_ = tag
+            self.attrs_ = attrs
             return
-        # if we're recording
+        # if recording
         if self.count:
             self.count += 1
-            self.html_ += html
-            print(html, self.count)
+            self.html_[self.group - 1] += html
             return
         else:
             return
@@ -89,14 +91,14 @@ class Soup(HTMLParser):
     def handle_startendtag(self, tag, attrs):
         html, attrs = html_starttag_and_attrs(tag, attrs, True)
         if self.count:
-            self.html_ += html
+            self.html_[self.group - 1] += html
             return
         else:
             return
 
     def handle_data(self, data):
         if self.count:
-            self.html_ += data
+            self.html_[self.group - 1] += data
             return
         else:
             return
@@ -104,9 +106,8 @@ class Soup(HTMLParser):
     def handle_endtag(self, tag):
         if self.count:
             end_tag = f'</{tag}>'
-            self.html_ += end_tag
+            self.html_[self.group - 1] += end_tag
             self.count -= 1
-            print(end_tag, self.count)
             return
         else:
             return
@@ -116,9 +117,13 @@ class Soup(HTMLParser):
         self.tag = tag
         self.attrs = attrs
         self.count = 0
-        self.html_ = ''
+        self.group = 0
+        self.html_ = []
         super().feed(self.html)
-        return self.html_
+        soups = [Soup(hi_) for hi_ in self.html_]
+        return soups
+        # soup = Soup(self.html_)
+        # return soup
 
 html = '''<div class="foo" id="bar">
   <p>'IDK!'</p>
@@ -128,12 +133,16 @@ html = '''<div class="foo" id="bar">
       <span>Hi</span>
     </div>
   </div>
+  <p>Try for 2</p>
+  <div class='baz'>Oh No!</div>
 </div>'''
 
 soup = Soup(html)
 result = soup.find('div', {'class': 'baz'})
-print(result)
+result[0]
+result[1]
+
 
 # hide methods
-# fix indenting
-# handle multiple
+# fix indenting (pretty print html)
+# handle multiple groups
