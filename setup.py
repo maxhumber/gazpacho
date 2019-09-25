@@ -5,7 +5,7 @@ with open('README.md', encoding='utf8') as f:
 
 setup(
     name='gazpacho',
-    version='0.5',
+    version='0.5.1',
     description='No BeautifulSoup For You',
     long_description=long_description,
     long_description_content_type="text/markdown",
