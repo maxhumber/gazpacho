@@ -59,58 +59,20 @@ def fake_html():
 def test_find_one(fake_html):
     soup = Soup(fake_html)
     result = soup.find('span')
-    assert len(result) == 1
-    assert str(result[0]) == '<span>Hi</span>'
+    assert str(result) == '<span>Hi</span>'
 
 def test_find_with_attrs(fake_html):
     soup = Soup(fake_html)
     result = soup.find('p', {'id': 'blarg'})
-    assert len(result) == 1
-    assert str(result[0]) == '<p id="blarg">Try for 2</p>'
+    assert str(result) == '<p id="blarg">Try for 2</p>'
 
 def test_find_multiple(fake_html):
     soup = Soup(fake_html)
     result = soup.find('div', {'class': 'baz'})
     assert len(result) == 2
+    assert str(result[1]) == '<div class="baz">Oh No!</div>'
 
-
-# from gazpacho import get, Soup
-# url = 'https://en.wikipedia.org/wiki/Gazpacho'
-# html = get(url)
-# soup = Soup(html)
-# soup.find('span', {'class': 'mw-headline'})
-# # [<span class="mw-headline" id="History">History</span>,
-# #  <span class="mw-headline" id="Ingredients_and_preparation">Ingredients and preparation</span>,
-# #  <span class="mw-headline" id="Variations">Variations</span>,
-# #  <span class="mw-headline" id="In_Spain">In Spain</span>,
-# #  <span class="mw-headline" id="Arranque_roteño">Arranque roteño</span>,
-# #  <span class="mw-headline" id="Extremaduran_variations">Extremaduran variations</span>,
-# #  <span class="mw-headline" id="La_Mancha_variations">La Mancha variations</span>,
-# #  <span class="mw-headline" id="Castilian_variations">Castilian variations</span>,
-# #  <span class="mw-headline" id="See_also">See also</span>,
-# #  <span class="mw-headline" id="References">References</span>]
-
-
-# url = 'https://news.ycombinator.com/'
-# html = get(url)
-# soup = Soup(html)
-# results = soup.find('tr', {'class': 'athing'})
-# results[0].find('td', {'class': 'title'})[1]
-#
-# url = 'https://en.wikipedia.org/wiki/Fantasy_hockey'
-#
-# soup = Soup(html)
-# soup.__dir__()
-# results = soup.find('span', {'class': 'mw-headline'})
-# results[0]
-# results[0].data
-#
-# url = 'https://www.goodreads.com/quotes/search'
-# params = {'commit': 'Search', 'page': 2, 'q': 'blake crouch'}
-# html = get(url, params)
-#
-# soup = Soup(html)
-# soup.find('a')
-#
-# results = soup.find('div', {'class': 'quoteText'})
-# results
+def test_find_text(fake_html):
+    soup = Soup(fake_html)
+    result = soup.find('p', {'id': 'blarg'})
+    assert result.text == 'Try for 2'

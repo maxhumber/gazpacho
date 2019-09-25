@@ -67,14 +67,13 @@ class Soup(HTMLParser):
         self.html = html
         self.tag = None
         self.attrs = None
-        self.data = None
+        self.text = None
 
     def __repr__(self):
         return self.html
 
     def handle_starttag(self, tag, attrs):
         html, attrs = html_starttag_and_attrs(tag, attrs)
-        # activate recording
         if tag == self.tag and match(self.attrs, attrs):
             self.count += 1
             self.group += 1
@@ -98,9 +97,10 @@ class Soup(HTMLParser):
         else:
             return
 
-    # TODO: set data attribute
     def handle_data(self, data):
         if self.count:
+            if self.groups[self.group - 1].text is None:
+                self.groups[self.group - 1].text = data.strip()
             self.groups[self.group - 1].html += data
             return
         else:
@@ -123,9 +123,10 @@ class Soup(HTMLParser):
         self.group = 0
         self.groups = []
         super().feed(self.html)
+        if len(self.groups) == 1:
+            return self.groups[0]
         return self.groups
 
 # TODO:
-# attribute setting? maybe not...
 # hide methods from HTMLParser
-# fix indenting (pretty print html)
+# pretty html
