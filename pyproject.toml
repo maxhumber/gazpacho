@@ -5,4 +5,4 @@ output_dir = "site"
 favicon = "images/icon.png"
 logo = "images/icon.png"
 name = "material"
-palette = {primary = "white", accent = "red"}
+palette = {primary = "white", accent = "cyan"}

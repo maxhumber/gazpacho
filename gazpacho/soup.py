@@ -1,11 +1,35 @@
+from html.parser import HTMLParser
+
 try:
     from .utils import match, html_starttag_and_attrs
 except ModuleNotFoundError:
     from gazpacho.utils import match, html_starttag_and_attrs
 
-from html.parser import HTMLParser
-
 class Soup(HTMLParser):
+    '''HTML Parser Class
+
+    - html (str): Full HTML text
+    - tag (str, None): Found tag
+    - attrs (dict, None): Found attributes
+    - text (str, None): Found text
+    - find (method): The main method to find HTML tags
+
+    Examples:
+
+    ```
+    html = "<div><p id='foo'>bar</p><p id='foo'>baz</p><p id='zoo'>Tiger</p></div>"
+    soup = Soup(html)
+    result = soup.find('p', {'id': 'foo'})
+    print(result)
+    # [<p id="foo">bar</p>, <p id="foo">baz</p>]
+    result = soup.find('p', {'id': 'zoo'})
+    print(result)
+    # <p id="zoo">Tiger</p>
+    print(result.text)
+    # Tiger
+    ```
+
+    '''
     def __init__(self, html):
         super().__init__()
         self.html = html
@@ -63,7 +87,11 @@ class Soup(HTMLParser):
             return
 
     def find(self, tag, attrs=None):
-        '''Find a tag with optional attributes'''
+        '''Find a tag with optional attributes
+
+        - tag (str): HTML tag to find
+        - attrs (dict, optional): Attributes within tag to match
+        '''
         self.tag = tag
         self.attrs = attrs
         self.count = 0

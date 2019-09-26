@@ -1,24 +1,23 @@
 def match(a, b, strict=False):
     '''A utility function to match two dictionaries
 
-    a: dict
-        The query dictionary
-    b: dict
-        The dictionary to match
-    strict: bool
-        Require exact matching
+    - a (dict): The query dictionary
+    - b (dict): The dictionary to match
+    - strict (bool): Require exact matching
 
     Examples:
 
-    >>> a = {'foo': 'bar'}
-    >>> b = {'foo': 'bar baz'}
-    >>> match(a, b)
-    True
+    ```
+    a = {'foo': 'bar'}
+    b = {'foo': 'bar baz'}
+    match(a, b)
+    # True
 
-    >>> a = {}
-    >>> b = {'foo': 'bar'}
-    >>> match(a, b)
-    True
+    a = {}
+    b = {'foo': 'bar'}
+    match(a, b)
+    # True
+    ```
     '''
     if not a:
         return True
@@ -43,20 +42,16 @@ def match(a, b, strict=False):
 def html_starttag_and_attrs(tag, attrs, startendtag=False):
     '''A utility functon to reconstruct starttag and attrs
 
-    tag: str
-        An HTML tag
-    attrs: list
-        A list of tuples for HTML tag attributes
-    startendtag: bool
-        A flag to handle startend tags
-
-    returns:
-        html (str), attrs (dict)
+    - tag (str): HTML tag
+    - attrs (list): A list of tuples for HTML tag attributes
+    - startendtag (bool): A flag to handle startend tags
 
     Example:
 
-    >>> html_starttag_and_attrs('a', [('href', 'localhost:8000')])
-    ('<a href="localhost:8000">', {'href': 'localhost:8000'})
+    ```
+    html_starttag_and_attrs('a', [('href', 'localhost:8000')])
+    # ('<a href="localhost:8000">', {'href': 'localhost:8000'})
+    ```
     '''
     if attrs:
         attrs = dict(attrs)
