@@ -1,65 +1,9 @@
-from copy import copy
+try:
+    from .utils import match, html_starttag_and_attrs
+except ModuleNotFoundError:
+    from gazpacho.utils import match, html_starttag_and_attrs
+
 from html.parser import HTMLParser
-import re
-from urllib.parse import urlencode
-from urllib.request import urlopen, build_opener
-
-DEFAULT_USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:69.0) Gecko/20100101 Firefox/69.0'
-
-def get(url, params=None, headers=None):
-    '''Get the content from a URL
-
-    url: The URL for the webpage
-    params: A dictionary of the param payload
-    headers: A dictionary for the headers to be added
-
-    Example:
-    get('https://httpbin.org/anything', {'soup': 'gazpacho'})
-    '''
-    opener = build_opener()
-    if params:
-        url += '?' + urlencode(params)
-    if headers:
-        for h in headers.items():
-            opener.addheaders = [h]
-    else:
-        opener.addheaders = [('User-Agent', DEFAULT_USER_AGENT)]
-    with opener.open(url) as f:
-        content = f.read().decode('utf-8')
-    return content
-
-def match(query_attrs, attrs):
-    '''Match a query dictionary to an attrs dictionary'''
-    if not query_attrs:
-        return True
-    if not query_attrs and not attrs:
-        return True
-    if query_attrs and not attrs:
-        return False
-    bools = []
-    for k, v in query_attrs.items():
-        if not attrs.get(k):
-            bools.append(False)
-        elif v in attrs.get(k):
-            bools.append(True)
-        else:
-            bools.append(False)
-    return all(bools)
-
-def html_starttag_and_attrs(tag, attrs, startendtag=False):
-    '''Reconstruct starttag and convert attrs to a dictionary'''
-    if attrs:
-        attrs = dict(attrs)
-        af = [f'{k}="{v}"' for k, v in attrs.items()]
-        af = f' {" ".join(af)}'
-    else:
-        attrs = {}
-        af = ''
-    if startendtag:
-        html = f'<{tag}{af} />'
-    else:
-        html = f'<{tag}{af}>'
-    return html, attrs
 
 class Soup(HTMLParser):
     def __init__(self, html):
@@ -68,6 +12,9 @@ class Soup(HTMLParser):
         self.tag = None
         self.attrs = None
         self.text = None
+
+    def __dir__(self):
+        return ['html', 'tag', 'attrs', 'text', 'find']
 
     def __repr__(self):
         return self.html
@@ -126,7 +73,3 @@ class Soup(HTMLParser):
         if len(self.groups) == 1:
             return self.groups[0]
         return self.groups
-
-# TODO:
-# hide HTMLParser methods
-# pretty html
