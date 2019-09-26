@@ -1,0 +1,2755 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../../images/icon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+    
+    
+      
+        <title>Soup - gazpacho</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.30686662.css">
+      
+        <link rel="stylesheet" href="../../../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="">
+      
+    
+    
+      <script src="../../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="white" data-md-color-accent="cyan">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#module-gazpachosoup" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../../.." title="gazpacho" class="md-header-nav__button md-logo">
+          
+            <img src="../../../images/icon.png" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              gazpacho
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Soup
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/maxhumber/gazpacho/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    gazpacho
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../../.." title="gazpacho" class="md-nav__button md-logo">
+      
+        <img src="../../../images/icon.png" width="48" height="48">
+      
+    </a>
+    gazpacho
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/maxhumber/gazpacho/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    gazpacho
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-1" type="checkbox" id="nav-2-1" checked>
+    
+    <label class="md-nav__link" for="nav-2-1">
+      Gazpacho
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-1">
+        Gazpacho
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../get/" title="Get" class="md-nav__link">
+      Get
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Soup
+      </label>
+    
+    <a href="./" title="Soup" class="md-nav__link md-nav__link--active">
+      Soup
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#soup" class="md-nav__link">
+    Soup
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-variables" class="md-nav__link">
+    Class variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#check_for_whole_start_tag" class="md-nav__link">
+    check_for_whole_start_tag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clear_cdata_mode" class="md-nav__link">
+    clear_cdata_mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#close" class="md-nav__link">
+    close
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error" class="md-nav__link">
+    error
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feed" class="md-nav__link">
+    feed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#find" class="md-nav__link">
+    find
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_starttag_text" class="md-nav__link">
+    get_starttag_text
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getpos" class="md-nav__link">
+    getpos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#goahead" class="md-nav__link">
+    goahead
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handle_charref" class="md-nav__link">
+    handle_charref
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handle_comment" class="md-nav__link">
+    handle_comment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handle_data" class="md-nav__link">
+    handle_data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handle_decl" class="md-nav__link">
+    handle_decl
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handle_endtag" class="md-nav__link">
+    handle_endtag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handle_entityref" class="md-nav__link">
+    handle_entityref
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handle_pi" class="md-nav__link">
+    handle_pi
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handle_startendtag" class="md-nav__link">
+    handle_startendtag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handle_starttag" class="md-nav__link">
+    handle_starttag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parse_bogus_comment" class="md-nav__link">
+    parse_bogus_comment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parse_comment" class="md-nav__link">
+    parse_comment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parse_declaration" class="md-nav__link">
+    parse_declaration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parse_endtag" class="md-nav__link">
+    parse_endtag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parse_html_declaration" class="md-nav__link">
+    parse_html_declaration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parse_marked_section" class="md-nav__link">
+    parse_marked_section
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parse_pi" class="md-nav__link">
+    parse_pi
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parse_starttag" class="md-nav__link">
+    parse_starttag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reset" class="md-nav__link">
+    reset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_cdata_mode" class="md-nav__link">
+    set_cdata_mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unescape" class="md-nav__link">
+    unescape
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unknown_decl" class="md-nav__link">
+    unknown_decl
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updatepos" class="md-nav__link">
+    updatepos
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../utils/" title="Utils" class="md-nav__link">
+      Utils
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#soup" class="md-nav__link">
+    Soup
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-variables" class="md-nav__link">
+    Class variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#check_for_whole_start_tag" class="md-nav__link">
+    check_for_whole_start_tag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clear_cdata_mode" class="md-nav__link">
+    clear_cdata_mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#close" class="md-nav__link">
+    close
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error" class="md-nav__link">
+    error
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feed" class="md-nav__link">
+    feed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#find" class="md-nav__link">
+    find
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_starttag_text" class="md-nav__link">
+    get_starttag_text
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getpos" class="md-nav__link">
+    getpos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#goahead" class="md-nav__link">
+    goahead
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handle_charref" class="md-nav__link">
+    handle_charref
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handle_comment" class="md-nav__link">
+    handle_comment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handle_data" class="md-nav__link">
+    handle_data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handle_decl" class="md-nav__link">
+    handle_decl
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handle_endtag" class="md-nav__link">
+    handle_endtag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handle_entityref" class="md-nav__link">
+    handle_entityref
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handle_pi" class="md-nav__link">
+    handle_pi
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handle_startendtag" class="md-nav__link">
+    handle_startendtag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handle_starttag" class="md-nav__link">
+    handle_starttag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parse_bogus_comment" class="md-nav__link">
+    parse_bogus_comment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parse_comment" class="md-nav__link">
+    parse_comment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parse_declaration" class="md-nav__link">
+    parse_declaration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parse_endtag" class="md-nav__link">
+    parse_endtag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parse_html_declaration" class="md-nav__link">
+    parse_html_declaration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parse_marked_section" class="md-nav__link">
+    parse_marked_section
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parse_pi" class="md-nav__link">
+    parse_pi
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parse_starttag" class="md-nav__link">
+    parse_starttag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reset" class="md-nav__link">
+    reset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_cdata_mode" class="md-nav__link">
+    set_cdata_mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unescape" class="md-nav__link">
+    unescape
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unknown_decl" class="md-nav__link">
+    unknown_decl
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updatepos" class="md-nav__link">
+    updatepos
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/maxhumber/gazpacho/edit/master/reference/gazpacho/soup.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="module-gazpachosoup">Module gazpacho.soup</h1>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">html.parser</span> <span class="kn">import</span> <span class="n">HTMLParser</span>
+
+<span class="k">try</span><span class="p">:</span>
+
+    <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">match</span><span class="p">,</span> <span class="n">html_starttag_and_attrs</span>
+
+<span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
+
+    <span class="kn">from</span> <span class="nn">gazpacho.utils</span> <span class="kn">import</span> <span class="n">match</span><span class="p">,</span> <span class="n">html_starttag_and_attrs</span>
+
+<span class="k">class</span> <span class="nc">Soup</span><span class="p">(</span><span class="n">HTMLParser</span><span class="p">):</span>
+
+    <span class="sd">&#39;&#39;&#39;HTML Parser Class</span>
+
+<span class="sd">    - html (str): Full HTML text</span>
+
+<span class="sd">    - tag (str, None): Found tag</span>
+
+<span class="sd">    - attrs (dict, None): Found attributes</span>
+
+<span class="sd">    - text (str, None): Found text</span>
+
+<span class="sd">    - find (method): The main method to find HTML tags</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    ```</span>
+
+<span class="sd">    html = &quot;&lt;div&gt;&lt;p id=&#39;foo&#39;&gt;bar&lt;/p&gt;&lt;p id=&#39;foo&#39;&gt;baz&lt;/p&gt;&lt;p id=&#39;zoo&#39;&gt;Tiger&lt;/p&gt;&lt;/div&gt;&quot;</span>
+
+<span class="sd">    soup = Soup(html)</span>
+
+<span class="sd">    result = soup.find(&#39;p&#39;, {&#39;id&#39;: &#39;foo&#39;})</span>
+
+<span class="sd">    print(result)</span>
+
+<span class="sd">    # [&lt;p id=&quot;foo&quot;&gt;bar&lt;/p&gt;, &lt;p id=&quot;foo&quot;&gt;baz&lt;/p&gt;]</span>
+
+<span class="sd">    result = soup.find(&#39;p&#39;, {&#39;id&#39;: &#39;zoo&#39;})</span>
+
+<span class="sd">    print(result)</span>
+
+<span class="sd">    # &lt;p id=&quot;zoo&quot;&gt;Tiger&lt;/p&gt;</span>
+
+<span class="sd">    print(result.text)</span>
+
+<span class="sd">    # Tiger</span>
+
+<span class="sd">    ```</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">html</span><span class="p">):</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">html</span> <span class="o">=</span> <span class="n">html</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">tag</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">__dir__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;html&#39;</span><span class="p">,</span> <span class="s1">&#39;tag&#39;</span><span class="p">,</span> <span class="s1">&#39;attrs&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;find&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">html</span>
+
+    <span class="k">def</span> <span class="nf">handle_starttag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">attrs</span><span class="p">):</span>
+
+        <span class="n">html</span><span class="p">,</span> <span class="n">attrs</span> <span class="o">=</span> <span class="n">html_starttag_and_attrs</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">tag</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">tag</span> <span class="ow">and</span> <span class="n">match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">attrs</span><span class="p">,</span> <span class="n">attrs</span><span class="p">):</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Soup</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">))</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">html</span> <span class="o">+=</span> <span class="n">html</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tag</span> <span class="o">=</span> <span class="n">tag</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="n">attrs</span>
+
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">html</span> <span class="o">+=</span> <span class="n">html</span>
+
+            <span class="k">return</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">handle_startendtag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">attrs</span><span class="p">):</span>
+
+        <span class="n">html</span><span class="p">,</span> <span class="n">attrs</span> <span class="o">=</span> <span class="n">html_starttag_and_attrs</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">attrs</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">html</span> <span class="o">+=</span> <span class="n">html</span>
+
+            <span class="k">return</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">handle_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">text</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">html</span> <span class="o">+=</span> <span class="n">data</span>
+
+            <span class="k">return</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">handle_endtag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">:</span>
+
+            <span class="n">end_tag</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;&lt;/{tag}&gt;&#39;</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">html</span> <span class="o">+=</span> <span class="n">end_tag</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">-=</span> <span class="mi">1</span>
+
+            <span class="k">return</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+
+        <span class="sd">&#39;&#39;&#39;Find a tag with optional attributes</span>
+
+<span class="sd">        - tag (str): HTML tag to find</span>
+
+<span class="sd">        - attrs (dict, optional): Attributes within tag to match</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">tag</span> <span class="o">=</span> <span class="n">tag</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">attrs</span> <span class="o">=</span> <span class="n">attrs</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">groups</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">feed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">html</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">groups</span>
+</pre></div>
+
+
+</details>
+<h2 id="classes">Classes</h2>
+<h3 id="soup">Soup</h3>
+<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">Soup</span><span class="p">(</span>
+    <span class="n">html</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<p>HTML Parser Class</p>
+<ul>
+<li>html (str): Full HTML text</li>
+<li>tag (str, None): Found tag</li>
+<li>attrs (dict, None): Found attributes</li>
+<li>text (str, None): Found text</li>
+<li>find (method): The main method to find HTML tags</li>
+</ul>
+<p>Examples:</p>
+<div class="codehilite"><pre><span></span>html = &quot;<span class="nt">&lt;div&gt;&lt;p</span> <span class="na">id=</span><span class="s">&#39;foo&#39;</span><span class="nt">&gt;</span>bar<span class="nt">&lt;/p&gt;&lt;p</span> <span class="na">id=</span><span class="s">&#39;foo&#39;</span><span class="nt">&gt;</span>baz<span class="nt">&lt;/p&gt;&lt;p</span> <span class="na">id=</span><span class="s">&#39;zoo&#39;</span><span class="nt">&gt;</span>Tiger<span class="nt">&lt;/p&gt;&lt;/div&gt;</span>&quot;
+soup = Soup(html)
+result = soup.find(&#39;p&#39;, {&#39;id&#39;: &#39;foo&#39;})
+print(result)
+# [<span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;foo&quot;</span><span class="nt">&gt;</span>bar<span class="nt">&lt;/p&gt;</span>, <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;foo&quot;</span><span class="nt">&gt;</span>baz<span class="nt">&lt;/p&gt;</span>]
+result = soup.find(&#39;p&#39;, {&#39;id&#39;: &#39;zoo&#39;})
+print(result)
+# <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">&quot;zoo&quot;</span><span class="nt">&gt;</span>Tiger<span class="nt">&lt;/p&gt;</span>
+print(result.text)
+# Tiger
+</pre></div>
+
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">Soup</span><span class="p">(</span><span class="nx">HTMLParser</span><span class="p">)</span><span class="o">:</span>
+
+    <span class="s1">&#39;&#39;&#39;HTML Parser Class</span>
+
+<span class="s1">    - html (str): Full HTML text</span>
+
+<span class="s1">    - tag (str, None): Found tag</span>
+
+<span class="s1">    - attrs (dict, None): Found attributes</span>
+
+<span class="s1">    - text (str, None): Found text</span>
+
+<span class="s1">    - find (method): The main method to find HTML tags</span>
+
+<span class="s1">    Examples:</span>
+
+<span class="s1">    ```</span>
+
+<span class="s1">    html = &quot;&lt;div&gt;&lt;p id=&#39;</span><span class="nx">foo</span><span class="s1">&#39;&gt;bar&lt;/p&gt;&lt;p id=&#39;</span><span class="nx">foo</span><span class="s1">&#39;&gt;baz&lt;/p&gt;&lt;p id=&#39;</span><span class="nx">zoo</span><span class="s1">&#39;&gt;Tiger&lt;/p&gt;&lt;/div&gt;&quot;</span>
+
+<span class="s1">    soup = Soup(html)</span>
+
+<span class="s1">    result = soup.find(&#39;</span><span class="nx">p</span><span class="s1">&#39;, {&#39;</span><span class="nx">id</span><span class="s1">&#39;: &#39;</span><span class="nx">foo</span><span class="s1">&#39;})</span>
+
+<span class="s1">    print(result)</span>
+
+<span class="s1">    # [&lt;p id=&quot;foo&quot;&gt;bar&lt;/p&gt;, &lt;p id=&quot;foo&quot;&gt;baz&lt;/p&gt;]</span>
+
+<span class="s1">    result = soup.find(&#39;</span><span class="nx">p</span><span class="s1">&#39;, {&#39;</span><span class="nx">id</span><span class="s1">&#39;: &#39;</span><span class="nx">zoo</span><span class="s1">&#39;})</span>
+
+<span class="s1">    print(result)</span>
+
+<span class="s1">    # &lt;p id=&quot;zoo&quot;&gt;Tiger&lt;/p&gt;</span>
+
+<span class="s1">    print(result.text)</span>
+
+<span class="s1">    # Tiger</span>
+
+<span class="s1">    ```</span>
+
+<span class="s1">    &#39;&#39;&#39;</span>
+
+    <span class="nx">def</span> <span class="nx">__init__</span><span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="nx">html</span><span class="p">)</span><span class="o">:</span>
+
+        <span class="kr">super</span><span class="p">().</span><span class="nx">__init__</span><span class="p">()</span>
+
+        <span class="nx">self</span><span class="p">.</span><span class="nx">html</span> <span class="o">=</span> <span class="nx">html</span>
+
+        <span class="nx">self</span><span class="p">.</span><span class="nx">tag</span> <span class="o">=</span> <span class="nx">None</span>
+
+        <span class="nx">self</span><span class="p">.</span><span class="nx">attrs</span> <span class="o">=</span> <span class="nx">None</span>
+
+        <span class="nx">self</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="nx">None</span>
+
+    <span class="nx">def</span> <span class="nx">__dir__</span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="o">:</span>
+
+        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;html&#39;</span><span class="p">,</span> <span class="s1">&#39;tag&#39;</span><span class="p">,</span> <span class="s1">&#39;attrs&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;find&#39;</span><span class="p">]</span>
+
+    <span class="nx">def</span> <span class="nx">__repr__</span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="o">:</span>
+
+        <span class="k">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">html</span>
+
+    <span class="nx">def</span> <span class="nx">handle_starttag</span><span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="nx">tag</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">)</span><span class="o">:</span>
+
+        <span class="nx">html</span><span class="p">,</span> <span class="nx">attrs</span> <span class="o">=</span> <span class="nx">html_starttag_and_attrs</span><span class="p">(</span><span class="nx">tag</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nx">tag</span> <span class="o">==</span> <span class="nx">self</span><span class="p">.</span><span class="nx">tag</span> <span class="nx">and</span> <span class="nx">match</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">attrs</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">)</span><span class="o">:</span>
+
+            <span class="nx">self</span><span class="p">.</span><span class="nx">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="nx">self</span><span class="p">.</span><span class="nx">group</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="nx">self</span><span class="p">.</span><span class="nx">groups</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">Soup</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">))</span>
+
+            <span class="nx">self</span><span class="p">.</span><span class="nx">groups</span><span class="p">[</span><span class="nx">self</span><span class="p">.</span><span class="nx">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">].</span><span class="nx">html</span> <span class="o">+=</span> <span class="nx">html</span>
+
+            <span class="nx">self</span><span class="p">.</span><span class="nx">groups</span><span class="p">[</span><span class="nx">self</span><span class="p">.</span><span class="nx">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">].</span><span class="nx">tag</span> <span class="o">=</span> <span class="nx">tag</span>
+
+            <span class="nx">self</span><span class="p">.</span><span class="nx">groups</span><span class="p">[</span><span class="nx">self</span><span class="p">.</span><span class="nx">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">].</span><span class="nx">attrs</span> <span class="o">=</span> <span class="nx">attrs</span>
+
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="nx">self.count</span>:
+
+            <span class="kt">self.count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="nx">self</span><span class="p">.</span><span class="nx">groups</span><span class="p">[</span><span class="nx">self</span><span class="p">.</span><span class="nx">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">].</span><span class="nx">html</span> <span class="o">+=</span> <span class="nx">html</span>
+
+            <span class="k">return</span>
+
+        <span class="k">else</span><span class="o">:</span>
+
+            <span class="k">return</span>
+
+    <span class="nx">def</span> <span class="nx">handle_startendtag</span><span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="nx">tag</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">)</span><span class="o">:</span>
+
+        <span class="nx">html</span><span class="p">,</span> <span class="nx">attrs</span> <span class="o">=</span> <span class="nx">html_starttag_and_attrs</span><span class="p">(</span><span class="nx">tag</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">,</span> <span class="nx">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nx">self.count</span>:
+
+            <span class="kt">self.groups</span><span class="p">[</span><span class="nx">self</span><span class="p">.</span><span class="nx">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">].</span><span class="nx">html</span> <span class="o">+=</span> <span class="nx">html</span>
+
+            <span class="k">return</span>
+
+        <span class="k">else</span><span class="o">:</span>
+
+            <span class="k">return</span>
+
+    <span class="nx">def</span> <span class="nx">handle_data</span><span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span><span class="o">:</span>
+
+        <span class="k">if</span> <span class="nx">self.count</span>:
+
+            <span class="kt">if</span> <span class="nx">self</span><span class="p">.</span><span class="nx">groups</span><span class="p">[</span><span class="nx">self</span><span class="p">.</span><span class="nx">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">].</span><span class="nx">text</span> <span class="nx">is</span> <span class="nx">None</span>:
+
+                <span class="kt">self.groups</span><span class="p">[</span><span class="nx">self</span><span class="p">.</span><span class="nx">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">].</span><span class="nx">text</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">strip</span><span class="p">()</span>
+
+            <span class="nx">self</span><span class="p">.</span><span class="nx">groups</span><span class="p">[</span><span class="nx">self</span><span class="p">.</span><span class="nx">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">].</span><span class="nx">html</span> <span class="o">+=</span> <span class="nx">data</span>
+
+            <span class="k">return</span>
+
+        <span class="k">else</span><span class="o">:</span>
+
+            <span class="k">return</span>
+
+    <span class="nx">def</span> <span class="nx">handle_endtag</span><span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="nx">tag</span><span class="p">)</span><span class="o">:</span>
+
+        <span class="k">if</span> <span class="nx">self.count</span>:
+
+            <span class="kt">end_tag</span> <span class="o">=</span> <span class="nx">f</span><span class="s1">&#39;&lt;/{tag}&gt;&#39;</span>
+
+            <span class="nx">self</span><span class="p">.</span><span class="nx">groups</span><span class="p">[</span><span class="nx">self</span><span class="p">.</span><span class="nx">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">].</span><span class="nx">html</span> <span class="o">+=</span> <span class="nx">end_tag</span>
+
+            <span class="nx">self</span><span class="p">.</span><span class="nx">count</span> <span class="o">-=</span> <span class="mi">1</span>
+
+            <span class="k">return</span>
+
+        <span class="k">else</span><span class="o">:</span>
+
+            <span class="k">return</span>
+
+    <span class="nx">def</span> <span class="nx">find</span><span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="nx">tag</span><span class="p">,</span> <span class="nx">attrs</span><span class="o">=</span><span class="nx">None</span><span class="p">)</span><span class="o">:</span>
+
+        <span class="s1">&#39;&#39;&#39;Find a tag with optional attributes</span>
+
+<span class="s1">        - tag (str): HTML tag to find</span>
+
+<span class="s1">        - attrs (dict, optional): Attributes within tag to match</span>
+
+<span class="s1">        &#39;&#39;&#39;</span>
+
+        <span class="nx">self</span><span class="p">.</span><span class="nx">tag</span> <span class="o">=</span> <span class="nx">tag</span>
+
+        <span class="nx">self</span><span class="p">.</span><span class="nx">attrs</span> <span class="o">=</span> <span class="nx">attrs</span>
+
+        <span class="nx">self</span><span class="p">.</span><span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="nx">self</span><span class="p">.</span><span class="nx">group</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="nx">self</span><span class="p">.</span><span class="nx">groups</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="kr">super</span><span class="p">().</span><span class="nx">feed</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">html</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nx">len</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">groups</span><span class="p">)</span> <span class="o">==</span> <span class="nx">1</span>:
+
+            <span class="kt">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">groups</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">groups</span>
+</pre></div>
+
+
+</details>
+<hr />
+<h4 id="ancestors-in-mro">Ancestors (in MRO)</h4>
+<ul>
+<li>html.parser.HTMLParser</li>
+<li>_markupbase.ParserBase</li>
+</ul>
+<h4 id="class-variables">Class variables</h4>
+<div class="codehilite"><pre><span></span><span class="n">CDATA_CONTENT_ELEMENTS</span>
+</pre></div>
+
+
+<h4 id="methods">Methods</h4>
+<h5 id="check_for_whole_start_tag">check_for_whole_start_tag</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">check_for_whole_start_tag</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">i</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def check_for_whole_start_tag(self, i):
+
+        rawdata = self.rawdata
+
+        m = locatestarttagend_tolerant.match(rawdata, i)
+
+        if m:
+
+            j = m.end()
+
+            next = rawdata[j:j+1]
+
+            if next == &quot;&gt;&quot;:
+
+                return j + 1
+
+            if next == &quot;/&quot;:
+
+                if rawdata.startswith(&quot;/&gt;&quot;, j):
+
+                    return j + 2
+
+                if rawdata.startswith(&quot;/&quot;, j):
+
+                    # buffer boundary
+
+                    return -1
+
+                # else bogus input
+
+                if j &gt; i:
+
+                    return j
+
+                else:
+
+                    return i + 1
+
+            if next == &quot;&quot;:
+
+                # end of input
+
+                return -1
+
+            if next in (&quot;abcdefghijklmnopqrstuvwxyz=/&quot;
+
+                        &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;):
+
+                # end of input in or before attribute value, or we have the
+
+                # &#39;/&#39; from a &#39;/&gt;&#39; ending
+
+                return -1
+
+            if j &gt; i:
+
+                return j
+
+            else:
+
+                return i + 1
+
+        raise AssertionError(&quot;we should not get here!&quot;)
+</pre></div>
+
+
+</details>
+<h5 id="clear_cdata_mode">clear_cdata_mode</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">clear_cdata_mode</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def clear_cdata_mode(self):
+
+        self.interesting = interesting_normal
+
+        self.cdata_elem = None
+</pre></div>
+
+
+</details>
+<h5 id="close">close</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">close</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<p>Handle any buffered data.</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def close(self):
+
+        &quot;&quot;&quot;Handle any buffered data.&quot;&quot;&quot;
+
+        self.goahead(1)
+</pre></div>
+
+
+</details>
+<h5 id="error">error</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">error</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">message</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def error(self, message):
+
+        raise NotImplementedError(
+
+            &quot;subclasses of ParserBase must override error()&quot;)
+</pre></div>
+
+
+</details>
+<h5 id="feed">feed</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">feed</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">data</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<p>Feed data to the parser.</p>
+<p>Call this as often as you want, with as little or as much text
+as you want (may include '\n').</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def feed(self, data):
+
+        r&quot;&quot;&quot;Feed data to the parser.
+
+        Call this as often as you want, with as little or as much text
+
+        as you want (may include &#39;\n&#39;).
+
+        &quot;&quot;&quot;
+
+        self.rawdata = self.rawdata + data
+
+        self.goahead(0)
+</pre></div>
+
+
+</details>
+<h5 id="find">find</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">find</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">tag</span><span class="p">,</span>
+    <span class="n">attrs</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<p>Find a tag with optional attributes</p>
+<ul>
+<li>tag (str): HTML tag to find</li>
+<li>attrs (dict, optional): Attributes within tag to match</li>
+</ul>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def find(self, tag, attrs=None):
+
+        &#39;&#39;&#39;Find a tag with optional attributes
+
+        - tag (str): HTML tag to find
+
+        - attrs (dict, optional): Attributes within tag to match
+
+        &#39;&#39;&#39;
+
+        self.tag = tag
+
+        self.attrs = attrs
+
+        self.count = 0
+
+        self.group = 0
+
+        self.groups = []
+
+        super().feed(self.html)
+
+        if len(self.groups) == 1:
+
+            return self.groups[0]
+
+        return self.groups
+</pre></div>
+
+
+</details>
+<h5 id="get_starttag_text">get_starttag_text</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">get_starttag_text</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<p>Return full source of start tag: '&lt;...&gt;'.</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def get_starttag_text(self):
+
+        &quot;&quot;&quot;Return full source of start tag: &#39;&lt;...&gt;&#39;.&quot;&quot;&quot;
+
+        return self.__starttag_text
+</pre></div>
+
+
+</details>
+<h5 id="getpos">getpos</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">getpos</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<p>Return current line number and offset.</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def getpos(self):
+
+        &quot;&quot;&quot;Return current line number and offset.&quot;&quot;&quot;
+
+        return self.lineno, self.offset
+</pre></div>
+
+
+</details>
+<h5 id="goahead">goahead</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">goahead</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">end</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="s s-Atom">def</span> <span class="nf">goahead</span><span class="p">(</span><span class="s s-Atom">self</span><span class="p">,</span> <span class="s s-Atom">end</span><span class="p">)</span><span class="s s-Atom">:</span>
+
+        <span class="s s-Atom">rawdata</span> <span class="o">=</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">rawdata</span>
+
+        <span class="s s-Atom">i</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="s s-Atom">n</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="s s-Atom">rawdata</span><span class="p">)</span>
+
+        <span class="s s-Atom">while</span> <span class="s s-Atom">i</span> <span class="o">&lt;</span> <span class="nn">n</span><span class="p">:</span>
+
+            <span class="s s-Atom">if</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">convert_charrefs</span> <span class="s s-Atom">and</span> <span class="o">not</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">cdata_elem:</span>
+
+                <span class="s s-Atom">j</span> <span class="o">=</span> <span class="s s-Atom">rawdata</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="s s-Atom">&#39;&lt;&#39;</span><span class="p">,</span> <span class="s s-Atom">i</span><span class="p">)</span>
+
+                <span class="s s-Atom">if</span> <span class="s s-Atom">j</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="s s-Atom">:</span>
+
+                    <span class="s s-Atom">#</span> <span class="s s-Atom">if</span> <span class="s s-Atom">we</span> <span class="s s-Atom">can&#39;t find the next &lt;, either we are at the end</span>
+
+<span class="s s-Atom">                    # or there&#39;s</span> <span class="s s-Atom">more</span> <span class="s s-Atom">text</span> <span class="s s-Atom">incoming</span><span class="p">.</span>  <span class="nv">If</span> <span class="s s-Atom">the</span> <span class="s s-Atom">latter</span> <span class="o">is</span> <span class="nv">True</span><span class="p">,</span>
+
+                    <span class="s s-Atom">#</span> <span class="s s-Atom">we</span> <span class="s s-Atom">can&#39;t pass the text to handle_data in case we have</span>
+
+<span class="s s-Atom">                    # a charref cut in half at end.  Try to determine if</span>
+
+<span class="s s-Atom">                    # this is the case before proceeding by looking for an</span>
+
+<span class="s s-Atom">                    # &amp; near the end and see if it&#39;s</span> <span class="s s-Atom">followed</span> <span class="s s-Atom">by</span> <span class="s s-Atom">a</span> <span class="s s-Atom">space</span> <span class="s s-Atom">or</span> <span class="p">;.</span>
+
+                    <span class="s s-Atom">amppos</span> <span class="o">=</span> <span class="s s-Atom">rawdata</span><span class="p">.</span><span class="nf">rfind</span><span class="p">(</span><span class="s s-Atom">&#39;&amp;&#39;</span><span class="p">,</span> <span class="nf">max</span><span class="p">(</span><span class="s s-Atom">i</span><span class="p">,</span> <span class="s s-Atom">n</span><span class="o">-</span><span class="mi">34</span><span class="p">))</span>
+
+                    <span class="nf">if</span> <span class="p">(</span><span class="s s-Atom">amppos</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="s s-Atom">and</span>
+
+                        <span class="o">not</span> <span class="s s-Atom">re</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span><span class="s s-Atom">r&#39;[\s;]&#39;</span><span class="p">).</span><span class="nf">search</span><span class="p">(</span><span class="s s-Atom">rawdata</span><span class="p">,</span> <span class="s s-Atom">amppos</span><span class="p">))</span><span class="s s-Atom">:</span>
+
+                        <span class="s s-Atom">break</span>  <span class="s s-Atom">#</span> <span class="s s-Atom">wait</span> <span class="s s-Atom">till</span> <span class="s s-Atom">we</span> <span class="s s-Atom">get</span> <span class="s s-Atom">all</span> <span class="s s-Atom">the</span> <span class="s s-Atom">text</span>
+
+                    <span class="s s-Atom">j</span> <span class="o">=</span> <span class="s s-Atom">n</span>
+
+            <span class="nn">else</span><span class="p">:</span>
+
+                <span class="s s-Atom">match</span> <span class="o">=</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">interesting</span><span class="p">.</span><span class="nf">search</span><span class="p">(</span><span class="s s-Atom">rawdata</span><span class="p">,</span> <span class="s s-Atom">i</span><span class="p">)</span>  <span class="s s-Atom">#</span> <span class="o">&lt;</span> <span class="s s-Atom">or</span> <span class="s s-Atom">&amp;</span>
+
+                <span class="s s-Atom">if</span> <span class="nn">match</span><span class="p">:</span>
+
+                    <span class="s s-Atom">j</span> <span class="o">=</span> <span class="s s-Atom">match</span><span class="p">.</span><span class="nf">start</span><span class="p">()</span>
+
+                <span class="nn">else</span><span class="p">:</span>
+
+                    <span class="s s-Atom">if</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">cdata_elem:</span>
+
+                        <span class="s s-Atom">break</span>
+
+                    <span class="s s-Atom">j</span> <span class="o">=</span> <span class="s s-Atom">n</span>
+
+            <span class="s s-Atom">if</span> <span class="s s-Atom">i</span> <span class="o">&lt;</span> <span class="nn">j</span><span class="p">:</span>
+
+                <span class="s s-Atom">if</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">convert_charrefs</span> <span class="s s-Atom">and</span> <span class="o">not</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">cdata_elem:</span>
+
+                    <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">handle_data</span><span class="p">(</span><span class="nf">unescape</span><span class="p">(</span><span class="s s-Atom">rawdata</span><span class="p">[</span><span class="nn">i</span><span class="p">:</span><span class="s s-Atom">j</span><span class="p">]))</span>
+
+                <span class="nn">else</span><span class="p">:</span>
+
+                    <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">handle_data</span><span class="p">(</span><span class="s s-Atom">rawdata</span><span class="p">[</span><span class="nn">i</span><span class="p">:</span><span class="s s-Atom">j</span><span class="p">])</span>
+
+            <span class="s s-Atom">i</span> <span class="o">=</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">updatepos</span><span class="p">(</span><span class="s s-Atom">i</span><span class="p">,</span> <span class="s s-Atom">j</span><span class="p">)</span>
+
+            <span class="s s-Atom">if</span> <span class="s s-Atom">i</span> <span class="o">==</span> <span class="nn">n</span><span class="p">:</span> <span class="s s-Atom">break</span>
+
+            <span class="s s-Atom">startswith</span> <span class="o">=</span> <span class="s s-Atom">rawdata</span><span class="p">.</span><span class="s s-Atom">startswith</span>
+
+            <span class="s s-Atom">if</span> <span class="nf">startswith</span><span class="p">(</span><span class="s s-Atom">&#39;&lt;&#39;</span><span class="p">,</span> <span class="s s-Atom">i</span><span class="p">)</span><span class="s s-Atom">:</span>
+
+                <span class="s s-Atom">if</span> <span class="s s-Atom">starttagopen</span><span class="p">.</span><span class="nf">match</span><span class="p">(</span><span class="s s-Atom">rawdata</span><span class="p">,</span> <span class="s s-Atom">i</span><span class="p">)</span><span class="s s-Atom">:</span> <span class="s s-Atom">#</span> <span class="o">&lt;</span> <span class="o">+</span> <span class="s s-Atom">letter</span>
+
+                    <span class="s s-Atom">k</span> <span class="o">=</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">parse_starttag</span><span class="p">(</span><span class="s s-Atom">i</span><span class="p">)</span>
+
+                <span class="s s-Atom">elif</span> <span class="nf">startswith</span><span class="p">(</span><span class="s2">&quot;&lt;/&quot;</span><span class="p">,</span> <span class="s s-Atom">i</span><span class="p">)</span><span class="s s-Atom">:</span>
+
+                    <span class="s s-Atom">k</span> <span class="o">=</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">parse_endtag</span><span class="p">(</span><span class="s s-Atom">i</span><span class="p">)</span>
+
+                <span class="s s-Atom">elif</span> <span class="nf">startswith</span><span class="p">(</span><span class="s2">&quot;&lt;!--&quot;</span><span class="p">,</span> <span class="s s-Atom">i</span><span class="p">)</span><span class="s s-Atom">:</span>
+
+                    <span class="s s-Atom">k</span> <span class="o">=</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">parse_comment</span><span class="p">(</span><span class="s s-Atom">i</span><span class="p">)</span>
+
+                <span class="s s-Atom">elif</span> <span class="nf">startswith</span><span class="p">(</span><span class="s2">&quot;&lt;?&quot;</span><span class="p">,</span> <span class="s s-Atom">i</span><span class="p">)</span><span class="s s-Atom">:</span>
+
+                    <span class="s s-Atom">k</span> <span class="o">=</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">parse_pi</span><span class="p">(</span><span class="s s-Atom">i</span><span class="p">)</span>
+
+                <span class="s s-Atom">elif</span> <span class="nf">startswith</span><span class="p">(</span><span class="s2">&quot;&lt;!&quot;</span><span class="p">,</span> <span class="s s-Atom">i</span><span class="p">)</span><span class="s s-Atom">:</span>
+
+                    <span class="s s-Atom">k</span> <span class="o">=</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">parse_html_declaration</span><span class="p">(</span><span class="s s-Atom">i</span><span class="p">)</span>
+
+                <span class="nf">elif</span> <span class="p">(</span><span class="s s-Atom">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nn">n</span><span class="p">:</span>
+
+                    <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">handle_data</span><span class="p">(</span><span class="s2">&quot;&lt;&quot;</span><span class="p">)</span>
+
+                    <span class="s s-Atom">k</span> <span class="o">=</span> <span class="s s-Atom">i</span> <span class="o">+</span> <span class="mi">1</span>
+
+                <span class="nn">else</span><span class="p">:</span>
+
+                    <span class="s s-Atom">break</span>
+
+                <span class="s s-Atom">if</span> <span class="s s-Atom">k</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="s s-Atom">:</span>
+
+                    <span class="s s-Atom">if</span> <span class="o">not</span> <span class="nn">end</span><span class="p">:</span>
+
+                        <span class="s s-Atom">break</span>
+
+                    <span class="s s-Atom">k</span> <span class="o">=</span> <span class="s s-Atom">rawdata</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="s s-Atom">&#39;&gt;&#39;</span><span class="p">,</span> <span class="s s-Atom">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+                    <span class="s s-Atom">if</span> <span class="s s-Atom">k</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="s s-Atom">:</span>
+
+                        <span class="s s-Atom">k</span> <span class="o">=</span> <span class="s s-Atom">rawdata</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="s s-Atom">&#39;&lt;&#39;</span><span class="p">,</span> <span class="s s-Atom">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+                        <span class="s s-Atom">if</span> <span class="s s-Atom">k</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="s s-Atom">:</span>
+
+                            <span class="s s-Atom">k</span> <span class="o">=</span> <span class="s s-Atom">i</span> <span class="o">+</span> <span class="mi">1</span>
+
+                    <span class="nn">else</span><span class="p">:</span>
+
+                        <span class="s s-Atom">k</span> <span class="s s-Atom">+=</span> <span class="mi">1</span>
+
+                    <span class="s s-Atom">if</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">convert_charrefs</span> <span class="s s-Atom">and</span> <span class="o">not</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">cdata_elem:</span>
+
+                        <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">handle_data</span><span class="p">(</span><span class="nf">unescape</span><span class="p">(</span><span class="s s-Atom">rawdata</span><span class="p">[</span><span class="nn">i</span><span class="p">:</span><span class="s s-Atom">k</span><span class="p">]))</span>
+
+                    <span class="nn">else</span><span class="p">:</span>
+
+                        <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">handle_data</span><span class="p">(</span><span class="s s-Atom">rawdata</span><span class="p">[</span><span class="nn">i</span><span class="p">:</span><span class="s s-Atom">k</span><span class="p">])</span>
+
+                <span class="s s-Atom">i</span> <span class="o">=</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">updatepos</span><span class="p">(</span><span class="s s-Atom">i</span><span class="p">,</span> <span class="s s-Atom">k</span><span class="p">)</span>
+
+            <span class="s s-Atom">elif</span> <span class="nf">startswith</span><span class="p">(</span><span class="s2">&quot;&amp;#&quot;</span><span class="p">,</span> <span class="s s-Atom">i</span><span class="p">)</span><span class="s s-Atom">:</span>
+
+                <span class="s s-Atom">match</span> <span class="o">=</span> <span class="s s-Atom">charref</span><span class="p">.</span><span class="nf">match</span><span class="p">(</span><span class="s s-Atom">rawdata</span><span class="p">,</span> <span class="s s-Atom">i</span><span class="p">)</span>
+
+                <span class="s s-Atom">if</span> <span class="nn">match</span><span class="p">:</span>
+
+                    <span class="s s-Atom">name</span> <span class="o">=</span> <span class="s s-Atom">match</span><span class="p">.</span><span class="nf">group</span><span class="p">()[</span><span class="mi">2</span><span class="p">:-</span><span class="mi">1</span><span class="p">]</span>
+
+                    <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">handle_charref</span><span class="p">(</span><span class="s s-Atom">name</span><span class="p">)</span>
+
+                    <span class="s s-Atom">k</span> <span class="o">=</span> <span class="s s-Atom">match</span><span class="p">.</span><span class="nf">end</span><span class="p">()</span>
+
+                    <span class="s s-Atom">if</span> <span class="o">not</span> <span class="nf">startswith</span><span class="p">(</span><span class="s s-Atom">&#39;;&#39;</span><span class="p">,</span> <span class="s s-Atom">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="s s-Atom">:</span>
+
+                        <span class="s s-Atom">k</span> <span class="o">=</span> <span class="s s-Atom">k</span> <span class="o">-</span> <span class="mi">1</span>
+
+                    <span class="s s-Atom">i</span> <span class="o">=</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">updatepos</span><span class="p">(</span><span class="s s-Atom">i</span><span class="p">,</span> <span class="s s-Atom">k</span><span class="p">)</span>
+
+                    <span class="s s-Atom">continue</span>
+
+                <span class="nn">else</span><span class="p">:</span>
+
+                    <span class="s s-Atom">if</span> <span class="s2">&quot;;&quot;</span> <span class="s s-Atom">in</span> <span class="s s-Atom">rawdata</span><span class="p">[</span><span class="nn">i</span><span class="p">:]</span><span class="s s-Atom">:</span>  <span class="s s-Atom">#</span> <span class="s s-Atom">bail</span> <span class="s s-Atom">by</span> <span class="s s-Atom">consuming</span> <span class="s s-Atom">&amp;#</span>
+
+                        <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">handle_data</span><span class="p">(</span><span class="s s-Atom">rawdata</span><span class="p">[</span><span class="nn">i</span><span class="p">:</span><span class="s s-Atom">i</span><span class="o">+</span><span class="mi">2</span><span class="p">])</span>
+
+                        <span class="s s-Atom">i</span> <span class="o">=</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">updatepos</span><span class="p">(</span><span class="s s-Atom">i</span><span class="p">,</span> <span class="s s-Atom">i</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+
+                    <span class="s s-Atom">break</span>
+
+            <span class="s s-Atom">elif</span> <span class="nf">startswith</span><span class="p">(</span><span class="s s-Atom">&#39;&amp;&#39;</span><span class="p">,</span> <span class="s s-Atom">i</span><span class="p">)</span><span class="s s-Atom">:</span>
+
+                <span class="s s-Atom">match</span> <span class="o">=</span> <span class="s s-Atom">entityref</span><span class="p">.</span><span class="nf">match</span><span class="p">(</span><span class="s s-Atom">rawdata</span><span class="p">,</span> <span class="s s-Atom">i</span><span class="p">)</span>
+
+                <span class="s s-Atom">if</span> <span class="nn">match</span><span class="p">:</span>
+
+                    <span class="s s-Atom">name</span> <span class="o">=</span> <span class="s s-Atom">match</span><span class="p">.</span><span class="nf">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+                    <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">handle_entityref</span><span class="p">(</span><span class="s s-Atom">name</span><span class="p">)</span>
+
+                    <span class="s s-Atom">k</span> <span class="o">=</span> <span class="s s-Atom">match</span><span class="p">.</span><span class="nf">end</span><span class="p">()</span>
+
+                    <span class="s s-Atom">if</span> <span class="o">not</span> <span class="nf">startswith</span><span class="p">(</span><span class="s s-Atom">&#39;;&#39;</span><span class="p">,</span> <span class="s s-Atom">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="s s-Atom">:</span>
+
+                        <span class="s s-Atom">k</span> <span class="o">=</span> <span class="s s-Atom">k</span> <span class="o">-</span> <span class="mi">1</span>
+
+                    <span class="s s-Atom">i</span> <span class="o">=</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">updatepos</span><span class="p">(</span><span class="s s-Atom">i</span><span class="p">,</span> <span class="s s-Atom">k</span><span class="p">)</span>
+
+                    <span class="s s-Atom">continue</span>
+
+                <span class="s s-Atom">match</span> <span class="o">=</span> <span class="s s-Atom">incomplete</span><span class="p">.</span><span class="nf">match</span><span class="p">(</span><span class="s s-Atom">rawdata</span><span class="p">,</span> <span class="s s-Atom">i</span><span class="p">)</span>
+
+                <span class="s s-Atom">if</span> <span class="nn">match</span><span class="p">:</span>
+
+                    <span class="s s-Atom">#</span> <span class="s s-Atom">match</span><span class="p">.</span><span class="nf">group</span><span class="p">()</span> <span class="s s-Atom">will</span> <span class="s s-Atom">contain</span> <span class="s s-Atom">at</span> <span class="s s-Atom">least</span> <span class="mi">2</span> <span class="s s-Atom">chars</span>
+
+                    <span class="s s-Atom">if</span> <span class="s s-Atom">end</span> <span class="s s-Atom">and</span> <span class="s s-Atom">match</span><span class="p">.</span><span class="nf">group</span><span class="p">()</span> <span class="o">==</span> <span class="s s-Atom">rawdata</span><span class="p">[</span><span class="nn">i</span><span class="p">:]</span><span class="s s-Atom">:</span>
+
+                        <span class="s s-Atom">k</span> <span class="o">=</span> <span class="s s-Atom">match</span><span class="p">.</span><span class="nf">end</span><span class="p">()</span>
+
+                        <span class="s s-Atom">if</span> <span class="s s-Atom">k</span> <span class="s s-Atom">&lt;=</span> <span class="nn">i</span><span class="p">:</span>
+
+                            <span class="s s-Atom">k</span> <span class="o">=</span> <span class="s s-Atom">n</span>
+
+                        <span class="s s-Atom">i</span> <span class="o">=</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">updatepos</span><span class="p">(</span><span class="s s-Atom">i</span><span class="p">,</span> <span class="s s-Atom">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+                    <span class="s s-Atom">#</span> <span class="s s-Atom">incomplete</span>
+
+                    <span class="s s-Atom">break</span>
+
+                <span class="nf">elif</span> <span class="p">(</span><span class="s s-Atom">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nn">n</span><span class="p">:</span>
+
+                    <span class="s s-Atom">#</span> <span class="o">not</span> <span class="s s-Atom">the</span> <span class="s s-Atom">end</span> <span class="s s-Atom">of</span> <span class="s s-Atom">the</span> <span class="s s-Atom">buffer</span><span class="p">,</span> <span class="s s-Atom">and</span> <span class="s s-Atom">can</span><span class="err">&#39;</span><span class="s s-Atom">t</span> <span class="s s-Atom">be</span> <span class="s s-Atom">confused</span>
+
+                    <span class="s s-Atom">#</span> <span class="s s-Atom">with</span> <span class="s s-Atom">some</span> <span class="s s-Atom">other</span> <span class="s s-Atom">construct</span>
+
+                    <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">handle_data</span><span class="p">(</span><span class="s2">&quot;&amp;&quot;</span><span class="p">)</span>
+
+                    <span class="s s-Atom">i</span> <span class="o">=</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">updatepos</span><span class="p">(</span><span class="s s-Atom">i</span><span class="p">,</span> <span class="s s-Atom">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+                <span class="nn">else</span><span class="p">:</span>
+
+                    <span class="s s-Atom">break</span>
+
+            <span class="nn">else</span><span class="p">:</span>
+
+                <span class="s s-Atom">assert</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;interesting.search() lied&quot;</span>
+
+        <span class="s s-Atom">#</span> <span class="s s-Atom">end</span> <span class="s s-Atom">while</span>
+
+        <span class="s s-Atom">if</span> <span class="s s-Atom">end</span> <span class="s s-Atom">and</span> <span class="s s-Atom">i</span> <span class="o">&lt;</span> <span class="s s-Atom">n</span> <span class="s s-Atom">and</span> <span class="o">not</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">cdata_elem:</span>
+
+            <span class="s s-Atom">if</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">convert_charrefs</span> <span class="s s-Atom">and</span> <span class="o">not</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">cdata_elem:</span>
+
+                <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">handle_data</span><span class="p">(</span><span class="nf">unescape</span><span class="p">(</span><span class="s s-Atom">rawdata</span><span class="p">[</span><span class="nn">i</span><span class="p">:</span><span class="s s-Atom">n</span><span class="p">]))</span>
+
+            <span class="nn">else</span><span class="p">:</span>
+
+                <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">handle_data</span><span class="p">(</span><span class="s s-Atom">rawdata</span><span class="p">[</span><span class="nn">i</span><span class="p">:</span><span class="s s-Atom">n</span><span class="p">])</span>
+
+            <span class="s s-Atom">i</span> <span class="o">=</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">updatepos</span><span class="p">(</span><span class="s s-Atom">i</span><span class="p">,</span> <span class="s s-Atom">n</span><span class="p">)</span>
+
+        <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">rawdata</span> <span class="o">=</span> <span class="s s-Atom">rawdata</span><span class="p">[</span><span class="nn">i</span><span class="p">:]</span>
+</pre></div>
+
+
+</details>
+<h5 id="handle_charref">handle_charref</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">handle_charref</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">name</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def handle_charref(self, name):
+
+        pass
+</pre></div>
+
+
+</details>
+<h5 id="handle_comment">handle_comment</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">handle_comment</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">data</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def handle_comment(self, data):
+
+        pass
+</pre></div>
+
+
+</details>
+<h5 id="handle_data">handle_data</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">handle_data</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">data</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def handle_data(self, data):
+
+        if self.count:
+
+            if self.groups[self.group - 1].text is None:
+
+                self.groups[self.group - 1].text = data.strip()
+
+            self.groups[self.group - 1].html += data
+
+            return
+
+        else:
+
+            return
+</pre></div>
+
+
+</details>
+<h5 id="handle_decl">handle_decl</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">handle_decl</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">decl</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def handle_decl(self, decl):
+
+        pass
+</pre></div>
+
+
+</details>
+<h5 id="handle_endtag">handle_endtag</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">handle_endtag</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">tag</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def handle_endtag(self, tag):
+
+        if self.count:
+
+            end_tag = f&#39;&lt;/{tag}&gt;&#39;
+
+            self.groups[self.group - 1].html += end_tag
+
+            self.count -= 1
+
+            return
+
+        else:
+
+            return
+</pre></div>
+
+
+</details>
+<h5 id="handle_entityref">handle_entityref</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">handle_entityref</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">name</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def handle_entityref(self, name):
+
+        pass
+</pre></div>
+
+
+</details>
+<h5 id="handle_pi">handle_pi</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">handle_pi</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">data</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def handle_pi(self, data):
+
+        pass
+</pre></div>
+
+
+</details>
+<h5 id="handle_startendtag">handle_startendtag</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">handle_startendtag</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">tag</span><span class="p">,</span>
+    <span class="n">attrs</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def handle_startendtag(self, tag, attrs):
+
+        html, attrs = html_starttag_and_attrs(tag, attrs, True)
+
+        if self.count:
+
+            self.groups[self.group - 1].html += html
+
+            return
+
+        else:
+
+            return
+</pre></div>
+
+
+</details>
+<h5 id="handle_starttag">handle_starttag</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">handle_starttag</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">tag</span><span class="p">,</span>
+    <span class="n">attrs</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def handle_starttag(self, tag, attrs):
+
+        html, attrs = html_starttag_and_attrs(tag, attrs)
+
+        if tag == self.tag and match(self.attrs, attrs):
+
+            self.count += 1
+
+            self.group += 1
+
+            self.groups.append(Soup(&#39;&#39;))
+
+            self.groups[self.group - 1].html += html
+
+            self.groups[self.group - 1].tag = tag
+
+            self.groups[self.group - 1].attrs = attrs
+
+            return
+
+        if self.count:
+
+            self.count += 1
+
+            self.groups[self.group - 1].html += html
+
+            return
+
+        else:
+
+            return
+</pre></div>
+
+
+</details>
+<h5 id="parse_bogus_comment">parse_bogus_comment</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">parse_bogus_comment</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">i</span><span class="p">,</span>
+    <span class="n">report</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def parse_bogus_comment(self, i, report=1):
+
+        rawdata = self.rawdata
+
+        assert rawdata[i:i+2] in (&#39;&lt;!&#39;, &#39;&lt;/&#39;), (&#39;unexpected call to &#39;
+
+                                                &#39;parse_comment()&#39;)
+
+        pos = rawdata.find(&#39;&gt;&#39;, i+2)
+
+        if pos == -1:
+
+            return -1
+
+        if report:
+
+            self.handle_comment(rawdata[i+2:pos])
+
+        return pos + 1
+</pre></div>
+
+
+</details>
+<h5 id="parse_comment">parse_comment</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">parse_comment</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">i</span><span class="p">,</span>
+    <span class="n">report</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def parse_comment(self, i, report=1):
+
+        rawdata = self.rawdata
+
+        if rawdata[i:i+4] != &#39;&lt;!--&#39;:
+
+            self.error(&#39;unexpected call to parse_comment()&#39;)
+
+        match = _commentclose.search(rawdata, i+4)
+
+        if not match:
+
+            return -1
+
+        if report:
+
+            j = match.start(0)
+
+            self.handle_comment(rawdata[i+4: j])
+
+        return match.end(0)
+</pre></div>
+
+
+</details>
+<h5 id="parse_declaration">parse_declaration</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">parse_declaration</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">i</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="n">def</span> <span class="nf">parse_declaration</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span><span class="o">:</span>
+
+        <span class="cp"># This is some sort of declaration</span><span class="p">;</span> <span class="k">in</span> <span class="s">&quot;HTML as</span>
+
+        <span class="cp"># deployed,&quot; this should only be the document type</span>
+
+        <span class="cp"># declaration (&quot;&lt;!DOCTYPE html...&gt;&quot;).</span>
+
+        <span class="cp"># ISO 8879:1986, however, has more complex</span>
+
+        <span class="cp"># declaration syntax for elements in &lt;!...&gt;, including:</span>
+
+        <span class="cp"># --comment--</span>
+
+        <span class="cp"># [marked section]</span>
+
+        <span class="cp"># name in the following list: ENTITY, DOCTYPE, ELEMENT,</span>
+
+        <span class="cp"># ATTLIST, NOTATION, SHORTREF, USEMAP,</span>
+
+        <span class="cp"># LINKTYPE, LINK, IDLINK, USELINK, SYSTEM</span>
+
+        <span class="n">rawdata</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="n">rawdata</span>
+
+        <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">2</span>
+
+        <span class="n">assert</span> <span class="n">rawdata</span><span class="p">[</span><span class="nl">i</span><span class="p">:</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;&lt;!&quot;</span><span class="p">,</span> <span class="s">&quot;unexpected call to parse_declaration&quot;</span>
+
+        <span class="k">if</span> <span class="n">rawdata</span><span class="p">[</span><span class="nl">j</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;&gt;&quot;</span><span class="o">:</span>
+
+            <span class="cp"># the empty comment &lt;!&gt;</span>
+
+            <span class="k">return</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="n">rawdata</span><span class="p">[</span><span class="nl">j</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="k">in</span> <span class="p">(</span><span class="s">&quot;-&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">:</span>
+
+            <span class="cp"># Start of comment followed by buffer boundary,</span>
+
+            <span class="cp"># or just a buffer boundary.</span>
+
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+
+        <span class="cp"># A simple, practical version could look like: ((name|stringlit) S*) + &#39;&gt;&#39;</span>
+
+        <span class="n">n</span> <span class="o">=</span> <span class="n">len</span><span class="p">(</span><span class="n">rawdata</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">rawdata</span><span class="p">[</span><span class="nl">j</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="err">&#39;</span><span class="o">--</span><span class="err">&#39;</span><span class="o">:</span> <span class="err">#</span><span class="n">comment</span>
+
+            <span class="cp"># Locate --.*-- as the body of the comment</span>
+
+            <span class="k">return</span> <span class="nb">self</span><span class="p">.</span><span class="n">parse_comment</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+        <span class="n">elif</span> <span class="n">rawdata</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;[&#39;</span><span class="o">:</span> <span class="err">#</span><span class="n">marked</span> <span class="n">section</span>
+
+            <span class="cp"># Locate [statusWord [...arbitrary SGML...]] as the body of the marked section</span>
+
+            <span class="cp"># Where statusWord is one of TEMP, CDATA, IGNORE, INCLUDE, RCDATA</span>
+
+            <span class="cp"># Note that this is extended by Microsoft Office &quot;Save as Web&quot; function</span>
+
+            <span class="cp"># to include [if...] and [endif].</span>
+
+            <span class="k">return</span> <span class="nb">self</span><span class="p">.</span><span class="n">parse_marked_section</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="o">:</span> <span class="err">#</span><span class="n">all</span> <span class="n">other</span> <span class="n">declaration</span> <span class="n">elements</span>
+
+            <span class="n">decltype</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="n">_scan_name</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">:</span>
+
+            <span class="k">return</span> <span class="n">j</span>
+
+        <span class="k">if</span> <span class="n">decltype</span> <span class="o">==</span> <span class="s">&quot;doctype&quot;</span><span class="o">:</span>
+
+            <span class="nb">self</span><span class="p">.</span><span class="n">_decl_otherchars</span> <span class="o">=</span> <span class="err">&#39;&#39;</span>
+
+        <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="nl">n</span><span class="p">:</span>
+
+            <span class="n">c</span> <span class="o">=</span> <span class="n">rawdata</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="s">&quot;&gt;&quot;</span><span class="o">:</span>
+
+                <span class="cp"># end of declaration syntax</span>
+
+                <span class="n">data</span> <span class="o">=</span> <span class="n">rawdata</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="o">:</span><span class="n">j</span><span class="p">]</span>
+
+                <span class="k">if</span> <span class="n">decltype</span> <span class="o">==</span> <span class="s">&quot;doctype&quot;</span><span class="o">:</span>
+
+                    <span class="nb">self</span><span class="p">.</span><span class="n">handle_decl</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+                <span class="k">else</span><span class="o">:</span>
+
+                    <span class="cp"># According to the HTML5 specs sections &quot;8.2.4.44 Bogus</span>
+
+                    <span class="cp"># comment state&quot; and &quot;8.2.4.45 Markup declaration open</span>
+
+                    <span class="cp"># state&quot;, a comment token should be emitted.</span>
+
+                    <span class="cp"># Calling unknown_decl provides more flexibility though.</span>
+
+                    <span class="nb">self</span><span class="p">.</span><span class="n">unknown_decl</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+                <span class="k">return</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span>
+
+            <span class="k">if</span> <span class="n">c</span> <span class="k">in</span> <span class="s">&quot;</span><span class="se">\&quot;</span><span class="s">&#39;&quot;</span><span class="o">:</span>
+
+                <span class="n">m</span> <span class="o">=</span> <span class="n">_declstringlit_match</span><span class="p">(</span><span class="n">rawdata</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">not</span> <span class="nl">m</span><span class="p">:</span>
+
+                    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="err">#</span> <span class="n">incomplete</span>
+
+                <span class="n">j</span> <span class="o">=</span> <span class="n">m</span><span class="p">.</span><span class="n">end</span><span class="p">()</span>
+
+            <span class="n">elif</span> <span class="n">c</span> <span class="k">in</span> <span class="s">&quot;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span><span class="o">:</span>
+
+                <span class="n">name</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="n">_scan_name</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+            <span class="n">elif</span> <span class="n">c</span> <span class="k">in</span> <span class="nb">self</span><span class="p">.</span><span class="nl">_decl_otherchars</span><span class="p">:</span>
+
+                <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span>
+
+            <span class="n">elif</span> <span class="n">c</span> <span class="o">==</span> <span class="s">&quot;[&quot;</span><span class="o">:</span>
+
+                <span class="cp"># this could be handled in a separate doctype parser</span>
+
+                <span class="k">if</span> <span class="n">decltype</span> <span class="o">==</span> <span class="s">&quot;doctype&quot;</span><span class="o">:</span>
+
+                    <span class="n">j</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="n">_parse_doctype_subset</span><span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+                <span class="n">elif</span> <span class="n">decltype</span> <span class="k">in</span> <span class="p">{</span><span class="s">&quot;attlist&quot;</span><span class="p">,</span> <span class="s">&quot;linktype&quot;</span><span class="p">,</span> <span class="s">&quot;link&quot;</span><span class="p">,</span> <span class="s">&quot;element&quot;</span><span class="p">}</span><span class="o">:</span>
+
+                    <span class="cp"># must tolerate []&#39;d groups in a content model in an element declaration</span>
+
+                    <span class="cp"># also in data attribute specifications of attlist declaration</span>
+
+                    <span class="cp"># also link type declaration subsets in linktype declarations</span>
+
+                    <span class="cp"># also link attribute specification lists in link declarations</span>
+
+                    <span class="nb">self</span><span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="s">&quot;unsupported &#39;[&#39; char in %s declaration&quot;</span> <span class="o">%</span> <span class="n">decltype</span><span class="p">)</span>
+
+                <span class="k">else</span><span class="o">:</span>
+
+                    <span class="nb">self</span><span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="s">&quot;unexpected &#39;[&#39; char in declaration&quot;</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="o">:</span>
+
+                <span class="nb">self</span><span class="p">.</span><span class="n">error</span><span class="p">(</span>
+
+                    <span class="s">&quot;unexpected %r char in declaration&quot;</span> <span class="o">%</span> <span class="n">rawdata</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+
+            <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">:</span>
+
+                <span class="k">return</span> <span class="n">j</span>
+
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="err">#</span> <span class="n">incomplete</span>
+</pre></div>
+
+
+</details>
+<h5 id="parse_endtag">parse_endtag</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">parse_endtag</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">i</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def parse_endtag(self, i):
+
+        rawdata = self.rawdata
+
+        assert rawdata[i:i+2] == &quot;<span class="err">&lt;</span>/&quot;, &quot;unexpected call to parse_endtag&quot;
+
+        match = endendtag.search(rawdata, i+1) # &gt;
+
+        if not match:
+
+            return -1
+
+        gtpos = match.end()
+
+        match = endtagfind.match(rawdata, i) # <span class="err">&lt;</span>/ + tag + &gt;
+
+        if not match:
+
+            if self.cdata_elem is not None:
+
+                self.handle_data(rawdata[i:gtpos])
+
+                return gtpos
+
+            # find the name: w3.org/TR/html5/tokenization.html#tag-name-state
+
+            namematch = tagfind_tolerant.match(rawdata, i+2)
+
+            if not namematch:
+
+                # w3.org/TR/html5/tokenization.html#end-tag-open-state
+
+                if rawdata[i:i+3] == &#39;<span class="err">&lt;</span>/&gt;&#39;:
+
+                    return i+3
+
+                else:
+
+                    return self.parse_bogus_comment(i)
+
+            tagname = namematch.group(1).lower()
+
+            # consume and ignore other stuff between the name and the &gt;
+
+            # Note: this is not 100% correct, since we might have things like
+
+            # <span class="err">&lt;</span>/tag attr=&quot;&gt;&quot;&gt;, but looking for &gt; after tha name should cover
+
+            # most of the cases and is much simpler
+
+            gtpos = rawdata.find(&#39;&gt;&#39;, namematch.end())
+
+            self.handle_endtag(tagname)
+
+            return gtpos+1
+
+        elem = match.group(1).lower() # script or style
+
+        if self.cdata_elem is not None:
+
+            if elem != self.cdata_elem:
+
+                self.handle_data(rawdata[i:gtpos])
+
+                return gtpos
+
+        self.handle_endtag(elem)
+
+        self.clear_cdata_mode()
+
+        return gtpos
+</pre></div>
+
+
+</details>
+<h5 id="parse_html_declaration">parse_html_declaration</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">parse_html_declaration</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">i</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def parse_html_declaration(self, i):
+
+        rawdata = self.rawdata
+
+        assert rawdata[i:i+2] == &#39;&lt;!&#39;, (&#39;unexpected call to &#39;
+
+                                        &#39;parse_html_declaration()&#39;)
+
+        if rawdata[i:i+4] == &#39;&lt;!--&#39;:
+
+            # this case is actually already handled in goahead()
+
+            return self.parse_comment(i)
+
+        elif rawdata[i:i+3] == &#39;&lt;![&#39;:
+
+            return self.parse_marked_section(i)
+
+        elif rawdata[i:i+9].lower() == &#39;&lt;!doctype&#39;:
+
+            # find the closing &gt;
+
+            gtpos = rawdata.find(&#39;&gt;&#39;, i+9)
+
+            if gtpos == -1:
+
+                return -1
+
+            self.handle_decl(rawdata[i+2:gtpos])
+
+            return gtpos+1
+
+        else:
+
+            return self.parse_bogus_comment(i)
+</pre></div>
+
+
+</details>
+<h5 id="parse_marked_section">parse_marked_section</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">parse_marked_section</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">i</span><span class="p">,</span>
+    <span class="n">report</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def parse_marked_section(self, i, report=1):
+
+        rawdata= self.rawdata
+
+        assert rawdata[i:i+3] == &#39;&lt;![&#39;, &quot;unexpected call to parse_marked_section()&quot;
+
+        sectName, j = self._scan_name( i+3, i )
+
+        if j &lt; 0:
+
+            return j
+
+        if sectName in {&quot;temp&quot;, &quot;cdata&quot;, &quot;ignore&quot;, &quot;include&quot;, &quot;rcdata&quot;}:
+
+            # look for standard ]]&gt; ending
+
+            match= _markedsectionclose.search(rawdata, i+3)
+
+        elif sectName in {&quot;if&quot;, &quot;else&quot;, &quot;endif&quot;}:
+
+            # look for MS Office ]&gt; ending
+
+            match= _msmarkedsectionclose.search(rawdata, i+3)
+
+        else:
+
+            self.error(&#39;unknown status keyword %r in marked section&#39; % rawdata[i+3:j])
+
+        if not match:
+
+            return -1
+
+        if report:
+
+            j = match.start(0)
+
+            self.unknown_decl(rawdata[i+3: j])
+
+        return match.end(0)
+</pre></div>
+
+
+</details>
+<h5 id="parse_pi">parse_pi</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">parse_pi</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">i</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="nx">def</span> <span class="nx">parse_pi</span><span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span><span class="o">:</span>
+
+        <span class="nx">rawdata</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">rawdata</span>
+
+        <span class="nx">assert</span> <span class="nx">rawdata</span><span class="p">[</span><span class="nx">i</span><span class="o">:</span><span class="nx">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="err">&#39;</span><span class="cp">&lt;?</span><span class="s1">&#39;, &#39;</span><span class="nx">unexpected</span> <span class="nx">call</span> <span class="nx">to</span> <span class="nx">parse_pi</span><span class="p">()</span><span class="err">&#39;</span>
+
+        <span class="nx">match</span> <span class="o">=</span> <span class="nx">piclose</span><span class="o">.</span><span class="nx">search</span><span class="p">(</span><span class="nx">rawdata</span><span class="p">,</span> <span class="nx">i</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># &gt;</span>
+
+        <span class="k">if</span> <span class="k">not</span> <span class="nx">match</span><span class="o">:</span>
+
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+
+        <span class="nx">j</span> <span class="o">=</span> <span class="nx">match</span><span class="o">.</span><span class="nx">start</span><span class="p">()</span>
+
+        <span class="nx">self</span><span class="o">.</span><span class="nx">handle_pi</span><span class="p">(</span><span class="nx">rawdata</span><span class="p">[</span><span class="nx">i</span><span class="o">+</span><span class="mi">2</span><span class="o">:</span> <span class="nx">j</span><span class="p">])</span>
+
+        <span class="nx">j</span> <span class="o">=</span> <span class="nx">match</span><span class="o">.</span><span class="nb">end</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="nx">j</span>
+</pre></div>
+
+
+</details>
+<h5 id="parse_starttag">parse_starttag</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">parse_starttag</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">i</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="s s-Atom">def</span> <span class="nf">parse_starttag</span><span class="p">(</span><span class="s s-Atom">self</span><span class="p">,</span> <span class="s s-Atom">i</span><span class="p">)</span><span class="s s-Atom">:</span>
+
+        <span class="s s-Atom">self</span><span class="p">.</span><span class="k">__</span><span class="s s-Atom">starttag_text</span> <span class="o">=</span> <span class="nv">None</span>
+
+        <span class="s s-Atom">endpos</span> <span class="o">=</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">check_for_whole_start_tag</span><span class="p">(</span><span class="s s-Atom">i</span><span class="p">)</span>
+
+        <span class="s s-Atom">if</span> <span class="s s-Atom">endpos</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="s s-Atom">:</span>
+
+            <span class="s s-Atom">return</span> <span class="s s-Atom">endpos</span>
+
+        <span class="s s-Atom">rawdata</span> <span class="o">=</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">rawdata</span>
+
+        <span class="s s-Atom">self</span><span class="p">.</span><span class="k">__</span><span class="s s-Atom">starttag_text</span> <span class="o">=</span> <span class="s s-Atom">rawdata</span><span class="p">[</span><span class="nn">i</span><span class="p">:</span><span class="s s-Atom">endpos</span><span class="p">]</span>
+
+        <span class="s s-Atom">#</span> <span class="nv">Now</span> <span class="s s-Atom">parse</span> <span class="s s-Atom">the</span> <span class="s s-Atom">data</span> <span class="s s-Atom">between</span> <span class="s s-Atom">i</span><span class="o">+</span><span class="mi">1</span> <span class="s s-Atom">and</span> <span class="s s-Atom">j</span> <span class="s s-Atom">into</span> <span class="s s-Atom">a</span> <span class="s s-Atom">tag</span> <span class="s s-Atom">and</span> <span class="s s-Atom">attrs</span>
+
+        <span class="s s-Atom">attrs</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="s s-Atom">match</span> <span class="o">=</span> <span class="s s-Atom">tagfind_tolerant</span><span class="p">.</span><span class="nf">match</span><span class="p">(</span><span class="s s-Atom">rawdata</span><span class="p">,</span> <span class="s s-Atom">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="s s-Atom">assert</span> <span class="s s-Atom">match</span><span class="p">,</span> <span class="s s-Atom">&#39;unexpected call to parse_starttag()&#39;</span>
+
+        <span class="s s-Atom">k</span> <span class="o">=</span> <span class="s s-Atom">match</span><span class="p">.</span><span class="nf">end</span><span class="p">()</span>
+
+        <span class="s s-Atom">self</span><span class="p">.</span><span class="s s-Atom">lasttag</span> <span class="o">=</span> <span class="s s-Atom">tag</span> <span class="o">=</span> <span class="s s-Atom">match</span><span class="p">.</span><span class="nf">group</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="nf">lower</span><span class="p">()</span>
+
+        <span class="s s-Atom">while</span> <span class="s s-Atom">k</span> <span class="o">&lt;</span> <span class="nn">endpos</span><span class="p">:</span>
+
+            <span class="s s-Atom">m</span> <span class="o">=</span> <span class="s s-Atom">attrfind_tolerant</span><span class="p">.</span><span class="nf">match</span><span class="p">(</span><span class="s s-Atom">rawdata</span><span class="p">,</span> <span class="s s-Atom">k</span><span class="p">)</span>
+
+            <span class="s s-Atom">if</span> <span class="o">not</span> <span class="nn">m</span><span class="p">:</span>
+
+                <span class="s s-Atom">break</span>
+
+            <span class="s s-Atom">attrname</span><span class="p">,</span> <span class="s s-Atom">rest</span><span class="p">,</span> <span class="s s-Atom">attrvalue</span> <span class="o">=</span> <span class="s s-Atom">m</span><span class="p">.</span><span class="nf">group</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+            <span class="s s-Atom">if</span> <span class="o">not</span> <span class="nn">rest</span><span class="p">:</span>
+
+                <span class="s s-Atom">attrvalue</span> <span class="o">=</span> <span class="nv">None</span>
+
+            <span class="s s-Atom">elif</span> <span class="s s-Atom">attrvalue</span><span class="p">[</span><span class="s s-Atom">:</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s s-Atom">&#39;\&#39;&#39; == attrvalue[-1:] or \</span>
+
+<span class="s s-Atom">                 attrvalue[:1] == &#39;</span><span class="s2">&quot;&#39; == attrvalue[-1:]:</span>
+
+<span class="s2">                attrvalue = attrvalue[1:-1]</span>
+
+<span class="s2">            if attrvalue:</span>
+
+<span class="s2">                attrvalue = unescape(attrvalue)</span>
+
+<span class="s2">            attrs.append((attrname.lower(), attrvalue))</span>
+
+<span class="s2">            k = m.end()</span>
+
+<span class="s2">        end = rawdata[k:endpos].strip()</span>
+
+<span class="s2">        if end not in (&quot;</span><span class="s s-Atom">&gt;</span><span class="s2">&quot;, &quot;</span><span class="s s-Atom">/&gt;</span><span class="s2">&quot;):</span>
+
+<span class="s2">            lineno, offset = self.getpos()</span>
+
+<span class="s2">            if &quot;</span><span class="s s-Atom">\n</span><span class="s2">&quot; in self.__starttag_text:</span>
+
+<span class="s2">                lineno = lineno + self.__starttag_text.count(&quot;</span><span class="s s-Atom">\n</span><span class="s2">&quot;)</span>
+
+<span class="s2">                offset = len(self.__starttag_text) \</span>
+
+<span class="s2">                         - self.__starttag_text.rfind(&quot;</span><span class="s s-Atom">\n</span><span class="s2">&quot;)</span>
+
+<span class="s2">            else:</span>
+
+<span class="s2">                offset = offset + len(self.__starttag_text)</span>
+
+<span class="s2">            self.handle_data(rawdata[i:endpos])</span>
+
+<span class="s2">            return endpos</span>
+
+<span class="s2">        if end.endswith(&#39;/&gt;&#39;):</span>
+
+<span class="s2">            # XHTML-style empty tag: &lt;span attr=&quot;</span><span class="s s-Atom">value</span><span class="err">&quot;</span> <span class="s s-Atom">/&gt;</span>
+
+            <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">handle_startendtag</span><span class="p">(</span><span class="s s-Atom">tag</span><span class="p">,</span> <span class="s s-Atom">attrs</span><span class="p">)</span>
+
+        <span class="nn">else</span><span class="p">:</span>
+
+            <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">handle_starttag</span><span class="p">(</span><span class="s s-Atom">tag</span><span class="p">,</span> <span class="s s-Atom">attrs</span><span class="p">)</span>
+
+            <span class="s s-Atom">if</span> <span class="s s-Atom">tag</span> <span class="s s-Atom">in</span> <span class="s s-Atom">self</span><span class="p">.</span><span class="nv">CDATA_CONTENT_ELEMENTS</span><span class="s s-Atom">:</span>
+
+                <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">set_cdata_mode</span><span class="p">(</span><span class="s s-Atom">tag</span><span class="p">)</span>
+
+        <span class="s s-Atom">return</span> <span class="s s-Atom">endpos</span>
+</pre></div>
+
+
+</details>
+<h5 id="reset">reset</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">reset</span><span class="p">(</span>
+    <span class="bp">self</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<p>Reset this instance.  Loses all unprocessed data.</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def reset(self):
+
+        &quot;&quot;&quot;Reset this instance.  Loses all unprocessed data.&quot;&quot;&quot;
+
+        self.rawdata = &#39;&#39;
+
+        self.lasttag = &#39;???&#39;
+
+        self.interesting = interesting_normal
+
+        self.cdata_elem = None
+
+        _markupbase.ParserBase.reset(self)
+</pre></div>
+
+
+</details>
+<h5 id="set_cdata_mode">set_cdata_mode</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">set_cdata_mode</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">elem</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def set_cdata_mode(self, elem):
+
+        self.cdata_elem = elem.lower()
+
+        self.interesting = re.compile(r&#39;&lt;/\s*%s\s*&gt;&#39; % self.cdata_elem, re.I)
+</pre></div>
+
+
+</details>
+<h5 id="unescape">unescape</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">unescape</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">s</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def unescape(self, s):
+
+        warnings.warn(&#39;The unescape method is deprecated and will be removed &#39;
+
+                      &#39;in 3.5, use html.unescape() instead.&#39;,
+
+                      DeprecationWarning, stacklevel=2)
+
+        return unescape(s)
+</pre></div>
+
+
+</details>
+<h5 id="unknown_decl">unknown_decl</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">unknown_decl</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">data</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def unknown_decl(self, data):
+
+        pass
+</pre></div>
+
+
+</details>
+<h5 id="updatepos">updatepos</h5>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">updatepos</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">i</span><span class="p">,</span>
+    <span class="n">j</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def updatepos(self, i, j):
+
+        if i &gt;= j:
+
+            return j
+
+        rawdata = self.rawdata
+
+        nlines = rawdata.count(&quot;\n&quot;, i, j)
+
+        if nlines:
+
+            self.lineno = self.lineno + nlines
+
+            pos = rawdata.rindex(&quot;\n&quot;, i, j) # Should not fail
+
+            self.offset = j-(pos+1)
+
+        else:
+
+            self.offset = self.offset + j-i
+
+        return j
+</pre></div>
+
+
+</details>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../" title="Index" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Index
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../utils/" title="Utils" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Utils
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Powered by
+        <a href="http://timothycrosley.github.io/portray">portray.</a>
+        You too can
+        <a href="http://timothycrosley.github.io/portray">
+          portray</a>
+        your Python project well using automatic documentation.
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/application.c648116f.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../../.."}})</script>
+      
+    
+  </body>
+</html>
