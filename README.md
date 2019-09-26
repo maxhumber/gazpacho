@@ -12,7 +12,7 @@
 
 #### About
 
-gazpacho is a web scraping library. It replaces requests and BeautifulSoup for most projects. gazpacho is small, simple, fast, and consistent. You should use it! 
+gazpacho is a web scraping library. It replaces requests and BeautifulSoup for most projects. gazpacho is small, simple, fast, and consistent. You should use it!
 
 
 
@@ -22,7 +22,7 @@ gazpacho is easy to use. To retrieve the contents of a web page use `get`. And t
 
 
 
-####get 
+#### Get 
 
 The `get` function retrieves content from a web page:
 
