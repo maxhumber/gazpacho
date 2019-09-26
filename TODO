@@ -1,8 +1,4 @@
 Tag groups not already recording
-Exact and partial match rewrite
-
-Check if header user-agent not there
-Return request code if not 200
 
 Release branch
 Better docs with Portray
@@ -12,4 +8,3 @@ time comparison?
 zero dependency badge
 promo
 pretty print html
-Exceptions
