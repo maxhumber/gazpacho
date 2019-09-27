@@ -45,7 +45,7 @@ class Soup(HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         html, attrs = html_starttag_and_attrs(tag, attrs)
-        if tag == self.tag and match(self.attrs, attrs):
+        if tag == self.tag and match(self.attrs, attrs) and not self.count:
             self.count += 1
             self.group += 1
             self.groups.append(Soup(''))
