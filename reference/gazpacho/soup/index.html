@@ -1015,7 +1015,7 @@
 
         <span class="n">html</span><span class="p">,</span> <span class="n">attrs</span> <span class="o">=</span> <span class="n">html_starttag_and_attrs</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">tag</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">tag</span> <span class="ow">and</span> <span class="n">match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">attrs</span><span class="p">,</span> <span class="n">attrs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">tag</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">tag</span> <span class="ow">and</span> <span class="n">match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">attrs</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">:</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 
@@ -1216,9 +1216,9 @@ print(result.text)
 
         <span class="nx">html</span><span class="p">,</span> <span class="nx">attrs</span> <span class="o">=</span> <span class="nx">html_starttag_and_attrs</span><span class="p">(</span><span class="nx">tag</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="nx">tag</span> <span class="o">==</span> <span class="nx">self</span><span class="p">.</span><span class="nx">tag</span> <span class="nx">and</span> <span class="nx">match</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">attrs</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">)</span><span class="o">:</span>
+        <span class="k">if</span> <span class="nx">tag</span> <span class="o">==</span> <span class="nx">self</span><span class="p">.</span><span class="nx">tag</span> <span class="nx">and</span> <span class="nx">match</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">attrs</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">)</span> <span class="nx">and</span> <span class="nx">not</span> <span class="nx">self.count</span>:
 
-            <span class="nx">self</span><span class="p">.</span><span class="nx">count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="kt">self.count</span> <span class="o">+=</span> <span class="mi">1</span>
 
             <span class="nx">self</span><span class="p">.</span><span class="nx">group</span> <span class="o">+=</span> <span class="mi">1</span>
 
@@ -1980,7 +1980,7 @@ as you want (may include '\n').</p>
 
         html, attrs = html_starttag_and_attrs(tag, attrs)
 
-        if tag == self.tag and match(self.attrs, attrs):
+        if tag == self.tag and match(self.attrs, attrs) and not self.count:
 
             self.count += 1
 
