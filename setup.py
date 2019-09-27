@@ -5,7 +5,7 @@ with open('README.md', encoding='utf8') as f:
 
 setup(
     name='gazpacho',
-    version='0.6.7',
+    version='0.7',
     description='Web scraping with pure python',
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -24,7 +24,7 @@ setup(
     author='Max Humber',
     author_email='max.humber@gmail.com',
     license='MIT',
-    package=['gazpacho'],
+    packages=['gazpacho'],
     python_requires='>=3.6',
     setup_requires=['setuptools>=38.6.0']
 )
