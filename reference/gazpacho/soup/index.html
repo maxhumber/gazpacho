@@ -1150,173 +1150,173 @@ print(result.text)
 </pre></div>
 
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">Soup</span><span class="p">(</span><span class="nx">HTMLParser</span><span class="p">)</span><span class="o">:</span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><span class="nv">class</span> <span class="nv">Soup</span><span class="ss">(</span><span class="nv">HTMLParser</span><span class="ss">)</span>:
 
-    <span class="s1">&#39;&#39;&#39;HTML Parser Class</span>
+    <span class="s1">&#39;&#39;&#39;</span><span class="s">HTML Parser Class</span>
 
-<span class="s1">    - html (str): Full HTML text</span>
+    <span class="o">-</span> <span class="nv">html</span> <span class="ss">(</span><span class="nv">str</span><span class="ss">)</span>: <span class="nv">Full</span> <span class="nv">HTML</span> <span class="nv">text</span>
 
-<span class="s1">    - tag (str, None): Found tag</span>
+    <span class="o">-</span> <span class="nv">tag</span> <span class="ss">(</span><span class="nv">str</span>, <span class="nv">None</span><span class="ss">)</span>: <span class="nv">Found</span> <span class="nv">tag</span>
 
-<span class="s1">    - attrs (dict, None): Found attributes</span>
+    <span class="o">-</span> <span class="nv">attrs</span> <span class="ss">(</span><span class="nv">dict</span>, <span class="nv">None</span><span class="ss">)</span>: <span class="nv">Found</span> <span class="nv">attributes</span>
 
-<span class="s1">    - text (str, None): Found text</span>
+    <span class="o">-</span> <span class="nv">text</span> <span class="ss">(</span><span class="nv">str</span>, <span class="nv">None</span><span class="ss">)</span>: <span class="nv">Found</span> <span class="nv">text</span>
 
-<span class="s1">    - find (method): The main method to find HTML tags</span>
+    <span class="o">-</span> <span class="nv">find</span> <span class="ss">(</span><span class="nv">method</span><span class="ss">)</span>: <span class="nv">The</span> <span class="nv">main</span> <span class="nv">method</span> <span class="nv">to</span> <span class="nv">find</span> <span class="nv">HTML</span> <span class="nv">tags</span>
 
-<span class="s1">    Examples:</span>
+    <span class="nv">Examples</span>:
 
-<span class="s1">    ```</span>
+    ```
 
-<span class="s1">    html = &quot;&lt;div&gt;&lt;p id=&#39;</span><span class="nx">foo</span><span class="s1">&#39;&gt;bar&lt;/p&gt;&lt;p id=&#39;</span><span class="nx">foo</span><span class="s1">&#39;&gt;baz&lt;/p&gt;&lt;p id=&#39;</span><span class="nx">zoo</span><span class="s1">&#39;&gt;Tiger&lt;/p&gt;&lt;/div&gt;&quot;</span>
+    <span class="nv">html</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">&lt;div&gt;&lt;p id=&#39;foo&#39;&gt;bar&lt;/p&gt;&lt;p id=&#39;foo&#39;&gt;baz&lt;/p&gt;&lt;p id=&#39;zoo&#39;&gt;Tiger&lt;/p&gt;&lt;/div&gt;</span><span class="s2">&quot;</span>
 
-<span class="s1">    soup = Soup(html)</span>
+    <span class="nv">soup</span> <span class="o">=</span> <span class="nv">Soup</span><span class="ss">(</span><span class="nv">html</span><span class="ss">)</span>
 
-<span class="s1">    result = soup.find(&#39;</span><span class="nx">p</span><span class="s1">&#39;, {&#39;</span><span class="nx">id</span><span class="s1">&#39;: &#39;</span><span class="nx">foo</span><span class="s1">&#39;})</span>
+    <span class="nb">result</span> <span class="o">=</span> <span class="nv">soup</span>.<span class="nv">find</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">p</span><span class="s1">&#39;</span>, {<span class="s1">&#39;</span><span class="s">id</span><span class="s1">&#39;</span>: <span class="s1">&#39;</span><span class="s">foo</span><span class="s1">&#39;</span>}<span class="ss">)</span>
 
-<span class="s1">    print(result)</span>
+    <span class="nv">print</span><span class="ss">(</span><span class="nb">result</span><span class="ss">)</span>
 
-<span class="s1">    # [&lt;p id=&quot;foo&quot;&gt;bar&lt;/p&gt;, &lt;p id=&quot;foo&quot;&gt;baz&lt;/p&gt;]</span>
+    # [<span class="o">&lt;</span><span class="nv">p</span> <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">foo</span><span class="s2">&quot;</span><span class="o">&gt;</span><span class="nv">bar</span><span class="o">&lt;/</span><span class="nv">p</span><span class="o">&gt;</span>, <span class="o">&lt;</span><span class="nv">p</span> <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">foo</span><span class="s2">&quot;</span><span class="o">&gt;</span><span class="nv">baz</span><span class="o">&lt;/</span><span class="nv">p</span><span class="o">&gt;</span>]
 
-<span class="s1">    result = soup.find(&#39;</span><span class="nx">p</span><span class="s1">&#39;, {&#39;</span><span class="nx">id</span><span class="s1">&#39;: &#39;</span><span class="nx">zoo</span><span class="s1">&#39;})</span>
+    <span class="nb">result</span> <span class="o">=</span> <span class="nv">soup</span>.<span class="nv">find</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">p</span><span class="s1">&#39;</span>, {<span class="s1">&#39;</span><span class="s">id</span><span class="s1">&#39;</span>: <span class="s1">&#39;</span><span class="s">zoo</span><span class="s1">&#39;</span>}<span class="ss">)</span>
 
-<span class="s1">    print(result)</span>
+    <span class="nv">print</span><span class="ss">(</span><span class="nb">result</span><span class="ss">)</span>
 
-<span class="s1">    # &lt;p id=&quot;zoo&quot;&gt;Tiger&lt;/p&gt;</span>
+    # <span class="o">&lt;</span><span class="nv">p</span> <span class="nv">id</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">zoo</span><span class="s2">&quot;</span><span class="o">&gt;</span><span class="nv">Tiger</span><span class="o">&lt;/</span><span class="nv">p</span><span class="o">&gt;</span>
 
-<span class="s1">    print(result.text)</span>
+    <span class="nv">print</span><span class="ss">(</span><span class="nb">result</span>.<span class="nv">text</span><span class="ss">)</span>
 
-<span class="s1">    # Tiger</span>
+    # <span class="nv">Tiger</span>
 
-<span class="s1">    ```</span>
+    ```
 
-<span class="s1">    &#39;&#39;&#39;</span>
+    <span class="s1">&#39;&#39;&#39;</span>
 
-    <span class="nx">def</span> <span class="nx">__init__</span><span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="nx">html</span><span class="p">)</span><span class="o">:</span>
+    <span class="nv">def</span> <span class="nv">__init__</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">html</span><span class="ss">)</span>:
 
-        <span class="kr">super</span><span class="p">().</span><span class="nx">__init__</span><span class="p">()</span>
+        <span class="nv">super</span><span class="ss">()</span>.<span class="nv">__init__</span><span class="ss">()</span>
 
-        <span class="nx">self</span><span class="p">.</span><span class="nx">html</span> <span class="o">=</span> <span class="nx">html</span>
+        <span class="nv">self</span>.<span class="nv">html</span> <span class="o">=</span> <span class="nv">html</span>
 
-        <span class="nx">self</span><span class="p">.</span><span class="nx">tag</span> <span class="o">=</span> <span class="nx">None</span>
+        <span class="nv">self</span>.<span class="nv">tag</span> <span class="o">=</span> <span class="nv">None</span>
 
-        <span class="nx">self</span><span class="p">.</span><span class="nx">attrs</span> <span class="o">=</span> <span class="nx">None</span>
+        <span class="nv">self</span>.<span class="nv">attrs</span> <span class="o">=</span> <span class="nv">None</span>
 
-        <span class="nx">self</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="nx">None</span>
+        <span class="nv">self</span>.<span class="nv">text</span> <span class="o">=</span> <span class="nv">None</span>
 
-    <span class="nx">def</span> <span class="nx">__dir__</span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="o">:</span>
+    <span class="nv">def</span> <span class="nv">__dir__</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>:
 
-        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;html&#39;</span><span class="p">,</span> <span class="s1">&#39;tag&#39;</span><span class="p">,</span> <span class="s1">&#39;attrs&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;find&#39;</span><span class="p">]</span>
+        <span class="k">return</span> [<span class="s1">&#39;</span><span class="s">html</span><span class="s1">&#39;</span>, <span class="s1">&#39;</span><span class="s">tag</span><span class="s1">&#39;</span>, <span class="s1">&#39;</span><span class="s">attrs</span><span class="s1">&#39;</span>, <span class="s1">&#39;</span><span class="s">text</span><span class="s1">&#39;</span>, <span class="s1">&#39;</span><span class="s">find</span><span class="s1">&#39;</span>]
 
-    <span class="nx">def</span> <span class="nx">__repr__</span><span class="p">(</span><span class="nx">self</span><span class="p">)</span><span class="o">:</span>
+    <span class="nv">def</span> <span class="nv">__repr__</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>:
 
-        <span class="k">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">html</span>
+        <span class="k">return</span> <span class="nv">self</span>.<span class="nv">html</span>
 
-    <span class="nx">def</span> <span class="nx">handle_starttag</span><span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="nx">tag</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">)</span><span class="o">:</span>
+    <span class="nv">def</span> <span class="nv">handle_starttag</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">tag</span>, <span class="nv">attrs</span><span class="ss">)</span>:
 
-        <span class="nx">html</span><span class="p">,</span> <span class="nx">attrs</span> <span class="o">=</span> <span class="nx">html_starttag_and_attrs</span><span class="p">(</span><span class="nx">tag</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">)</span>
+        <span class="nv">html</span>, <span class="nv">attrs</span> <span class="o">=</span> <span class="nv">html_starttag_and_attrs</span><span class="ss">(</span><span class="nv">tag</span>, <span class="nv">attrs</span><span class="ss">)</span>
 
-        <span class="k">if</span> <span class="nx">tag</span> <span class="o">==</span> <span class="nx">self</span><span class="p">.</span><span class="nx">tag</span> <span class="nx">and</span> <span class="nx">match</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">attrs</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">)</span> <span class="nx">and</span> <span class="nx">not</span> <span class="nx">self.count</span>:
+        <span class="k">if</span> <span class="nv">tag</span> <span class="o">==</span> <span class="nv">self</span>.<span class="nv">tag</span> <span class="nv">and</span> <span class="nv">match</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">attrs</span>, <span class="nv">attrs</span><span class="ss">)</span> <span class="nv">and</span> <span class="nv">not</span> <span class="nv">self</span>.<span class="nv">count</span>:
 
-            <span class="kt">self.count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="nv">self</span>.<span class="nv">count</span> <span class="o">+=</span> <span class="mi">1</span>
 
-            <span class="nx">self</span><span class="p">.</span><span class="nx">group</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="nv">self</span>.<span class="nv">group</span> <span class="o">+=</span> <span class="mi">1</span>
 
-            <span class="nx">self</span><span class="p">.</span><span class="nx">groups</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">Soup</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">))</span>
+            <span class="nv">self</span>.<span class="nv">groups</span>.<span class="nv">append</span><span class="ss">(</span><span class="nv">Soup</span><span class="ss">(</span><span class="s1">&#39;&#39;</span><span class="ss">))</span>
 
-            <span class="nx">self</span><span class="p">.</span><span class="nx">groups</span><span class="p">[</span><span class="nx">self</span><span class="p">.</span><span class="nx">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">].</span><span class="nx">html</span> <span class="o">+=</span> <span class="nx">html</span>
+            <span class="nv">self</span>.<span class="nv">groups</span>[<span class="nv">self</span>.<span class="nv">group</span> <span class="o">-</span> <span class="mi">1</span>].<span class="nv">html</span> <span class="o">+=</span> <span class="nv">html</span>
 
-            <span class="nx">self</span><span class="p">.</span><span class="nx">groups</span><span class="p">[</span><span class="nx">self</span><span class="p">.</span><span class="nx">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">].</span><span class="nx">tag</span> <span class="o">=</span> <span class="nx">tag</span>
+            <span class="nv">self</span>.<span class="nv">groups</span>[<span class="nv">self</span>.<span class="nv">group</span> <span class="o">-</span> <span class="mi">1</span>].<span class="nv">tag</span> <span class="o">=</span> <span class="nv">tag</span>
 
-            <span class="nx">self</span><span class="p">.</span><span class="nx">groups</span><span class="p">[</span><span class="nx">self</span><span class="p">.</span><span class="nx">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">].</span><span class="nx">attrs</span> <span class="o">=</span> <span class="nx">attrs</span>
-
-            <span class="k">return</span>
-
-        <span class="k">if</span> <span class="nx">self.count</span>:
-
-            <span class="kt">self.count</span> <span class="o">+=</span> <span class="mi">1</span>
-
-            <span class="nx">self</span><span class="p">.</span><span class="nx">groups</span><span class="p">[</span><span class="nx">self</span><span class="p">.</span><span class="nx">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">].</span><span class="nx">html</span> <span class="o">+=</span> <span class="nx">html</span>
+            <span class="nv">self</span>.<span class="nv">groups</span>[<span class="nv">self</span>.<span class="nv">group</span> <span class="o">-</span> <span class="mi">1</span>].<span class="nv">attrs</span> <span class="o">=</span> <span class="nv">attrs</span>
 
             <span class="k">return</span>
 
-        <span class="k">else</span><span class="o">:</span>
+        <span class="k">if</span> <span class="nv">self</span>.<span class="nv">count</span>:
+
+            <span class="nv">self</span>.<span class="nv">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="nv">self</span>.<span class="nv">groups</span>[<span class="nv">self</span>.<span class="nv">group</span> <span class="o">-</span> <span class="mi">1</span>].<span class="nv">html</span> <span class="o">+=</span> <span class="nv">html</span>
 
             <span class="k">return</span>
 
-    <span class="nx">def</span> <span class="nx">handle_startendtag</span><span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="nx">tag</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">)</span><span class="o">:</span>
-
-        <span class="nx">html</span><span class="p">,</span> <span class="nx">attrs</span> <span class="o">=</span> <span class="nx">html_starttag_and_attrs</span><span class="p">(</span><span class="nx">tag</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">,</span> <span class="nx">True</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="nx">self.count</span>:
-
-            <span class="kt">self.groups</span><span class="p">[</span><span class="nx">self</span><span class="p">.</span><span class="nx">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">].</span><span class="nx">html</span> <span class="o">+=</span> <span class="nx">html</span>
+        <span class="k">else</span>:
 
             <span class="k">return</span>
 
-        <span class="k">else</span><span class="o">:</span>
+    <span class="nv">def</span> <span class="nv">handle_startendtag</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">tag</span>, <span class="nv">attrs</span><span class="ss">)</span>:
+
+        <span class="nv">html</span>, <span class="nv">attrs</span> <span class="o">=</span> <span class="nv">html_starttag_and_attrs</span><span class="ss">(</span><span class="nv">tag</span>, <span class="nv">attrs</span>, <span class="nv">True</span><span class="ss">)</span>
+
+        <span class="k">if</span> <span class="nv">self</span>.<span class="nv">count</span>:
+
+            <span class="nv">self</span>.<span class="nv">groups</span>[<span class="nv">self</span>.<span class="nv">group</span> <span class="o">-</span> <span class="mi">1</span>].<span class="nv">html</span> <span class="o">+=</span> <span class="nv">html</span>
 
             <span class="k">return</span>
 
-    <span class="nx">def</span> <span class="nx">handle_data</span><span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span><span class="o">:</span>
-
-        <span class="k">if</span> <span class="nx">self.count</span>:
-
-            <span class="kt">if</span> <span class="nx">self</span><span class="p">.</span><span class="nx">groups</span><span class="p">[</span><span class="nx">self</span><span class="p">.</span><span class="nx">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">].</span><span class="nx">text</span> <span class="nx">is</span> <span class="nx">None</span>:
-
-                <span class="kt">self.groups</span><span class="p">[</span><span class="nx">self</span><span class="p">.</span><span class="nx">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">].</span><span class="nx">text</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">strip</span><span class="p">()</span>
-
-            <span class="nx">self</span><span class="p">.</span><span class="nx">groups</span><span class="p">[</span><span class="nx">self</span><span class="p">.</span><span class="nx">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">].</span><span class="nx">html</span> <span class="o">+=</span> <span class="nx">data</span>
+        <span class="k">else</span>:
 
             <span class="k">return</span>
 
-        <span class="k">else</span><span class="o">:</span>
+    <span class="nv">def</span> <span class="nv">handle_data</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">data</span><span class="ss">)</span>:
+
+        <span class="k">if</span> <span class="nv">self</span>.<span class="nv">count</span>:
+
+            <span class="k">if</span> <span class="nv">self</span>.<span class="nv">groups</span>[<span class="nv">self</span>.<span class="nv">group</span> <span class="o">-</span> <span class="mi">1</span>].<span class="nv">text</span> <span class="nv">is</span> <span class="nv">None</span>:
+
+                <span class="nv">self</span>.<span class="nv">groups</span>[<span class="nv">self</span>.<span class="nv">group</span> <span class="o">-</span> <span class="mi">1</span>].<span class="nv">text</span> <span class="o">=</span> <span class="nv">data</span>.<span class="nv">strip</span><span class="ss">()</span>
+
+            <span class="nv">self</span>.<span class="nv">groups</span>[<span class="nv">self</span>.<span class="nv">group</span> <span class="o">-</span> <span class="mi">1</span>].<span class="nv">html</span> <span class="o">+=</span> <span class="nv">data</span>
 
             <span class="k">return</span>
 
-    <span class="nx">def</span> <span class="nx">handle_endtag</span><span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="nx">tag</span><span class="p">)</span><span class="o">:</span>
-
-        <span class="k">if</span> <span class="nx">self.count</span>:
-
-            <span class="kt">end_tag</span> <span class="o">=</span> <span class="nx">f</span><span class="s1">&#39;&lt;/{tag}&gt;&#39;</span>
-
-            <span class="nx">self</span><span class="p">.</span><span class="nx">groups</span><span class="p">[</span><span class="nx">self</span><span class="p">.</span><span class="nx">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">].</span><span class="nx">html</span> <span class="o">+=</span> <span class="nx">end_tag</span>
-
-            <span class="nx">self</span><span class="p">.</span><span class="nx">count</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">else</span>:
 
             <span class="k">return</span>
 
-        <span class="k">else</span><span class="o">:</span>
+    <span class="nv">def</span> <span class="nv">handle_endtag</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">tag</span><span class="ss">)</span>:
+
+        <span class="k">if</span> <span class="nv">self</span>.<span class="nv">count</span>:
+
+            <span class="nv">end_tag</span> <span class="o">=</span> <span class="nv">f</span><span class="s1">&#39;</span><span class="s">&lt;/{tag}&gt;</span><span class="s1">&#39;</span>
+
+            <span class="nv">self</span>.<span class="nv">groups</span>[<span class="nv">self</span>.<span class="nv">group</span> <span class="o">-</span> <span class="mi">1</span>].<span class="nv">html</span> <span class="o">+=</span> <span class="nv">end_tag</span>
+
+            <span class="nv">self</span>.<span class="nv">count</span> <span class="o">-=</span> <span class="mi">1</span>
 
             <span class="k">return</span>
 
-    <span class="nx">def</span> <span class="nx">find</span><span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="nx">tag</span><span class="p">,</span> <span class="nx">attrs</span><span class="o">=</span><span class="nx">None</span><span class="p">)</span><span class="o">:</span>
+        <span class="k">else</span>:
 
-        <span class="s1">&#39;&#39;&#39;Find a tag with optional attributes</span>
+            <span class="k">return</span>
 
-<span class="s1">        - tag (str): HTML tag to find</span>
+    <span class="nv">def</span> <span class="nv">find</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">tag</span>, <span class="nv">attrs</span><span class="o">=</span><span class="nv">None</span><span class="ss">)</span>:
 
-<span class="s1">        - attrs (dict, optional): Attributes within tag to match</span>
+        <span class="s1">&#39;&#39;&#39;</span><span class="s">Find a tag with optional attributes</span>
 
-<span class="s1">        &#39;&#39;&#39;</span>
+        <span class="o">-</span> <span class="nv">tag</span> <span class="ss">(</span><span class="nv">str</span><span class="ss">)</span>: <span class="nv">HTML</span> <span class="nv">tag</span> <span class="nv">to</span> <span class="nv">find</span>
 
-        <span class="nx">self</span><span class="p">.</span><span class="nx">tag</span> <span class="o">=</span> <span class="nx">tag</span>
+        <span class="o">-</span> <span class="nv">attrs</span> <span class="ss">(</span><span class="nv">dict</span>, <span class="nv">optional</span><span class="ss">)</span>: <span class="nv">Attributes</span> <span class="nv">within</span> <span class="nv">tag</span> <span class="nv">to</span> <span class="nv">match</span>
 
-        <span class="nx">self</span><span class="p">.</span><span class="nx">attrs</span> <span class="o">=</span> <span class="nx">attrs</span>
+        <span class="s1">&#39;&#39;&#39;</span>
 
-        <span class="nx">self</span><span class="p">.</span><span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="nv">self</span>.<span class="nv">tag</span> <span class="o">=</span> <span class="nv">tag</span>
 
-        <span class="nx">self</span><span class="p">.</span><span class="nx">group</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="nv">self</span>.<span class="nv">attrs</span> <span class="o">=</span> <span class="nv">attrs</span>
 
-        <span class="nx">self</span><span class="p">.</span><span class="nx">groups</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="nv">self</span>.<span class="nv">count</span> <span class="o">=</span> <span class="mi">0</span>
 
-        <span class="kr">super</span><span class="p">().</span><span class="nx">feed</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">html</span><span class="p">)</span>
+        <span class="nv">self</span>.<span class="nv">group</span> <span class="o">=</span> <span class="mi">0</span>
 
-        <span class="k">if</span> <span class="nx">len</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">groups</span><span class="p">)</span> <span class="o">==</span> <span class="nx">1</span>:
+        <span class="nv">self</span>.<span class="nv">groups</span> <span class="o">=</span> []
 
-            <span class="kt">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">groups</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="nv">super</span><span class="ss">()</span>.<span class="nv">feed</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">html</span><span class="ss">)</span>
 
-        <span class="k">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">groups</span>
+        <span class="k">if</span> <span class="nv">len</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">groups</span><span class="ss">)</span> <span class="o">==</span> <span class="mi">1</span>:
+
+            <span class="k">return</span> <span class="nv">self</span>.<span class="nv">groups</span>[<span class="mi">0</span>]
+
+        <span class="k">return</span> <span class="nv">self</span>.<span class="nv">groups</span>
 </pre></div>
 
 
@@ -1341,69 +1341,69 @@ print(result.text)
 </pre></div>
 
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def check_for_whole_start_tag(self, i):
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="nv">def</span> <span class="nv">check_for_whole_start_tag</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">i</span><span class="ss">)</span>:
 
-        rawdata = self.rawdata
+        <span class="nv">rawdata</span> <span class="o">=</span> <span class="nv">self</span>.<span class="nv">rawdata</span>
 
-        m = locatestarttagend_tolerant.match(rawdata, i)
+        <span class="nv">m</span> <span class="o">=</span> <span class="nv">locatestarttagend_tolerant</span>.<span class="nv">match</span><span class="ss">(</span><span class="nv">rawdata</span>, <span class="nv">i</span><span class="ss">)</span>
 
-        if m:
+        <span class="k">if</span> <span class="nv">m</span>:
 
-            j = m.end()
+            <span class="nv">j</span> <span class="o">=</span> <span class="nv">m</span>.<span class="k">end</span><span class="ss">()</span>
 
-            next = rawdata[j:j+1]
+            <span class="k">next</span> <span class="o">=</span> <span class="nv">rawdata</span>[<span class="nv">j</span>:<span class="nv">j</span><span class="o">+</span><span class="mi">1</span>]
 
-            if next == &quot;&gt;&quot;:
+            <span class="k">if</span> <span class="k">next</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">&gt;</span><span class="s2">&quot;</span>:
 
-                return j + 1
+                <span class="k">return</span> <span class="nv">j</span> <span class="o">+</span> <span class="mi">1</span>
 
-            if next == &quot;/&quot;:
+            <span class="k">if</span> <span class="k">next</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">/</span><span class="s2">&quot;</span>:
 
-                if rawdata.startswith(&quot;/&gt;&quot;, j):
+                <span class="k">if</span> <span class="nv">rawdata</span>.<span class="nv">startswith</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">/&gt;</span><span class="s2">&quot;</span>, <span class="nv">j</span><span class="ss">)</span>:
 
-                    return j + 2
+                    <span class="k">return</span> <span class="nv">j</span> <span class="o">+</span> <span class="mi">2</span>
 
-                if rawdata.startswith(&quot;/&quot;, j):
+                <span class="k">if</span> <span class="nv">rawdata</span>.<span class="nv">startswith</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">/</span><span class="s2">&quot;</span>, <span class="nv">j</span><span class="ss">)</span>:
 
-                    # buffer boundary
+                    # <span class="nv">buffer</span> <span class="nv">boundary</span>
 
-                    return -1
+                    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
 
-                # else bogus input
+                # <span class="k">else</span> <span class="nv">bogus</span> <span class="nv">input</span>
 
-                if j &gt; i:
+                <span class="k">if</span> <span class="nv">j</span> <span class="o">&gt;</span> <span class="nv">i</span>:
 
-                    return j
+                    <span class="k">return</span> <span class="nv">j</span>
 
-                else:
+                <span class="k">else</span>:
 
-                    return i + 1
+                    <span class="k">return</span> <span class="nv">i</span> <span class="o">+</span> <span class="mi">1</span>
 
-            if next == &quot;&quot;:
+            <span class="k">if</span> <span class="k">next</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span>:
 
-                # end of input
+                # <span class="k">end</span> <span class="nv">of</span> <span class="nv">input</span>
 
-                return -1
+                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
 
-            if next in (&quot;abcdefghijklmnopqrstuvwxyz=/&quot;
+            <span class="k">if</span> <span class="k">next</span> <span class="nv">in</span> <span class="ss">(</span><span class="s2">&quot;</span><span class="s">abcdefghijklmnopqrstuvwxyz=/</span><span class="s2">&quot;</span>
 
-                        &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;):
+                        <span class="s2">&quot;</span><span class="s">ABCDEFGHIJKLMNOPQRSTUVWXYZ</span><span class="s2">&quot;</span><span class="ss">)</span>:
 
-                # end of input in or before attribute value, or we have the
+                # <span class="k">end</span> <span class="nv">of</span> <span class="nv">input</span> <span class="nv">in</span> <span class="nv">or</span> <span class="nv">before</span> <span class="nv">attribute</span> <span class="nv">value</span>, <span class="nv">or</span> <span class="nv">we</span> <span class="nv">have</span> <span class="nv">the</span>
 
-                # &#39;/&#39; from a &#39;/&gt;&#39; ending
+                # <span class="s1">&#39;</span><span class="s">/</span><span class="s1">&#39;</span> <span class="nv">from</span> <span class="nv">a</span> <span class="s1">&#39;</span><span class="s">/&gt;</span><span class="s1">&#39;</span> <span class="nv">ending</span>
 
-                return -1
+                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
 
-            if j &gt; i:
+            <span class="k">if</span> <span class="nv">j</span> <span class="o">&gt;</span> <span class="nv">i</span>:
 
-                return j
+                <span class="k">return</span> <span class="nv">j</span>
 
-            else:
+            <span class="k">else</span>:
 
-                return i + 1
+                <span class="k">return</span> <span class="nv">i</span> <span class="o">+</span> <span class="mi">1</span>
 
-        raise AssertionError(&quot;we should not get here!&quot;)
+        <span class="nv">raise</span> <span class="nv">AssertionError</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">we should not get here!</span><span class="s2">&quot;</span><span class="ss">)</span>
 </pre></div>
 
 
@@ -1415,11 +1415,11 @@ print(result.text)
 </pre></div>
 
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def clear_cdata_mode(self):
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="n">def</span> <span class="n">clear_cdata_mode</span><span class="p">(</span><span class="k">self</span><span class="p">):</span>
 
-        self.interesting = interesting_normal
+        <span class="k">self</span><span class="p">.</span><span class="n">interesting</span> <span class="o">=</span> <span class="n">interesting_normal</span>
 
-        self.cdata_elem = None
+        <span class="k">self</span><span class="p">.</span><span class="n">cdata_elem</span> <span class="o">=</span> <span class="k">None</span>
 </pre></div>
 
 
@@ -1432,11 +1432,11 @@ print(result.text)
 
 
 <p>Handle any buffered data.</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def close(self):
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="n">def</span> <span class="k">close</span><span class="p">(</span><span class="k">self</span><span class="p">):</span>
 
-        &quot;&quot;&quot;Handle any buffered data.&quot;&quot;&quot;
+        <span class="ss">&quot;&quot;&quot;Handle any buffered data.&quot;&quot;&quot;</span>
 
-        self.goahead(1)
+        <span class="k">self</span><span class="p">.</span><span class="n">goahead</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
 
@@ -1449,11 +1449,11 @@ print(result.text)
 </pre></div>
 
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def error(self, message):
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="n">def</span> <span class="n">error</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
 
-        raise NotImplementedError(
+        <span class="n">raise</span> <span class="n">NotImplementedError</span><span class="p">(</span>
 
-            &quot;subclasses of ParserBase must override error()&quot;)
+            <span class="ss">&quot;subclasses of ParserBase must override error()&quot;</span><span class="p">)</span>
 </pre></div>
 
 
@@ -1469,19 +1469,19 @@ print(result.text)
 <p>Feed data to the parser.</p>
 <p>Call this as often as you want, with as little or as much text
 as you want (may include '\n').</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def feed(self, data):
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="nv">def</span> <span class="nv">feed</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">data</span><span class="ss">)</span>:
 
-        r&quot;&quot;&quot;Feed data to the parser.
+        <span class="nv">r</span><span class="s2">&quot;&quot;&quot;</span><span class="s">Feed data to the parser.</span>
 
-        Call this as often as you want, with as little or as much text
+        <span class="k">Call</span> <span class="nl">this</span> <span class="nv">as</span> <span class="nv">often</span> <span class="nv">as</span> <span class="nv">you</span> <span class="nv">want</span>, <span class="nv">with</span> <span class="nv">as</span> <span class="nv">little</span> <span class="nv">or</span> <span class="nv">as</span> <span class="nv">much</span> <span class="nv">text</span>
 
-        as you want (may include &#39;\n&#39;).
+        <span class="nv">as</span> <span class="nv">you</span> <span class="nv">want</span> <span class="ss">(</span><span class="nv">may</span> <span class="k">include</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="ss">)</span>.
 
-        &quot;&quot;&quot;
+        <span class="s2">&quot;&quot;&quot;</span>
 
-        self.rawdata = self.rawdata + data
+        <span class="nv">self</span>.<span class="nv">rawdata</span> <span class="o">=</span> <span class="nv">self</span>.<span class="nv">rawdata</span> <span class="o">+</span> <span class="nv">data</span>
 
-        self.goahead(0)
+        <span class="nv">self</span>.<span class="nv">goahead</span><span class="ss">(</span><span class="mi">0</span><span class="ss">)</span>
 </pre></div>
 
 
@@ -1500,33 +1500,33 @@ as you want (may include '\n').</p>
 <li>tag (str): HTML tag to find</li>
 <li>attrs (dict, optional): Attributes within tag to match</li>
 </ul>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def find(self, tag, attrs=None):
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="nv">def</span> <span class="nv">find</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">tag</span>, <span class="nv">attrs</span><span class="o">=</span><span class="nv">None</span><span class="ss">)</span>:
 
-        &#39;&#39;&#39;Find a tag with optional attributes
+        <span class="s1">&#39;&#39;&#39;</span><span class="s">Find a tag with optional attributes</span>
 
-        - tag (str): HTML tag to find
+        <span class="o">-</span> <span class="nv">tag</span> <span class="ss">(</span><span class="nv">str</span><span class="ss">)</span>: <span class="nv">HTML</span> <span class="nv">tag</span> <span class="nv">to</span> <span class="nv">find</span>
 
-        - attrs (dict, optional): Attributes within tag to match
+        <span class="o">-</span> <span class="nv">attrs</span> <span class="ss">(</span><span class="nv">dict</span>, <span class="nv">optional</span><span class="ss">)</span>: <span class="nv">Attributes</span> <span class="nv">within</span> <span class="nv">tag</span> <span class="nv">to</span> <span class="nv">match</span>
 
-        &#39;&#39;&#39;
+        <span class="s1">&#39;&#39;&#39;</span>
 
-        self.tag = tag
+        <span class="nv">self</span>.<span class="nv">tag</span> <span class="o">=</span> <span class="nv">tag</span>
 
-        self.attrs = attrs
+        <span class="nv">self</span>.<span class="nv">attrs</span> <span class="o">=</span> <span class="nv">attrs</span>
 
-        self.count = 0
+        <span class="nv">self</span>.<span class="nv">count</span> <span class="o">=</span> <span class="mi">0</span>
 
-        self.group = 0
+        <span class="nv">self</span>.<span class="nv">group</span> <span class="o">=</span> <span class="mi">0</span>
 
-        self.groups = []
+        <span class="nv">self</span>.<span class="nv">groups</span> <span class="o">=</span> []
 
-        super().feed(self.html)
+        <span class="nv">super</span><span class="ss">()</span>.<span class="nv">feed</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">html</span><span class="ss">)</span>
 
-        if len(self.groups) == 1:
+        <span class="k">if</span> <span class="nv">len</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">groups</span><span class="ss">)</span> <span class="o">==</span> <span class="mi">1</span>:
 
-            return self.groups[0]
+            <span class="k">return</span> <span class="nv">self</span>.<span class="nv">groups</span>[<span class="mi">0</span>]
 
-        return self.groups
+        <span class="k">return</span> <span class="nv">self</span>.<span class="nv">groups</span>
 </pre></div>
 
 
@@ -1539,11 +1539,11 @@ as you want (may include '\n').</p>
 
 
 <p>Return full source of start tag: '&lt;...&gt;'.</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def get_starttag_text(self):
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="nv">def</span> <span class="nv">get_starttag_text</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>:
 
-        &quot;&quot;&quot;Return full source of start tag: &#39;&lt;...&gt;&#39;.&quot;&quot;&quot;
+        <span class="s2">&quot;&quot;&quot;</span><span class="s">Return full source of start tag: &#39;&lt;...&gt;&#39;.</span><span class="s2">&quot;&quot;&quot;</span>
 
-        return self.__starttag_text
+        <span class="k">return</span> <span class="nv">self</span>.<span class="nv">__starttag_text</span>
 </pre></div>
 
 
@@ -1556,11 +1556,11 @@ as you want (may include '\n').</p>
 
 
 <p>Return current line number and offset.</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def getpos(self):
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="nv">def</span> <span class="nv">getpos</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>:
 
-        &quot;&quot;&quot;Return current line number and offset.&quot;&quot;&quot;
+        <span class="s2">&quot;&quot;&quot;</span><span class="s">Return current line number and offset.</span><span class="s2">&quot;&quot;&quot;</span>
 
-        return self.lineno, self.offset
+        <span class="k">return</span> <span class="nv">self</span>.<span class="nv">lineno</span>, <span class="nv">self</span>.<span class="nv">offset</span>
 </pre></div>
 
 
@@ -1820,9 +1820,9 @@ as you want (may include '\n').</p>
 </pre></div>
 
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def handle_charref(self, name):
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="n">def</span> <span class="n">handle_charref</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 
-        pass
+        <span class="n">pass</span>
 </pre></div>
 
 
@@ -1835,9 +1835,9 @@ as you want (may include '\n').</p>
 </pre></div>
 
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def handle_comment(self, data):
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="n">def</span> <span class="n">handle_comment</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="k">data</span><span class="p">):</span>
 
-        pass
+        <span class="n">pass</span>
 </pre></div>
 
 
@@ -1850,21 +1850,21 @@ as you want (may include '\n').</p>
 </pre></div>
 
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def handle_data(self, data):
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="nv">def</span> <span class="nv">handle_data</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">data</span><span class="ss">)</span>:
 
-        if self.count:
+        <span class="k">if</span> <span class="nv">self</span>.<span class="nv">count</span>:
 
-            if self.groups[self.group - 1].text is None:
+            <span class="k">if</span> <span class="nv">self</span>.<span class="nv">groups</span>[<span class="nv">self</span>.<span class="nv">group</span> <span class="o">-</span> <span class="mi">1</span>].<span class="nv">text</span> <span class="nv">is</span> <span class="nv">None</span>:
 
-                self.groups[self.group - 1].text = data.strip()
+                <span class="nv">self</span>.<span class="nv">groups</span>[<span class="nv">self</span>.<span class="nv">group</span> <span class="o">-</span> <span class="mi">1</span>].<span class="nv">text</span> <span class="o">=</span> <span class="nv">data</span>.<span class="nv">strip</span><span class="ss">()</span>
 
-            self.groups[self.group - 1].html += data
+            <span class="nv">self</span>.<span class="nv">groups</span>[<span class="nv">self</span>.<span class="nv">group</span> <span class="o">-</span> <span class="mi">1</span>].<span class="nv">html</span> <span class="o">+=</span> <span class="nv">data</span>
 
-            return
+            <span class="k">return</span>
 
-        else:
+        <span class="k">else</span>:
 
-            return
+            <span class="k">return</span>
 </pre></div>
 
 
@@ -1877,9 +1877,9 @@ as you want (may include '\n').</p>
 </pre></div>
 
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def handle_decl(self, decl):
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="n">def</span> <span class="n">handle_decl</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="n">decl</span><span class="p">):</span>
 
-        pass
+        <span class="n">pass</span>
 </pre></div>
 
 
@@ -1892,21 +1892,21 @@ as you want (may include '\n').</p>
 </pre></div>
 
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def handle_endtag(self, tag):
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="nv">def</span> <span class="nv">handle_endtag</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">tag</span><span class="ss">)</span>:
 
-        if self.count:
+        <span class="k">if</span> <span class="nv">self</span>.<span class="nv">count</span>:
 
-            end_tag = f&#39;&lt;/{tag}&gt;&#39;
+            <span class="nv">end_tag</span> <span class="o">=</span> <span class="nv">f</span><span class="s1">&#39;</span><span class="s">&lt;/{tag}&gt;</span><span class="s1">&#39;</span>
 
-            self.groups[self.group - 1].html += end_tag
+            <span class="nv">self</span>.<span class="nv">groups</span>[<span class="nv">self</span>.<span class="nv">group</span> <span class="o">-</span> <span class="mi">1</span>].<span class="nv">html</span> <span class="o">+=</span> <span class="nv">end_tag</span>
 
-            self.count -= 1
+            <span class="nv">self</span>.<span class="nv">count</span> <span class="o">-=</span> <span class="mi">1</span>
 
-            return
+            <span class="k">return</span>
 
-        else:
+        <span class="k">else</span>:
 
-            return
+            <span class="k">return</span>
 </pre></div>
 
 
@@ -1919,9 +1919,9 @@ as you want (may include '\n').</p>
 </pre></div>
 
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def handle_entityref(self, name):
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="n">def</span> <span class="n">handle_entityref</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
 
-        pass
+        <span class="n">pass</span>
 </pre></div>
 
 
@@ -1934,9 +1934,9 @@ as you want (may include '\n').</p>
 </pre></div>
 
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def handle_pi(self, data):
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="n">def</span> <span class="n">handle_pi</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="k">data</span><span class="p">):</span>
 
-        pass
+        <span class="n">pass</span>
 </pre></div>
 
 
@@ -1950,19 +1950,19 @@ as you want (may include '\n').</p>
 </pre></div>
 
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def handle_startendtag(self, tag, attrs):
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="nv">def</span> <span class="nv">handle_startendtag</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">tag</span>, <span class="nv">attrs</span><span class="ss">)</span>:
 
-        html, attrs = html_starttag_and_attrs(tag, attrs, True)
+        <span class="nv">html</span>, <span class="nv">attrs</span> <span class="o">=</span> <span class="nv">html_starttag_and_attrs</span><span class="ss">(</span><span class="nv">tag</span>, <span class="nv">attrs</span>, <span class="nv">True</span><span class="ss">)</span>
 
-        if self.count:
+        <span class="k">if</span> <span class="nv">self</span>.<span class="nv">count</span>:
 
-            self.groups[self.group - 1].html += html
+            <span class="nv">self</span>.<span class="nv">groups</span>[<span class="nv">self</span>.<span class="nv">group</span> <span class="o">-</span> <span class="mi">1</span>].<span class="nv">html</span> <span class="o">+=</span> <span class="nv">html</span>
 
-            return
+            <span class="k">return</span>
 
-        else:
+        <span class="k">else</span>:
 
-            return
+            <span class="k">return</span>
 </pre></div>
 
 
@@ -1976,37 +1976,37 @@ as you want (may include '\n').</p>
 </pre></div>
 
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def handle_starttag(self, tag, attrs):
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="nv">def</span> <span class="nv">handle_starttag</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">tag</span>, <span class="nv">attrs</span><span class="ss">)</span>:
 
-        html, attrs = html_starttag_and_attrs(tag, attrs)
+        <span class="nv">html</span>, <span class="nv">attrs</span> <span class="o">=</span> <span class="nv">html_starttag_and_attrs</span><span class="ss">(</span><span class="nv">tag</span>, <span class="nv">attrs</span><span class="ss">)</span>
 
-        if tag == self.tag and match(self.attrs, attrs) and not self.count:
+        <span class="k">if</span> <span class="nv">tag</span> <span class="o">==</span> <span class="nv">self</span>.<span class="nv">tag</span> <span class="nv">and</span> <span class="nv">match</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">attrs</span>, <span class="nv">attrs</span><span class="ss">)</span> <span class="nv">and</span> <span class="nv">not</span> <span class="nv">self</span>.<span class="nv">count</span>:
 
-            self.count += 1
+            <span class="nv">self</span>.<span class="nv">count</span> <span class="o">+=</span> <span class="mi">1</span>
 
-            self.group += 1
+            <span class="nv">self</span>.<span class="nv">group</span> <span class="o">+=</span> <span class="mi">1</span>
 
-            self.groups.append(Soup(&#39;&#39;))
+            <span class="nv">self</span>.<span class="nv">groups</span>.<span class="nv">append</span><span class="ss">(</span><span class="nv">Soup</span><span class="ss">(</span><span class="s1">&#39;&#39;</span><span class="ss">))</span>
 
-            self.groups[self.group - 1].html += html
+            <span class="nv">self</span>.<span class="nv">groups</span>[<span class="nv">self</span>.<span class="nv">group</span> <span class="o">-</span> <span class="mi">1</span>].<span class="nv">html</span> <span class="o">+=</span> <span class="nv">html</span>
 
-            self.groups[self.group - 1].tag = tag
+            <span class="nv">self</span>.<span class="nv">groups</span>[<span class="nv">self</span>.<span class="nv">group</span> <span class="o">-</span> <span class="mi">1</span>].<span class="nv">tag</span> <span class="o">=</span> <span class="nv">tag</span>
 
-            self.groups[self.group - 1].attrs = attrs
+            <span class="nv">self</span>.<span class="nv">groups</span>[<span class="nv">self</span>.<span class="nv">group</span> <span class="o">-</span> <span class="mi">1</span>].<span class="nv">attrs</span> <span class="o">=</span> <span class="nv">attrs</span>
 
-            return
+            <span class="k">return</span>
 
-        if self.count:
+        <span class="k">if</span> <span class="nv">self</span>.<span class="nv">count</span>:
 
-            self.count += 1
+            <span class="nv">self</span>.<span class="nv">count</span> <span class="o">+=</span> <span class="mi">1</span>
 
-            self.groups[self.group - 1].html += html
+            <span class="nv">self</span>.<span class="nv">groups</span>[<span class="nv">self</span>.<span class="nv">group</span> <span class="o">-</span> <span class="mi">1</span>].<span class="nv">html</span> <span class="o">+=</span> <span class="nv">html</span>
 
-            return
+            <span class="k">return</span>
 
-        else:
+        <span class="k">else</span>:
 
-            return
+            <span class="k">return</span>
 </pre></div>
 
 
@@ -2020,25 +2020,25 @@ as you want (may include '\n').</p>
 </pre></div>
 
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def parse_bogus_comment(self, i, report=1):
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="nv">def</span> <span class="nv">parse_bogus_comment</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">i</span>, <span class="nv">report</span><span class="o">=</span><span class="mi">1</span><span class="ss">)</span>:
 
-        rawdata = self.rawdata
+        <span class="nv">rawdata</span> <span class="o">=</span> <span class="nv">self</span>.<span class="nv">rawdata</span>
 
-        assert rawdata[i:i+2] in (&#39;&lt;!&#39;, &#39;&lt;/&#39;), (&#39;unexpected call to &#39;
+        <span class="nv">assert</span> <span class="nv">rawdata</span>[<span class="nv">i</span>:<span class="nv">i</span><span class="o">+</span><span class="mi">2</span>] <span class="nv">in</span> <span class="ss">(</span><span class="s1">&#39;</span><span class="s">&lt;!</span><span class="s1">&#39;</span>, <span class="s1">&#39;</span><span class="s">&lt;/</span><span class="s1">&#39;</span><span class="ss">)</span>, <span class="ss">(</span><span class="s1">&#39;</span><span class="s">unexpected call to </span><span class="s1">&#39;</span>
 
-                                                &#39;parse_comment()&#39;)
+                                                <span class="s1">&#39;</span><span class="s">parse_comment()</span><span class="s1">&#39;</span><span class="ss">)</span>
 
-        pos = rawdata.find(&#39;&gt;&#39;, i+2)
+        <span class="nv">pos</span> <span class="o">=</span> <span class="nv">rawdata</span>.<span class="nv">find</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">&gt;</span><span class="s1">&#39;</span>, <span class="nv">i</span><span class="o">+</span><span class="mi">2</span><span class="ss">)</span>
 
-        if pos == -1:
+        <span class="k">if</span> <span class="nv">pos</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>:
 
-            return -1
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
 
-        if report:
+        <span class="k">if</span> <span class="nv">report</span>:
 
-            self.handle_comment(rawdata[i+2:pos])
+            <span class="nv">self</span>.<span class="nv">handle_comment</span><span class="ss">(</span><span class="nv">rawdata</span>[<span class="nv">i</span><span class="o">+</span><span class="mi">2</span>:<span class="nv">pos</span>]<span class="ss">)</span>
 
-        return pos + 1
+        <span class="k">return</span> <span class="nv">pos</span> <span class="o">+</span> <span class="mi">1</span>
 </pre></div>
 
 
@@ -2052,27 +2052,27 @@ as you want (may include '\n').</p>
 </pre></div>
 
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def parse_comment(self, i, report=1):
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="nv">def</span> <span class="nv">parse_comment</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">i</span>, <span class="nv">report</span><span class="o">=</span><span class="mi">1</span><span class="ss">)</span>:
 
-        rawdata = self.rawdata
+        <span class="nv">rawdata</span> <span class="o">=</span> <span class="nv">self</span>.<span class="nv">rawdata</span>
 
-        if rawdata[i:i+4] != &#39;&lt;!--&#39;:
+        <span class="k">if</span> <span class="nv">rawdata</span>[<span class="nv">i</span>:<span class="nv">i</span><span class="o">+</span><span class="mi">4</span>] <span class="o">!=</span> <span class="s1">&#39;</span><span class="s">&lt;!--</span><span class="s1">&#39;</span>:
 
-            self.error(&#39;unexpected call to parse_comment()&#39;)
+            <span class="nv">self</span>.<span class="nv">error</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">unexpected call to parse_comment()</span><span class="s1">&#39;</span><span class="ss">)</span>
 
-        match = _commentclose.search(rawdata, i+4)
+        <span class="nv">match</span> <span class="o">=</span> <span class="nv">_commentclose</span>.<span class="nv">search</span><span class="ss">(</span><span class="nv">rawdata</span>, <span class="nv">i</span><span class="o">+</span><span class="mi">4</span><span class="ss">)</span>
 
-        if not match:
+        <span class="k">if</span> <span class="nv">not</span> <span class="nv">match</span>:
 
-            return -1
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
 
-        if report:
+        <span class="k">if</span> <span class="nv">report</span>:
 
-            j = match.start(0)
+            <span class="nv">j</span> <span class="o">=</span> <span class="nv">match</span>.<span class="nv">start</span><span class="ss">(</span><span class="mi">0</span><span class="ss">)</span>
 
-            self.handle_comment(rawdata[i+4: j])
+            <span class="nv">self</span>.<span class="nv">handle_comment</span><span class="ss">(</span><span class="nv">rawdata</span>[<span class="nv">i</span><span class="o">+</span><span class="mi">4</span>: <span class="nv">j</span>]<span class="ss">)</span>
 
-        return match.end(0)
+        <span class="k">return</span> <span class="nv">match</span>.<span class="k">end</span><span class="ss">(</span><span class="mi">0</span><span class="ss">)</span>
 </pre></div>
 
 
@@ -2254,77 +2254,77 @@ as you want (may include '\n').</p>
 </pre></div>
 
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def parse_endtag(self, i):
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="nv">def</span> <span class="nv">parse_endtag</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">i</span><span class="ss">)</span>:
 
-        rawdata = self.rawdata
+        <span class="nv">rawdata</span> <span class="o">=</span> <span class="nv">self</span>.<span class="nv">rawdata</span>
 
-        assert rawdata[i:i+2] == &quot;<span class="err">&lt;</span>/&quot;, &quot;unexpected call to parse_endtag&quot;
+        <span class="nv">assert</span> <span class="nv">rawdata</span>[<span class="nv">i</span>:<span class="nv">i</span><span class="o">+</span><span class="mi">2</span>] <span class="o">==</span> <span class="s2">&quot;</span><span class="s">&lt;/</span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s">unexpected call to parse_endtag</span><span class="s2">&quot;</span>
 
-        match = endendtag.search(rawdata, i+1) # &gt;
+        <span class="nv">match</span> <span class="o">=</span> <span class="nv">endendtag</span>.<span class="nv">search</span><span class="ss">(</span><span class="nv">rawdata</span>, <span class="nv">i</span><span class="o">+</span><span class="mi">1</span><span class="ss">)</span> # <span class="o">&gt;</span>
 
-        if not match:
+        <span class="k">if</span> <span class="nv">not</span> <span class="nv">match</span>:
 
-            return -1
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
 
-        gtpos = match.end()
+        <span class="nv">gtpos</span> <span class="o">=</span> <span class="nv">match</span>.<span class="k">end</span><span class="ss">()</span>
 
-        match = endtagfind.match(rawdata, i) # <span class="err">&lt;</span>/ + tag + &gt;
+        <span class="nv">match</span> <span class="o">=</span> <span class="nv">endtagfind</span>.<span class="nv">match</span><span class="ss">(</span><span class="nv">rawdata</span>, <span class="nv">i</span><span class="ss">)</span> # <span class="o">&lt;/</span> <span class="o">+</span> <span class="nv">tag</span> <span class="o">+</span> <span class="o">&gt;</span>
 
-        if not match:
+        <span class="k">if</span> <span class="nv">not</span> <span class="nv">match</span>:
 
-            if self.cdata_elem is not None:
+            <span class="k">if</span> <span class="nv">self</span>.<span class="nv">cdata_elem</span> <span class="nv">is</span> <span class="nv">not</span> <span class="nv">None</span>:
 
-                self.handle_data(rawdata[i:gtpos])
+                <span class="nv">self</span>.<span class="nv">handle_data</span><span class="ss">(</span><span class="nv">rawdata</span>[<span class="nv">i</span>:<span class="nv">gtpos</span>]<span class="ss">)</span>
 
-                return gtpos
+                <span class="k">return</span> <span class="nv">gtpos</span>
 
-            # find the name: w3.org/TR/html5/tokenization.html#tag-name-state
+            # <span class="nv">find</span> <span class="nv">the</span> <span class="nv">name</span>: <span class="nv">w3</span>.<span class="nv">org</span><span class="o">/</span><span class="nv">TR</span><span class="o">/</span><span class="nv">html5</span><span class="o">/</span><span class="nv">tokenization</span>.<span class="nv">html</span>#<span class="nv">tag</span><span class="o">-</span><span class="nv">name</span><span class="o">-</span><span class="nv">state</span>
 
-            namematch = tagfind_tolerant.match(rawdata, i+2)
+            <span class="nv">namematch</span> <span class="o">=</span> <span class="nv">tagfind_tolerant</span>.<span class="nv">match</span><span class="ss">(</span><span class="nv">rawdata</span>, <span class="nv">i</span><span class="o">+</span><span class="mi">2</span><span class="ss">)</span>
 
-            if not namematch:
+            <span class="k">if</span> <span class="nv">not</span> <span class="nv">namematch</span>:
 
-                # w3.org/TR/html5/tokenization.html#end-tag-open-state
+                # <span class="nv">w3</span>.<span class="nv">org</span><span class="o">/</span><span class="nv">TR</span><span class="o">/</span><span class="nv">html5</span><span class="o">/</span><span class="nv">tokenization</span>.<span class="nv">html</span>#<span class="k">end</span><span class="o">-</span><span class="nv">tag</span><span class="o">-</span><span class="nv">open</span><span class="o">-</span><span class="nv">state</span>
 
-                if rawdata[i:i+3] == &#39;<span class="err">&lt;</span>/&gt;&#39;:
+                <span class="k">if</span> <span class="nv">rawdata</span>[<span class="nv">i</span>:<span class="nv">i</span><span class="o">+</span><span class="mi">3</span>] <span class="o">==</span> <span class="s1">&#39;</span><span class="s">&lt;/&gt;</span><span class="s1">&#39;</span>:
 
-                    return i+3
+                    <span class="k">return</span> <span class="nv">i</span><span class="o">+</span><span class="mi">3</span>
 
-                else:
+                <span class="k">else</span>:
 
-                    return self.parse_bogus_comment(i)
+                    <span class="k">return</span> <span class="nv">self</span>.<span class="nv">parse_bogus_comment</span><span class="ss">(</span><span class="nv">i</span><span class="ss">)</span>
 
-            tagname = namematch.group(1).lower()
+            <span class="nv">tagname</span> <span class="o">=</span> <span class="nv">namematch</span>.<span class="nv">group</span><span class="ss">(</span><span class="mi">1</span><span class="ss">)</span>.<span class="nv">lower</span><span class="ss">()</span>
 
-            # consume and ignore other stuff between the name and the &gt;
+            # <span class="nv">consume</span> <span class="nv">and</span> <span class="nv">ignore</span> <span class="nv">other</span> <span class="nv">stuff</span> <span class="nv">between</span> <span class="nv">the</span> <span class="nv">name</span> <span class="nv">and</span> <span class="nv">the</span> <span class="o">&gt;</span>
 
-            # Note: this is not 100% correct, since we might have things like
+            # <span class="nv">Note</span>: <span class="nv">this</span> <span class="nv">is</span> <span class="nv">not</span> <span class="mi">100</span><span class="o">%</span> <span class="nv">correct</span>, <span class="nv">since</span> <span class="nv">we</span> <span class="nv">might</span> <span class="nv">have</span> <span class="nv">things</span> <span class="nv">like</span>
 
-            # <span class="err">&lt;</span>/tag attr=&quot;&gt;&quot;&gt;, but looking for &gt; after tha name should cover
+            # <span class="o">&lt;/</span><span class="nv">tag</span> <span class="nv">attr</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">&gt;</span><span class="s2">&quot;</span><span class="o">&gt;</span>, <span class="nv">but</span> <span class="nv">looking</span> <span class="k">for</span> <span class="o">&gt;</span> <span class="nv">after</span> <span class="nv">tha</span> <span class="nv">name</span> <span class="nv">should</span> <span class="nv">cover</span>
 
-            # most of the cases and is much simpler
+            # <span class="nv">most</span> <span class="nv">of</span> <span class="nv">the</span> <span class="nv">cases</span> <span class="nv">and</span> <span class="nv">is</span> <span class="nv">much</span> <span class="nv">simpler</span>
 
-            gtpos = rawdata.find(&#39;&gt;&#39;, namematch.end())
+            <span class="nv">gtpos</span> <span class="o">=</span> <span class="nv">rawdata</span>.<span class="nv">find</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">&gt;</span><span class="s1">&#39;</span>, <span class="nv">namematch</span>.<span class="k">end</span><span class="ss">())</span>
 
-            self.handle_endtag(tagname)
+            <span class="nv">self</span>.<span class="nv">handle_endtag</span><span class="ss">(</span><span class="nv">tagname</span><span class="ss">)</span>
 
-            return gtpos+1
+            <span class="k">return</span> <span class="nv">gtpos</span><span class="o">+</span><span class="mi">1</span>
 
-        elem = match.group(1).lower() # script or style
+        <span class="nv">elem</span> <span class="o">=</span> <span class="nv">match</span>.<span class="nv">group</span><span class="ss">(</span><span class="mi">1</span><span class="ss">)</span>.<span class="nv">lower</span><span class="ss">()</span> # <span class="nv">script</span> <span class="nv">or</span> <span class="nv">style</span>
 
-        if self.cdata_elem is not None:
+        <span class="k">if</span> <span class="nv">self</span>.<span class="nv">cdata_elem</span> <span class="nv">is</span> <span class="nv">not</span> <span class="nv">None</span>:
 
-            if elem != self.cdata_elem:
+            <span class="k">if</span> <span class="nv">elem</span> <span class="o">!=</span> <span class="nv">self</span>.<span class="nv">cdata_elem</span>:
 
-                self.handle_data(rawdata[i:gtpos])
+                <span class="nv">self</span>.<span class="nv">handle_data</span><span class="ss">(</span><span class="nv">rawdata</span>[<span class="nv">i</span>:<span class="nv">gtpos</span>]<span class="ss">)</span>
 
-                return gtpos
+                <span class="k">return</span> <span class="nv">gtpos</span>
 
-        self.handle_endtag(elem)
+        <span class="nv">self</span>.<span class="nv">handle_endtag</span><span class="ss">(</span><span class="nv">elem</span><span class="ss">)</span>
 
-        self.clear_cdata_mode()
+        <span class="nv">self</span>.<span class="nv">clear_cdata_mode</span><span class="ss">()</span>
 
-        return gtpos
+        <span class="k">return</span> <span class="nv">gtpos</span>
 </pre></div>
 
 
@@ -2337,41 +2337,41 @@ as you want (may include '\n').</p>
 </pre></div>
 
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def parse_html_declaration(self, i):
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="nv">def</span> <span class="nv">parse_html_declaration</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">i</span><span class="ss">)</span>:
 
-        rawdata = self.rawdata
+        <span class="nv">rawdata</span> <span class="o">=</span> <span class="nv">self</span>.<span class="nv">rawdata</span>
 
-        assert rawdata[i:i+2] == &#39;&lt;!&#39;, (&#39;unexpected call to &#39;
+        <span class="nv">assert</span> <span class="nv">rawdata</span>[<span class="nv">i</span>:<span class="nv">i</span><span class="o">+</span><span class="mi">2</span>] <span class="o">==</span> <span class="s1">&#39;</span><span class="s">&lt;!</span><span class="s1">&#39;</span>, <span class="ss">(</span><span class="s1">&#39;</span><span class="s">unexpected call to </span><span class="s1">&#39;</span>
 
-                                        &#39;parse_html_declaration()&#39;)
+                                        <span class="s1">&#39;</span><span class="s">parse_html_declaration()</span><span class="s1">&#39;</span><span class="ss">)</span>
 
-        if rawdata[i:i+4] == &#39;&lt;!--&#39;:
+        <span class="k">if</span> <span class="nv">rawdata</span>[<span class="nv">i</span>:<span class="nv">i</span><span class="o">+</span><span class="mi">4</span>] <span class="o">==</span> <span class="s1">&#39;</span><span class="s">&lt;!--</span><span class="s1">&#39;</span>:
 
-            # this case is actually already handled in goahead()
+            # <span class="nv">this</span> <span class="nv">case</span> <span class="nv">is</span> <span class="nv">actually</span> <span class="nv">already</span> <span class="nv">handled</span> <span class="nv">in</span> <span class="nv">goahead</span><span class="ss">()</span>
 
-            return self.parse_comment(i)
+            <span class="k">return</span> <span class="nv">self</span>.<span class="nv">parse_comment</span><span class="ss">(</span><span class="nv">i</span><span class="ss">)</span>
 
-        elif rawdata[i:i+3] == &#39;&lt;![&#39;:
+        <span class="nv">elif</span> <span class="nv">rawdata</span>[<span class="nv">i</span>:<span class="nv">i</span><span class="o">+</span><span class="mi">3</span>] <span class="o">==</span> <span class="s1">&#39;</span><span class="s">&lt;![</span><span class="s1">&#39;</span>:
 
-            return self.parse_marked_section(i)
+            <span class="k">return</span> <span class="nv">self</span>.<span class="nv">parse_marked_section</span><span class="ss">(</span><span class="nv">i</span><span class="ss">)</span>
 
-        elif rawdata[i:i+9].lower() == &#39;&lt;!doctype&#39;:
+        <span class="nv">elif</span> <span class="nv">rawdata</span>[<span class="nv">i</span>:<span class="nv">i</span><span class="o">+</span><span class="mi">9</span>].<span class="nv">lower</span><span class="ss">()</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="s">&lt;!doctype</span><span class="s1">&#39;</span>:
 
-            # find the closing &gt;
+            # <span class="nv">find</span> <span class="nv">the</span> <span class="nv">closing</span> <span class="o">&gt;</span>
 
-            gtpos = rawdata.find(&#39;&gt;&#39;, i+9)
+            <span class="nv">gtpos</span> <span class="o">=</span> <span class="nv">rawdata</span>.<span class="nv">find</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">&gt;</span><span class="s1">&#39;</span>, <span class="nv">i</span><span class="o">+</span><span class="mi">9</span><span class="ss">)</span>
 
-            if gtpos == -1:
+            <span class="k">if</span> <span class="nv">gtpos</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>:
 
-                return -1
+                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
 
-            self.handle_decl(rawdata[i+2:gtpos])
+            <span class="nv">self</span>.<span class="nv">handle_decl</span><span class="ss">(</span><span class="nv">rawdata</span>[<span class="nv">i</span><span class="o">+</span><span class="mi">2</span>:<span class="nv">gtpos</span>]<span class="ss">)</span>
 
-            return gtpos+1
+            <span class="k">return</span> <span class="nv">gtpos</span><span class="o">+</span><span class="mi">1</span>
 
-        else:
+        <span class="k">else</span>:
 
-            return self.parse_bogus_comment(i)
+            <span class="k">return</span> <span class="nv">self</span>.<span class="nv">parse_bogus_comment</span><span class="ss">(</span><span class="nv">i</span><span class="ss">)</span>
 </pre></div>
 
 
@@ -2385,45 +2385,45 @@ as you want (may include '\n').</p>
 </pre></div>
 
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def parse_marked_section(self, i, report=1):
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="nv">def</span> <span class="nv">parse_marked_section</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">i</span>, <span class="nv">report</span><span class="o">=</span><span class="mi">1</span><span class="ss">)</span>:
 
-        rawdata= self.rawdata
+        <span class="nv">rawdata</span><span class="o">=</span> <span class="nv">self</span>.<span class="nv">rawdata</span>
 
-        assert rawdata[i:i+3] == &#39;&lt;![&#39;, &quot;unexpected call to parse_marked_section()&quot;
+        <span class="nv">assert</span> <span class="nv">rawdata</span>[<span class="nv">i</span>:<span class="nv">i</span><span class="o">+</span><span class="mi">3</span>] <span class="o">==</span> <span class="s1">&#39;</span><span class="s">&lt;![</span><span class="s1">&#39;</span>, <span class="s2">&quot;</span><span class="s">unexpected call to parse_marked_section()</span><span class="s2">&quot;</span>
 
-        sectName, j = self._scan_name( i+3, i )
+        <span class="nv">sectName</span>, <span class="nv">j</span> <span class="o">=</span> <span class="nv">self</span>.<span class="nv">_scan_name</span><span class="ss">(</span> <span class="nv">i</span><span class="o">+</span><span class="mi">3</span>, <span class="nv">i</span> <span class="ss">)</span>
 
-        if j &lt; 0:
+        <span class="k">if</span> <span class="nv">j</span> <span class="o">&lt;</span> <span class="mi">0</span>:
 
-            return j
+            <span class="k">return</span> <span class="nv">j</span>
 
-        if sectName in {&quot;temp&quot;, &quot;cdata&quot;, &quot;ignore&quot;, &quot;include&quot;, &quot;rcdata&quot;}:
+        <span class="k">if</span> <span class="nv">sectName</span> <span class="nv">in</span> {<span class="s2">&quot;</span><span class="s">temp</span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s">cdata</span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s">ignore</span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s">include</span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s">rcdata</span><span class="s2">&quot;</span>}:
 
-            # look for standard ]]&gt; ending
+            # <span class="nv">look</span> <span class="k">for</span> <span class="nv">standard</span> ]]<span class="o">&gt;</span> <span class="nv">ending</span>
 
-            match= _markedsectionclose.search(rawdata, i+3)
+            <span class="nv">match</span><span class="o">=</span> <span class="nv">_markedsectionclose</span>.<span class="nv">search</span><span class="ss">(</span><span class="nv">rawdata</span>, <span class="nv">i</span><span class="o">+</span><span class="mi">3</span><span class="ss">)</span>
 
-        elif sectName in {&quot;if&quot;, &quot;else&quot;, &quot;endif&quot;}:
+        <span class="nv">elif</span> <span class="nv">sectName</span> <span class="nv">in</span> {<span class="s2">&quot;</span><span class="s">if</span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s">else</span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s">endif</span><span class="s2">&quot;</span>}:
 
-            # look for MS Office ]&gt; ending
+            # <span class="nv">look</span> <span class="k">for</span> <span class="nv">MS</span> <span class="nv">Office</span> ]<span class="o">&gt;</span> <span class="nv">ending</span>
 
-            match= _msmarkedsectionclose.search(rawdata, i+3)
+            <span class="nv">match</span><span class="o">=</span> <span class="nv">_msmarkedsectionclose</span>.<span class="nv">search</span><span class="ss">(</span><span class="nv">rawdata</span>, <span class="nv">i</span><span class="o">+</span><span class="mi">3</span><span class="ss">)</span>
 
-        else:
+        <span class="k">else</span>:
 
-            self.error(&#39;unknown status keyword %r in marked section&#39; % rawdata[i+3:j])
+            <span class="nv">self</span>.<span class="nv">error</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">unknown status keyword %r in marked section</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nv">rawdata</span>[<span class="nv">i</span><span class="o">+</span><span class="mi">3</span>:<span class="nv">j</span>]<span class="ss">)</span>
 
-        if not match:
+        <span class="k">if</span> <span class="nv">not</span> <span class="nv">match</span>:
 
-            return -1
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
 
-        if report:
+        <span class="k">if</span> <span class="nv">report</span>:
 
-            j = match.start(0)
+            <span class="nv">j</span> <span class="o">=</span> <span class="nv">match</span>.<span class="nv">start</span><span class="ss">(</span><span class="mi">0</span><span class="ss">)</span>
 
-            self.unknown_decl(rawdata[i+3: j])
+            <span class="nv">self</span>.<span class="nv">unknown_decl</span><span class="ss">(</span><span class="nv">rawdata</span>[<span class="nv">i</span><span class="o">+</span><span class="mi">3</span>: <span class="nv">j</span>]<span class="ss">)</span>
 
-        return match.end(0)
+        <span class="k">return</span> <span class="nv">match</span>.<span class="k">end</span><span class="ss">(</span><span class="mi">0</span><span class="ss">)</span>
 </pre></div>
 
 
@@ -2436,25 +2436,25 @@ as you want (may include '\n').</p>
 </pre></div>
 
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="nx">def</span> <span class="nx">parse_pi</span><span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span><span class="o">:</span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="nv">def</span> <span class="nv">parse_pi</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">i</span><span class="ss">)</span>:
 
-        <span class="nx">rawdata</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">rawdata</span>
+        <span class="nv">rawdata</span> <span class="o">=</span> <span class="nv">self</span>.<span class="nv">rawdata</span>
 
-        <span class="nx">assert</span> <span class="nx">rawdata</span><span class="p">[</span><span class="nx">i</span><span class="o">:</span><span class="nx">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="err">&#39;</span><span class="cp">&lt;?</span><span class="s1">&#39;, &#39;</span><span class="nx">unexpected</span> <span class="nx">call</span> <span class="nx">to</span> <span class="nx">parse_pi</span><span class="p">()</span><span class="err">&#39;</span>
+        <span class="nv">assert</span> <span class="nv">rawdata</span>[<span class="nv">i</span>:<span class="nv">i</span><span class="o">+</span><span class="mi">2</span>] <span class="o">==</span> <span class="s1">&#39;</span><span class="s">&lt;?</span><span class="s1">&#39;</span>, <span class="s1">&#39;</span><span class="s">unexpected call to parse_pi()</span><span class="s1">&#39;</span>
 
-        <span class="nx">match</span> <span class="o">=</span> <span class="nx">piclose</span><span class="o">.</span><span class="nx">search</span><span class="p">(</span><span class="nx">rawdata</span><span class="p">,</span> <span class="nx">i</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># &gt;</span>
+        <span class="nv">match</span> <span class="o">=</span> <span class="nv">piclose</span>.<span class="nv">search</span><span class="ss">(</span><span class="nv">rawdata</span>, <span class="nv">i</span><span class="o">+</span><span class="mi">2</span><span class="ss">)</span> # <span class="o">&gt;</span>
 
-        <span class="k">if</span> <span class="k">not</span> <span class="nx">match</span><span class="o">:</span>
+        <span class="k">if</span> <span class="nv">not</span> <span class="nv">match</span>:
 
             <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
 
-        <span class="nx">j</span> <span class="o">=</span> <span class="nx">match</span><span class="o">.</span><span class="nx">start</span><span class="p">()</span>
+        <span class="nv">j</span> <span class="o">=</span> <span class="nv">match</span>.<span class="nv">start</span><span class="ss">()</span>
 
-        <span class="nx">self</span><span class="o">.</span><span class="nx">handle_pi</span><span class="p">(</span><span class="nx">rawdata</span><span class="p">[</span><span class="nx">i</span><span class="o">+</span><span class="mi">2</span><span class="o">:</span> <span class="nx">j</span><span class="p">])</span>
+        <span class="nv">self</span>.<span class="nv">handle_pi</span><span class="ss">(</span><span class="nv">rawdata</span>[<span class="nv">i</span><span class="o">+</span><span class="mi">2</span>: <span class="nv">j</span>]<span class="ss">)</span>
 
-        <span class="nx">j</span> <span class="o">=</span> <span class="nx">match</span><span class="o">.</span><span class="nb">end</span><span class="p">()</span>
+        <span class="nv">j</span> <span class="o">=</span> <span class="nv">match</span>.<span class="k">end</span><span class="ss">()</span>
 
-        <span class="k">return</span> <span class="nx">j</span>
+        <span class="k">return</span> <span class="nv">j</span>
 </pre></div>
 
 
@@ -2570,19 +2570,19 @@ as you want (may include '\n').</p>
 
 
 <p>Reset this instance.  Loses all unprocessed data.</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def reset(self):
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="n">def</span> <span class="k">reset</span><span class="p">(</span><span class="k">self</span><span class="p">):</span>
 
-        &quot;&quot;&quot;Reset this instance.  Loses all unprocessed data.&quot;&quot;&quot;
+        <span class="ss">&quot;&quot;&quot;Reset this instance.  Loses all unprocessed data.&quot;&quot;&quot;</span>
 
-        self.rawdata = &#39;&#39;
+        <span class="k">self</span><span class="p">.</span><span class="n">rawdata</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 
-        self.lasttag = &#39;???&#39;
+        <span class="k">self</span><span class="p">.</span><span class="n">lasttag</span> <span class="o">=</span> <span class="s1">&#39;???&#39;</span>
 
-        self.interesting = interesting_normal
+        <span class="k">self</span><span class="p">.</span><span class="n">interesting</span> <span class="o">=</span> <span class="n">interesting_normal</span>
 
-        self.cdata_elem = None
+        <span class="k">self</span><span class="p">.</span><span class="n">cdata_elem</span> <span class="o">=</span> <span class="k">None</span>
 
-        _markupbase.ParserBase.reset(self)
+        <span class="n">_markupbase</span><span class="p">.</span><span class="n">ParserBase</span><span class="p">.</span><span class="k">reset</span><span class="p">(</span><span class="k">self</span><span class="p">)</span>
 </pre></div>
 
 
@@ -2595,11 +2595,11 @@ as you want (may include '\n').</p>
 </pre></div>
 
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def set_cdata_mode(self, elem):
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="n">def</span> <span class="n">set_cdata_mode</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="n">elem</span><span class="p">):</span>
 
-        self.cdata_elem = elem.lower()
+        <span class="k">self</span><span class="p">.</span><span class="n">cdata_elem</span> <span class="o">=</span> <span class="n">elem</span><span class="p">.</span><span class="k">lower</span><span class="p">()</span>
 
-        self.interesting = re.compile(r&#39;&lt;/\s*%s\s*&gt;&#39; % self.cdata_elem, re.I)
+        <span class="k">self</span><span class="p">.</span><span class="n">interesting</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">compile</span><span class="p">(</span><span class="n">r</span><span class="s1">&#39;&lt;/\s*%s\s*&gt;&#39;</span> <span class="o">%</span> <span class="k">self</span><span class="p">.</span><span class="n">cdata_elem</span><span class="p">,</span> <span class="n">re</span><span class="p">.</span><span class="n">I</span><span class="p">)</span>
 </pre></div>
 
 
@@ -2612,15 +2612,15 @@ as you want (may include '\n').</p>
 </pre></div>
 
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def unescape(self, s):
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="nv">def</span> <span class="nv">unescape</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">s</span><span class="ss">)</span>:
 
-        warnings.warn(&#39;The unescape method is deprecated and will be removed &#39;
+        <span class="nv">warnings</span>.<span class="nv">warn</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">The unescape method is deprecated and will be removed </span><span class="s1">&#39;</span>
 
-                      &#39;in 3.5, use html.unescape() instead.&#39;,
+                      <span class="s1">&#39;</span><span class="s">in 3.5, use html.unescape() instead.</span><span class="s1">&#39;</span>,
 
-                      DeprecationWarning, stacklevel=2)
+                      <span class="nv">DeprecationWarning</span>, <span class="nv">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="ss">)</span>
 
-        return unescape(s)
+        <span class="k">return</span> <span class="nv">unescape</span><span class="ss">(</span><span class="nv">s</span><span class="ss">)</span>
 </pre></div>
 
 
@@ -2633,9 +2633,9 @@ as you want (may include '\n').</p>
 </pre></div>
 
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def unknown_decl(self, data):
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="n">def</span> <span class="n">unknown_decl</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="k">data</span><span class="p">):</span>
 
-        pass
+        <span class="n">pass</span>
 </pre></div>
 
 
@@ -2649,29 +2649,29 @@ as you want (may include '\n').</p>
 </pre></div>
 
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    def updatepos(self, i, j):
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="nv">def</span> <span class="nv">updatepos</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">i</span>, <span class="nv">j</span><span class="ss">)</span>:
 
-        if i &gt;= j:
+        <span class="k">if</span> <span class="nv">i</span> <span class="o">&gt;=</span> <span class="nv">j</span>:
 
-            return j
+            <span class="k">return</span> <span class="nv">j</span>
 
-        rawdata = self.rawdata
+        <span class="nv">rawdata</span> <span class="o">=</span> <span class="nv">self</span>.<span class="nv">rawdata</span>
 
-        nlines = rawdata.count(&quot;\n&quot;, i, j)
+        <span class="nv">nlines</span> <span class="o">=</span> <span class="nv">rawdata</span>.<span class="nv">count</span><span class="ss">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>, <span class="nv">i</span>, <span class="nv">j</span><span class="ss">)</span>
 
-        if nlines:
+        <span class="k">if</span> <span class="nv">nlines</span>:
 
-            self.lineno = self.lineno + nlines
+            <span class="nv">self</span>.<span class="nv">lineno</span> <span class="o">=</span> <span class="nv">self</span>.<span class="nv">lineno</span> <span class="o">+</span> <span class="nv">nlines</span>
 
-            pos = rawdata.rindex(&quot;\n&quot;, i, j) # Should not fail
+            <span class="nv">pos</span> <span class="o">=</span> <span class="nv">rawdata</span>.<span class="nv">rindex</span><span class="ss">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>, <span class="nv">i</span>, <span class="nv">j</span><span class="ss">)</span> # <span class="nv">Should</span> <span class="nv">not</span> <span class="nv">fail</span>
 
-            self.offset = j-(pos+1)
+            <span class="nv">self</span>.<span class="nv">offset</span> <span class="o">=</span> <span class="nv">j</span><span class="o">-</span><span class="ss">(</span><span class="nv">pos</span><span class="o">+</span><span class="mi">1</span><span class="ss">)</span>
 
-        else:
+        <span class="k">else</span>:
 
-            self.offset = self.offset + j-i
+            <span class="nv">self</span>.<span class="nv">offset</span> <span class="o">=</span> <span class="nv">self</span>.<span class="nv">offset</span> <span class="o">+</span> <span class="nv">j</span><span class="o">-</span><span class="nv">i</span>
 
-        return j
+        <span class="k">return</span> <span class="nv">j</span>
 </pre></div>
 
 

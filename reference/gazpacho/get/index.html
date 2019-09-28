@@ -504,45 +504,45 @@
 </ul>
 <p>Example:</p>
 <p><code>get('https://httpbin.org/anything', {'soup': 'gazpacho'})</code></p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>def get(url, params=None, headers=None):
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><span class="nv">def</span> <span class="nv">get</span><span class="ss">(</span><span class="nv">url</span>, <span class="nb">params</span><span class="o">=</span><span class="nv">None</span>, <span class="nv">headers</span><span class="o">=</span><span class="nv">None</span><span class="ss">)</span>:
 
-    &#39;&#39;&#39;Get the content from a URL
+    <span class="s1">&#39;&#39;&#39;</span><span class="s">Get the content from a URL</span>
 
-    - url (str): A URL for a website
+    <span class="o">-</span> <span class="nv">url</span> <span class="ss">(</span><span class="nv">str</span><span class="ss">)</span>: <span class="nv">A</span> <span class="nv">URL</span> <span class="k">for</span> <span class="nv">a</span> <span class="nv">website</span>
 
-    - params (dict, optional): Paramater payload to be added to the GET request
+    <span class="o">-</span> <span class="nb">params</span> <span class="ss">(</span><span class="nv">dict</span>, <span class="nv">optional</span><span class="ss">)</span>: <span class="nv">Paramater</span> <span class="nv">payload</span> <span class="nv">to</span> <span class="nv">be</span> <span class="nv">added</span> <span class="nv">to</span> <span class="nv">the</span> <span class="nv">GET</span> <span class="nv">request</span>
 
-    - headers (dict, optional): Headers to be added to the GET request
+    <span class="o">-</span> <span class="nv">headers</span> <span class="ss">(</span><span class="nv">dict</span>, <span class="nv">optional</span><span class="ss">)</span>: <span class="nv">Headers</span> <span class="nv">to</span> <span class="nv">be</span> <span class="nv">added</span> <span class="nv">to</span> <span class="nv">the</span> <span class="nv">GET</span> <span class="nv">request</span>
 
-    Example:
+    <span class="nv">Example</span>:
 
-    `get(&#39;https://httpbin.org/anything&#39;, {&#39;soup&#39;: &#39;gazpacho&#39;})`
+    `<span class="nv">get</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">https://httpbin.org/anything</span><span class="s1">&#39;</span>, {<span class="s1">&#39;</span><span class="s">soup</span><span class="s1">&#39;</span>: <span class="s1">&#39;</span><span class="s">gazpacho</span><span class="s1">&#39;</span>}<span class="ss">)</span>`
 
-    &#39;&#39;&#39;
+    <span class="s1">&#39;&#39;&#39;</span>
 
-    opener = build_opener()
+    <span class="nv">opener</span> <span class="o">=</span> <span class="nv">build_opener</span><span class="ss">()</span>
 
-    if params:
+    <span class="k">if</span> <span class="nb">params</span>:
 
-        url += &#39;?&#39; + urlencode(params)
+        <span class="nv">url</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="s">?</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nv">urlencode</span><span class="ss">(</span><span class="nb">params</span><span class="ss">)</span>
 
-    if headers:
+    <span class="k">if</span> <span class="nv">headers</span>:
 
-        for h in headers.items():
+        <span class="k">for</span> <span class="nv">h</span> <span class="nv">in</span> <span class="nv">headers</span>.<span class="nv">items</span><span class="ss">()</span>:
 
-            opener.addheaders = [h]
+            <span class="nv">opener</span>.<span class="nv">addheaders</span> <span class="o">=</span> [<span class="nv">h</span>]
 
-    if (headers and not headers.get(&#39;User-Agent&#39;)) or not headers:
+    <span class="k">if</span> <span class="ss">(</span><span class="nv">headers</span> <span class="nv">and</span> <span class="nv">not</span> <span class="nv">headers</span>.<span class="nv">get</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">User-Agent</span><span class="s1">&#39;</span><span class="ss">))</span> <span class="nv">or</span> <span class="nv">not</span> <span class="nv">headers</span>:
 
-        UA = &#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:69.0) Gecko/20100101 Firefox/69.0&#39;
+        <span class="nv">UA</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="s">Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:69.0) Gecko/20100101 Firefox/69.0</span><span class="s1">&#39;</span>
 
-        opener.addheaders = [(&#39;User-Agent&#39;, UA)]
+        <span class="nv">opener</span>.<span class="nv">addheaders</span> <span class="o">=</span> [<span class="ss">(</span><span class="s1">&#39;</span><span class="s">User-Agent</span><span class="s1">&#39;</span>, <span class="nv">UA</span><span class="ss">)</span>]
 
-    with opener.open(url) as f:
+    <span class="nv">with</span> <span class="nv">opener</span>.<span class="nv">open</span><span class="ss">(</span><span class="nv">url</span><span class="ss">)</span> <span class="nv">as</span> <span class="nv">f</span>:
 
-        content = f.read().decode(&#39;utf-8&#39;)
+        <span class="nv">content</span> <span class="o">=</span> <span class="nv">f</span>.<span class="nv">read</span><span class="ss">()</span>.<span class="nv">decode</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">utf-8</span><span class="s1">&#39;</span><span class="ss">)</span>
 
-    return content
+    <span class="k">return</span> <span class="nv">content</span>
 </pre></div>
 
 
