@@ -22,12 +22,12 @@ gazpacho is easy to use. To retrieve the contents of a web page use `get`. And t
 
 
 
-#### Get 
+#### Get
 
 The `get` function retrieves content from a web page:
 
 ```python
-from gazpacho import get, Soup
+from gazpacho import get
 
 url = 'https://en.wikipedia.org/wiki/Gazpacho'
 html = get(url)
@@ -51,6 +51,8 @@ get(url, params={'foo': 'bar', 'bar': 'baz'}, headers={'User-Agent': 'gazpacho'}
 The `Soup` object takes an html string and turns it into something parsable:
 
 ```python
+from gazpacho import Soup
+
 soup = Soup(html)
 str(soup)[:50]
 
@@ -127,7 +129,7 @@ print(df[['PLAYER', 'TEAM', 'SALARY', 'AGE']].head(3))
 # 2     3. John Tavares  TOR  $15,900,000   28
 ```
 
-And powered by gazpacho:
+Powered by gazpacho:
 
 ```python
 from gazpacho import get, Soup
@@ -147,10 +149,47 @@ print(df[['PLAYER', 'TEAM', 'SALARY', 'AGE']].head(3))
 
 
 
+#### Speed
+
+gazpacho is fast:
+
+```python
+from gazpacho import Soup
+
+%%timeit
+soup = Soup(html)
+soup.find('span', {'class': 'mw-headline'})
+# 15 ms ± 325 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+```
+
+gazpacho is often 20-40% faster than BeautifulSoup:
+
+```python
+from bs4 import BeautifulSoup
+
+%%timeit
+soup = BeautifulSoup(html, 'lxml')
+soup.find('span', {'class': 'mw-headline'})
+# 19.4 ms ± 583 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
+```
+
+And 200-300% faster than requests-html:
+
+```python
+from requests_html import HTML
+
+%%timeit
+soup = HTML(html=html)
+soup.find('span.mw-headline')
+# 40.1 ms ± 418 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
+```
+
+
+
 #### Installation
 
 ```
-pip install gazpacho
+pip install -U gazpacho
 ```
 
 

@@ -1,8 +1,7 @@
-Tag groups not already recording
-Release branch
-time comparison on docs
-windows in travis
+tutorials
+release branch
 travis publish portray docs
+poetry
 add contributing.md
 add tasks for hacktober
 pretty print html
