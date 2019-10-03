@@ -5,6 +5,8 @@ deploy:
   provider: pypi
   user: maxhumber
   password: $PYPI_PASSWORD
+  on:
+    tags: true
 
 install:
   - "pip install -e ."
