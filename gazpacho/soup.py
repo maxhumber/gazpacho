@@ -98,6 +98,20 @@ class Soup(HTMLParser):
         self.group = 0
         self.groups = []
         super().feed(self.html)
-        if len(self.groups) == 1:
-            return self.groups[0]
         return self.groups
+
+    def find_one(self, tag, attrs=None):
+        '''Find a tag with optional attributes
+
+        - tag (str): HTML tag to find
+        - attrs (dict, optional): Attributes within tag to match
+        '''
+        self.tag = tag
+        self.attrs = attrs
+        self.count = 0
+        self.group = 0
+        self.groups = []
+        super().feed(self.html)
+        if len(self.groups) == 1:
+            return Optional[self.groups]
+        raise Exception
