@@ -30,12 +30,17 @@ def fake_html_2():
 
 def test_find_one(fake_html_1):
     soup = Soup(fake_html_1)
-    result = soup.find('span')
+    result = soup.find_one('span')
     assert str(result) == '<span>Hi</span>'
+
+def test_find_one_with_find(fake_html_1):
+    soup = Soup(fake_html_1)
+    result = soup.find('span')
+    assert str(result) == '[<span>Hi</span>]'
 
 def test_find_with_attrs(fake_html_1):
     soup = Soup(fake_html_1)
-    result = soup.find('p', {'id': 'blarg'})
+    result = soup.find_one('p', {'id': 'blarg'})
     assert str(result) == '<p id="blarg">Try for 2</p>'
 
 def test_find_multiple(fake_html_1):
@@ -46,7 +51,7 @@ def test_find_multiple(fake_html_1):
 
 def test_find_text(fake_html_1):
     soup = Soup(fake_html_1)
-    result = soup.find('p', {'id': 'blarg'})
+    result = soup.find_one('p', {'id': 'blarg'})
     assert result.text == 'Try for 2'
 
 def test_find_nested_groups(fake_html_2):

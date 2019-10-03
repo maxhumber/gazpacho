@@ -1,9 +1,5 @@
 from html.parser import HTMLParser
-
-try:
-    from .utils import match, html_starttag_and_attrs
-except ModuleNotFoundError:
-    from gazpacho.utils import match, html_starttag_and_attrs
+from .utils import match, html_starttag_and_attrs
 
 class Soup(HTMLParser):
     '''HTML Parser Class
@@ -13,22 +9,23 @@ class Soup(HTMLParser):
     - attrs (dict, None): Found attributes
     - text (str, None): Found text
     - find (method): The main method to find HTML tags
+    - find_one (method): find, but for just one result
 
     Examples:
 
     ```
-    html = "<div><p id='foo'>bar</p><p id='foo'>baz</p><p id='zoo'>Tiger</p></div>"
+    from gazpacho import Soup
+    html = "<div><p id='foo'>bar</p><p id='foo'>baz</p><p id='zoo'>bat</p></div>"
     soup = Soup(html)
     result = soup.find('p', {'id': 'foo'})
     print(result)
     # [<p id="foo">bar</p>, <p id="foo">baz</p>]
-    result = soup.find('p', {'id': 'zoo'})
+    result = soup.find_one('p', {'id': 'zoo'})
     print(result)
-    # <p id="zoo">Tiger</p>
+    # <p id="zoo">bat</p>
     print(result.text)
-    # Tiger
+    # bat
     ```
-
     '''
     def __init__(self, html):
         super().__init__()
@@ -87,7 +84,7 @@ class Soup(HTMLParser):
             return
 
     def find(self, tag, attrs=None):
-        '''Find a tag with optional attributes
+        '''Find all HTML elements that match a tag and optional attributes
 
         - tag (str): HTML tag to find
         - attrs (dict, optional): Attributes within tag to match
@@ -98,6 +95,19 @@ class Soup(HTMLParser):
         self.group = 0
         self.groups = []
         super().feed(self.html)
-        if len(self.groups) == 1:
-            return self.groups[0]
         return self.groups
+
+    def find_one(self, tag, attrs=None):
+        '''Find one HTML element that matches a tag and optional attributes
+
+        - tag (str): HTML tag to find
+        - attrs (dict, optional): Attributes within tag to match
+        '''
+        self.tag = tag
+        self.attrs = attrs
+        self.count = 0
+        self.group = 0
+        self.groups = []
+        super().feed(self.html)
+        soup = self.groups[0]
+        return soup

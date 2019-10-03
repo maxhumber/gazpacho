@@ -48,7 +48,7 @@ get(url, params={'foo': 'bar', 'bar': 'baz'}, headers={'User-Agent': 'gazpacho'}
 
 #### Soup
 
-The `Soup` object takes an html string and turns it into something parsable:
+The `Soup` object takes an HTML string and turns it into something parsable:
 
 ```python
 from gazpacho import Soup
@@ -59,7 +59,7 @@ str(soup)[:50]
 # '<!DOCTYPE html>\n<html class="client-nojs" lang="en'
 ```
 
-In order to parse an html element in a `Soup` object, pass the tag and optional attributes to the `find` method:
+In order to parse an HTML element inside of a `Soup` object, pass the desired tag and optional attributes to the `find` method:
 
 ```python
 # Original HTML: <span class="mw-headline" id="Ingredients_and_preparation">Ingredients and preparation</span>
@@ -67,7 +67,7 @@ In order to parse an html element in a `Soup` object, pass the tag and optional 
 results = soup.find('span', {'class': 'mw-headline'})
 ```
 
-The `find` method will return one `Soup` object if it finds exactly one element that satisfies the tag and attribute constraints, or a list of `Soup` objects if it finds more than one:
+The `find` method will return a list of `Soup` objects for those elements that satisfy the tag and attribute constraints:
 
 ```python
 print(results)
@@ -84,7 +84,14 @@ print(results)
 #  <span class="mw-headline" id="References">References</span>]
 ```
 
-`Soup` objects returned by the `find` method will have `html`, `tag`, `attrs`, and `text` attributes:
+Meanwhile, the `find_one` method will return the first found element as a `Soup` object:
+
+```python
+soup.find_one('span', {'class': 'mw-headline'})
+# <span class="mw-headline" id="History">History</span>
+```
+
+`Soup` objects returned by the `find` or `find_one` methods will have `html`, `tag`, `attrs`, and `text` attributes:
 
 ```python
 result = results[3]
@@ -98,7 +105,7 @@ print(result.text)
 # In Spain
 ```
 
-Crucially, returned `Soup` objects can reimplement the `find` method!
+Crucially, returned `Soup` objects can reimplement the `find` and `find_one` methods!
 
 
 
