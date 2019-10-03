@@ -113,5 +113,5 @@ class Soup(HTMLParser):
         self.groups = []
         super().feed(self.html)
         if len(self.groups) == 1:
-            return Optional[self.groups]
+            return self.groups[0]
         raise Exception
