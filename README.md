@@ -59,7 +59,7 @@ str(soup)[:50]
 # '<!DOCTYPE html>\n<html class="client-nojs" lang="en'
 ```
 
-In order to parse an HTML element inside of a `Soup` object, pass the desired tag and optional attributes to the `find` method:
+In order to parse an HTML element inside of a `Soup` object, pass the desired tag and attributes (optional) to the `find` method:
 
 ```python
 # Original HTML: <span class="mw-headline" id="Ingredients_and_preparation">Ingredients and preparation</span>
@@ -84,7 +84,7 @@ print(results)
 #  <span class="mw-headline" id="References">References</span>]
 ```
 
-Meanwhile, the `find_one` method will return the first found element as a `Soup` object:
+Whereas `find` will return a list, the `find_one` method will return the first found element as a `Soup` object:
 
 ```python
 soup.find_one('span', {'class': 'mw-headline'})
@@ -105,19 +105,19 @@ print(result.text)
 # In Spain
 ```
 
-Crucially, returned `Soup` objects can reimplement the `find` and `find_one` methods!
+Importantly, returned `Soup` objects can reimplement the `find` and `find_one` methods!
 
 
 
 #### Production
 
-gazpacho is production ready. It currently powers another library, [quote](https://github.com/maxhumber/quote), a python wrapper for the Goodreads Quote API.
+gazpacho is production ready. The library currently powers [quote](https://github.com/maxhumber/quote), a python wrapper for the Goodreads Quote API. And a fully worked example of gazpacho in action is available [here](https://maxhumber.com/scraping_fantasy_hockey). 
 
 
 
 #### Comparison
 
-gazpacho is a drop-in replacement for most projects that use requests and BeautifulSoup.
+gazpacho is a drop-in replacement for most projects that use requests and BeautifulSoup:
 
 ```python
 import requests
@@ -203,4 +203,6 @@ pip install -U gazpacho
 
 #### Contribute
 
-For feature requests or bug reports, please use [Github Issues](https://github.com/maxhumber/gazpacho/issues)
+For feature requests or bug reports, please use [Github Issues](https://github.com/maxhumber/gazpacho/issues).
+
+For PRs, please read the [CONTRIBUTING.md](https://github.com/maxhumber/gazpacho/blob/master/README.md) file.
