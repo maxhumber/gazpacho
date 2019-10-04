@@ -2,15 +2,19 @@ from urllib.parse import urlencode
 from urllib.request import build_opener
 
 def get(url, params=None, headers=None):
-    '''Get the content from a URL
+    '''Return the content from a URL
 
-    - url (str): A URL for a website
-    - params (dict, optional): Paramater payload to be added to the GET request
-    - headers (dict, optional): Headers to be added to the GET request
+    Params:
+
+    - url (str): website URL
+    - params (dict, optional): Param payload to add to the GET request
+    - headers (dict, optional): Headers to add to the GET request
 
     Example:
-    
-    `get('https://httpbin.org/anything', {'soup': 'gazpacho'})`
+
+    ```
+    get('https://httpbin.org/anything', {'soup': 'gazpacho'})
+    ```
     '''
     opener = build_opener()
     if params:

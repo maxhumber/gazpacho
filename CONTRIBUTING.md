@@ -17,7 +17,7 @@ When contributing to `gazpacho`, please open an issue before making a change
 
 #### Guidelines
 
-- Keep in mind that `gazpacho` does not want to do everything. It is a replacement for BeautifulSoup and requests for **most** projects but not all projects
+- Keep in mind that `gazpacho` does not want to do everything. It is a replacement for BeautifulSoup and requests for **most** projects but **not all** projects
 - Always write tests for any change introduced
-- If the change involves new methods, arguments or otherwise modifies the public API, make sure to adjust the `README`
-- If the change is not just cosmetic, add a line to the CHANGELOG.md file give yourself credit!
+- If the change involves new methods, arguments or otherwise modifies the public API, make sure to adjust the `README.md`
+- If the change is beyond cosmetic, add it to the `CHANGELOG.md` file and give yourself credit!

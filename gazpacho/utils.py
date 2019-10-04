@@ -1,8 +1,10 @@
 def match(a, b, strict=False):
-    '''A utility function to match two dictionaries
+    '''Utility function to match two dictionaries
 
-    - a (dict): The query dictionary
-    - b (dict): The dictionary to match
+    Params:
+
+    - a (dict): Query dictionary
+    - b (dict): Dictionary to match
     - strict (bool): Require exact matching
 
     Examples:
@@ -13,8 +15,18 @@ def match(a, b, strict=False):
     match(a, b)
     # True
 
+    a = {'foo': 'bar'}
+    b = {'foo': 'bar baz'}
+    match(a, b, strict=True)
+    # False
+
     a = {}
     b = {'foo': 'bar'}
+    match(a, b)
+    # True
+
+    a = {}
+    b = {}
     match(a, b)
     # True
     ```
@@ -40,11 +52,13 @@ def match(a, b, strict=False):
     return True
 
 def html_starttag_and_attrs(tag, attrs, startendtag=False):
-    '''A utility functon to reconstruct starttag and attrs
+    '''Utility functon to reconstruct starttag and attrs
 
-    - tag (str): HTML tag
-    - attrs (list): A list of tuples for HTML tag attributes
-    - startendtag (bool): A flag to handle startend tags
+    Params:
+
+    - tag (str): HTML element tag
+    - attrs (list): HTML element attributes formatted as a list of tuples
+    - startendtag (bool, False): Flag to handle startend tags
 
     Example:
 

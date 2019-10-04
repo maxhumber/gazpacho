@@ -23,7 +23,7 @@ def fake_html_2():
       <p>bar</p>
       </div>
     </div>
-    <div id='c' class='foo'>
+    <div id='c' class='foo foo-striped'>
       <span>baz</span>
     </div>'''
     return html
@@ -38,7 +38,7 @@ def test_find_one_with_find(fake_html_1):
     result = soup.find('span')
     assert str(result) == '[<span>Hi</span>]'
 
-def test_find_with_attrs(fake_html_1):
+def test_find_one_with_attrs(fake_html_1):
     soup = Soup(fake_html_1)
     result = soup.find_one('p', {'id': 'blarg'})
     assert str(result) == '<p id="blarg">Try for 2</p>'
@@ -58,3 +58,8 @@ def test_find_nested_groups(fake_html_2):
     soup = Soup(fake_html_2)
     results = soup.find('div', {'class': 'foo'})
     assert len(results) == 2
+
+def test_find_strict(fake_html_2):
+    soup = Soup(fake_html_2)
+    result = soup.find('div', {'class': 'foo'}, strict=True)
+    assert len(result) == 1
