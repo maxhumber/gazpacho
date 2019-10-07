@@ -13,8 +13,7 @@ class Soup(HTMLParser):
 
     Methods:
 
-    - find: return all matching HTML elements
-    - find_one: return the first matching HTML element
+    - find: return matching HTML elements {'auto', 'all', 'first'}
 
     Examples:
 
@@ -27,7 +26,11 @@ class Soup(HTMLParser):
     soup.find('p', {'id': 'foo'})
     # [<p id="foo">bar</p>, <p id="foo">baz</p>]
 
-    result = soup.find_one('p', {'id': 'zoo'})
+    result = soup.find('p', {'id': 'foo'}, mode='first')
+    print(result)
+    # <p id="foo">bar</p>
+
+    result = soup.find('p', {'id': 'zoo'}, mode='auto')
     print(result)
     # <p id="zoo">bat</p>
 
@@ -97,13 +100,14 @@ class Soup(HTMLParser):
         else:
             return
 
-    def find(self, tag, attrs=None, strict=False):
-        '''Return all matching HTML elements
+    def find(self, tag, attrs=None, mode='auto', strict=False):
+        '''Return matching HTML elements
 
         Params:
 
         - tag (str): HTML element tag to find
         - attrs (dict, optional): HTML element attributes to match
+        - mode (str, 'auto'): Element(s) to return {'auto', 'all', 'first'}
         - strict (bool, False): Require exact attribute matching
 
         Examples:
@@ -118,6 +122,10 @@ class Soup(HTMLParser):
         soup.find('p', {'id': 'foo'})
         # [<p id="foo foo-striped">bar</p>, <p id="foo">baz</p>]
 
+        result = soup.find('p', {'id': 'foo'}, mode='first')
+        print(result)
+        # <p id="foo">bar</p>
+
         soup.find('p', {'id': 'foo'}, strict=True)
         # [<p id="foo">baz</p>]
         ```
@@ -129,33 +137,11 @@ class Soup(HTMLParser):
         self.group = 0
         self.groups = []
         self.feed(self.html)
-        soups = self.groups
-        return soups
-
-    def find_one(self, tag, attrs=None, strict=False):
-        '''Return the first matching HTML element
-
-        Params:
-
-        - tag (str): HTML element tag to find
-        - attrs (dict, optional): HTML element attributes to match
-        - strict (bool, False): Require exact attribute matching
-
-        Example (*for more see* `find`):
-
-        ```
-        html = "<div><p id='foo foo-striped'>bar</p><p id='foo'>baz</p><p id='zoo'>bat</p></div>"
-        soup = Soup(html)
-
-        soup.find_one('p', {'id': 'foo'})
-        # <p id="foo foo-striped">bar</p>
-        '''
-        self.tag = tag
-        self.attrs = attrs
-        self.strict = strict
-        self.count = 0
-        self.group = 0
-        self.groups = []
-        self.feed(self.html)
-        soup = self.groups[0]
-        return soup
+        if mode == 'all':
+            return self.groups
+        if mode == 'first':
+            return self.groups[0]
+        if mode == 'auto':
+            if len(self.groups) == 1:
+                return self.groups[0]
+            return self.groups
