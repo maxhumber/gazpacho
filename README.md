@@ -111,7 +111,7 @@ And, importantly, returned `Soup` objects can reimplement the `find` method!
 
 #### Production
 
-gazpacho is production ready. The library currently powers [quote](https://github.com/maxhumber/quote), a python wrapper for the Goodreads Quote API. And a fully worked example of gazpacho in action is available [here](https://maxhumber.com/scraping_fantasy_hockey). 
+gazpacho is production ready. The library currently powers [quote](https://github.com/maxhumber/quote), a python wrapper for the Goodreads Quote API. And a fully worked example of gazpacho in action is available [here](https://maxhumber.com/scraping_fantasy_hockey).
 
 
 
@@ -205,4 +205,4 @@ pip install -U gazpacho
 
 For feature requests or bug reports, please use [Github Issues](https://github.com/maxhumber/gazpacho/issues).
 
-For PRs, please read the [CONTRIBUTING.md](https://github.com/maxhumber/gazpacho/blob/master/README.md) document.
+For PRs, please read the [CONTRIBUTING.md](https://github.com/maxhumber/gazpacho/blob/master/CONTRIBUTING.md) document.
