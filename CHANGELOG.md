@@ -12,8 +12,8 @@ pip install -U gazpacho
 
 ---
 
-#### 0.8 (2019-10-XX)
+#### 0.8 (2019-10-07)
 
-* Split the `find` method into `find` and `find_one`
-* Enabled strict attribute matching for both `find` methods (however, defaults to `strict=False`)
+* Add mode argument to the `find` method to adjust return behaviour (defaults to `mode='auto'`)
+* Enable strict attribute matching for the `find` method (defaults to `strict=False`)
 

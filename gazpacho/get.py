@@ -2,11 +2,11 @@ from urllib.parse import urlencode
 from urllib.request import build_opener
 
 def get(url, params=None, headers=None):
-    '''Return the content from a URL
+    '''Return the contents from a URL
 
     Params:
 
-    - url (str): website URL
+    - url (str): Target website URL
     - params (dict, optional): Param payload to add to the GET request
     - headers (dict, optional): Headers to add to the GET request
 

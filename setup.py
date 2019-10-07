@@ -6,7 +6,7 @@ with open('README.md', encoding='utf8') as f:
 setup(
     name='gazpacho',
     version='0.8',
-    description='Web scraping with pure python',
+    description='gazpacho is a web scraping library',
     long_description=long_description,
     long_description_content_type="text/markdown",
     classifiers=[
@@ -18,7 +18,7 @@ setup(
         'Programming Language :: Python :: 3.6',
     ],
     keywords=[
-        'web', 'web scraping', 'scraping', 'beautifulsoup', 'requests'
+        'web scraping', 'web', 'scraping', 'BeautifulSoup', 'requests'
     ],
     url='https://github.com/maxhumber/gazpacho',
     author='Max Humber',

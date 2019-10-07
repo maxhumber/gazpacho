@@ -51,7 +51,7 @@ class Soup(HTMLParser):
         self.text = None
 
     def __dir__(self):
-        return ['html', 'tag', 'attrs', 'text', 'find', 'find_one']
+        return ['html', 'tag', 'attrs', 'text', 'find']
 
     def __repr__(self):
         return self.html

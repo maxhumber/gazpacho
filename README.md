@@ -59,7 +59,7 @@ str(soup)[:50]
 # '<!DOCTYPE html>\n<html class="client-nojs" lang="en'
 ```
 
-In order to parse an HTML element inside of a `Soup` object, pass the desired tag and (optional) attributes to the `find` method:
+In order to parse an HTML element inside of a `Soup` object, pass the desired tag and attributes (optional) to the `find` method:
 
 ```python
 # Original HTML: <span class="mw-headline" id="Ingredients_and_preparation">Ingredients and preparation</span>
@@ -84,7 +84,7 @@ print(results)
 #  <span class="mw-headline" id="References">References</span>]
 ```
 
-The return functionality of `find` can be adjusted and made explicit with the `mode` argument `{'auto', 'first', 'all'}`:
+The return behaviour of `find` can be adjusted and more predictable with the `mode` argument `{'auto', 'first', 'all'}`:
 
 ```python
 soup.find('span', {'class': 'mw-headline'}, mode='first')
