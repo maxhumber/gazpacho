@@ -232,18 +232,42 @@
       
       
 
+
+  <li class="md-nav__item">
+    <a href="../../../CHANGELOG/" title="Changelog" class="md-nav__link">
+      Changelog
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../CONTRIBUTING/" title="Contributing" class="md-nav__link">
+      Contributing
+    </a>
+  </li>
+
+    
+      
+      
+      
+
   
 
 
   <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
-    <label class="md-nav__link" for="nav-2">
+    <label class="md-nav__link" for="nav-4">
       Reference
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-2">
+      <label class="md-nav__title" for="nav-4">
         Reference
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -258,13 +282,13 @@
 
   <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-1" type="checkbox" id="nav-2-1" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-1" type="checkbox" id="nav-4-1" checked>
     
-    <label class="md-nav__link" for="nav-2-1">
+    <label class="md-nav__link" for="nav-4-1">
       Gazpacho
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-1">
+      <label class="md-nav__title" for="nav-4-1">
         Gazpacho
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -445,17 +469,23 @@
 
 <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
 
-    <span class="sd">&#39;&#39;&#39;Get the content from a URL</span>
+    <span class="sd">&#39;&#39;&#39;Return the contents from a URL</span>
 
-<span class="sd">    - url (str): A URL for a website</span>
+<span class="sd">    Params:</span>
 
-<span class="sd">    - params (dict, optional): Paramater payload to be added to the GET request</span>
+<span class="sd">    - url (str): Target website URL</span>
 
-<span class="sd">    - headers (dict, optional): Headers to be added to the GET request</span>
+<span class="sd">    - params (dict, optional): Param payload to add to the GET request</span>
+
+<span class="sd">    - headers (dict, optional): Headers to add to the GET request</span>
 
 <span class="sd">    Example:</span>
 
-<span class="sd">    `get(&#39;https://httpbin.org/anything&#39;, {&#39;soup&#39;: &#39;gazpacho&#39;})`</span>
+<span class="sd">    ```</span>
+
+<span class="sd">    get(&#39;https://httpbin.org/anything&#39;, {&#39;soup&#39;: &#39;gazpacho&#39;})</span>
+
+<span class="sd">    ```</span>
 
 <span class="sd">    &#39;&#39;&#39;</span>
 
@@ -496,27 +526,37 @@
 </pre></div>
 
 
-<p>Get the content from a URL</p>
+<p>Return the contents from a URL</p>
+<p>Params:</p>
 <ul>
-<li>url (str): A URL for a website</li>
-<li>params (dict, optional): Paramater payload to be added to the GET request</li>
-<li>headers (dict, optional): Headers to be added to the GET request</li>
+<li>url (str): Target website URL</li>
+<li>params (dict, optional): Param payload to add to the GET request</li>
+<li>headers (dict, optional): Headers to add to the GET request</li>
 </ul>
 <p>Example:</p>
-<p><code>get('https://httpbin.org/anything', {'soup': 'gazpacho'})</code></p>
+<div class="codehilite"><pre><span></span><span class="k">get</span><span class="p">(</span><span class="s1">&#39;https://httpbin.org/anything&#39;</span><span class="p">,</span> <span class="err">{</span><span class="s1">&#39;soup&#39;</span><span class="p">:</span> <span class="s1">&#39;gazpacho&#39;</span><span class="err">}</span><span class="p">)</span>
+</pre></div>
+
+
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><span class="nv">def</span> <span class="nv">get</span><span class="ss">(</span><span class="nv">url</span>, <span class="nb">params</span><span class="o">=</span><span class="nv">None</span>, <span class="nv">headers</span><span class="o">=</span><span class="nv">None</span><span class="ss">)</span>:
 
-    <span class="s1">&#39;&#39;&#39;</span><span class="s">Get the content from a URL</span>
+    <span class="s1">&#39;&#39;&#39;</span><span class="s">Return the contents from a URL</span>
 
-    <span class="o">-</span> <span class="nv">url</span> <span class="ss">(</span><span class="nv">str</span><span class="ss">)</span>: <span class="nv">A</span> <span class="nv">URL</span> <span class="k">for</span> <span class="nv">a</span> <span class="nv">website</span>
+    <span class="nb">Params</span>:
 
-    <span class="o">-</span> <span class="nb">params</span> <span class="ss">(</span><span class="nv">dict</span>, <span class="nv">optional</span><span class="ss">)</span>: <span class="nv">Paramater</span> <span class="nv">payload</span> <span class="nv">to</span> <span class="nv">be</span> <span class="nv">added</span> <span class="nv">to</span> <span class="nv">the</span> <span class="nv">GET</span> <span class="nv">request</span>
+    <span class="o">-</span> <span class="nv">url</span> <span class="ss">(</span><span class="nv">str</span><span class="ss">)</span>: <span class="nv">Target</span> <span class="nv">website</span> <span class="nv">URL</span>
 
-    <span class="o">-</span> <span class="nv">headers</span> <span class="ss">(</span><span class="nv">dict</span>, <span class="nv">optional</span><span class="ss">)</span>: <span class="nv">Headers</span> <span class="nv">to</span> <span class="nv">be</span> <span class="nv">added</span> <span class="nv">to</span> <span class="nv">the</span> <span class="nv">GET</span> <span class="nv">request</span>
+    <span class="o">-</span> <span class="nb">params</span> <span class="ss">(</span><span class="nv">dict</span>, <span class="nv">optional</span><span class="ss">)</span>: <span class="nv">Param</span> <span class="nv">payload</span> <span class="nv">to</span> <span class="nv">add</span> <span class="nv">to</span> <span class="nv">the</span> <span class="nv">GET</span> <span class="nv">request</span>
+
+    <span class="o">-</span> <span class="nv">headers</span> <span class="ss">(</span><span class="nv">dict</span>, <span class="nv">optional</span><span class="ss">)</span>: <span class="nv">Headers</span> <span class="nv">to</span> <span class="nv">add</span> <span class="nv">to</span> <span class="nv">the</span> <span class="nv">GET</span> <span class="nv">request</span>
 
     <span class="nv">Example</span>:
 
-    `<span class="nv">get</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">https://httpbin.org/anything</span><span class="s1">&#39;</span>, {<span class="s1">&#39;</span><span class="s">soup</span><span class="s1">&#39;</span>: <span class="s1">&#39;</span><span class="s">gazpacho</span><span class="s1">&#39;</span>}<span class="ss">)</span>`
+    ```
+
+    <span class="nv">get</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">https://httpbin.org/anything</span><span class="s1">&#39;</span>, {<span class="s1">&#39;</span><span class="s">soup</span><span class="s1">&#39;</span>: <span class="s1">&#39;</span><span class="s">gazpacho</span><span class="s1">&#39;</span>}<span class="ss">)</span>
+
+    ```
 
     <span class="s1">&#39;&#39;&#39;</span>
 
@@ -567,7 +607,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../../.." title="Home" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../../../CONTRIBUTING/" title="Contributing" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -576,7 +616,7 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Home
+                Contributing
               </span>
             </div>
           </a>

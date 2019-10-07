@@ -323,15 +323,39 @@
       
 
 
+  <li class="md-nav__item">
+    <a href="CHANGELOG/" title="Changelog" class="md-nav__link">
+      Changelog
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="CONTRIBUTING/" title="Contributing" class="md-nav__link">
+      Contributing
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
     
-    <label class="md-nav__link" for="nav-2">
+    <label class="md-nav__link" for="nav-4">
       Reference
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-2">
+      <label class="md-nav__title" for="nav-4">
         Reference
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -344,13 +368,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-1" type="checkbox" id="nav-2-1">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-1" type="checkbox" id="nav-4-1">
     
-    <label class="md-nav__link" for="nav-2-1">
+    <label class="md-nav__link" for="nav-4-1">
       Gazpacho
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-2-1">
+      <label class="md-nav__title" for="nav-4-1">
         Gazpacho
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -521,10 +545,10 @@
 </h3>
 
 <p align="center">
-  <a href="https://github.com/maxhumber/gazpacho/blob/master/setup.py"><img alt="Dependencies" src="https://img.shields.io/badge/dependencies-zero-blueviolet"></a>
+  <a href="https://github.com/maxhumber/gazpacho/blob/master/setup.py"><img alt="Dependencies" src="https://img.shields.io/badge/dependencies-zero-brightgreen"></a>
   <a href="https://travis-ci.org/maxhumber/gazpacho"><img alt="Travis" src="https://img.shields.io/travis/maxhumber/gazpacho.svg"></a>
   <a href="https://pypi.python.org/pypi/gazpacho"><img alt="PyPI" src="https://img.shields.io/pypi/v/gazpacho.svg"></a>
-  <a href="https://pepy.tech/project/gazpacho"><img alt="Downloads" src="https://pepy.tech/badge/gazpacho"></a>  
+  <a href="https://pepy.tech/project/gazpacho/month"><img alt="Downloads" src="https://pepy.tech/badge/gazpacho/month"></a>  
 </p>
 
 <h4 id="about">About</h4>
@@ -551,7 +575,7 @@
 
 
 <h4 id="soup">Soup</h4>
-<p>The <code>Soup</code> object takes an html string and turns it into something parsable:</p>
+<p>The <code>Soup</code> object takes an HTML string and turns it into something parsable:</p>
 <div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">gazpacho</span> <span class="kn">import</span> <span class="n">Soup</span>
 
 <span class="n">soup</span> <span class="o">=</span> <span class="n">Soup</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
@@ -561,14 +585,14 @@
 </pre></div>
 
 
-<p>In order to parse an html element in a <code>Soup</code> object, pass the tag and optional attributes to the <code>find</code> method:</p>
+<p>In order to parse an HTML element inside of a <code>Soup</code> object, pass the desired tag and attributes (optional) to the <code>find</code> method:</p>
 <div class="codehilite"><pre><span></span><span class="c1"># Original HTML: &lt;span class=&quot;mw-headline&quot; id=&quot;Ingredients_and_preparation&quot;&gt;Ingredients and preparation&lt;/span&gt;</span>
 
 <span class="n">results</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;mw-headline&#39;</span><span class="p">})</span>
 </pre></div>
 
 
-<p>The <code>find</code> method will return one <code>Soup</code> object if it finds exactly one element that satisfies the tag and attribute constraints, or a list of <code>Soup</code> objects if it finds more than one:</p>
+<p>The <code>find</code> method will either return a list of <code>Soup</code> objects if there are multiple elements that satisfy the tag and attribute constraints, or a single <code>Soup</code> object if there's just one:</p>
 <div class="codehilite"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
 
 <span class="c1"># [&lt;span class=&quot;mw-headline&quot; id=&quot;History&quot;&gt;History&lt;/span&gt;,</span>
@@ -581,6 +605,12 @@
 <span class="c1">#  &lt;span class=&quot;mw-headline&quot; id=&quot;Castilian_variations&quot;&gt;Castilian variations&lt;/span&gt;,</span>
 <span class="c1">#  &lt;span class=&quot;mw-headline&quot; id=&quot;See_also&quot;&gt;See also&lt;/span&gt;,</span>
 <span class="c1">#  &lt;span class=&quot;mw-headline&quot; id=&quot;References&quot;&gt;References&lt;/span&gt;]</span>
+</pre></div>
+
+
+<p>The return behaviour of <code>find</code> can be adjusted and more predictable with the <code>mode</code> argument <code>{'auto', 'first', 'all'}</code>:</p>
+<div class="codehilite"><pre><span></span><span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;mw-headline&#39;</span><span class="p">},</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">)</span>
+<span class="c1"># &lt;span class=&quot;mw-headline&quot; id=&quot;History&quot;&gt;History&lt;/span&gt;</span>
 </pre></div>
 
 
@@ -597,11 +627,11 @@
 </pre></div>
 
 
-<p>Crucially, returned <code>Soup</code> objects can reimplement the <code>find</code> method!</p>
+<p>And, importantly, returned <code>Soup</code> objects can reimplement the <code>find</code> method!</p>
 <h4 id="production">Production</h4>
-<p>gazpacho is production ready. It currently powers another library, <a href="https://github.com/maxhumber/quote">quote</a>, a python wrapper for the Goodreads Quote API.</p>
+<p>gazpacho is production ready. The library currently powers <a href="https://github.com/maxhumber/quote">quote</a>, a python wrapper for the Goodreads Quote API. And a fully worked example of gazpacho in action is available <a href="https://maxhumber.com/scraping_fantasy_hockey">here</a>.</p>
 <h4 id="comparison">Comparison</h4>
-<p>gazpacho is a drop-in replacement for most projects that use requests and BeautifulSoup.</p>
+<p>gazpacho is a drop-in replacement for most projects that use requests and BeautifulSoup:</p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
@@ -673,7 +703,8 @@
 
 
 <h4 id="contribute">Contribute</h4>
-<p>For feature requests or bug reports, please use <a href="https://github.com/maxhumber/gazpacho/issues">Github Issues</a></p>
+<p>For feature requests or bug reports, please use <a href="https://github.com/maxhumber/gazpacho/issues">Github Issues</a>.</p>
+<p>For PRs, please read the <a href="https://github.com/maxhumber/gazpacho/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a> document.</p>
                 
                   
                 
@@ -695,13 +726,13 @@
       <nav class="md-footer-nav__inner md-grid">
         
         
-          <a href="reference/gazpacho/get/" title="Get" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="CHANGELOG/" title="Changelog" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Get
+                Changelog
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
