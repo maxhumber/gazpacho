@@ -1,36 +1,49 @@
 from html.parser import HTMLParser
-
-try:
-    from .utils import match, html_starttag_and_attrs
-except ModuleNotFoundError:
-    from gazpacho.utils import match, html_starttag_and_attrs
+from .utils import match, html_starttag_and_attrs
 
 class Soup(HTMLParser):
-    '''HTML Parser Class
+    '''HTML Soup Parser
 
-    - html (str): Full HTML text
-    - tag (str, None): Found tag
-    - attrs (dict, None): Found attributes
-    - text (str, None): Found text
-    - find (method): The main method to find HTML tags
+    Attributes:
+
+    - html (str): HTML content to parse
+    - tag (str, None): HTML element tag returned by find
+    - attrs (dict, None): HTML element attributes returned by find
+    - text (str, None): HTML element text returned by find
+
+    Methods:
+
+    - find: return matching HTML elements {'auto', 'all', 'first'}
 
     Examples:
 
     ```
-    html = "<div><p id='foo'>bar</p><p id='foo'>baz</p><p id='zoo'>Tiger</p></div>"
-    soup = Soup(html)
-    result = soup.find('p', {'id': 'foo'})
-    print(result)
-    # [<p id="foo">bar</p>, <p id="foo">baz</p>]
-    result = soup.find('p', {'id': 'zoo'})
-    print(result)
-    # <p id="zoo">Tiger</p>
-    print(result.text)
-    # Tiger
-    ```
+    from gazpacho import Soup
 
+    html = "<div><p id='foo'>bar</p><p id='foo'>baz</p><p id='zoo'>bat</p></div>"
+    soup = Soup(html)
+
+    soup.find('p', {'id': 'foo'})
+    # [<p id="foo">bar</p>, <p id="foo">baz</p>]
+
+    result = soup.find('p', {'id': 'foo'}, mode='first')
+    print(result)
+    # <p id="foo">bar</p>
+
+    result = soup.find('p', {'id': 'zoo'}, mode='auto')
+    print(result)
+    # <p id="zoo">bat</p>
+
+    print(result.text)
+    # bat
+    ```
     '''
+
     def __init__(self, html):
+        '''Params:
+
+        - html (str): HTML content to parse
+        '''
         super().__init__()
         self.html = html
         self.tag = None
@@ -45,7 +58,8 @@ class Soup(HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         html, attrs = html_starttag_and_attrs(tag, attrs)
-        if tag == self.tag and match(self.attrs, attrs) and not self.count:
+        matching = match(self.attrs, attrs, self.strict)
+        if tag == self.tag and matching and not self.count:
             self.count += 1
             self.group += 1
             self.groups.append(Soup(''))
@@ -86,18 +100,48 @@ class Soup(HTMLParser):
         else:
             return
 
-    def find(self, tag, attrs=None):
-        '''Find a tag with optional attributes
+    def find(self, tag, attrs=None, mode='auto', strict=False):
+        '''Return matching HTML elements
 
-        - tag (str): HTML tag to find
-        - attrs (dict, optional): Attributes within tag to match
+        Params:
+
+        - tag (str): HTML element tag to find
+        - attrs (dict, optional): HTML element attributes to match
+        - mode (str, 'auto'): Element(s) to return {'auto', 'all', 'first'}
+        - strict (bool, False): Require exact attribute matching
+
+        Examples:
+
+        ```
+        html = "<div><p id='foo foo-striped'>bar</p><p id='foo'>baz</p><p id='zoo'>bat</p></div>"
+        soup = Soup(html)
+
+        soup.find('p')
+        # [<p id="foo foo-striped">bar</p>, <p id="foo">baz</p>, <p id="zoo">bat</p>]
+
+        soup.find('p', {'id': 'foo'})
+        # [<p id="foo foo-striped">bar</p>, <p id="foo">baz</p>]
+
+        result = soup.find('p', {'id': 'foo'}, mode='first')
+        print(result)
+        # <p id="foo">bar</p>
+
+        soup.find('p', {'id': 'foo'}, strict=True)
+        # [<p id="foo">baz</p>]
+        ```
         '''
         self.tag = tag
         self.attrs = attrs
+        self.strict = strict
         self.count = 0
         self.group = 0
         self.groups = []
-        super().feed(self.html)
-        if len(self.groups) == 1:
+        self.feed(self.html)
+        if mode == 'all':
+            return self.groups
+        if mode == 'first':
             return self.groups[0]
-        return self.groups
+        if mode == 'auto':
+            if len(self.groups) == 1:
+                return self.groups[0]
+            return self.groups

@@ -2,10 +2,10 @@
   <img src="https://raw.githubusercontent.com/maxhumber/gazpacho/master/images/gazpacho.png" height="300px" alt="gazpacho">
 </h3>
 <p align="center">
-  <a href="https://github.com/maxhumber/gazpacho/blob/master/setup.py"><img alt="Dependencies" src="https://img.shields.io/badge/dependencies-zero-blueviolet"></a>
+  <a href="https://github.com/maxhumber/gazpacho/blob/master/setup.py"><img alt="Dependencies" src="https://img.shields.io/badge/dependencies-zero-brightgreen"></a>
   <a href="https://travis-ci.org/maxhumber/gazpacho"><img alt="Travis" src="https://img.shields.io/travis/maxhumber/gazpacho.svg"></a>
   <a href="https://pypi.python.org/pypi/gazpacho"><img alt="PyPI" src="https://img.shields.io/pypi/v/gazpacho.svg"></a>
-  <a href="https://pepy.tech/project/gazpacho"><img alt="Downloads" src="https://pepy.tech/badge/gazpacho"></a>  
+  <a href="https://pepy.tech/project/gazpacho/month"><img alt="Downloads" src="https://pepy.tech/badge/gazpacho/month"></a>  
 </p>
 
 
@@ -48,7 +48,7 @@ get(url, params={'foo': 'bar', 'bar': 'baz'}, headers={'User-Agent': 'gazpacho'}
 
 #### Soup
 
-The `Soup` object takes an html string and turns it into something parsable:
+The `Soup` object takes an HTML string and turns it into something parsable:
 
 ```python
 from gazpacho import Soup
@@ -59,7 +59,7 @@ str(soup)[:50]
 # '<!DOCTYPE html>\n<html class="client-nojs" lang="en'
 ```
 
-In order to parse an html element in a `Soup` object, pass the tag and optional attributes to the `find` method:
+In order to parse an HTML element inside of a `Soup` object, pass the desired tag and attributes (optional) to the `find` method:
 
 ```python
 # Original HTML: <span class="mw-headline" id="Ingredients_and_preparation">Ingredients and preparation</span>
@@ -67,7 +67,7 @@ In order to parse an html element in a `Soup` object, pass the tag and optional 
 results = soup.find('span', {'class': 'mw-headline'})
 ```
 
-The `find` method will return one `Soup` object if it finds exactly one element that satisfies the tag and attribute constraints, or a list of `Soup` objects if it finds more than one:
+The `find` method will either return a list of `Soup` objects if there are multiple elements that satisfy the tag and attribute constraints, or a single `Soup` object if there's just one:
 
 ```python
 print(results)
@@ -84,6 +84,13 @@ print(results)
 #  <span class="mw-headline" id="References">References</span>]
 ```
 
+The return behaviour of `find` can be adjusted and more predictable with the `mode` argument `{'auto', 'first', 'all'}`:
+
+```python
+soup.find('span', {'class': 'mw-headline'}, mode='first')
+# <span class="mw-headline" id="History">History</span>
+```
+
 `Soup` objects returned by the `find` method will have `html`, `tag`, `attrs`, and `text` attributes:
 
 ```python
@@ -98,19 +105,19 @@ print(result.text)
 # In Spain
 ```
 
-Crucially, returned `Soup` objects can reimplement the `find` method!
+And, importantly, returned `Soup` objects can reimplement the `find` method!
 
 
 
 #### Production
 
-gazpacho is production ready. It currently powers another library, [quote](https://github.com/maxhumber/quote), a python wrapper for the Goodreads Quote API.
+gazpacho is production ready. The library currently powers [quote](https://github.com/maxhumber/quote), a python wrapper for the Goodreads Quote API. And a fully worked example of gazpacho in action is available [here](https://maxhumber.com/scraping_fantasy_hockey). 
 
 
 
 #### Comparison
 
-gazpacho is a drop-in replacement for most projects that use requests and BeautifulSoup.
+gazpacho is a drop-in replacement for most projects that use requests and BeautifulSoup:
 
 ```python
 import requests
@@ -196,4 +203,6 @@ pip install -U gazpacho
 
 #### Contribute
 
-For feature requests or bug reports, please use [Github Issues](https://github.com/maxhumber/gazpacho/issues)
+For feature requests or bug reports, please use [Github Issues](https://github.com/maxhumber/gazpacho/issues).
+
+For PRs, please read the [CONTRIBUTING.md](https://github.com/maxhumber/gazpacho/blob/master/README.md) document.
