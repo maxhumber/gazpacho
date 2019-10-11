@@ -4,7 +4,6 @@ about: Create a report to help gazpacho improve
 title: ''
 labels: ''
 assignees: ''
-
 ---
 
 **Describe the bug**
@@ -22,7 +21,7 @@ A clear and concise description of what you expected to happen.
 
 **Environment:**
  - OS: [macOS, Linux, Windows]
- - Version [e.g. 0.7.2]
+ - Version: [e.g. 0.8.1]
 
 **Additional context**
 Add any other context about the problem here.

@@ -12,8 +12,11 @@ pip install -U gazpacho
 
 ---
 
+#### 0.8.1 (2019-10-10)
+
+- Fixed empty element tag counting within the `find` method
+
 #### 0.8 (2019-10-07)
 
-* Add mode argument to the `find` method to adjust return behaviour (defaults to `mode='auto'`)
-* Enable strict attribute matching for the `find` method (defaults to `strict=False`)
-
+* Added mode argument to the `find` method to adjust return behaviour (defaults to `mode='auto'`)
+* Enabled strict attribute matching for the `find` method (defaults to `strict=False`)
