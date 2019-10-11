@@ -28,6 +28,23 @@ def fake_html_2():
     </div>'''
     return html
 
+@pytest.fixture
+def fake_html_3():
+    html = '''<div class="foo-list">
+      <a class="foo" href="/foo/1">
+        <div class="foo-image-container">
+          <img src="image.jpg">
+        </div>
+      </a>
+      <a class="foo" href="/foo/2">
+        <div class="foo-image-container">
+          <img src="image.jpg">
+        </div>
+      </a>
+    </div>
+    '''
+    return html
+
 def test_find(fake_html_1):
     soup = Soup(fake_html_1)
     result = soup.find('span')
@@ -63,3 +80,8 @@ def test_find_strict(fake_html_2):
     soup = Soup(fake_html_2)
     result = soup.find('div', {'class': 'foo'}, strict=True, mode='all')
     assert len(result) == 1
+
+def test_find_nested_empty_tag(fake_html_3):
+    soup = Soup(fake_html_3)
+    result = soup.find('a', {'class': "foo"})
+    assert len(result) == 2

@@ -56,6 +56,13 @@ class Soup(HTMLParser):
     def __repr__(self):
         return self.html
 
+    @staticmethod
+    def _empty_tag(tag):
+        return tag in [
+            'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input',
+            'keygen', 'link', 'meta', 'param', 'source', 'track', 'wbr'
+        ]
+
     def handle_starttag(self, tag, attrs):
         html, attrs = html_starttag_and_attrs(tag, attrs)
         matching = match(self.attrs, attrs, self.strict)
@@ -68,7 +75,8 @@ class Soup(HTMLParser):
             self.groups[self.group - 1].attrs = attrs
             return
         if self.count:
-            self.count += 1
+            if not self._empty_tag(tag):
+                self.count += 1
             self.groups[self.group - 1].html += html
             return
         else:
