@@ -1,5 +1,5 @@
 def match(a, b, strict=False):
-    '''Utility function to match two dictionaries
+    """Utility function to match two dictionaries
 
     Params:
 
@@ -30,7 +30,7 @@ def match(a, b, strict=False):
     match(a, b)
     # True
     ```
-    '''
+    """
     if not a:
         return True
     if not a and not b:
@@ -51,8 +51,9 @@ def match(a, b, strict=False):
             return False
     return True
 
+
 def html_starttag_and_attrs(tag, attrs, startendtag=False):
-    '''Utility functon to reconstruct starttag and attrs
+    """Utility functon to reconstruct starttag and attrs
 
     Params:
 
@@ -66,16 +67,16 @@ def html_starttag_and_attrs(tag, attrs, startendtag=False):
     html_starttag_and_attrs('a', [('href', 'localhost:8000')])
     # ('<a href="localhost:8000">', {'href': 'localhost:8000'})
     ```
-    '''
+    """
     if attrs:
         attrs = dict(attrs)
         af = [f'{k}="{v}"' for k, v in attrs.items()]
         af = f' {" ".join(af)}'
     else:
         attrs = {}
-        af = ''
+        af = ""
     if startendtag:
-        html = f'<{tag}{af} />'
+        html = f"<{tag}{af} />"
     else:
-        html = f'<{tag}{af}>'
+        html = f"<{tag}{af}>"
     return html, attrs

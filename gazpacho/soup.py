@@ -1,8 +1,9 @@
 from html.parser import HTMLParser
 from .utils import match, html_starttag_and_attrs
 
+
 class Soup(HTMLParser):
-    '''HTML Soup Parser
+    """HTML Soup Parser
 
     Attributes:
 
@@ -37,13 +38,13 @@ class Soup(HTMLParser):
     print(result.text)
     # bat
     ```
-    '''
+    """
 
     def __init__(self, html):
-        '''Params:
+        """Params:
 
         - html (str): HTML content to parse
-        '''
+        """
         super().__init__()
         self.html = html
         self.tag = None
@@ -51,7 +52,7 @@ class Soup(HTMLParser):
         self.text = None
 
     def __dir__(self):
-        return ['html', 'tag', 'attrs', 'text', 'find']
+        return ["html", "tag", "attrs", "text", "find"]
 
     def __repr__(self):
         return self.html
@@ -59,8 +60,21 @@ class Soup(HTMLParser):
     @staticmethod
     def _empty_tag(tag):
         return tag in [
-            'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input',
-            'keygen', 'link', 'meta', 'param', 'source', 'track', 'wbr'
+            "area",
+            "base",
+            "br",
+            "col",
+            "embed",
+            "hr",
+            "img",
+            "input",
+            "keygen",
+            "link",
+            "meta",
+            "param",
+            "source",
+            "track",
+            "wbr",
         ]
 
     def handle_starttag(self, tag, attrs):
@@ -69,7 +83,7 @@ class Soup(HTMLParser):
         if tag == self.tag and matching and not self.count:
             self.count += 1
             self.group += 1
-            self.groups.append(Soup(''))
+            self.groups.append(Soup(""))
             self.groups[self.group - 1].html += html
             self.groups[self.group - 1].tag = tag
             self.groups[self.group - 1].attrs = attrs
@@ -101,15 +115,15 @@ class Soup(HTMLParser):
 
     def handle_endtag(self, tag):
         if self.count:
-            end_tag = f'</{tag}>'
+            end_tag = f"</{tag}>"
             self.groups[self.group - 1].html += end_tag
             self.count -= 1
             return
         else:
             return
 
-    def find(self, tag, attrs=None, mode='auto', strict=False):
-        '''Return matching HTML elements
+    def find(self, tag, attrs=None, mode="auto", strict=False):
+        """Return matching HTML elements
 
         Params:
 
@@ -137,7 +151,7 @@ class Soup(HTMLParser):
         soup.find('p', {'id': 'foo'}, strict=True)
         # [<p id="foo">baz</p>]
         ```
-        '''
+        """
         self.tag = tag
         self.attrs = attrs
         self.strict = strict
@@ -145,11 +159,11 @@ class Soup(HTMLParser):
         self.group = 0
         self.groups = []
         self.feed(self.html)
-        if mode == 'all':
+        if mode == "all":
             return self.groups
-        if mode == 'first':
+        if mode == "first":
             return self.groups[0]
-        if mode == 'auto':
+        if mode == "auto":
             if len(self.groups) == 1:
                 return self.groups[0]
             return self.groups
