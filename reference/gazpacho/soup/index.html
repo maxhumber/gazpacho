@@ -969,7 +969,7 @@
 
 <span class="k">class</span> <span class="nc">Soup</span><span class="p">(</span><span class="n">HTMLParser</span><span class="p">):</span>
 
-    <span class="sd">&#39;&#39;&#39;HTML Soup Parser</span>
+    <span class="sd">&quot;&quot;&quot;HTML Soup Parser</span>
 
 <span class="sd">    Attributes:</span>
 
@@ -1017,15 +1017,15 @@
 
 <span class="sd">    ```</span>
 
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">html</span><span class="p">):</span>
 
-        <span class="sd">&#39;&#39;&#39;Params:</span>
+        <span class="sd">&quot;&quot;&quot;Params:</span>
 
 <span class="sd">        - html (str): HTML content to parse</span>
 
-<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
@@ -1039,11 +1039,49 @@
 
     <span class="k">def</span> <span class="nf">__dir__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
-        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;html&#39;</span><span class="p">,</span> <span class="s1">&#39;tag&#39;</span><span class="p">,</span> <span class="s1">&#39;attrs&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;find&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;html&quot;</span><span class="p">,</span> <span class="s2">&quot;tag&quot;</span><span class="p">,</span> <span class="s2">&quot;attrs&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;find&quot;</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">html</span>
+
+    <span class="nd">@staticmethod</span>
+
+    <span class="k">def</span> <span class="nf">_empty_tag</span><span class="p">(</span><span class="n">tag</span><span class="p">):</span>
+
+        <span class="k">return</span> <span class="n">tag</span> <span class="ow">in</span> <span class="p">[</span>
+
+            <span class="s2">&quot;area&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;base&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;br&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;col&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;embed&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;hr&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;img&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;input&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;keygen&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;link&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;meta&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;param&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;source&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;track&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;wbr&quot;</span><span class="p">,</span>
+
+        <span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">handle_starttag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">attrs</span><span class="p">):</span>
 
@@ -1057,7 +1095,7 @@
 
             <span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">+=</span> <span class="mi">1</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Soup</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Soup</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">))</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">html</span> <span class="o">+=</span> <span class="n">html</span>
 
@@ -1069,7 +1107,9 @@
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">:</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_empty_tag</span><span class="p">(</span><span class="n">tag</span><span class="p">):</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">html</span> <span class="o">+=</span> <span class="n">html</span>
 
@@ -1113,7 +1153,7 @@
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">:</span>
 
-            <span class="n">end_tag</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;&lt;/{tag}&gt;&#39;</span>
+            <span class="n">end_tag</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;&lt;/{tag}&gt;&quot;</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">html</span> <span class="o">+=</span> <span class="n">end_tag</span>
 
@@ -1125,9 +1165,9 @@
 
             <span class="k">return</span>
 
-    <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
 
-        <span class="sd">&#39;&#39;&#39;Return matching HTML elements</span>
+        <span class="sd">&quot;&quot;&quot;Return matching HTML elements</span>
 
 <span class="sd">        Params:</span>
 
@@ -1167,7 +1207,7 @@
 
 <span class="sd">        ```</span>
 
-<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">tag</span> <span class="o">=</span> <span class="n">tag</span>
 
@@ -1183,15 +1223,15 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">feed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">html</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;all&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;all&quot;</span><span class="p">:</span>
 
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">groups</span>
 
-        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;first&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;first&quot;</span><span class="p">:</span>
 
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;auto&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;auto&quot;</span><span class="p">:</span>
 
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
 
@@ -1246,7 +1286,7 @@
 
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">Soup</span><span class="p">(</span><span class="n">HTMLParser</span><span class="p">):</span>
 
-    <span class="sd">&#39;&#39;&#39;HTML Soup Parser</span>
+    <span class="sd">&quot;&quot;&quot;HTML Soup Parser</span>
 
 <span class="sd">    Attributes:</span>
 
@@ -1294,15 +1334,15 @@
 
 <span class="sd">    ```</span>
 
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">html</span><span class="p">):</span>
 
-        <span class="sd">&#39;&#39;&#39;Params:</span>
+        <span class="sd">&quot;&quot;&quot;Params:</span>
 
 <span class="sd">        - html (str): HTML content to parse</span>
 
-<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
@@ -1316,11 +1356,49 @@
 
     <span class="k">def</span> <span class="nf">__dir__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
-        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;html&#39;</span><span class="p">,</span> <span class="s1">&#39;tag&#39;</span><span class="p">,</span> <span class="s1">&#39;attrs&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;find&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;html&quot;</span><span class="p">,</span> <span class="s2">&quot;tag&quot;</span><span class="p">,</span> <span class="s2">&quot;attrs&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;find&quot;</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">html</span>
+
+    <span class="nd">@staticmethod</span>
+
+    <span class="k">def</span> <span class="nf">_empty_tag</span><span class="p">(</span><span class="n">tag</span><span class="p">):</span>
+
+        <span class="k">return</span> <span class="n">tag</span> <span class="ow">in</span> <span class="p">[</span>
+
+            <span class="s2">&quot;area&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;base&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;br&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;col&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;embed&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;hr&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;img&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;input&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;keygen&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;link&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;meta&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;param&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;source&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;track&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;wbr&quot;</span><span class="p">,</span>
+
+        <span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">handle_starttag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">attrs</span><span class="p">):</span>
 
@@ -1334,7 +1412,7 @@
 
             <span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">+=</span> <span class="mi">1</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Soup</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Soup</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">))</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">html</span> <span class="o">+=</span> <span class="n">html</span>
 
@@ -1346,7 +1424,9 @@
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">:</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_empty_tag</span><span class="p">(</span><span class="n">tag</span><span class="p">):</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">html</span> <span class="o">+=</span> <span class="n">html</span>
 
@@ -1390,7 +1470,7 @@
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">:</span>
 
-            <span class="n">end_tag</span> <span class="o">=</span> <span class="n">f</span><span class="s1">&#39;&lt;/{tag}&gt;&#39;</span>
+            <span class="n">end_tag</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;&lt;/{tag}&gt;&quot;</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">html</span> <span class="o">+=</span> <span class="n">end_tag</span>
 
@@ -1402,9 +1482,9 @@
 
             <span class="k">return</span>
 
-    <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
 
-        <span class="sd">&#39;&#39;&#39;Return matching HTML elements</span>
+        <span class="sd">&quot;&quot;&quot;Return matching HTML elements</span>
 
 <span class="sd">        Params:</span>
 
@@ -1444,7 +1524,7 @@
 
 <span class="sd">        ```</span>
 
-<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">tag</span> <span class="o">=</span> <span class="n">tag</span>
 
@@ -1460,15 +1540,15 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">feed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">html</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;all&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;all&quot;</span><span class="p">:</span>
 
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">groups</span>
 
-        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;first&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;first&quot;</span><span class="p">:</span>
 
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;auto&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;auto&quot;</span><span class="p">:</span>
 
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
 
@@ -1682,9 +1762,9 @@ soup.find(&#39;p&#39;, {&#39;id&#39;: &#39;foo&#39;}, strict=True)
 </pre></div>
 
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="nv">def</span> <span class="nv">find</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">tag</span>, <span class="nv">attrs</span><span class="o">=</span><span class="nv">None</span>, <span class="nv">mode</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">auto</span><span class="s1">&#39;</span>, <span class="nv">strict</span><span class="o">=</span><span class="nv">False</span><span class="ss">)</span>:
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span>    <span class="nv">def</span> <span class="nv">find</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">tag</span>, <span class="nv">attrs</span><span class="o">=</span><span class="nv">None</span>, <span class="nv">mode</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">auto</span><span class="s2">&quot;</span>, <span class="nv">strict</span><span class="o">=</span><span class="nv">False</span><span class="ss">)</span>:
 
-        <span class="s1">&#39;&#39;&#39;</span><span class="s">Return matching HTML elements</span>
+        <span class="s2">&quot;&quot;&quot;</span><span class="s">Return matching HTML elements</span>
 
         <span class="nb">Params</span>:
 
@@ -1724,7 +1804,7 @@ soup.find(&#39;p&#39;, {&#39;id&#39;: &#39;foo&#39;}, strict=True)
 
         ```
 
-        <span class="s1">&#39;&#39;&#39;</span>
+        <span class="s2">&quot;&quot;&quot;</span>
 
         <span class="nv">self</span>.<span class="nv">tag</span> <span class="o">=</span> <span class="nv">tag</span>
 
@@ -1740,15 +1820,15 @@ soup.find(&#39;p&#39;, {&#39;id&#39;: &#39;foo&#39;}, strict=True)
 
         <span class="nv">self</span>.<span class="nv">feed</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">html</span><span class="ss">)</span>
 
-        <span class="k">if</span> <span class="nv">mode</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="s">all</span><span class="s1">&#39;</span>:
+        <span class="k">if</span> <span class="nv">mode</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">all</span><span class="s2">&quot;</span>:
 
             <span class="k">return</span> <span class="nv">self</span>.<span class="nv">groups</span>
 
-        <span class="k">if</span> <span class="nv">mode</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="s">first</span><span class="s1">&#39;</span>:
+        <span class="k">if</span> <span class="nv">mode</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">first</span><span class="s2">&quot;</span>:
 
             <span class="k">return</span> <span class="nv">self</span>.<span class="nv">groups</span>[<span class="mi">0</span>]
 
-        <span class="k">if</span> <span class="nv">mode</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="s">auto</span><span class="s1">&#39;</span>:
+        <span class="k">if</span> <span class="nv">mode</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">auto</span><span class="s2">&quot;</span>:
 
             <span class="k">if</span> <span class="nv">len</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">groups</span><span class="ss">)</span> <span class="o">==</span> <span class="mi">1</span>:
 
@@ -2124,7 +2204,7 @@ soup.find(&#39;p&#39;, {&#39;id&#39;: &#39;foo&#39;}, strict=True)
 
         <span class="k">if</span> <span class="nv">self</span>.<span class="nv">count</span>:
 
-            <span class="nv">end_tag</span> <span class="o">=</span> <span class="nv">f</span><span class="s1">&#39;</span><span class="s">&lt;/{tag}&gt;</span><span class="s1">&#39;</span>
+            <span class="nv">end_tag</span> <span class="o">=</span> <span class="nv">f</span><span class="s2">&quot;</span><span class="s">&lt;/{tag}&gt;</span><span class="s2">&quot;</span>
 
             <span class="nv">self</span>.<span class="nv">groups</span>[<span class="nv">self</span>.<span class="nv">group</span> <span class="o">-</span> <span class="mi">1</span>].<span class="nv">html</span> <span class="o">+=</span> <span class="nv">end_tag</span>
 
@@ -2216,7 +2296,7 @@ soup.find(&#39;p&#39;, {&#39;id&#39;: &#39;foo&#39;}, strict=True)
 
             <span class="nv">self</span>.<span class="nv">group</span> <span class="o">+=</span> <span class="mi">1</span>
 
-            <span class="nv">self</span>.<span class="nv">groups</span>.<span class="nv">append</span><span class="ss">(</span><span class="nv">Soup</span><span class="ss">(</span><span class="s1">&#39;&#39;</span><span class="ss">))</span>
+            <span class="nv">self</span>.<span class="nv">groups</span>.<span class="nv">append</span><span class="ss">(</span><span class="nv">Soup</span><span class="ss">(</span><span class="s2">&quot;&quot;</span><span class="ss">))</span>
 
             <span class="nv">self</span>.<span class="nv">groups</span>[<span class="nv">self</span>.<span class="nv">group</span> <span class="o">-</span> <span class="mi">1</span>].<span class="nv">html</span> <span class="o">+=</span> <span class="nv">html</span>
 
@@ -2228,7 +2308,9 @@ soup.find(&#39;p&#39;, {&#39;id&#39;: &#39;foo&#39;}, strict=True)
 
         <span class="k">if</span> <span class="nv">self</span>.<span class="nv">count</span>:
 
-            <span class="nv">self</span>.<span class="nv">count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="nv">not</span> <span class="nv">self</span>.<span class="nv">_empty_tag</span><span class="ss">(</span><span class="nv">tag</span><span class="ss">)</span>:
+
+                <span class="nv">self</span>.<span class="nv">count</span> <span class="o">+=</span> <span class="mi">1</span>
 
             <span class="nv">self</span>.<span class="nv">groups</span>[<span class="nv">self</span>.<span class="nv">group</span> <span class="o">-</span> <span class="mi">1</span>].<span class="nv">html</span> <span class="o">+=</span> <span class="nv">html</span>
 

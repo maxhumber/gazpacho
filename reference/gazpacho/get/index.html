@@ -469,7 +469,7 @@
 
 <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
 
-    <span class="sd">&#39;&#39;&#39;Return the contents from a URL</span>
+    <span class="sd">&quot;&quot;&quot;Return the contents from a URL</span>
 
 <span class="sd">    Params:</span>
 
@@ -487,13 +487,13 @@
 
 <span class="sd">    ```</span>
 
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">opener</span> <span class="o">=</span> <span class="n">build_opener</span><span class="p">()</span>
 
     <span class="k">if</span> <span class="n">params</span><span class="p">:</span>
 
-        <span class="n">url</span> <span class="o">+=</span> <span class="s1">&#39;?&#39;</span> <span class="o">+</span> <span class="n">urlencode</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">+=</span> <span class="s2">&quot;?&quot;</span> <span class="o">+</span> <span class="n">urlencode</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">headers</span><span class="p">:</span>
 
@@ -501,15 +501,15 @@
 
             <span class="n">opener</span><span class="o">.</span><span class="n">addheaders</span> <span class="o">=</span> <span class="p">[</span><span class="n">h</span><span class="p">]</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">headers</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">))</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">headers</span><span class="p">:</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">headers</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;User-Agent&quot;</span><span class="p">))</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">headers</span><span class="p">:</span>
 
-        <span class="n">UA</span> <span class="o">=</span> <span class="s1">&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:69.0) Gecko/20100101 Firefox/69.0&#39;</span>
+        <span class="n">UA</span> <span class="o">=</span> <span class="s2">&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:69.0) Gecko/20100101 Firefox/69.0&quot;</span>
 
-        <span class="n">opener</span><span class="o">.</span><span class="n">addheaders</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">,</span> <span class="n">UA</span><span class="p">)]</span>
+        <span class="n">opener</span><span class="o">.</span><span class="n">addheaders</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;User-Agent&quot;</span><span class="p">,</span> <span class="n">UA</span><span class="p">)]</span>
 
     <span class="k">with</span> <span class="n">opener</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
 
-        <span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">content</span>
 </pre></div>
@@ -540,7 +540,7 @@
 
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><span class="nv">def</span> <span class="nv">get</span><span class="ss">(</span><span class="nv">url</span>, <span class="nb">params</span><span class="o">=</span><span class="nv">None</span>, <span class="nv">headers</span><span class="o">=</span><span class="nv">None</span><span class="ss">)</span>:
 
-    <span class="s1">&#39;&#39;&#39;</span><span class="s">Return the contents from a URL</span>
+    <span class="s2">&quot;&quot;&quot;</span><span class="s">Return the contents from a URL</span>
 
     <span class="nb">Params</span>:
 
@@ -558,13 +558,13 @@
 
     ```
 
-    <span class="s1">&#39;&#39;&#39;</span>
+    <span class="s2">&quot;&quot;&quot;</span>
 
     <span class="nv">opener</span> <span class="o">=</span> <span class="nv">build_opener</span><span class="ss">()</span>
 
     <span class="k">if</span> <span class="nb">params</span>:
 
-        <span class="nv">url</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="s">?</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nv">urlencode</span><span class="ss">(</span><span class="nb">params</span><span class="ss">)</span>
+        <span class="nv">url</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="s">?</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nv">urlencode</span><span class="ss">(</span><span class="nb">params</span><span class="ss">)</span>
 
     <span class="k">if</span> <span class="nv">headers</span>:
 
@@ -572,15 +572,15 @@
 
             <span class="nv">opener</span>.<span class="nv">addheaders</span> <span class="o">=</span> [<span class="nv">h</span>]
 
-    <span class="k">if</span> <span class="ss">(</span><span class="nv">headers</span> <span class="nv">and</span> <span class="nv">not</span> <span class="nv">headers</span>.<span class="nv">get</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">User-Agent</span><span class="s1">&#39;</span><span class="ss">))</span> <span class="nv">or</span> <span class="nv">not</span> <span class="nv">headers</span>:
+    <span class="k">if</span> <span class="ss">(</span><span class="nv">headers</span> <span class="nv">and</span> <span class="nv">not</span> <span class="nv">headers</span>.<span class="nv">get</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">User-Agent</span><span class="s2">&quot;</span><span class="ss">))</span> <span class="nv">or</span> <span class="nv">not</span> <span class="nv">headers</span>:
 
-        <span class="nv">UA</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="s">Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:69.0) Gecko/20100101 Firefox/69.0</span><span class="s1">&#39;</span>
+        <span class="nv">UA</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:69.0) Gecko/20100101 Firefox/69.0</span><span class="s2">&quot;</span>
 
-        <span class="nv">opener</span>.<span class="nv">addheaders</span> <span class="o">=</span> [<span class="ss">(</span><span class="s1">&#39;</span><span class="s">User-Agent</span><span class="s1">&#39;</span>, <span class="nv">UA</span><span class="ss">)</span>]
+        <span class="nv">opener</span>.<span class="nv">addheaders</span> <span class="o">=</span> [<span class="ss">(</span><span class="s2">&quot;</span><span class="s">User-Agent</span><span class="s2">&quot;</span>, <span class="nv">UA</span><span class="ss">)</span>]
 
     <span class="nv">with</span> <span class="nv">opener</span>.<span class="nv">open</span><span class="ss">(</span><span class="nv">url</span><span class="ss">)</span> <span class="nv">as</span> <span class="nv">f</span>:
 
-        <span class="nv">content</span> <span class="o">=</span> <span class="nv">f</span>.<span class="nv">read</span><span class="ss">()</span>.<span class="nv">decode</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">utf-8</span><span class="s1">&#39;</span><span class="ss">)</span>
+        <span class="nv">content</span> <span class="o">=</span> <span class="nv">f</span>.<span class="nv">read</span><span class="ss">()</span>.<span class="nv">decode</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">utf-8</span><span class="s2">&quot;</span><span class="ss">)</span>
 
     <span class="k">return</span> <span class="nv">content</span>
 </pre></div>

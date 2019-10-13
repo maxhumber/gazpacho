@@ -479,7 +479,7 @@
                 <h1 id="module-gazpachoutils">Module gazpacho.utils</h1>
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><span class="nv">def</span> <span class="nv">match</span><span class="ss">(</span><span class="nv">a</span>, <span class="nv">b</span>, <span class="nv">strict</span><span class="o">=</span><span class="nv">False</span><span class="ss">)</span>:
 
-    <span class="s1">&#39;&#39;&#39;</span><span class="s">Utility function to match two dictionaries</span>
+    <span class="s2">&quot;&quot;&quot;</span><span class="s">Utility function to match two dictionaries</span>
 
     <span class="nb">Params</span>:
 
@@ -527,7 +527,7 @@
 
     ```
 
-    <span class="s1">&#39;&#39;&#39;</span>
+    <span class="s2">&quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="nv">not</span> <span class="nv">a</span>:
 
@@ -569,7 +569,7 @@
 
 <span class="nv">def</span> <span class="nv">html_starttag_and_attrs</span><span class="ss">(</span><span class="nv">tag</span>, <span class="nv">attrs</span>, <span class="nv">startendtag</span><span class="o">=</span><span class="nv">False</span><span class="ss">)</span>:
 
-    <span class="s1">&#39;&#39;&#39;</span><span class="s">Utility functon to reconstruct starttag and attrs</span>
+    <span class="s2">&quot;&quot;&quot;</span><span class="s">Utility functon to reconstruct starttag and attrs</span>
 
     <span class="nb">Params</span>:
 
@@ -589,7 +589,7 @@
 
     ```
 
-    <span class="s1">&#39;&#39;&#39;</span>
+    <span class="s2">&quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="nv">attrs</span>:
 
@@ -603,15 +603,15 @@
 
         <span class="nv">attrs</span> <span class="o">=</span> {}
 
-        <span class="nv">af</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="nv">af</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 
     <span class="k">if</span> <span class="nv">startendtag</span>:
 
-        <span class="nv">html</span> <span class="o">=</span> <span class="nv">f</span><span class="s1">&#39;</span><span class="s">&lt;{tag}{af} /&gt;</span><span class="s1">&#39;</span>
+        <span class="nv">html</span> <span class="o">=</span> <span class="nv">f</span><span class="s2">&quot;</span><span class="s">&lt;{tag}{af} /&gt;</span><span class="s2">&quot;</span>
 
     <span class="k">else</span>:
 
-        <span class="nv">html</span> <span class="o">=</span> <span class="nv">f</span><span class="s1">&#39;</span><span class="s">&lt;{tag}{af}&gt;</span><span class="s1">&#39;</span>
+        <span class="nv">html</span> <span class="o">=</span> <span class="nv">f</span><span class="s2">&quot;</span><span class="s">&lt;{tag}{af}&gt;</span><span class="s2">&quot;</span>
 
     <span class="k">return</span> <span class="nv">html</span>, <span class="nv">attrs</span>
 </pre></div>
@@ -643,7 +643,7 @@
 
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><span class="nv">def</span> <span class="nv">html_starttag_and_attrs</span><span class="ss">(</span><span class="nv">tag</span>, <span class="nv">attrs</span>, <span class="nv">startendtag</span><span class="o">=</span><span class="nv">False</span><span class="ss">)</span>:
 
-    <span class="s1">&#39;&#39;&#39;</span><span class="s">Utility functon to reconstruct starttag and attrs</span>
+    <span class="s2">&quot;&quot;&quot;</span><span class="s">Utility functon to reconstruct starttag and attrs</span>
 
     <span class="nb">Params</span>:
 
@@ -663,7 +663,7 @@
 
     ```
 
-    <span class="s1">&#39;&#39;&#39;</span>
+    <span class="s2">&quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="nv">attrs</span>:
 
@@ -677,15 +677,15 @@
 
         <span class="nv">attrs</span> <span class="o">=</span> {}
 
-        <span class="nv">af</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="nv">af</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 
     <span class="k">if</span> <span class="nv">startendtag</span>:
 
-        <span class="nv">html</span> <span class="o">=</span> <span class="nv">f</span><span class="s1">&#39;</span><span class="s">&lt;{tag}{af} /&gt;</span><span class="s1">&#39;</span>
+        <span class="nv">html</span> <span class="o">=</span> <span class="nv">f</span><span class="s2">&quot;</span><span class="s">&lt;{tag}{af} /&gt;</span><span class="s2">&quot;</span>
 
     <span class="k">else</span>:
 
-        <span class="nv">html</span> <span class="o">=</span> <span class="nv">f</span><span class="s1">&#39;</span><span class="s">&lt;{tag}{af}&gt;</span><span class="s1">&#39;</span>
+        <span class="nv">html</span> <span class="o">=</span> <span class="nv">f</span><span class="s2">&quot;</span><span class="s">&lt;{tag}{af}&gt;</span><span class="s2">&quot;</span>
 
     <span class="k">return</span> <span class="nv">html</span>, <span class="nv">attrs</span>
 </pre></div>
@@ -733,7 +733,7 @@
 
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><span class="nv">def</span> <span class="nv">match</span><span class="ss">(</span><span class="nv">a</span>, <span class="nv">b</span>, <span class="nv">strict</span><span class="o">=</span><span class="nv">False</span><span class="ss">)</span>:
 
-    <span class="s1">&#39;&#39;&#39;</span><span class="s">Utility function to match two dictionaries</span>
+    <span class="s2">&quot;&quot;&quot;</span><span class="s">Utility function to match two dictionaries</span>
 
     <span class="nb">Params</span>:
 
@@ -781,7 +781,7 @@
 
     ```
 
-    <span class="s1">&#39;&#39;&#39;</span>
+    <span class="s2">&quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="nv">not</span> <span class="nv">a</span>:
 
