@@ -2,7 +2,7 @@
   <img src="https://raw.githubusercontent.com/maxhumber/gazpacho/master/images/gazpacho.png" height="300px" alt="gazpacho">
 </h3>
 <p align="center">
-  <a href="https://github.com/maxhumber/gazpacho/"><img alt="Dependencies" src="https://img.shields.io/badge/scraping-gazpacho-C6422C"></a>
+  <a href="https://github.com/maxhumber/gazpacho/"><img alt="Dependencies" src="https://img.shields.io/badge/scraper-gazpacho-C6422C"></a>
   <a href="https://github.com/maxhumber/gazpacho/blob/master/setup.py"><img alt="Dependencies" src="https://img.shields.io/badge/dependencies-0-brightgreen"></a>
   <a href="https://travis-ci.org/maxhumber/gazpacho"><img alt="Travis" src="https://img.shields.io/travis/maxhumber/gazpacho.svg"></a>
   <a href="https://pypi.python.org/pypi/gazpacho"><img alt="PyPI" src="https://img.shields.io/pypi/v/gazpacho.svg"></a>
@@ -85,7 +85,7 @@ print(results)
 #  <span class="mw-headline" id="References">References</span>]
 ```
 
-The return behaviour of `find` can be adjusted and more predictable with the `mode` argument `{'auto', 'first', 'all'}`:
+The return behaviour of `find` can be adjusted and made more predictable with the `mode` argument `{'auto', 'first', 'all'}`:
 
 ```python
 soup.find('span', {'class': 'mw-headline'}, mode='first')
@@ -204,10 +204,10 @@ pip install -U gazpacho
 
 #### Support
 
-If you use gazpacho, consider adding the [![scraping: gazpacho](https://img.shields.io/badge/scraping-gazpacho-C6422C)](https://github.com/maxhumber/gazpacho) badge to your project README.md:
+If you use gazpacho, consider adding the [![scraper: gazpacho](https://img.shields.io/badge/scraper-gazpacho-C6422C)](https://github.com/maxhumber/gazpacho) badge to your project README.md:
 
 ```markdown
-[![scraping: gazpacho](https://img.shields.io/badge/scraping-gazpacho-C6422C)](https://github.com/maxhumber/gazpacho)
+[![scraper: gazpacho](https://img.shields.io/badge/scraper-gazpacho-C6422C)](https://github.com/maxhumber/gazpacho)
 ```
 
 
