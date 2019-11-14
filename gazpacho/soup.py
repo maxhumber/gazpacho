@@ -92,35 +92,27 @@ class Soup(HTMLParser):
             if not self._empty_tag(tag):
                 self.count += 1
             self.groups[self.group - 1].html += html
-            return
-        else:
-            return
+        return
 
     def handle_startendtag(self, tag, attrs):
         html, attrs = html_starttag_and_attrs(tag, attrs, True)
         if self.count:
             self.groups[self.group - 1].html += html
-            return
-        else:
-            return
+        return
 
     def handle_data(self, data):
         if self.count:
             if self.groups[self.group - 1].text is None:
                 self.groups[self.group - 1].text = data.strip()
             self.groups[self.group - 1].html += data
-            return
-        else:
-            return
+        return
 
     def handle_endtag(self, tag):
         if self.count:
             end_tag = f"</{tag}>"
             self.groups[self.group - 1].html += end_tag
             self.count -= 1
-            return
-        else:
-            return
+        return
 
     def find(self, tag, attrs=None, mode="auto", strict=False):
         """Return matching HTML elements
