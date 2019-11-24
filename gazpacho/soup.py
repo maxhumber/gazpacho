@@ -1,4 +1,5 @@
 from html.parser import HTMLParser
+import re
 from .utils import match, html_starttag_and_attrs
 
 
@@ -113,6 +114,28 @@ class Soup(HTMLParser):
             self.groups[self.group - 1].html += end_tag
             self.count -= 1
         return
+
+    def remove_tags(self, strip=True):
+        """Remove all HTML element tags
+
+        Params:
+
+        - strip (bool, True): Strip all extra whitespace
+
+        Example:
+
+        ```
+        html = '<span>Hi! I like <b>soup</b>.</span>'
+        soup = Soup(html)
+        soup.remove_tags()
+
+        # Hi! I like soup.
+        ```
+        """
+        text = re.sub("<[^>]+>", "", self.html)
+        if strip:
+            text = " ".join(text.split())
+        return text
 
     def find(self, tag, attrs=None, mode="auto", strict=False):
         """Return matching HTML elements

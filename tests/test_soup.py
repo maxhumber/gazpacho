@@ -49,6 +49,17 @@ def fake_html_3():
     return html
 
 
+@pytest.fixture
+def fake_html_4():
+    html = """
+    <div class="foo-list">
+      <span>I like <b>soup</b> and I really like <i>cold</i> soup</span>
+      <p>I guess hot soup is okay too</p>
+    </div>
+    """
+    return html
+
+
 def test_find(fake_html_1):
     soup = Soup(fake_html_1)
     result = soup.find("span")
@@ -96,3 +107,20 @@ def test_find_nested_empty_tag(fake_html_3):
     soup = Soup(fake_html_3)
     result = soup.find("a", {"class": "foo"})
     assert len(result) == 2
+
+
+def test_remove_tags(fake_html_4):
+    soup = Soup(fake_html_4)
+    result = soup.remove_tags()
+    assert (
+        result == "I like soup and I really like cold soup I guess hot soup is okay too"
+    )
+
+
+def test_remove_tags_no_strip(fake_html_4):
+    soup = Soup(fake_html_4)
+    result = soup.remove_tags(strip=False)
+    assert (
+        result
+        == "\n    \n      I like soup and I really like cold soup\n      I guess hot soup is okay too\n    \n    "
+    )
