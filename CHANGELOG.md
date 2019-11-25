@@ -12,6 +12,10 @@ pip install -U gazpacho
 
 ---
 
+#### 0.9 (2019-11-24)
+
+- Added the `remove_tags` method for isolating formatted text in a block of HTML
+
 #### 0.8.1 (2019-10-10)
 
 - Fixed empty element tag counting within the `find` method
