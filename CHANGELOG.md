@@ -12,7 +12,7 @@ pip install -U gazpacho
 
 ---
 
-#### 0.9 (2019-11-24)
+#### 0.9 (2019-11-25)
 
 - Added the `remove_tags` method for isolating formatted text in a block of HTML
 
