@@ -1,19 +1,15 @@
-from gazpacho import Soup
+from gazpacho import Soup, get
 
 html = """
 <div class="foo-list">
-  <a class="foo" href="/foo/1">
-    <div class="foo-image-container">
-      <img src="image.jpg">
-    </div>
-  </a>
-  <a class="foo" href="/foo/2">
-    <div class="foo-image-container">
-      <img src="image.jpg">
-    </div>
-  </a>
+  <span>This is some text, but it has fancy <b>bold tags</b> and even fancier <i>italic</i> tags</span>
+  <p>There's some text here too</p>
 </div>
 """
 
 soup = Soup(html)
-soup.find("a", {"class": "foo"})
+soup = soup.find("span")
+
+soup.text
+soup.html
+soup.remove_tags()
