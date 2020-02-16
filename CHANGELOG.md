@@ -12,6 +12,11 @@ pip install -U gazpacho
 
 ---
 
+#### 0.9.1 (2020-02-16)
+
+- Fixed `UnicodeEncodeError` lurking beneath `get` (thanks for the "Issue" [mlehotay](https://github.com/mlehotay)!)
+- Fixed `find` method to properly handle non-closing HTML tags
+
 #### 0.9 (2019-11-25)
 
 - Added the `remove_tags` method for isolating formatted text in a block of HTML
