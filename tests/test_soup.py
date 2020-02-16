@@ -36,15 +36,16 @@ def fake_html_3():
     html = """<div class="foo-list">
       <a class="foo" href="/foo/1">
         <div class="foo-image-container">
-          <img src="image.jpg">
+          <img src="hi.png">
         </div>
       </a>
       <a class="foo" href="/foo/2">
         <div class="foo-image-container">
-          <img src="image.jpg">
+          <img src="bye.jpg">
         </div>
       </a>
     </div>
+    <img src='pip_install.gif'>
     """
     return html
 
@@ -107,6 +108,12 @@ def test_find_nested_empty_tag(fake_html_3):
     soup = Soup(fake_html_3)
     result = soup.find("a", {"class": "foo"})
     assert len(result) == 2
+
+
+def test_find_mutliple_imgs(fake_html_3):
+    soup = Soup(fake_html_3)
+    result = soup.find("img")
+    assert result[1].attrs['src'] == 'bye.jpg'
 
 
 def test_remove_tags(fake_html_4):

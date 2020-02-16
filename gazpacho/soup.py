@@ -82,7 +82,8 @@ class Soup(HTMLParser):
         html, attrs = html_starttag_and_attrs(tag, attrs)
         matching = match(self.attrs, attrs, self.strict)
         if tag == self.tag and matching and not self.count:
-            self.count += 1
+            if not self._empty_tag(tag):
+                self.count += 1
             self.group += 1
             self.groups.append(Soup(""))
             self.groups[self.group - 1].html += html
