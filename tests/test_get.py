@@ -24,3 +24,9 @@ def test_get_params():
     content = get(url, params)
     args = json.loads(content)["args"]
     assert args == params
+
+
+def test_weird_characters():
+    url = 'https://httpbin.org/anything/drãke'
+    content = get(url)
+    assert url == json.loads(content)['url']

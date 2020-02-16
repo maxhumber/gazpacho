@@ -1,4 +1,4 @@
-from urllib.parse import urlencode
+from urllib.parse import quote, urlencode, urlsplit, urlunsplit
 from urllib.request import build_opener
 
 
@@ -17,6 +17,9 @@ def get(url, params=None, headers=None):
     get('https://httpbin.org/anything', {'soup': 'gazpacho'})
     ```
     """
+    scheme, netloc, path, query, fragment = urlsplit(url)
+    path = quote(path)
+    url = urlunsplit((scheme, netloc, path, query, fragment))
     opener = build_opener()
     if params:
         url += "?" + urlencode(params)
