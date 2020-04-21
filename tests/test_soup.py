@@ -113,7 +113,7 @@ def test_find_nested_empty_tag(fake_html_3):
 def test_find_mutliple_imgs(fake_html_3):
     soup = Soup(fake_html_3)
     result = soup.find("img")
-    assert result[1].attrs['src'] == 'bye.jpg'
+    assert result[1].attrs["src"] == "bye.jpg"
 
 
 def test_remove_tags(fake_html_4):
@@ -131,3 +131,21 @@ def test_remove_tags_no_strip(fake_html_4):
         result
         == "\n    \n      I like soup and I really like cold soup\n      I guess hot soup is okay too\n    \n    "
     )
+
+
+def test_find_no_match_first(fake_html_1):
+    soup = Soup(fake_html_1)
+    result = soup.find("a", mode="first")
+    assert result == None
+
+
+def test_find_no_match_all(fake_html_1):
+    soup = Soup(fake_html_1)
+    result = soup.find("a", mode="all")
+    assert result == []
+
+
+def test_find_no_match_auto(fake_html_1):
+    soup = Soup(fake_html_1)
+    result = soup.find("a", mode="auto")
+    assert result == None

@@ -175,6 +175,8 @@ class Soup(HTMLParser):
         self.group = 0
         self.groups = []
         self.feed(self.html)
+        if mode in ["auto", "first"] and not self.groups:
+            return None
         if mode == "all":
             return self.groups
         if mode == "first":

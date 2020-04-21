@@ -27,6 +27,6 @@ def test_get_params():
 
 
 def test_weird_characters():
-    url = 'https://httpbin.org/anything/drãke'
+    url = "https://httpbin.org/anything/drãke"
     content = get(url)
-    assert url == json.loads(content)['url']
+    assert url == json.loads(content)["url"]

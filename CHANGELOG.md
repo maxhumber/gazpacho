@@ -12,6 +12,10 @@ pip install -U gazpacho
 
 ---
 
+#### 0.9.2 (2020-04-21)
+
+- Fixed `find(..., mode='first')` to return `None` and not an `IndexError` (thanks, [psyonara](https://github.com/maxhumber/gazpacho/issues/14)!)
+
 #### 0.9.1 (2020-02-16)
 
 - Fixed `UnicodeEncodeError` lurking beneath `get` (thanks for the "Issue" [mlehotay](https://github.com/mlehotay)!)

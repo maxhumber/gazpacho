@@ -133,8 +133,8 @@ print(df[['PLAYER', 'TEAM', 'SALARY', 'AGE']].head(3))
 
 #                PLAYER TEAM       SALARY  AGE
 # 0  1. Mitchell Marner  TOR  $16,000,000   22
-# 1  2. Auston Matthews  TOR  $15,900,000   21
-# 2     3. John Tavares  TOR  $15,900,000   28
+# 1     2. John Tavares  TOR  $15,900,000   28
+# 2  3. Auston Matthews  TOR  $15,900,000   21
 ```
 
 Powered by gazpacho:
@@ -151,8 +151,8 @@ print(df[['PLAYER', 'TEAM', 'SALARY', 'AGE']].head(3))
 
 #                PLAYER TEAM       SALARY  AGE
 # 0  1. Mitchell Marner  TOR  $16,000,000   22
-# 1  2. Auston Matthews  TOR  $15,900,000   21
-# 2     3. John Tavares  TOR  $15,900,000   28
+# 1     2. John Tavares  TOR  $15,900,000   28
+# 2  3. Auston Matthews  TOR  $15,900,000   21
 ```
 
 
