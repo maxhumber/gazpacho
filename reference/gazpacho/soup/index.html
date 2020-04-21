@@ -1107,7 +1107,9 @@
 
         <span class="k">if</span> <span class="n">tag</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">tag</span> <span class="ow">and</span> <span class="n">matching</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">:</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_empty_tag</span><span class="p">(</span><span class="n">tag</span><span class="p">):</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">+=</span> <span class="mi">1</span>
 
@@ -1254,6 +1256,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">groups</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">feed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">html</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">mode</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="s2">&quot;first&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="p">:</span>
+
+            <span class="k">return</span> <span class="bp">None</span>
 
         <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;all&quot;</span><span class="p">:</span>
 
@@ -1440,7 +1446,9 @@
 
         <span class="k">if</span> <span class="n">tag</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">tag</span> <span class="ow">and</span> <span class="n">matching</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">:</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_empty_tag</span><span class="p">(</span><span class="n">tag</span><span class="p">):</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">group</span> <span class="o">+=</span> <span class="mi">1</span>
 
@@ -1587,6 +1595,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">groups</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">feed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">html</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">mode</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="s2">&quot;first&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">groups</span><span class="p">:</span>
+
+            <span class="k">return</span> <span class="bp">None</span>
 
         <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;all&quot;</span><span class="p">:</span>
 
@@ -1867,6 +1879,10 @@ soup.find(&#39;p&#39;, {&#39;id&#39;: &#39;foo&#39;}, strict=True)
         <span class="nv">self</span>.<span class="nv">groups</span> <span class="o">=</span> []
 
         <span class="nv">self</span>.<span class="nv">feed</span><span class="ss">(</span><span class="nv">self</span>.<span class="nv">html</span><span class="ss">)</span>
+
+        <span class="k">if</span> <span class="nv">mode</span> <span class="nv">in</span> [<span class="s2">&quot;</span><span class="s">auto</span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s">first</span><span class="s2">&quot;</span>] <span class="nv">and</span> <span class="nv">not</span> <span class="nv">self</span>.<span class="nv">groups</span>:
+
+            <span class="k">return</span> <span class="nv">None</span>
 
         <span class="k">if</span> <span class="nv">mode</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">all</span><span class="s2">&quot;</span>:
 
@@ -2328,7 +2344,9 @@ soup.find(&#39;p&#39;, {&#39;id&#39;: &#39;foo&#39;}, strict=True)
 
         <span class="k">if</span> <span class="nv">tag</span> <span class="o">==</span> <span class="nv">self</span>.<span class="nv">tag</span> <span class="nv">and</span> <span class="nv">matching</span> <span class="nv">and</span> <span class="nv">not</span> <span class="nv">self</span>.<span class="nv">count</span>:
 
-            <span class="nv">self</span>.<span class="nv">count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="nv">not</span> <span class="nv">self</span>.<span class="nv">_empty_tag</span><span class="ss">(</span><span class="nv">tag</span><span class="ss">)</span>:
+
+                <span class="nv">self</span>.<span class="nv">count</span> <span class="o">+=</span> <span class="mi">1</span>
 
             <span class="nv">self</span>.<span class="nv">group</span> <span class="o">+=</span> <span class="mi">1</span>
 
