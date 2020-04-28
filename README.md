@@ -13,32 +13,42 @@
 
 #### About
 
-gazpacho is a web scraping library. It replaces requests and BeautifulSoup for most projects. gazpacho is small, simple, fast, and consistent. You should use it!
+gazpacho is a simple, fast, and modern web scraping library. The library is actively maintained, stable, and installed with zero dependencies. 
 
 
 
-#### Usage
+#### Install
 
-gazpacho is easy to use. To retrieve the contents of a web page use `get`. And to parse the retrieved contents use `Soup`.
+Install gazpacho at the command line:
 
-
-
-#### Get
-
-The `get` function retrieves content from a web page:
-
-```python
-from gazpacho import get
-
-url = 'https://en.wikipedia.org/wiki/Gazpacho'
-html = get(url)
-print(html[:50])
-
-# <!DOCTYPE html>
-# <html class="client-nojs" lang="en
+```
+pip install -U gazpacho
 ```
 
-The `get` function also accepts optional params and headers for any GET request.
+
+
+#### Import
+
+Import gazpacho following the convention:
+
+```python
+from gazpacho import get, Soup
+```
+
+
+
+#### get
+
+Use the `get` function to download raw HTML:
+
+```python
+url = 'https://scrape.world/soup'
+html = get(url)
+print(html[:50])
+# '<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <met'
+```
+
+Use optional params and headers to adjust `get` requests:
 
 ```python
 url = 'https://httpbin.org/anything'
@@ -49,48 +59,53 @@ get(url, params={'foo': 'bar', 'bar': 'baz'}, headers={'User-Agent': 'gazpacho'}
 
 #### Soup
 
-The `Soup` object takes an HTML string and turns it into something parsable:
+Use the `Soup` wrapper to turn raw HTML strings into parseable objects:
 
 ```python
-from gazpacho import Soup
-
 soup = Soup(html)
-str(soup)[:50]
-
-# '<!DOCTYPE html>\n<html class="client-nojs" lang="en'
 ```
 
-In order to parse an HTML element inside of a `Soup` object, pass the desired tag and attributes (optional) to the `find` method:
+
+
+#### .find
+
+Use the `.find` method to target and extract HTML tags elements and elements:
 
 ```python
-# Original HTML: <span class="mw-headline" id="Ingredients_and_preparation">Ingredients and preparation</span>
-
-results = soup.find('span', {'class': 'mw-headline'})
+result = soup.find('span', {'id': 'As_a_figure_of_speech'})
+print(result)
+# <span class="mw-headline" id="As_a_figure_of_speech">As a figure of speech</span>
 ```
 
-The `find` method will either return a list of `Soup` objects if there are multiple elements that satisfy the tag and attribute constraints, or a single `Soup` object if there's just one:
+
+
+#### mode
+
+Use the mode argument {`'auto', 'first', 'all'`} to adjust the return behaviour of `.find`:
 
 ```python
-print(results)
-
-# [<span class="mw-headline" id="History">History</span>,
-#  <span class="mw-headline" id="Ingredients_and_preparation">Ingredients and preparation</span>,
-#  <span class="mw-headline" id="Variations">Variations</span>,
-#  <span class="mw-headline" id="In_Spain">In Spain</span>,
-#  <span class="mw-headline" id="Arranque_roteño">Arranque roteño</span>,
-#  <span class="mw-headline" id="Extremaduran_variations">Extremaduran variations</span>,
-#  <span class="mw-headline" id="La_Mancha_variations">La Mancha variations</span>,
-#  <span class="mw-headline" id="Castilian_variations">Castilian variations</span>,
-#  <span class="mw-headline" id="See_also">See also</span>,
-#  <span class="mw-headline" id="References">References</span>]
+print(soup.find('span', mode='first'))
+# <span class="navbar-toggler-icon"></span>
+len(soup.find('span', mode='all'))
+# 8
 ```
 
-The return behaviour of `find` can be adjusted and made more predictable with the `mode` argument `{'auto', 'first', 'all'}`:
+
+
+#### Chain
+
+Use method chaining to join consecutive `.find` calls together:
 
 ```python
-soup.find('span', {'class': 'mw-headline'}, mode='first')
-# <span class="mw-headline" id="History">History</span>
+soup.find('div', {'class': 'section-speech'}).find('a')[-2]
+# <a href="https://en.wikipedia.org/wiki/Tag_soup" title="Tag soup">Tag soup</a>
 ```
+
+
+
+#### text
+
+
 
 `Soup` objects returned by the `find` method will have `html`, `tag`, `attrs`, and `text` attributes:
 
@@ -106,17 +121,9 @@ print(result.text)
 # In Spain
 ```
 
-And, importantly, returned `Soup` objects can reimplement the `find` method!
 
 
-
-#### Production
-
-gazpacho is production ready. The library currently powers [quote](https://github.com/maxhumber/quote), a python wrapper for the Goodreads Quote API. A fully working example of gazpacho in action is available [here](https://maxhumber.com/scraping_fantasy_hockey).
-
-
-
-#### Comparison
+#### BeautifulSoup
 
 gazpacho is a drop-in replacement for most projects that use requests and BeautifulSoup:
 
@@ -155,6 +162,8 @@ print(df[['PLAYER', 'TEAM', 'SALARY', 'AGE']].head(3))
 # 2  3. Auston Matthews  TOR  $15,900,000   21
 ```
 
+#### Scrapy
+
 
 
 #### Speed
@@ -190,14 +199,6 @@ from requests_html import HTML
 soup = HTML(html=html)
 soup.find('span.mw-headline')
 # 40.1 ms ± 418 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
-```
-
-
-
-#### Installation
-
-```
-pip install -U gazpacho
 ```
 
 
