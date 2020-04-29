@@ -252,51 +252,85 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
+  <a href="#install" class="md-nav__link">
+    Install
   </a>
   
 </li>
       
         <li class="md-nav__item">
+  <a href="#quickstart" class="md-nav__link">
+    Quickstart
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tutorial" class="md-nav__link">
+    Tutorial
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import" class="md-nav__link">
+    Import
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get" class="md-nav__link">
-    Get
+    get
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#soup" class="md-nav__link">
     Soup
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#production" class="md-nav__link">
-    Production
+        
+          <li class="md-nav__item">
+  <a href="#find" class="md-nav__link">
+    .find
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#comparison" class="md-nav__link">
-    Comparison
+        
+          <li class="md-nav__item">
+  <a href="#attrs" class="md-nav__link">
+    attrs=
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#speed" class="md-nav__link">
-    Speed
+        
+          <li class="md-nav__item">
+  <a href="#strict" class="md-nav__link">
+    strict=
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
-    Installation
+        
+          <li class="md-nav__item">
+  <a href="#mode" class="md-nav__link">
+    mode=
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dir" class="md-nav__link">
+    dir()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -471,51 +505,85 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
+  <a href="#install" class="md-nav__link">
+    Install
   </a>
   
 </li>
       
         <li class="md-nav__item">
+  <a href="#quickstart" class="md-nav__link">
+    Quickstart
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tutorial" class="md-nav__link">
+    Tutorial
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import" class="md-nav__link">
+    Import
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get" class="md-nav__link">
-    Get
+    get
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#soup" class="md-nav__link">
     Soup
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#production" class="md-nav__link">
-    Production
+        
+          <li class="md-nav__item">
+  <a href="#find" class="md-nav__link">
+    .find
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#comparison" class="md-nav__link">
-    Comparison
+        
+          <li class="md-nav__item">
+  <a href="#attrs" class="md-nav__link">
+    attrs=
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#speed" class="md-nav__link">
-    Speed
+        
+          <li class="md-nav__item">
+  <a href="#strict" class="md-nav__link">
+    strict=
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
-    Installation
+        
+          <li class="md-nav__item">
+  <a href="#mode" class="md-nav__link">
+    mode=
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dir" class="md-nav__link">
+    dir()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -566,166 +634,120 @@
   <a href="https://pepy.tech/project/gazpacho"><img alt="Downloads" src="https://pepy.tech/badge/gazpacho"></a>  
 </p>
 
-<h4 id="about">About</h4>
-<p>gazpacho is a web scraping library. It replaces requests and BeautifulSoup for most projects. gazpacho is small, simple, fast, and consistent. You should use it!</p>
-<h4 id="usage">Usage</h4>
-<p>gazpacho is easy to use. To retrieve the contents of a web page use <code>get</code>. And to parse the retrieved contents use <code>Soup</code>.</p>
-<h4 id="get">Get</h4>
-<p>The <code>get</code> function retrieves content from a web page:</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">gazpacho</span> <span class="kn">import</span> <span class="n">get</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://en.wikipedia.org/wiki/Gazpacho&#39;</span>
-<span class="n">html</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">html</span><span class="p">[:</span><span class="mi">50</span><span class="p">])</span>
-
-<span class="c1"># &lt;!DOCTYPE html&gt;</span>
-<span class="c1"># &lt;html class=&quot;client-nojs&quot; lang=&quot;en</span>
-</pre></div>
-
-
-<p>The <code>get</code> function also accepts optional params and headers for any GET request.</p>
-<div class="codehilite"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://httpbin.org/anything&#39;</span>
-<span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">:</span> <span class="s1">&#39;baz&#39;</span><span class="p">},</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">:</span> <span class="s1">&#39;gazpacho&#39;</span><span class="p">})</span>
-</pre></div>
-
-
-<h4 id="soup">Soup</h4>
-<p>The <code>Soup</code> object takes an HTML string and turns it into something parsable:</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">gazpacho</span> <span class="kn">import</span> <span class="n">Soup</span>
-
-<span class="n">soup</span> <span class="o">=</span> <span class="n">Soup</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
-<span class="nb">str</span><span class="p">(</span><span class="n">soup</span><span class="p">)[:</span><span class="mi">50</span><span class="p">]</span>
-
-<span class="c1"># &#39;&lt;!DOCTYPE html&gt;\n&lt;html class=&quot;client-nojs&quot; lang=&quot;en&#39;</span>
-</pre></div>
-
-
-<p>In order to parse an HTML element inside of a <code>Soup</code> object, pass the desired tag and attributes (optional) to the <code>find</code> method:</p>
-<div class="codehilite"><pre><span></span><span class="c1"># Original HTML: &lt;span class=&quot;mw-headline&quot; id=&quot;Ingredients_and_preparation&quot;&gt;Ingredients and preparation&lt;/span&gt;</span>
-
-<span class="n">results</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;mw-headline&#39;</span><span class="p">})</span>
-</pre></div>
-
-
-<p>The <code>find</code> method will either return a list of <code>Soup</code> objects if there are multiple elements that satisfy the tag and attribute constraints, or a single <code>Soup</code> object if there's just one:</p>
-<div class="codehilite"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
-
-<span class="c1"># [&lt;span class=&quot;mw-headline&quot; id=&quot;History&quot;&gt;History&lt;/span&gt;,</span>
-<span class="c1">#  &lt;span class=&quot;mw-headline&quot; id=&quot;Ingredients_and_preparation&quot;&gt;Ingredients and preparation&lt;/span&gt;,</span>
-<span class="c1">#  &lt;span class=&quot;mw-headline&quot; id=&quot;Variations&quot;&gt;Variations&lt;/span&gt;,</span>
-<span class="c1">#  &lt;span class=&quot;mw-headline&quot; id=&quot;In_Spain&quot;&gt;In Spain&lt;/span&gt;,</span>
-<span class="c1">#  &lt;span class=&quot;mw-headline&quot; id=&quot;Arranque_roteño&quot;&gt;Arranque roteño&lt;/span&gt;,</span>
-<span class="c1">#  &lt;span class=&quot;mw-headline&quot; id=&quot;Extremaduran_variations&quot;&gt;Extremaduran variations&lt;/span&gt;,</span>
-<span class="c1">#  &lt;span class=&quot;mw-headline&quot; id=&quot;La_Mancha_variations&quot;&gt;La Mancha variations&lt;/span&gt;,</span>
-<span class="c1">#  &lt;span class=&quot;mw-headline&quot; id=&quot;Castilian_variations&quot;&gt;Castilian variations&lt;/span&gt;,</span>
-<span class="c1">#  &lt;span class=&quot;mw-headline&quot; id=&quot;See_also&quot;&gt;See also&lt;/span&gt;,</span>
-<span class="c1">#  &lt;span class=&quot;mw-headline&quot; id=&quot;References&quot;&gt;References&lt;/span&gt;]</span>
-</pre></div>
-
-
-<p>The return behaviour of <code>find</code> can be adjusted and made more predictable with the <code>mode</code> argument <code>{'auto', 'first', 'all'}</code>:</p>
-<div class="codehilite"><pre><span></span><span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;mw-headline&#39;</span><span class="p">},</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">)</span>
-<span class="c1"># &lt;span class=&quot;mw-headline&quot; id=&quot;History&quot;&gt;History&lt;/span&gt;</span>
-</pre></div>
-
-
-<p><code>Soup</code> objects returned by the <code>find</code> method will have <code>html</code>, <code>tag</code>, <code>attrs</code>, and <code>text</code> attributes:</p>
-<div class="codehilite"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">html</span><span class="p">)</span>
-<span class="c1"># &lt;span class=&quot;mw-headline&quot; id=&quot;In_Spain&quot;&gt;In Spain&lt;/span&gt;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
-<span class="c1"># span</span>
-<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
-<span class="c1"># {&#39;class&#39;: &#39;mw-headline&#39;, &#39;id&#39;: &#39;In_Spain&#39;}</span>
-<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-<span class="c1"># In Spain</span>
-</pre></div>
-
-
-<p>And, importantly, returned <code>Soup</code> objects can reimplement the <code>find</code> method!</p>
-<h4 id="production">Production</h4>
-<p>gazpacho is production ready. The library currently powers <a href="https://github.com/maxhumber/quote">quote</a>, a python wrapper for the Goodreads Quote API. A fully working example of gazpacho in action is available <a href="https://maxhumber.com/scraping_fantasy_hockey">here</a>.</p>
-<h4 id="comparison">Comparison</h4>
-<p>gazpacho is a drop-in replacement for most projects that use requests and BeautifulSoup:</p>
-<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://www.capfriendly.com/browse/active/2020/salary?p=1&#39;</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;lxml&#39;</span><span class="p">)</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_html</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;table&#39;</span><span class="p">)))[</span><span class="mi">0</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;PLAYER&#39;</span><span class="p">,</span> <span class="s1">&#39;TEAM&#39;</span><span class="p">,</span> <span class="s1">&#39;SALARY&#39;</span><span class="p">,</span> <span class="s1">&#39;AGE&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
-
-<span class="c1">#                PLAYER TEAM       SALARY  AGE</span>
-<span class="c1"># 0  1. Mitchell Marner  TOR  $16,000,000   22</span>
-<span class="c1"># 1     2. John Tavares  TOR  $15,900,000   28</span>
-<span class="c1"># 2  3. Auston Matthews  TOR  $15,900,000   21</span>
-</pre></div>
-
-
-<p>Powered by gazpacho:</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">gazpacho</span> <span class="kn">import</span> <span class="n">get</span><span class="p">,</span> <span class="n">Soup</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://www.capfriendly.com/browse/active/2020/salary?p=1&#39;</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<span class="n">soup</span> <span class="o">=</span> <span class="n">Soup</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_html</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;table&#39;</span><span class="p">)))[</span><span class="mi">0</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;PLAYER&#39;</span><span class="p">,</span> <span class="s1">&#39;TEAM&#39;</span><span class="p">,</span> <span class="s1">&#39;SALARY&#39;</span><span class="p">,</span> <span class="s1">&#39;AGE&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
-
-<span class="c1">#                PLAYER TEAM       SALARY  AGE</span>
-<span class="c1"># 0  1. Mitchell Marner  TOR  $16,000,000   22</span>
-<span class="c1"># 1     2. John Tavares  TOR  $15,900,000   28</span>
-<span class="c1"># 2  3. Auston Matthews  TOR  $15,900,000   21</span>
-</pre></div>
-
-
-<h4 id="speed">Speed</h4>
-<p>gazpacho is fast:</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">gazpacho</span> <span class="kn">import</span> <span class="n">Soup</span>
-
-<span class="o">%%</span><span class="n">timeit</span>
-<span class="n">soup</span> <span class="o">=</span> <span class="n">Soup</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
-<span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;mw-headline&#39;</span><span class="p">})</span>
-<span class="c1"># 15 ms ± 325 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)</span>
-</pre></div>
-
-
-<p>gazpacho is often 20-40% faster than BeautifulSoup:</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
-
-<span class="o">%%</span><span class="n">timeit</span>
-<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s1">&#39;lxml&#39;</span><span class="p">)</span>
-<span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;mw-headline&#39;</span><span class="p">})</span>
-<span class="c1"># 19.4 ms ± 583 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)</span>
-</pre></div>
-
-
-<p>And 200-300% faster than requests-html:</p>
-<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">requests_html</span> <span class="kn">import</span> <span class="n">HTML</span>
-
-<span class="o">%%</span><span class="n">timeit</span>
-<span class="n">soup</span> <span class="o">=</span> <span class="n">HTML</span><span class="p">(</span><span class="n">html</span><span class="o">=</span><span class="n">html</span><span class="p">)</span>
-<span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;span.mw-headline&#39;</span><span class="p">)</span>
-<span class="c1"># 40.1 ms ± 418 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)</span>
-</pre></div>
-
-
-<h4 id="installation">Installation</h4>
+<h2 id="about">About</h2>
+<p>gazpacho is a simple, fast, and modern web scraping library. The library is stable, actively maintained, and installed with zero dependencies. </p>
+<h2 id="install">Install</h2>
+<p>Install with <code>pip</code> at the command line:</p>
 <div class="codehilite"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="n">gazpacho</span>
 </pre></div>
 
 
-<h4 id="support">Support</h4>
+<h2 id="quickstart">Quickstart</h2>
+<p>Give this a try:</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">gazpacho</span> <span class="kn">import</span> <span class="n">get</span><span class="p">,</span> <span class="n">Soup</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://scrape.world/books&#39;</span>
+<span class="n">html</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">Soup</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+<span class="n">books</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;book-&#39;</span><span class="p">},</span> <span class="n">strict</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="n">book</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">book</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;h4&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+    <span class="n">price</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">book</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">name</span><span class="p">,</span> <span class="n">price</span>
+
+<span class="p">[</span><span class="n">parse</span><span class="p">(</span><span class="n">book</span><span class="p">)</span> <span class="k">for</span> <span class="n">book</span> <span class="ow">in</span> <span class="n">books</span><span class="p">]</span>
+</pre></div>
+
+
+<h2 id="tutorial">Tutorial</h2>
+<h4 id="import">Import</h4>
+<p>Import gazpacho following the convention:</p>
+<div class="codehilite"><pre><span></span><span class="kn">from</span> <span class="nn">gazpacho</span> <span class="kn">import</span> <span class="n">get</span><span class="p">,</span> <span class="n">Soup</span>
+</pre></div>
+
+
+<h4 id="get">get</h4>
+<p>Use the <code>get</code> function to download raw HTML:</p>
+<div class="codehilite"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://scrape.world/soup&#39;</span>
+<span class="n">html</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">html</span><span class="p">[:</span><span class="mi">50</span><span class="p">])</span>
+<span class="c1"># &#39;&lt;!DOCTYPE html&gt;\n&lt;html lang=&quot;en&quot;&gt;\n  &lt;head&gt;\n    &lt;met&#39;</span>
+</pre></div>
+
+
+<p>Adjust <code>get</code> requests with optional params and headers:</p>
+<div class="codehilite"><pre><span></span><span class="n">get</span><span class="p">(</span>
+    <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://httpbin.org/anything&#39;</span><span class="p">,</span> 
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">:</span> <span class="s1">&#39;baz&#39;</span><span class="p">},</span> 
+    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">:</span> <span class="s1">&#39;gazpacho&#39;</span><span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<h4 id="soup">Soup</h4>
+<p>Use the <code>Soup</code> wrapper on raw html to enable parsing:</p>
+<div class="codehilite"><pre><span></span><span class="n">soup</span> <span class="o">=</span> <span class="n">Soup</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+</pre></div>
+
+
+<h4 id="find">.find</h4>
+<p>Use the <code>.find</code> method to target and extract HTML tags:</p>
+<div class="codehilite"><pre><span></span><span class="n">h1</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;h1&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">h1</span><span class="p">)</span>
+<span class="c1"># &lt;h1 id=&quot;firstHeading&quot; class=&quot;firstHeading&quot; lang=&quot;en&quot;&gt;Soup&lt;/h1&gt;</span>
+</pre></div>
+
+
+<h4 id="attrs">attrs=</h4>
+<p>Use the <code>attrs</code> argument to isolate tags that contain specific HTML element attributes:</p>
+<div class="codehilite"><pre><span></span><span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;section-soup&#39;</span><span class="p">})</span>
+</pre></div>
+
+
+<h4 id="strict">strict=</h4>
+<p>Adjust the <code>strict</code> argument to partial match element attributes:</p>
+<div class="codehilite"><pre><span></span><span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;section-&#39;</span><span class="p">},</span> <span class="n">strict</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+
+
+<h4 id="mode">mode=</h4>
+<p>Override the mode argument {<code>'auto', 'first', 'all'</code>} to guarantee return behaviour:</p>
+<div class="codehilite"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">))</span>
+<span class="c1"># &lt;span class=&quot;navbar-toggler-icon&quot;&gt;&lt;/span&gt;</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">))</span>
+<span class="c1"># 8</span>
+</pre></div>
+
+
+<h4 id="dir">dir()</h4>
+<p><code>Soup</code> objects have <code>html</code>, <code>tag</code>, <code>attrs</code>, and <code>text</code> attributes:</p>
+<div class="codehilite"><pre><span></span><span class="nb">dir</span><span class="p">(</span><span class="n">h1</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;attrs&#39;</span><span class="p">,</span> <span class="s1">&#39;find&#39;</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">,</span> <span class="s1">&#39;tag&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Use them accordingly:</p>
+<div class="codehilite"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">h1</span><span class="o">.</span><span class="n">html</span><span class="p">)</span>
+<span class="c1"># &#39;&lt;h1 id=&quot;firstHeading&quot; class=&quot;firstHeading&quot; lang=&quot;en&quot;&gt;Soup&lt;/h1&gt;&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">h1</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+<span class="c1"># h1</span>
+<span class="k">print</span><span class="p">(</span><span class="n">h1</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
+<span class="c1"># {&#39;id&#39;: &#39;firstHeading&#39;, &#39;class&#39;: &#39;firstHeading&#39;, &#39;lang&#39;: &#39;en&#39;}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">h1</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="c1"># Soup</span>
+</pre></div>
+
+
+<h2 id="support">Support</h2>
 <p>If you use gazpacho, consider adding the <a href="https://github.com/maxhumber/gazpacho"><img alt="scraper: gazpacho" src="https://img.shields.io/badge/scraper-gazpacho-C6422C" /></a> badge to your project README.md:</p>
 <div class="codehilite"><pre><span></span><span class="p">[</span><span class="o">!</span><span class="p">[</span><span class="n">scraper</span><span class="p">:</span> <span class="n">gazpacho</span><span class="p">](</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">img</span><span class="p">.</span><span class="n">shields</span><span class="p">.</span><span class="n">io</span><span class="o">/</span><span class="n">badge</span><span class="o">/</span><span class="n">scraper</span><span class="o">-</span><span class="n">gazpacho</span><span class="o">-</span><span class="n">C6422C</span><span class="p">)](</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">maxhumber</span><span class="o">/</span><span class="n">gazpacho</span><span class="p">)</span>
 </pre></div>
 
 
-<h4 id="contribute">Contribute</h4>
-<p>For feature requests or bug reports, please use <a href="https://github.com/maxhumber/gazpacho/issues">Github Issues</a>.</p>
-<p>For PRs, please read the <a href="https://github.com/maxhumber/gazpacho/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a> document.</p>
+<h2 id="contribute">Contribute</h2>
+<p>For feature requests or bug reports, please use <a href="https://github.com/maxhumber/gazpacho/issues">Github Issues</a></p>
+<p>For PRs, please read the <a href="https://github.com/maxhumber/gazpacho/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a> document</p>
                 
                   
                 

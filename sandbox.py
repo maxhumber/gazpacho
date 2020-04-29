@@ -1,73 +1,122 @@
-from gazpacho import get
+# Quickstart
 
-url = 'https://en.wikipedia.org/wiki/Gazpacho'
+from gazpacho import get, Soup
+
+url = 'https://scrape.world/books'
+html = get(url)
+soup = Soup(html)
+books = soup.find('div', {'class': 'book-'}, strict=False)
+
+def parse(book):
+    name = book.find('h4').text
+    price = float(book.find('p').text[1:].split(' ')[0])
+    return name, price
+
+[parse(book) for book in books]
+
+# Import
+
+from gazpacho import get, Soup
+
+# get
+
+url = 'https://scrape.world/soup'
 html = get(url)
 print(html[:50])
+# '<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <met'
 
-url = 'https://httpbin.org/anything'
-get(url, params={'foo': 'bar', 'bar': 'baz'}, headers={'User-Agent': 'gazpacho'})
+# optional
 
-from gazpacho import Soup
+get(
+    url='https://httpbin.org/anything',
+    params={'foo': 'bar', 'bar': 'baz'},
+    headers={'User-Agent': 'gazpacho'}
+)
+
+# Soup
 
 soup = Soup(html)
-str(soup)[:50]
-
-# '<!DOCTYPE html>\n<html class="client-nojs" lang="en'
-
-results = soup.find('span', {'class': 'mw-headline'})
-results
 
 
-soup.find('span', {'class': 'mw-headline'}, mode='first')
+# .find
+
+h1 = soup.find('h1')
+print(h1)
+# <h1 id="firstHeading" class="firstHeading" lang="en">Soup</h1>
+
+# attrs=
+
+soup.find('div', attrs={'class': 'section-soup'})
+
+# strict=
+
+soup.find('div', {'class': 'section-'}, strict=False)
+
+# mode=
+
+print(soup.find('span', mode='first'))
+# <span class="navbar-toggler-icon"></span>
+len(soup.find('span', mode='all'))
+# 8
+
+# dir()
+
+dir(h1)
+
+print(h1.html)
+# '<h1 id="firstHeading" class="firstHeading" lang="en">Soup</h1>'
+print(h1.tag)
+# h1
+print(h1.attrs)
+# {'id': 'firstHeading', 'class': 'firstHeading', 'lang': 'en'}
+print(h1.text)
+# Soup
+
+# Comparison
+
+# gazpacho
+
+from gazpacho import get, Soup
+
+url = 'http://quotes.toscrape.com/'
+html = get(url)
+soup = Soup(html)
+quotes = soup.find('div', {'class': 'quote'})
+
+def parse(quote):
+    return {
+        'author': quote.find('small').text,
+        'text': quote.find('span', {'class': 'text'}).text
+    }
+
+%%timeit
+[parse(quote) for quote in quotes]
 
 
-result = results[3]
-print(result.html)
-# <span class="mw-headline" id="In_Spain">In Spain</span>
-print(result.tag)
-# span
-print(result.attrs)
-# {'class': 'mw-headline', 'id': 'In_Spain'}
-print(result.text)
-
+#### BeautifulSoup
 
 import requests
 from bs4 import BeautifulSoup
-import pandas as pd
 
-url = 'https://www.capfriendly.com/browse/active/2020/salary?p=1'
+url = 'http://quotes.toscrape.com/'
 response = requests.get(url)
-soup = BeautifulSoup(response.text, 'lxml')
-df = pd.read_html(str(soup.find('table')))[0]
-print(df[['PLAYER', 'TEAM', 'SALARY', 'AGE']].head(3))
-#                PLAYER TEAM       SALARY  AGE
-# 0  1. Mitchell Marner  TOR  $16,000,000   22
-# 1     2. John Tavares  TOR  $15,900,000   28
-# 2  3. Auston Matthews  TOR  $15,900,000   21
+html = response.text
+soup = BeautifulSoup(html)
+quotes = soup.find_all('div', class_='quote')
 
-from gazpacho import get, Soup
-import pandas as pd
+def parse(quote):
+    return {
+        'author': quote.find('small').text,
+        'text': quote.find('span', class_= 'text').text
+    }
 
-url = 'https://www.capfriendly.com/browse/active/2020/salary?p=1'
-response = get(url)
-soup = Soup(response)
-df = pd.read_html(str(soup.find('table')))[0]
-print(df[['PLAYER', 'TEAM', 'SALARY', 'AGE']].head(3))
+[parse(quote) for quote in quotes]
 
-from gazpacho import Soup
 
-%%timeit
-soup = Soup(html)
-soup.find('span', {'class': 'mw-headline'})
 
-from bs4 import BeautifulSoup
 
-%%timeit
-soup = BeautifulSoup(html, 'lxml')
-soup.find('span', {'class': 'mw-headline'})
 
-from requests_html import HTML
 
-%%timeit
-soup = HTML(html=html)
-soup.find('span.mw-headline')
+
+
+#
