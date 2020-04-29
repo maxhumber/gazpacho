@@ -11,21 +11,45 @@
 
 
 
-#### About
+## About
 
-gazpacho is a simple, fast, and modern web scraping library. The library is actively maintained, stable, and installed with zero dependencies. 
+gazpacho is a simple, fast, and modern web scraping library. The library is stable, actively maintained, and installed with zero dependencies. 
 
 
 
-#### Install
+## Install
 
-Install gazpacho at the command line:
+Install with `pip` at the command line:
 
 ```
 pip install -U gazpacho
 ```
 
 
+
+## Quickstart
+
+Give this a try:
+
+```python
+from gazpacho import get, Soup
+
+url = 'https://scrape.world/books'
+html = get(url)
+soup = Soup(html)
+books = soup.find('div', {'class': 'book-'}, strict=False)
+
+def parse(book):
+    name = book.find('h4').text
+    price = float(book.find('p').text[1:].split(' ')[0])
+    return name, price
+
+[parse(book) for book in books]
+```
+
+
+
+## Tutorial
 
 #### Import
 
@@ -48,18 +72,21 @@ print(html[:50])
 # '<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <met'
 ```
 
-Use optional params and headers to adjust `get` requests:
+Adjust `get` requests with optional params and headers:
 
 ```python
-url = 'https://httpbin.org/anything'
-get(url, params={'foo': 'bar', 'bar': 'baz'}, headers={'User-Agent': 'gazpacho'})
+get(
+    url='https://httpbin.org/anything', 
+    params={'foo': 'bar', 'bar': 'baz'}, 
+    headers={'User-Agent': 'gazpacho'}
+)
 ```
 
 
 
 #### Soup
 
-Use the `Soup` wrapper to turn raw HTML strings into parseable objects:
+Use the `Soup` wrapper on raw html to enable parsing:
 
 ```python
 soup = Soup(html)
@@ -69,19 +96,39 @@ soup = Soup(html)
 
 #### .find
 
-Use the `.find` method to target and extract HTML tags elements and elements:
+Use the `.find` method to target and extract HTML tags:
 
 ```python
-result = soup.find('span', {'id': 'As_a_figure_of_speech'})
-print(result)
-# <span class="mw-headline" id="As_a_figure_of_speech">As a figure of speech</span>
+h1 = soup.find('h1')
+print(h1)
+# <h1 id="firstHeading" class="firstHeading" lang="en">Soup</h1>
 ```
 
 
 
-#### mode
+#### attrs=
 
-Use the mode argument {`'auto', 'first', 'all'`} to adjust the return behaviour of `.find`:
+Use the `attrs` argument to isolate tags that contain specific HTML element attributes:
+
+```python
+soup.find('div', attrs={'class': 'section-soup'})
+```
+
+
+
+#### strict=
+
+Adjust the `strict` argument to partial match element attributes:
+
+```python
+soup.find('div', {'class': 'section-'}, strict=False)
+```
+
+
+
+#### mode=
+
+Override the mode argument {`'auto', 'first', 'all'`} to guarantee return behaviour:
 
 ```python
 print(soup.find('span', mode='first'))
@@ -92,113 +139,76 @@ len(soup.find('span', mode='all'))
 
 
 
-#### Chain
+#### dir()
 
-Use method chaining to join consecutive `.find` calls together:
+`Soup` objects have `html`, `tag`, `attrs`, and `text` attributes:
 
 ```python
-soup.find('div', {'class': 'section-speech'}).find('a')[-2]
-# <a href="https://en.wikipedia.org/wiki/Tag_soup" title="Tag soup">Tag soup</a>
+dir(h1)
+['attrs', 'find', 'html', 'tag', 'text']
+```
+
+Use them accordingly:
+
+```python
+print(h1.html)
+# '<h1 id="firstHeading" class="firstHeading" lang="en">Soup</h1>'
+print(h1.tag)
+# h1
+print(h1.attrs)
+# {'id': 'firstHeading', 'class': 'firstHeading', 'lang': 'en'}
+print(h1.text)
+# Soup
 ```
 
 
 
-#### text
+## Comparison
 
+#### gazpacho
 
+Using `get` and `Soup` to scrape [quotes.toscrape.com](http://quotes.toscrape.com):
 
-`Soup` objects returned by the `find` method will have `html`, `tag`, `attrs`, and `text` attributes:
+````python
+from gazpacho import get, Soup
 
-```python
-result = results[3]
-print(result.html)
-# <span class="mw-headline" id="In_Spain">In Spain</span>
-print(result.tag)
-# span
-print(result.attrs)
-# {'class': 'mw-headline', 'id': 'In_Spain'}
-print(result.text)
-# In Spain
-```
+url = 'http://quotes.toscrape.com/'
+html = get(url)
+soup = Soup(html)
+quotes = soup.find('div', {'class': 'quote'})
+
+def parse(quote):
+    return {
+        'author': quote.find('small').text,
+        'text': quote.find('span', {'class': 'text'}).text
+    }
+  
+[parse(quote) for quote in quotes]
+````
 
 
 
 #### BeautifulSoup
 
-gazpacho is a drop-in replacement for most projects that use requests and BeautifulSoup:
+gazpacho is a near drop-in replacement for BeautifulSoup:
 
 ```python
 import requests
 from bs4 import BeautifulSoup
-import pandas as pd
 
-url = 'https://www.capfriendly.com/browse/active/2020/salary?p=1'
+url = 'http://quotes.toscrape.com/'
 response = requests.get(url)
-soup = BeautifulSoup(response.text, 'lxml')
-df = pd.read_html(str(soup.find('table')))[0]
-print(df[['PLAYER', 'TEAM', 'SALARY', 'AGE']].head(3))
+html = response.text
+soup = BeautifulSoup(html)
+quotes = soup.find_all('div', class_='quote')
 
-#                PLAYER TEAM       SALARY  AGE
-# 0  1. Mitchell Marner  TOR  $16,000,000   22
-# 1     2. John Tavares  TOR  $15,900,000   28
-# 2  3. Auston Matthews  TOR  $15,900,000   21
-```
+def parse(quote):
+    return {
+        'author': quote.find('small').text,
+        'text': quote.find('span', class_= 'text').text
+    }
 
-Powered by gazpacho:
-
-```python
-from gazpacho import get, Soup
-import pandas as pd
-
-url = 'https://www.capfriendly.com/browse/active/2020/salary?p=1'
-response = get(url)
-soup = Soup(response)
-df = pd.read_html(str(soup.find('table')))[0]
-print(df[['PLAYER', 'TEAM', 'SALARY', 'AGE']].head(3))
-
-#                PLAYER TEAM       SALARY  AGE
-# 0  1. Mitchell Marner  TOR  $16,000,000   22
-# 1     2. John Tavares  TOR  $15,900,000   28
-# 2  3. Auston Matthews  TOR  $15,900,000   21
-```
-
-#### Scrapy
-
-
-
-#### Speed
-
-gazpacho is fast:
-
-```python
-from gazpacho import Soup
-
-%%timeit
-soup = Soup(html)
-soup.find('span', {'class': 'mw-headline'})
-# 15 ms ± 325 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
-```
-
-gazpacho is often 20-40% faster than BeautifulSoup:
-
-```python
-from bs4 import BeautifulSoup
-
-%%timeit
-soup = BeautifulSoup(html, 'lxml')
-soup.find('span', {'class': 'mw-headline'})
-# 19.4 ms ± 583 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
-```
-
-And 200-300% faster than requests-html:
-
-```python
-from requests_html import HTML
-
-%%timeit
-soup = HTML(html=html)
-soup.find('span.mw-headline')
-# 40.1 ms ± 418 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
+[parse(quote) for quote in quotes]
 ```
 
 
@@ -215,6 +225,6 @@ If you use gazpacho, consider adding the [![scraper: gazpacho](https://img.shiel
 
 #### Contribute
 
-For feature requests or bug reports, please use [Github Issues](https://github.com/maxhumber/gazpacho/issues).
+For feature requests or bug reports, please use [Github Issues](https://github.com/maxhumber/gazpacho/issues)
 
-For PRs, please read the [CONTRIBUTING.md](https://github.com/maxhumber/gazpacho/blob/master/CONTRIBUTING.md) document.
+For PRs, please read the [CONTRIBUTING.md](https://github.com/maxhumber/gazpacho/blob/master/CONTRIBUTING.md) document
