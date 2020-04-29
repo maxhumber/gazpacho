@@ -12,6 +12,10 @@ pip install -U gazpacho
 
 ---
 
+#### 0.9.3 (2020-04-29)
+
+- Updated the README (thanks for flagging the `lxml` error, [@koaning](https://github.com/koaning)!)
+
 #### 0.9.2 (2020-04-21)
 
 - Fixed `find(..., mode='first')` to return `None` and not an `IndexError` (thanks, [psyonara](https://github.com/maxhumber/gazpacho/issues/14)!)

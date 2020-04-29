@@ -163,57 +163,7 @@ print(h1.text)
 
 
 
-## Comparison
-
-#### gazpacho
-
-Using `get` and `Soup` to scrape [quotes.toscrape.com](http://quotes.toscrape.com):
-
-````python
-from gazpacho import get, Soup
-
-url = 'http://quotes.toscrape.com/'
-html = get(url)
-soup = Soup(html)
-quotes = soup.find('div', {'class': 'quote'})
-
-def parse(quote):
-    return {
-        'author': quote.find('small').text,
-        'text': quote.find('span', {'class': 'text'}).text
-    }
-  
-[parse(quote) for quote in quotes]
-````
-
-
-
-#### BeautifulSoup
-
-gazpacho is a near drop-in replacement for BeautifulSoup:
-
-```python
-import requests
-from bs4 import BeautifulSoup
-
-url = 'http://quotes.toscrape.com/'
-response = requests.get(url)
-html = response.text
-soup = BeautifulSoup(html)
-quotes = soup.find_all('div', class_='quote')
-
-def parse(quote):
-    return {
-        'author': quote.find('small').text,
-        'text': quote.find('span', class_= 'text').text
-    }
-
-[parse(quote) for quote in quotes]
-```
-
-
-
-#### Support
+## Support
 
 If you use gazpacho, consider adding the [![scraper: gazpacho](https://img.shields.io/badge/scraper-gazpacho-C6422C)](https://github.com/maxhumber/gazpacho) badge to your project README.md:
 
@@ -223,7 +173,7 @@ If you use gazpacho, consider adding the [![scraper: gazpacho](https://img.shiel
 
 
 
-#### Contribute
+## Contribute
 
 For feature requests or bug reports, please use [Github Issues](https://github.com/maxhumber/gazpacho/issues)
 
