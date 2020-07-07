@@ -5,12 +5,12 @@ with open("README.md", encoding="utf8") as f:
 
 setup(
     name="gazpacho",
-    version="0.9.3",
+    version="0.9.4",
     description="gazpacho is a web scraping library",
     long_description=long_description,
     long_description_content_type="text/markdown",
     classifiers=[
-        "Development Status :: 4 - Beta",
+        "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Natural Language :: English",
@@ -18,6 +18,7 @@ setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9"
     ],
     keywords=["web scraping", "web", "scraping", "BeautifulSoup", "requests"],
     url="https://github.com/maxhumber/gazpacho",

@@ -12,6 +12,12 @@ pip install -U gazpacho
 
 ---
 
+#### 0.9.4 (2020-07-07)
+
+- Feature: automagical json-to-dictionary return behaviour for `get`
+- Improvement: automatic missing URL protocol inference for `get`
+- Improvement: condensed HTTPError Exceptions
+
 #### 0.9.3 (2020-04-29)
 
 - Updated the README (thanks for flagging the `lxml` error, [@koaning](https://github.com/koaning)!)
