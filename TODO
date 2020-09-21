@@ -1,14 +1,21 @@
-post request
-download function
 void tag matching
 switch to counter
-typing
-auto reverse matching?
-pretty print html
 
+post request
+download function
+
+Soup.from_url()? clsmethod?
+conda releases
+logo update
+3.6, 3.7, 3.8, 3.9 tests
 
 find improvements
 - one, first
 - last
 - all, list
 - deprecate strict in favour of "partial"
+
+time permitting:
+typing
+auto reverse matching?
+pretty print html

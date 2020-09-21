@@ -54,8 +54,6 @@ def match(a, b, partial=True, *, strict=None):
     # True
     ```
     """
-    if strict:
-        partial = not strict
     if not a:
         return True
     if not a and not b:
@@ -77,7 +75,7 @@ def match(a, b, partial=True, *, strict=None):
     return True
 
 
-match(a={'foo': 'bar'}, b={'foo': 'bar baz'}, partial)
+# match(a={'foo': 'bar'}, b={'foo': 'bar baz'}, partial)
 
 
 def html_starttag_and_attrs(tag, attrs, startendtag=False):
