@@ -1,16 +1,9 @@
 import json
 from urllib.error import HTTPError as UrllibHTTPError
-from urllib.parse import quote, urlencode, urlsplit, urlunsplit
+from urllib.parse import urlencode
 from urllib.request import build_opener
 
-
-class HTTPError(Exception):
-    def __init__(self, code, msg):
-        self.code = code
-        self.msg = msg
-
-    def __str__(self):
-        return f"{self.code} - {self.msg}"
+from .utils import sanitize, HTTPError
 
 
 def get(url, params=None, headers=None):
@@ -28,11 +21,7 @@ def get(url, params=None, headers=None):
     get('https://httpbin.org/anything', {'soup': 'gazpacho'})
     ```
     """
-    scheme, netloc, path, query, fragment = urlsplit(url)
-    if not scheme:
-        scheme, netloc, path, query, fragment = urlsplit(f"http://{url}")
-    path = quote(path)
-    url = urlunsplit((scheme, netloc, path, query, fragment))
+    url = sanitize(url)
     opener = build_opener()
     if params:
         url += "?" + urlencode(params)
