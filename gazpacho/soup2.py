@@ -6,7 +6,7 @@ from gazpacho.utils import match, html_starttag_and_attrs
 class Soup2(HTMLParser):
 
     @staticmethod
-    def is_void_tag(tag):
+    def void(tag):
         return tag in ["img", "link"]
 
     def __repr__(self):
@@ -19,21 +19,20 @@ class Soup2(HTMLParser):
         self.attrs = None
         self.text = None
 
-    def handle_starts(self, tag, attrs):
+    def handle_start(self, tag, attrs):
         html, attrs = html_starttag_and_attrs(tag, attrs)
-        matching = match(attrs, self.attrs)
+        matching = match(self.attrs, attrs)
         self.counter[tag] += 1
         print(f'{tag} (start) +1 = {self.counter[tag]}')
 
-
     def handle_starttag(self, tag, attrs):
-        self.handle_starts(tag, attrs)
-        if self.is_void_tag(tag):
+        self.handle_start(tag, attrs)
+        if self.void(tag):
             self.counter[tag] -= 1
             print(f'{tag} (void)  -1 = {self.counter[tag]}')
 
     def handle_startendtag(self, tag, attrs):
-        self.handle_starts(tag, attrs)
+        self.handle_start(tag, attrs)
         self.counter[tag] -= 1
         print(f'{tag} (s/end) -1 = {self.counter[tag]}')
 
@@ -66,5 +65,5 @@ html = """
 """
 
 soup = Soup2(html)
-soup.find('div')
+soup.find('img')
 soup.counter
