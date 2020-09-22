@@ -5,7 +5,7 @@ with open("README.md", encoding="utf8") as f:
 
 setup(
     name="gazpacho",
-    version="0.9.4b",
+    version="1.0-alpha",
     description="gazpacho is a web scraping library",
     long_description=long_description,
     long_description_content_type="text/markdown",

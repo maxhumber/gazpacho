@@ -3,6 +3,7 @@ from html.parser import HTMLParser
 from re import sub as resub
 
 from .utils import match, html_starttag_and_attrs
+from .get import get
 
 class Soup(HTMLParser):
     """HTML Soup Parser
@@ -58,6 +59,19 @@ class Soup(HTMLParser):
 
     def __repr__(self):
         return self.html
+
+    # EXPERIMENTAL is this the right way?
+    # Soup.get(), Soup.post()
+    # Soup.from_url(method="GET/POST")
+    # Soup.read_url(method="GET/POST") like pandas
+    # Soup("www.example.com")
+    # Soup.url()
+    # import gazpacho as gz; gz.from_url; gz.Soup()
+    @classmethod
+    def get(cls, url, params=None, headers=None):
+        html = get(url, params, headers)
+        soup = Soup(html)
+        return soup
 
     @property
     def recording(self):
