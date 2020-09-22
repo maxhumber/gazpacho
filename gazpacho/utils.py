@@ -21,7 +21,7 @@ def rename_kwargs(func_name, kwargs, aliases):
             kwargs[new] = kwargs.pop(alias)
 
 @deprecated_alias(strict='partial')
-def match(a, b, partial=True, *, strict=None):
+def match(a, b, partial=True, *, strict=False):
     """Utility function to match two dictionaries
 
     Params:
@@ -60,23 +60,19 @@ def match(a, b, partial=True, *, strict=None):
         return True
     if a and not b:
         return False
-    for key, value in a.items():
-        if not b.get(key):
+    for k, v in a.items():
+        if not b.get(k):
             return False
         if strict:
-            if value == b.get(key):
+            if v == b.get(k):
                 continue
             else:
                 return False
-        if value in b.get(key):
+        if v in b.get(k):
             continue
         else:
             return False
     return True
-
-
-# match(a={'foo': 'bar'}, b={'foo': 'bar baz'}, partial)
-
 
 def html_starttag_and_attrs(tag, attrs, startendtag=False):
     """Utility functon to reconstruct starttag and attrs

@@ -60,6 +60,22 @@ def fake_html_4():
     """
     return html
 
+@pytest.fixture
+def fake_html_5():
+    html = """\
+    <div>
+        <div id="hi">
+            <div>Text is text</div>
+        </div>
+        <img src="test1.png">
+        <img src="test2.png">
+        <img src="test3.png" />
+        <div id="hi">Bye</div>
+        <div id="hi2">Gotcha</div>
+    </div>
+    """
+    return html
+
 
 def test_find(fake_html_1):
     soup = Soup(fake_html_1)
@@ -149,3 +165,9 @@ def test_find_no_match_auto(fake_html_1):
     soup = Soup(fake_html_1)
     result = soup.find("a", mode="auto")
     assert result == None
+
+
+def test_malformed_void_tags(fake_html_5):
+    soup = Soup(fake_html_5)
+    result = soup.find("img")
+    assert len(result) == 3

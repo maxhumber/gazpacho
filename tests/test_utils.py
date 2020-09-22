@@ -1,5 +1,5 @@
 from gazpacho import match
-from gazpacho import sanitize
+# from gazpacho import sanitize
 
 def test_attr_match():
     a = {"foo": "bar"}
@@ -61,6 +61,6 @@ def test_multiple_strict_fail():
     assert not match(a, b, strict=True)
 
 
-def test_sanitize():
-    url = "example.com"
-    assert sanitize(url) == "http://example.com/"
+# def test_sanitize():
+#     url = "example.com"
+#     assert sanitize(url) == "http://example.com/"

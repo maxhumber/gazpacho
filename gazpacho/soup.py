@@ -1,7 +1,8 @@
+from collections import Counter
 from html.parser import HTMLParser
-import re
-from .utils import match, html_starttag_and_attrs
+from re import sub as resub
 
+from .utils import match, html_starttag_and_attrs
 
 class Soup(HTMLParser):
     """HTML Soup Parser
@@ -41,13 +42,13 @@ class Soup(HTMLParser):
     ```
     """
 
-    def __init__(self, html):
+    def __init__(self, html=None):
         """Params:
 
         - html (str): HTML content to parse
         """
         super().__init__()
-        self.html = html
+        self.html = "" if not html else html
         self.tag = None
         self.attrs = None
         self.text = None
@@ -58,8 +59,12 @@ class Soup(HTMLParser):
     def __repr__(self):
         return self.html
 
+    @property
+    def recording(self):
+        return sum(self.counter.values()) > 0
+
     @staticmethod
-    def _empty_tag(tag):
+    def void(tag):
         return tag in [
             "area",
             "base",
@@ -78,43 +83,45 @@ class Soup(HTMLParser):
             "wbr",
         ]
 
-    def handle_starttag(self, tag, attrs):
+    def handle_start(self, tag, attrs):
         html, attrs = html_starttag_and_attrs(tag, attrs)
         matching = match(self.attrs, attrs, self.strict)
-        if tag == self.tag and matching and not self.count:
-            if not self._empty_tag(tag):
-                self.count += 1
-            self.group += 1
-            self.groups.append(Soup(""))
-            self.groups[self.group - 1].html += html
-            self.groups[self.group - 1].tag = tag
-            self.groups[self.group - 1].attrs = attrs
+
+        # if match and not already recording
+        if (tag == self.tag) and (matching) and (not self.recording):
+            self.groups.append(Soup())
+            self.groups[-1].tag = tag
+            self.groups[-1].attrs = attrs
+            self.groups[-1].html += html
+            self.counter[tag] += 1
             return
-        if self.count:
-            if not self._empty_tag(tag):
-                self.count += 1
-            self.groups[self.group - 1].html += html
-        return
+
+        # if already recording
+        if self.recording:
+            self.groups[-1].html += html
+            self.counter[tag] += 1
+
+    def handle_starttag(self, tag, attrs):
+        self.handle_start(tag, attrs)
+        if self.recording:
+            if self.void(tag):
+                self.counter[tag] -= 1
 
     def handle_startendtag(self, tag, attrs):
-        html, attrs = html_starttag_and_attrs(tag, attrs, True)
-        if self.count:
-            self.groups[self.group - 1].html += html
-        return
+        self.handle_start(tag, attrs)
+        if self.recording:
+            self.counter[tag] -= 1
 
     def handle_data(self, data):
-        if self.count:
-            if self.groups[self.group - 1].text is None:
-                self.groups[self.group - 1].text = data.strip()
-            self.groups[self.group - 1].html += data
-        return
+        if self.recording:
+            if self.groups[-1].text is None:
+                self.groups[-1].text = data.strip()
+            self.groups[-1].html += data
 
     def handle_endtag(self, tag):
-        if self.count:
-            end_tag = f"</{tag}>"
-            self.groups[self.group - 1].html += end_tag
-            self.count -= 1
-        return
+        if self.recording:
+            self.groups[-1].html += f"</{tag}>"
+            self.counter[tag] -= 1
 
     def remove_tags(self, strip=True):
         """Remove all HTML element tags
@@ -133,7 +140,7 @@ class Soup(HTMLParser):
         # Hi! I like soup.
         ```
         """
-        text = re.sub("<[^>]+>", "", self.html)
+        text = resub("<[^>]+>", "", self.html)
         if strip:
             text = " ".join(text.split())
         return text
@@ -171,8 +178,7 @@ class Soup(HTMLParser):
         self.tag = tag
         self.attrs = attrs
         self.strict = strict
-        self.count = 0
-        self.group = 0
+        self.counter = Counter()
         self.groups = []
         self.feed(self.html)
         if mode in ["auto", "first"] and not self.groups:
