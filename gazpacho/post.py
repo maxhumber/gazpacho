@@ -6,10 +6,8 @@ from gazpacho.utils import sanitize
 
 url = "https://scrape.world/demand"
 
-data = {
-    "date": str(datetime.datetime.now()),
-    "temperature": 21
-}
+data = {"date": str(datetime.datetime.now()), "temperature": 21}
+
 
 def post(url, data):
     url = sanitize(url)
@@ -19,5 +17,6 @@ def post(url, data):
     with urlopen(request) as response:
         response = json.loads(response.read().decode("utf-8"))
     return response
+
 
 post(url, data)

@@ -1,5 +1,7 @@
 from gazpacho import match
+
 # from gazpacho import sanitize
+
 
 def test_attr_match():
     a = {"foo": "bar"}

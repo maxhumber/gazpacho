@@ -60,6 +60,7 @@ def fake_html_4():
     """
     return html
 
+
 @pytest.fixture
 def fake_html_5():
     html = """\

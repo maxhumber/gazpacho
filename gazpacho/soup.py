@@ -5,6 +5,7 @@ from re import sub as resub
 from .utils import match, html_starttag_and_attrs
 from .get import get
 
+
 class Soup(HTMLParser):
     """HTML Soup Parser
 
