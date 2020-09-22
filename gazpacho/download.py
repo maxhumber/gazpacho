@@ -4,6 +4,7 @@ from gazpacho.utils import sanitize
 from io import BytesIO
 from urllib.request import urlopen
 
+# does this make sense? for multiple usage, try with wav? and videos?
 
 class Bytes(BytesIO):
     def __init__(self, url):
@@ -21,6 +22,8 @@ def download(url, path=None):
         return Bytes(url)
     urlretrieve(url, path)
 
+# from gazpacho import download
+# asset()
 
 # testing
 
@@ -34,3 +37,9 @@ Image.open(bo)
 
 download(url, path)
 download(url)
+
+
+soup.download("/source")
+
+
+#

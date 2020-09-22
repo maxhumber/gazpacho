@@ -1,6 +1,6 @@
 from collections import Counter
 from html.parser import HTMLParser
-from re import sub as resub
+import re
 
 from .utils import match, html_starttag_and_attrs
 from .get import get
@@ -56,6 +56,7 @@ class Soup(HTMLParser):
         self.text = None
 
     def __dir__(self):
+        # what to expose here?
         return ["html", "tag", "attrs", "text", "find"]
 
     def __repr__(self):
@@ -74,6 +75,7 @@ class Soup(HTMLParser):
         soup = Soup(html)
         return soup
 
+    # is recording the right word?
     @property
     def recording(self):
         return sum(self.counter.values()) > 0
@@ -100,7 +102,7 @@ class Soup(HTMLParser):
 
     def handle_start(self, tag, attrs):
         html, attrs = html_starttag_and_attrs(tag, attrs)
-        matching = match(self.attrs, attrs, self.strict)
+        matching = match(self.attrs, attrs, partial=self.partial)
 
         # if match and not already recording
         if (tag == self.tag) and (matching) and (not self.recording):
@@ -155,12 +157,13 @@ class Soup(HTMLParser):
         # Hi! I like soup.
         ```
         """
-        text = resub("<[^>]+>", "", self.html)
+        text = re.sub("<[^>]+>", "", self.html)
         if strip:
             text = " ".join(text.split())
         return text
 
-    def find(self, tag, attrs=None, mode="auto", strict=False):
+    # need a strict deprecation message here
+    def find(self, tag, attrs=None, *, mode="auto", partial=True):
         """Return matching HTML elements
 
         Params:
@@ -186,16 +189,35 @@ class Soup(HTMLParser):
         print(result)
         # <p id="foo">bar</p>
 
-        soup.find('p', {'id': 'foo'}, strict=True)
+        soup.find('p', {'id': 'foo'}, partial=False)
         # [<p id="foo">baz</p>]
         ```
         """
         self.tag = tag
         self.attrs = attrs
-        self.strict = strict
+        self.partial = partial
         self.counter = Counter()
         self.groups = []
         self.feed(self.html)
+
+        # does this make it more confusing? Undecided
+        # first
+        modeX = ["first", "head"] # leave off head
+
+        # last
+        modeX = ["last", "tail"]
+
+        # random
+        modeX = ["one", "random", "sample"]
+
+        # all
+        modeX = ["all", "list"]
+
+        # automatic
+        modeX = ["auto", "automatic"] # could probably make this no problem
+
+        # if wrong mode, raise error
+
         if mode in ["auto", "first"] and not self.groups:
             return None
         if mode == "all":

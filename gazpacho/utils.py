@@ -1,51 +1,25 @@
 from urllib.parse import quote, urlsplit, urlunsplit
 
-import functools
-import warnings
-
-
-def deprecated_alias(**aliases):
-    def deco(f):
-        @functools.wraps(f)
-        def wrapper(*args, **kwargs):
-            rename_kwargs(f.__name__, kwargs, aliases)
-            return f(*args, **kwargs)
-
-        return wrapper
-
-    return deco
-
-
-def rename_kwargs(func_name, kwargs, aliases):
-    for alias, new in aliases.items():
-        if alias in kwargs:
-            if new in kwargs:
-                raise TypeError(f"{func_name} received both {alias} and {new}")
-            warnings.warn(f"{alias} is deprecated; use {new}", DeprecationWarning)
-            kwargs[new] = kwargs.pop(alias)
-
-
-@deprecated_alias(strict="partial")
-def match(a, b, partial=True, *, strict=False):
-    """Utility function to match two dictionaries
+def match(a: dict, b: dict, *, partial: bool=False) -> bool:
+    """Match two dictionaries
 
     Params:
 
-    - a (dict): Query dictionary
-    - b (dict): Dictionary to match
-    - strict (bool): Require exact matching
+    - a: query dict
+    - b: dict to match
+    - partial: allow partial match
 
     Examples:
 
     ```
     a = {'foo': 'bar'}
     b = {'foo': 'bar baz'}
-    match(a, b)
+    match(a, b, partial=True)
     # True
 
     a = {'foo': 'bar'}
     b = {'foo': 'bar baz'}
-    match(a, b, strict=True)
+    match(a, b)
     # False
 
     a = {}
@@ -59,21 +33,19 @@ def match(a, b, partial=True, *, strict=False):
     # True
     ```
     """
-    if not a:
+    if (not a) or (not a and not b):
         return True
-    if not a and not b:
-        return True
-    if a and not b:
+    if a and (not b):
         return False
-    for k, v in a.items():
-        if not b.get(k):
+    for key, value in a.items():
+        if not b.get(key):
             return False
-        if strict:
-            if v == b.get(k):
+        if not partial:
+            if value == b.get(key):
                 continue
             else:
                 return False
-        if v in b.get(k):
+        if value in b.get(key):
             continue
         else:
             return False
@@ -81,19 +53,19 @@ def match(a, b, partial=True, *, strict=False):
 
 
 def html_starttag_and_attrs(tag, attrs, startendtag=False):
-    """Utility functon to reconstruct starttag and attrs
+    """Reconstruct html and attrs from HTMLParser
 
     Params:
 
-    - tag (str): HTML element tag
-    - attrs (list): HTML element attributes formatted as a list of tuples
-    - startendtag (bool, False): Flag to handle startend tags
+    - tag: element tag
+    - attrs: attributes as a list of tuples
+    - startendtag: flag for start-end tags
 
     Example:
 
     ```
-    html_starttag_and_attrs('a', [('href', 'localhost:8000')])
-    # ('<a href="localhost:8000">', {'href': 'localhost:8000'})
+    html_starttag_and_attrs('img', [('src', 'example.png')])
+    # ('<img src="example.png">', {'src': 'example.png'})
     ```
     """
     if attrs:
@@ -110,7 +82,7 @@ def html_starttag_and_attrs(tag, attrs, startendtag=False):
     return html, attrs
 
 
-def sanitize(url):
+def sanitize(url: str) -> str:
     scheme, netloc, path, query, fragment = urlsplit(url)
     if not scheme:
         scheme, netloc, path, query, fragment = urlsplit(f"http://{url}")

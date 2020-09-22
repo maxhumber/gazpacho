@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 with open("README.md", encoding="utf8") as f:
     long_description = f.read()
@@ -20,12 +20,12 @@ setup(
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
     ],
-    keywords=["web scraping", "web", "scraping", "BeautifulSoup", "requests"],
+    keywords=["web scraping", "BeautifulSoup", "requests"],
     url="https://github.com/maxhumber/gazpacho",
     author="Max Humber",
     author_email="max.humber@gmail.com",
     license="MIT",
-    packages=["gazpacho"],
+    packages=find_packages(),
     python_requires=">=3.6",
     setup_requires=["setuptools>=38.6.0"],
 )

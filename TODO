@@ -1,17 +1,14 @@
 post request
 
-conda releases
-logo update
-
 find improvements
 - deprecate strict in favour of "partial"
 
-- one, first, head
+- first/one/head, all/list, auto/automatic
 - last, tail
 - all, list
 
-time permitting:
-typing
+conda releases
+logo update
+
 auto reverse matching?
-pretty print html
 string matching on attrs
