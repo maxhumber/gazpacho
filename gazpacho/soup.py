@@ -1,57 +1,49 @@
 from __future__ import annotations
-from typing import Dict, Optional, Tuple, Union, List
-
 from collections import Counter
 from html.parser import HTMLParser
-import re
 import random
+import re
+from typing import Dict, Optional, Tuple, Union, List
 
 from .utils import match, html_starttag_and_attrs
 from .get import get
 
-
 class Soup(HTMLParser):
-    """HTML Soup Parser
+    """\
+    HTML Soup Parser
 
     Attributes:
 
-    - html (str): HTML content to parse
-    - tag (str, None): HTML element tag returned by find
-    - attrs (dict, None): HTML element attributes returned by find
-    - text (str, None): HTML element text returned by find
+    - html: content to parse
+    - tag: element tag
+    - attrs: element attributes
+    - text: text data
 
     Methods:
 
-    - find: return matching HTML elements {'auto', 'all', 'first'}
+    - find: matching content by tag (and attributes)
+    - strip:
+    - get: initialize instance with gazpacho.get
+    - post: initialize instance with gazpacho.post
 
     Examples:
 
     ```
-    from gazpacho import Soup
+    >>> from gazpacho import Soup
 
-    html = "<div><p id='foo'>bar</p><p id='foo'>baz</p><p id='zoo'>bat</p></div>"
-    soup = Soup(html)
+    >>> html = "<div><p class='a'>1</p><p class='a'>2</p><p class='b'>3</p></div>"
+    >>> url = "https://www.exaxmple.com"
 
-    soup.find('p', {'id': 'foo'})
-    # [<p id="foo">bar</p>, <p id="foo">baz</p>]
-
-    result = soup.find('p', {'id': 'foo'}, mode='first')
-    print(result)
-    # <p id="foo">bar</p>
-
-    result = soup.find('p', {'id': 'zoo'}, mode='auto')
-    print(result)
-    # <p id="zoo">bat</p>
-
-    print(result.text)
-    # bat
+    >>> soup = Soup(html)
+    >>> soup = Soup.get(url)
+    >>> soup = Soup.post(url, {"foo": "bar"})
     ```
     """
-
     def __init__(self, html: Optional[str] = None) -> None:
-        """Params:
+        """\
+        Params:
 
-        - html (str): HTML content to parse
+        - html: content to parse
         """
         super().__init__()
         self.html = "" if not html else html
@@ -60,31 +52,34 @@ class Soup(HTMLParser):
         self.text = None
 
     def __dir__(self):
-        # what to expose here?
-        return ["html", "tag", "attrs", "text", "find"]
+        ex = sorted(re.findall("(?<=\-\s)(.*)(?=\:)", self.__doc__))
+        return ex
 
     def __repr__(self) -> str:
         return self.html
 
-    # EXPERIMENTAL is this the right way?
-    # Soup.get(), Soup.post()
-    # Soup.from_url(method="GET/POST")
-    # Soup.read_url(method="GET/POST") like pandas
-    # Soup("www.example.com")
-    # Soup.url()
-    # import gazpacho as gz; gz.from_url; gz.Soup()
+    # need to write tests
     @classmethod
-    def get(cls, url, params=None, headers=None) -> Soup:
+    def get(
+        cls,
+        url: str,
+        params: Optional[Dict[str, str]] = None,
+        headers: Optional[Dict[str, str]] = None,
+    ) -> Soup:
+        """\
+        ...
+        TODO
+        ...
+        """
         html = get(url, params, headers)
         return cls(html)
 
-    # is recording the right word?
     @property
-    def recording(self) -> bool:
+    def _active(self) -> bool:
         return sum(self.counter.values()) > 0
 
     @staticmethod
-    def void(tag: str) -> bool:
+    def _void(tag: str) -> bool:
         return tag in [
             "area",
             "base",
@@ -103,12 +98,11 @@ class Soup(HTMLParser):
             "wbr",
         ]
 
-    def handle_start(self, tag: str, attrs: List[Tuple[str, str]]) -> None:
+    def _handle_start(self, tag: str, attrs: List[Tuple[str, str]]) -> None:
         html, attrs = html_starttag_and_attrs(tag, attrs)
         matching = match(self.attrs, attrs, partial=self.partial)
 
-        # if match and not already recording
-        if (tag == self.tag) and (matching) and (not self.recording):
+        if (tag == self.tag) and (matching) and (not self._active):
             self.groups.append(Soup())
             self.groups[-1].tag = tag
             self.groups[-1].attrs = attrs
@@ -116,54 +110,62 @@ class Soup(HTMLParser):
             self.counter[tag] += 1
             return
 
-        # if already recording
-        if self.recording:
+        if self._active:
             self.groups[-1].html += html
             self.counter[tag] += 1
 
     def handle_starttag(self, tag: str, attrs: List[Tuple[str, str]]) -> None:
-        self.handle_start(tag, attrs)
-        if self.recording:
-            if self.void(tag):
+        self._handle_start(tag, attrs)
+        if self._active:
+            if self._void(tag):
                 self.counter[tag] -= 1
 
     def handle_startendtag(self, tag: str, attrs: List[Tuple[str, str]]) -> None:
-        self.handle_start(tag, attrs)
-        if self.recording:
+        self._handle_start(tag, attrs)
+        if self._active:
             self.counter[tag] -= 1
 
     def handle_data(self, data: str) -> None:
-        if self.recording:
+        if self._active:
             if self.groups[-1].text is None:
                 self.groups[-1].text = data.strip()
             self.groups[-1].html += data
 
     def handle_endtag(self, tag: str) -> None:
-        if self.recording:
+        if self._active:
             self.groups[-1].html += f"</{tag}>"
             self.counter[tag] -= 1
 
-    def remove_tags(self, strip: bool = True) -> str:
-        """Remove all HTML element tags
+    def strip(self, whitespace: bool = True) -> str:
+        """\
+        Remove brackets, tags, and attributes
 
         Params:
 
-        - strip (bool, True): Strip all extra whitespace
+        - whitespace: remove extra whitespace
 
         Example:
 
         ```
-        html = '<span>Hi! I like <b>soup</b>.</span>'
-        soup = Soup(html)
-        soup.remove_tags()
-
-        # Hi! I like soup.
+        >>> html = "<span>AB<b>C</b>D</span>"
+        >>> soup = Soup(html)
+        >>> soup.find("span").text
+        AB
+        >>> soup.strip()
+        ABCD
         ```
         """
         text = re.sub("<[^>]+>", "", self.html)
-        if strip:
+        if whitespace:
             text = " ".join(text.split())
         return text
+
+    # # deprecate
+    # def remove_tags(self, strip: bool = True) -> str:
+    #     text = re.sub("<[^>]+>", "", self.html)
+    #     if strip:
+    #         text = " ".join(text.split())
+    #     return text
 
     # need a strict deprecation message here
     # accept strict as an argument for backwards compat
@@ -172,10 +174,12 @@ class Soup(HTMLParser):
         tag: str,
         attrs: Optional[Dict[str, str]] = None,
         *,
-        mode="auto",
-        partial=True,
+        mode: str = "auto",
+        partial: bool = True,
+        strict: Optional[bool] = None,
     ) -> Optional[Union[List[Soup], Soup]]:
-        """Return matching HTML elements
+        """\
+        Return matching HTML elements
 
         Params:
 
@@ -187,23 +191,24 @@ class Soup(HTMLParser):
         Examples:
 
         ```
-        html = "<div><p id='foo foo-striped'>bar</p><p id='foo'>baz</p><p id='zoo'>bat</p></div>"
-        soup = Soup(html)
+        >>> soup.find('p', {'class': 'a'})
+        [<p class="a">1</p>, <p class="a">2</p>]
 
-        soup.find('p')
-        # [<p id="foo foo-striped">bar</p>, <p id="foo">baz</p>, <p id="zoo">bat</p>]
+        >>> soup.find('p', {'class': 'a'}, mode='first')
+        <p class="a">1</p>
 
-        soup.find('p', {'id': 'foo'})
-        # [<p id="foo foo-striped">bar</p>, <p id="foo">baz</p>]
+        >>> result = soup.find('p', {'class': 'b'}, mode='auto')
+        >>> print(result)
+        <p class="b">3</p>
 
-        result = soup.find('p', {'id': 'foo'}, mode='first')
-        print(result)
-        # <p id="foo">bar</p>
-
-        soup.find('p', {'id': 'foo'}, partial=False)
-        # [<p id="foo">baz</p>]
+        >>> print(result.text)
+        3
         ```
         """
+        # deprecation
+        if strict is not None:
+            raise
+
         self.tag = tag
         self.attrs = attrs
         self.partial = partial

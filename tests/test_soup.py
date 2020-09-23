@@ -4,7 +4,8 @@ from gazpacho.soup import Soup
 
 @pytest.fixture
 def fake_html_1():
-    html = """<div class="foo" id="bar">
+    html = """\
+    <div class="foo" id="bar">
       <p>'IDK!'</p>
       <br/>
       <div class='baz'>
@@ -14,26 +15,30 @@ def fake_html_1():
       </div>
       <p id='blarg'>Try for 2</p>
       <div class='baz'>Oh No!</div>
-    </div>"""
+    </div>
+    """
     return html
 
 
 @pytest.fixture
 def fake_html_2():
-    html = """<div id='a' class='foo'>
+    html = """\
+    <div id='a' class='foo'>
       <div id='b' class='foo'>
       <p>bar</p>
       </div>
     </div>
     <div id='c' class='foo foo-striped'>
       <span>baz</span>
-    </div>"""
+    </div>
+    """
     return html
 
 
 @pytest.fixture
 def fake_html_3():
-    html = """<div class="foo-list">
+    html = """\
+    <div class="foo-list">
       <a class="foo" href="/foo/1">
         <div class="foo-image-container">
           <img src="hi.png">
@@ -52,7 +57,7 @@ def fake_html_3():
 
 @pytest.fixture
 def fake_html_4():
-    html = """
+    html = """\
     <div class="foo-list">
       <span>I like <b>soup</b> and I really like <i>cold</i> soup</span>
       <p>I guess hot soup is okay too</p>
