@@ -3,7 +3,7 @@ from collections import Counter
 from html.parser import HTMLParser
 import random
 import re
-from typing import Dict, Optional, Tuple, Union, List
+from typing import Any, Dict, Optional, Tuple, Union, List
 import warnings
 
 from .get import get
@@ -52,9 +52,9 @@ class Soup(HTMLParser):
         """
         super().__init__()
         self.html = "" if not html else html
-        self.tag = None
-        self.attrs = None
-        self.text = None
+        self.tag: Optional[str] = None
+        self.attrs: Optional[Dict[Any, Any]] = None
+        self.text: Optional[str] = None
 
     def __dir__(self):
         return ["html", "tag", "attrs", "text", "find", "strip", "get"]
@@ -102,8 +102,8 @@ class Soup(HTMLParser):
         ]
 
     def _handle_start(self, tag: str, attrs: List[Tuple[str, Optional[str]]]) -> None:
-        html, attrs = recover_html_and_attrs(tag, attrs)
-        matching = match(self.attrs, attrs, partial=self.partial)
+        html, attrs_dict = recover_html_and_attrs(tag, attrs)
+        matching = match(self.attrs, attrs_dict, partial=self.partial)
 
         if (tag == self.tag) and (matching) and (not self._active):
             self.groups.append(Soup())
@@ -210,7 +210,7 @@ class Soup(HTMLParser):
         # 3
         ```
         """
-        self.counter = Counter()
+        self.counter: Counter = Counter()
         self.groups = []
         self.tag = tag
         self.attrs = attrs

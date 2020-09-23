@@ -1,4 +1,5 @@
-fix soup dir
+fix mypy
+
 post request (dont add to soup get)
 
 soup tests:
@@ -19,19 +20,9 @@ utils tests:
 
 ----
 
-make sure types are working with mypy
-
 mypy auto checking
 black auto
-monkeytype auto apply
-
 
 conda releases
 
 auto reverse matching?
-string matching on attrs
-
----
-
-monkeytype run `which pytest`
-monkeytype apply gazpacho

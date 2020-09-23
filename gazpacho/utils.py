@@ -1,8 +1,8 @@
-from typing import Any, Dict, List, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union
 from urllib.parse import quote, urlsplit, urlunsplit
 
 
-def match(a: dict, b: dict, *, partial: bool = False) -> bool:
+def match(a: Dict[Any, Any], b: Dict[Any, Any], *, partial: bool = False) -> bool:
     """Match two dictionaries
 
     Arguments:
@@ -39,15 +39,16 @@ def match(a: dict, b: dict, *, partial: bool = False) -> bool:
         return True
     if a and (not b):
         return False
-    for key, value in a.items():
-        if not b.get(key):
+    for key, lhs in a.items():
+        rhs = b.get(key)
+        if not rhs:
             return False
         if not partial:
-            if value == b.get(key):
+            if lhs == rhs:
                 continue
             else:
                 return False
-        if value in b.get(key):
+        if lhs in rhs:
             continue
         else:
             return False
@@ -55,7 +56,7 @@ def match(a: dict, b: dict, *, partial: bool = False) -> bool:
 
 
 def recover_html_and_attrs(
-    tag: str, attrs: List[Tuple[str, str]], startendtag: bool = False
+    tag: str, attrs: List[Tuple[str, Optional[str]]], startendtag: bool = False
 ) -> Tuple[str, Dict[str, str]]:
     """\
     Recover html and attrs from HTMLParser feed
