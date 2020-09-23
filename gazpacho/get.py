@@ -4,9 +4,16 @@ from urllib.parse import urlencode
 from urllib.request import build_opener
 
 from .utils import sanitize, HTTPError
+from typing import Dict, Optional, Union
 
 
-def get(url, params=None, headers=None):
+def get(
+    url: str,
+    params: Optional[Dict[str, str]] = None,
+    headers: Optional[Dict[str, str]] = None,
+) -> Union[
+    Dict[str, Dict[str, str]], Dict[str, Optional[Union[Dict[str, str], str]]], str
+]:
     """Return the contents from a URL
 
     Params:

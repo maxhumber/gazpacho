@@ -1,4 +1,11 @@
+monkeytype run `which pytest`
+monkeytype apply gazpacho
+
 post request
+
+mypy auto checking
+black auto
+monkeytype auto apply
 
 find improvements
 - deprecate strict in favour of "partial"
@@ -8,7 +15,6 @@ find improvements
 - all, list
 
 conda releases
-logo update
 
 auto reverse matching?
 string matching on attrs

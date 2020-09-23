@@ -2,9 +2,8 @@
   <img src="https://raw.githubusercontent.com/maxhumber/gazpacho/master/images/gazpacho.png" height="300px" alt="gazpacho">
 </h3>
 <p align="center">
-  <a href="https://github.com/maxhumber/gazpacho/"><img alt="Dependencies" src="https://img.shields.io/badge/scraper-gazpacho-C6422C"></a>
-  <a href="https://github.com/maxhumber/gazpacho/blob/master/setup.py"><img alt="Dependencies" src="https://img.shields.io/badge/dependencies-0-brightgreen"></a>
   <a href="https://travis-ci.org/maxhumber/gazpacho"><img alt="Travis" src="https://img.shields.io/travis/maxhumber/gazpacho.svg"></a>
+  <a href="https://github.com/maxhumber/gazpacho/blob/master/setup.py"><img alt="Dependencies" src="https://img.shields.io/badge/dependencies-0-brightgreen"></a>
   <a href="https://pypi.python.org/pypi/gazpacho"><img alt="PyPI" src="https://img.shields.io/pypi/v/gazpacho.svg"></a>
   <a href="https://pepy.tech/project/gazpacho"><img alt="Downloads" src="https://pepy.tech/badge/gazpacho"></a>  
 </p>
@@ -13,7 +12,7 @@
 
 ## About
 
-gazpacho is a simple, fast, and modern web scraping library. The library is stable, actively maintained, and installed with zero dependencies. 
+gazpacho is a simple, fast, and modern web scraping library. The library is stable, actively maintained, and installed with zero dependencies.
 
 
 
@@ -76,8 +75,8 @@ Adjust `get` requests with optional params and headers:
 
 ```python
 get(
-    url='https://httpbin.org/anything', 
-    params={'foo': 'bar', 'bar': 'baz'}, 
+    url='https://httpbin.org/anything',
+    params={'foo': 'bar', 'bar': 'baz'},
     headers={'User-Agent': 'gazpacho'}
 )
 ```

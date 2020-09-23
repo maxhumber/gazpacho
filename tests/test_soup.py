@@ -1,5 +1,5 @@
 import pytest
-from gazpacho import Soup
+from gazpacho.soup import Soup
 
 
 @pytest.fixture
@@ -115,9 +115,15 @@ def test_find_nested_groups(fake_html_2):
     assert len(results) == 2
 
 
+# def test_find_strict(fake_html_2):
+#     soup = Soup(fake_html_2)
+#     result = soup.find("div", {"class": "foo"}, strict=True, mode="all")
+#     assert len(result) == 1
+
+
 def test_find_strict(fake_html_2):
     soup = Soup(fake_html_2)
-    result = soup.find("div", {"class": "foo"}, strict=True, mode="all")
+    result = soup.find("div", {"class": "foo"}, partial=False, mode="all")
     assert len(result) == 1
 
 

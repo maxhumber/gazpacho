@@ -33,16 +33,19 @@ from gazpacho import Soup
 import re
 import json
 
+
 def find_block(target, html):
-    return re.findall(f'<.*>{target}</.*>', html)[0]
+    return re.findall(f"<.*>{target}</.*>", html)[0]
+
 
 def extract_tag_and_attrs(block):
     tag = re.findall("(?<=\<)(.*?)(?=\s)", block)[0]
     attrs_string = re.findall("(?<=\s)(.*?)(?=\>)", block)[0]
-    attrs_raw = attrs_string.split(' ')
-    attrs_list = [a.split('=') for a in attrs_raw]
+    attrs_raw = attrs_string.split(" ")
+    attrs_list = [a.split("=") for a in attrs_raw]
     attrs = {k: json.loads(v) for k, v in attrs_list}
     return tag, attrs
+
 
 # test
 
@@ -56,7 +59,7 @@ html = """\
     </div>
 """
 
-target = '19.99'
+target = "19.99"
 
 block = find_block(target, html)
 tag, attrs = extract_tag_and_attrs(block)
@@ -81,7 +84,6 @@ soup.find({tag}, {attrs})
 """
 
 print(template)
-
 
 
 #

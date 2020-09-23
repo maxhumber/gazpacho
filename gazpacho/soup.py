@@ -1,6 +1,10 @@
+from __future__ import annotations
+from typing import Dict, Optional, Tuple, Union, List
+
 from collections import Counter
 from html.parser import HTMLParser
 import re
+import random
 
 from .utils import match, html_starttag_and_attrs
 from .get import get
@@ -44,7 +48,7 @@ class Soup(HTMLParser):
     ```
     """
 
-    def __init__(self, html=None):
+    def __init__(self, html: Optional[str] = None) -> None:
         """Params:
 
         - html (str): HTML content to parse
@@ -59,7 +63,7 @@ class Soup(HTMLParser):
         # what to expose here?
         return ["html", "tag", "attrs", "text", "find"]
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return self.html
 
     # EXPERIMENTAL is this the right way?
@@ -70,18 +74,17 @@ class Soup(HTMLParser):
     # Soup.url()
     # import gazpacho as gz; gz.from_url; gz.Soup()
     @classmethod
-    def get(cls, url, params=None, headers=None):
+    def get(cls, url, params=None, headers=None) -> Soup:
         html = get(url, params, headers)
-        soup = Soup(html)
-        return soup
+        return cls(html)
 
     # is recording the right word?
     @property
-    def recording(self):
+    def recording(self) -> bool:
         return sum(self.counter.values()) > 0
 
     @staticmethod
-    def void(tag):
+    def void(tag: str) -> bool:
         return tag in [
             "area",
             "base",
@@ -100,7 +103,7 @@ class Soup(HTMLParser):
             "wbr",
         ]
 
-    def handle_start(self, tag, attrs):
+    def handle_start(self, tag: str, attrs: List[Tuple[str, str]]) -> None:
         html, attrs = html_starttag_and_attrs(tag, attrs)
         matching = match(self.attrs, attrs, partial=self.partial)
 
@@ -118,29 +121,29 @@ class Soup(HTMLParser):
             self.groups[-1].html += html
             self.counter[tag] += 1
 
-    def handle_starttag(self, tag, attrs):
+    def handle_starttag(self, tag: str, attrs: List[Tuple[str, str]]) -> None:
         self.handle_start(tag, attrs)
         if self.recording:
             if self.void(tag):
                 self.counter[tag] -= 1
 
-    def handle_startendtag(self, tag, attrs):
+    def handle_startendtag(self, tag: str, attrs: List[Tuple[str, str]]) -> None:
         self.handle_start(tag, attrs)
         if self.recording:
             self.counter[tag] -= 1
 
-    def handle_data(self, data):
+    def handle_data(self, data: str) -> None:
         if self.recording:
             if self.groups[-1].text is None:
                 self.groups[-1].text = data.strip()
             self.groups[-1].html += data
 
-    def handle_endtag(self, tag):
+    def handle_endtag(self, tag: str) -> None:
         if self.recording:
             self.groups[-1].html += f"</{tag}>"
             self.counter[tag] -= 1
 
-    def remove_tags(self, strip=True):
+    def remove_tags(self, strip: bool = True) -> str:
         """Remove all HTML element tags
 
         Params:
@@ -163,7 +166,15 @@ class Soup(HTMLParser):
         return text
 
     # need a strict deprecation message here
-    def find(self, tag, attrs=None, *, mode="auto", partial=True):
+    # accept strict as an argument for backwards compat
+    def find(
+        self,
+        tag: str,
+        attrs: Optional[Dict[str, str]] = None,
+        *,
+        mode="auto",
+        partial=True,
+    ) -> Optional[Union[List[Soup], Soup]]:
         """Return matching HTML elements
 
         Params:
@@ -202,7 +213,7 @@ class Soup(HTMLParser):
 
         # does this make it more confusing? Undecided
         # first
-        modeX = ["first", "head"] # leave off head
+        modeX = ["first", "head"]  # leave off head
 
         # last
         modeX = ["last", "tail"]
@@ -214,7 +225,7 @@ class Soup(HTMLParser):
         modeX = ["all", "list"]
 
         # automatic
-        modeX = ["auto", "automatic"] # could probably make this no problem
+        modeX = ["auto", "automatic"]  # could probably make this no problem
 
         # if wrong mode, raise error
 

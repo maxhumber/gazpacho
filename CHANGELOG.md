@@ -14,6 +14,7 @@ pip install -U gazpacho
 - Soup.get() class method
 - 3.6, .7, .8, .9 testing
 - download function
+- partial over strict
 
 ---
 

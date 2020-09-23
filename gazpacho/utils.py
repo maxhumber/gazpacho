@@ -1,6 +1,8 @@
 from urllib.parse import quote, urlsplit, urlunsplit
+from typing import Any, Dict, List, Tuple, Union
 
-def match(a: dict, b: dict, *, partial: bool=False) -> bool:
+
+def match(a: dict, b: dict, *, partial: bool = False) -> bool:
     """Match two dictionaries
 
     Params:
@@ -52,7 +54,9 @@ def match(a: dict, b: dict, *, partial: bool=False) -> bool:
     return True
 
 
-def html_starttag_and_attrs(tag, attrs, startendtag=False):
+def html_starttag_and_attrs(
+    tag: str, attrs: List[Tuple[str, str]], startendtag: bool = False
+) -> Union[Tuple[str, Dict[str, str]], Tuple[str, Dict[Any, Any]]]:
     """Reconstruct html and attrs from HTMLParser
 
     Params:
@@ -92,7 +96,7 @@ def sanitize(url: str) -> str:
 
 
 class HTTPError(Exception):
-    def __init__(self, code, msg):
+    def __init__(self, code: int, msg: str) -> None:
         self.code = code
         self.msg = msg
 

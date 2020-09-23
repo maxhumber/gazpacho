@@ -1,5 +1,5 @@
 import pytest
-from gazpacho import get
+from gazpacho.get import get
 
 
 def test_get():

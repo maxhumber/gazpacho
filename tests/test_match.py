@@ -1,4 +1,4 @@
-from gazpacho import match
+from gazpacho.utils import match
 
 
 def test_attr_match():
