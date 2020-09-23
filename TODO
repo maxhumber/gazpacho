@@ -1,20 +1,32 @@
-monkeytype run `which pytest`
-monkeytype apply gazpacho
+fix soup dir
+post request (dont add to soup get)
 
-post request
+soup tests:
+  fix all old remove_tags references
+  deprecation for remove_tags
+  deprecation for strict
+  new .strip()
+  new random return type
+  new last return type
+  test value error return
+  void tag images (original problem)
+  get init cls method
+
+----
+
+make sure types are working with mypy
 
 mypy auto checking
 black auto
 monkeytype auto apply
 
-find improvements
-- deprecate strict in favour of "partial"
-
-- first/one/head, all/list, auto/automatic
-- last, tail
-- all, list
 
 conda releases
 
 auto reverse matching?
 string matching on attrs
+
+---
+
+monkeytype run `which pytest`
+monkeytype apply gazpacho

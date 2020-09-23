@@ -1,5 +1,5 @@
-from urllib.parse import quote, urlsplit, urlunsplit
 from typing import Any, Dict, List, Tuple, Union
+from urllib.parse import quote, urlsplit, urlunsplit
 
 
 def match(a: dict, b: dict, *, partial: bool = False) -> bool:
@@ -54,12 +54,12 @@ def match(a: dict, b: dict, *, partial: bool = False) -> bool:
     return True
 
 
-def html_starttag_and_attrs(
+def recover_html_and_attrs(
     tag: str, attrs: List[Tuple[str, str]], startendtag: bool = False
-) -> Union[Tuple[str, Dict[str, str]], Tuple[str, Dict[Any, Any]]]:
+) -> Tuple[str, Dict[str, str]]:
     """Reconstruct html and attrs from HTMLParser
 
-    Params:
+    Arguments:
 
     - tag: element tag
     - attrs: attributes as a list of tuples
@@ -68,8 +68,8 @@ def html_starttag_and_attrs(
     Example:
 
     ```
-    html_starttag_and_attrs('img', [('src', 'example.png')])
-    # ('<img src="example.png">', {'src': 'example.png'})
+    recover_html_and_attrs('img', [('src', 'example.png')])
+    # ("<img src='example.png'>", {'src': 'example.png'})
     ```
     """
     if attrs:

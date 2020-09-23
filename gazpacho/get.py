@@ -12,13 +12,13 @@ def get(
     params: Optional[Dict[str, str]] = None,
     headers: Optional[Dict[str, str]] = None,
 ) -> Union[str, dict]:
-    """Return the contents from a URL
+    """Retrive url contents
 
     Params:
 
-    - url (str): Target website URL
-    - params (dict, optional): Param payload to add to the GET request
-    - headers (dict, optional): Headers to add to the GET request
+    - url: target page
+    - params: GET request payload
+    - headers: GET request headers
 
     Example:
 

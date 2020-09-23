@@ -4,9 +4,11 @@ from html.parser import HTMLParser
 import random
 import re
 from typing import Dict, Optional, Tuple, Union, List
+import warnings
 
-from .utils import match, html_starttag_and_attrs
 from .get import get
+from .utils import match, recover_html_and_attrs
+
 
 class Soup(HTMLParser):
     """\
@@ -15,33 +17,36 @@ class Soup(HTMLParser):
     Attributes:
 
     - html: content to parse
-    - tag: element tag
-    - attrs: element attributes
-    - text: text data
+    - tag: element to match
+    - attrs: element attributes to match
+    - text: inner data
 
     Methods:
 
-    - find: matching content by tag (and attributes)
-    - strip:
-    - get: initialize instance with gazpacho.get
-    - post: initialize instance with gazpacho.post
+    - find: matching content by element tag (and attributes)
+    - strip: brackets, tags, and attributes from inner data
+    - get: alternate initializer
+
+    Deprecations:
+
+    - remove_tags: (as of 1.0) use strip
 
     Examples:
 
     ```
-    >>> from gazpacho import Soup
+    from gazpacho import Soup
 
-    >>> html = "<div><p class='a'>1</p><p class='a'>2</p><p class='b'>3</p></div>"
-    >>> url = "https://www.exaxmple.com"
+    html = "<div><p class='a'>1</p><p class='a'>2</p><p class='b'>3</p></div>"
+    url = "https://www.gazpacho.xyz"
 
-    >>> soup = Soup(html)
-    >>> soup = Soup.get(url)
-    >>> soup = Soup.post(url, {"foo": "bar"})
+    soup = Soup(html)
+    soup = Soup.get(url)
     ```
     """
+
     def __init__(self, html: Optional[str] = None) -> None:
         """\
-        Params:
+        Arguments:
 
         - html: content to parse
         """
@@ -58,7 +63,6 @@ class Soup(HTMLParser):
     def __repr__(self) -> str:
         return self.html
 
-    # need to write tests
     @classmethod
     def get(
         cls,
@@ -67,9 +71,7 @@ class Soup(HTMLParser):
         headers: Optional[Dict[str, str]] = None,
     ) -> Soup:
         """\
-        ...
-        TODO
-        ...
+        Intialize with gazpacho.get
         """
         html = get(url, params, headers)
         return cls(html)
@@ -99,7 +101,7 @@ class Soup(HTMLParser):
         ]
 
     def _handle_start(self, tag: str, attrs: List[Tuple[str, str]]) -> None:
-        html, attrs = html_starttag_and_attrs(tag, attrs)
+        html, attrs = recover_html_and_attrs(tag, attrs)
         matching = match(self.attrs, attrs, partial=self.partial)
 
         if (tag == self.tag) and (matching) and (not self._active):
@@ -138,21 +140,21 @@ class Soup(HTMLParser):
 
     def strip(self, whitespace: bool = True) -> str:
         """\
-        Remove brackets, tags, and attributes
+        Strip brackets, tags, and attributes from inner text
 
-        Params:
+        Arguments:
 
-        - whitespace: remove extra whitespace
+        - whitespace: remove extra whitespace characters
 
         Example:
 
         ```
-        >>> html = "<span>AB<b>C</b>D</span>"
-        >>> soup = Soup(html)
-        >>> soup.find("span").text
-        AB
-        >>> soup.strip()
-        ABCD
+        html = "<span>AB<b>C</b>D</span>"
+        soup = Soup(html)
+        soup.find("span").text
+        # AB
+        soup.strip()
+        # ABCD
         ```
         """
         text = re.sub("<[^>]+>", "", self.html)
@@ -160,87 +162,86 @@ class Soup(HTMLParser):
             text = " ".join(text.split())
         return text
 
-    # # deprecate
-    # def remove_tags(self, strip: bool = True) -> str:
-    #     text = re.sub("<[^>]+>", "", self.html)
-    #     if strip:
-    #         text = " ".join(text.split())
-    #     return text
+    def remove_tags(self, strip: bool = True) -> str:
+        message = "Marked for removal; use .strip()"
+        warnings.warn(message, category=DeprecationWarning, stacklevel=2)
+        return self.strip(whitespace=strip)
 
-    # need a strict deprecation message here
-    # accept strict as an argument for backwards compat
     def find(
         self,
         tag: str,
         attrs: Optional[Dict[str, str]] = None,
-        *,
-        mode: str = "auto",
         partial: bool = True,
+        mode: str = "automatic",
         strict: Optional[bool] = None,
     ) -> Optional[Union[List[Soup], Soup]]:
         """\
         Return matching HTML elements
 
-        Params:
+        Arguments:
 
-        - tag (str): HTML element tag to find
-        - attrs (dict, optional): HTML element attributes to match
-        - mode (str, 'auto'): Element(s) to return {'auto', 'all', 'first'}
-        - strict (bool, False): Require exact attribute matching
+        - tag: target element tag
+        - attrs: target element attributes
+        - partial: match on attributes
+        - mode: modify return type {'auto/automatic', 'all/list', 'first'}
+
+        Deprecations:
+
+        - strict: (as of 1.0) use partial=
 
         Examples:
 
         ```
-        >>> soup.find('p', {'class': 'a'})
-        [<p class="a">1</p>, <p class="a">2</p>]
+        soup.find('p', {'class': 'a'})
+        # [<p class="a">1</p>, <p class="a">2</p>]
 
-        >>> soup.find('p', {'class': 'a'}, mode='first')
-        <p class="a">1</p>
+        soup.find('p', {'class': 'a'}, mode='first')
+        # <p class="a">1</p>
 
-        >>> result = soup.find('p', {'class': 'b'}, mode='auto')
-        >>> print(result)
-        <p class="b">3</p>
+        result = soup.find('p', {'class': 'b'}, mode='auto')
+        print(result)
+        # <p class="b">3</p>
 
-        >>> print(result.text)
-        3
+        print(result.text)
+        # 3
         ```
         """
-        # deprecation
-        if strict is not None:
-            raise
-
+        self.counter = Counter()
+        self.groups = []
         self.tag = tag
         self.attrs = attrs
         self.partial = partial
-        self.counter = Counter()
-        self.groups = []
+
+        if strict is not None:
+            message = "Marked for removal; use partial="
+            warnings.warn(message, category=DeprecationWarning, stacklevel=2)
+            partial = not strict
+
         self.feed(self.html)
 
-        # does this make it more confusing? Undecided
-        # first
-        modeX = ["first", "head"]  # leave off head
+        automatic = ["auto", "automatic"]
+        all = ["all", "list"]
+        first = ["first"]
+        last = ["last"]
+        random = ["random"]
 
-        # last
-        modeX = ["last", "tail"]
-
-        # random
-        modeX = ["one", "random", "sample"]
-
-        # all
-        modeX = ["all", "list"]
-
-        # automatic
-        modeX = ["auto", "automatic"]  # could probably make this no problem
-
-        # if wrong mode, raise error
-
-        if mode in ["auto", "first"] and not self.groups:
-            return None
-        if mode == "all":
-            return self.groups
-        if mode == "first":
-            return self.groups[0]
-        if mode == "auto":
+        if not self.groups:
+            if mode in all:
+                return []
+            else:
+                return None
+        elif mode in automatic:
             if len(self.groups) == 1:
                 return self.groups[0]
+            else:
+                return self.groups
+        elif mode in all:
             return self.groups
+        elif mode in first:
+            return self.groups[0]
+        elif mode in last:
+            return self.groups[-1]
+        elif mode in random:
+            return random.choice(self.groups)
+        else:
+            raise ValueError(mode)

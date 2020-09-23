@@ -154,10 +154,10 @@ def test_remove_tags(fake_html_4):
 
 def test_remove_tags_no_strip(fake_html_4):
     soup = Soup(fake_html_4)
-    result = soup.remove_tags(strip=False)
+    result = soup.strip(whitespace=False)
     assert (
         result
-        == "\n    \n      I like soup and I really like cold soup\n      I guess hot soup is okay too\n    \n    "
+        == "    \n      I like soup and I really like cold soup\n      I guess hot soup is okay too\n    \n    "
     )
 
 
