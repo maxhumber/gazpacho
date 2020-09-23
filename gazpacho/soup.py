@@ -57,8 +57,7 @@ class Soup(HTMLParser):
         self.text = None
 
     def __dir__(self):
-        ex = sorted(re.findall("(?<=\-\s)(.*)(?=\:)", self.__doc__))
-        return ex
+        return ["html", "tag", "attrs", "text", "find", "strip", "get"]
 
     def __repr__(self) -> str:
         return self.html
@@ -74,6 +73,8 @@ class Soup(HTMLParser):
         Intialize with gazpacho.get
         """
         html = get(url, params, headers)
+        if not isinstance(html, str):
+            raise Exception(f"Unable to retrieve contents from {url}")
         return cls(html)
 
     @property
@@ -100,7 +101,7 @@ class Soup(HTMLParser):
             "wbr",
         ]
 
-    def _handle_start(self, tag: str, attrs: List[Tuple[str, str]]) -> None:
+    def _handle_start(self, tag: str, attrs: List[Tuple[str, Optional[str]]]) -> None:
         html, attrs = recover_html_and_attrs(tag, attrs)
         matching = match(self.attrs, attrs, partial=self.partial)
 
@@ -116,13 +117,15 @@ class Soup(HTMLParser):
             self.groups[-1].html += html
             self.counter[tag] += 1
 
-    def handle_starttag(self, tag: str, attrs: List[Tuple[str, str]]) -> None:
+    def handle_starttag(self, tag: str, attrs: List[Tuple[str, Optional[str]]]) -> None:
         self._handle_start(tag, attrs)
         if self._active:
             if self._void(tag):
                 self.counter[tag] -= 1
 
-    def handle_startendtag(self, tag: str, attrs: List[Tuple[str, str]]) -> None:
+    def handle_startendtag(
+        self, tag: str, attrs: List[Tuple[str, Optional[str]]]
+    ) -> None:
         self._handle_start(tag, attrs)
         if self._active:
             self.counter[tag] -= 1
@@ -164,13 +167,14 @@ class Soup(HTMLParser):
 
     def remove_tags(self, strip: bool = True) -> str:
         message = "Marked for removal; use .strip()"
-        warnings.warn(message, category=DeprecationWarning, stacklevel=2)
+        warnings.warn(message, category=FutureWarning, stacklevel=2)
         return self.strip(whitespace=strip)
 
     def find(
         self,
         tag: str,
         attrs: Optional[Dict[str, str]] = None,
+        *,
         partial: bool = True,
         mode: str = "automatic",
         strict: Optional[bool] = None,
@@ -214,7 +218,7 @@ class Soup(HTMLParser):
 
         if strict is not None:
             message = "Marked for removal; use partial="
-            warnings.warn(message, category=DeprecationWarning, stacklevel=2)
+            warnings.warn(message, category=FutureWarning, stacklevel=2)
             partial = not strict
 
         self.feed(self.html)
@@ -222,8 +226,8 @@ class Soup(HTMLParser):
         automatic = ["auto", "automatic"]
         all = ["all", "list"]
         first = ["first"]
-        last = ["last"]
-        random = ["random"]
+        last = ["last"]  # undocumented
+        random = ["random"]  # undocumented
 
         if not self.groups:
             if mode in all:

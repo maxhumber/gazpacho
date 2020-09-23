@@ -5,7 +5,7 @@ from urllib.parse import quote, urlsplit, urlunsplit
 def match(a: dict, b: dict, *, partial: bool = False) -> bool:
     """Match two dictionaries
 
-    Params:
+    Arguments:
 
     - a: query dict
     - b: dict to match
@@ -57,13 +57,14 @@ def match(a: dict, b: dict, *, partial: bool = False) -> bool:
 def recover_html_and_attrs(
     tag: str, attrs: List[Tuple[str, str]], startendtag: bool = False
 ) -> Tuple[str, Dict[str, str]]:
-    """Reconstruct html and attrs from HTMLParser
+    """\
+    Recover html and attrs from HTMLParser feed
 
     Arguments:
 
     - tag: element tag
-    - attrs: attributes as a list of tuples
-    - startendtag: flag for start-end tags
+    - attrs: element attributes
+    - startendtag: if startend tag
 
     Example:
 
@@ -73,20 +74,23 @@ def recover_html_and_attrs(
     ```
     """
     if attrs:
-        attrs = dict(attrs)
-        af = [f'{key}="{value}"' for key, value in attrs.items()]
-        af = f' {" ".join(af)}'
+        attrs_dict = dict(attrs)
+        attrs_list = [f'{key}="{value}"' for key, value in attrs_dict.items()]
+        attrs_str = f' {" ".join(attrs_list)}'
     else:
-        attrs = {}
-        af = ""
+        attrs_dict = {}
+        attrs_str = ""
     if startendtag:
-        html = f"<{tag}{af} />"
+        html = f"<{tag}{attrs_str} />"
     else:
-        html = f"<{tag}{af}>"
-    return html, attrs
+        html = f"<{tag}{attrs_str}>"
+    return html, attrs_dict
 
 
 def sanitize(url: str) -> str:
+    """\
+    TODO
+    """
     scheme, netloc, path, query, fragment = urlsplit(url)
     if not scheme:
         scheme, netloc, path, query, fragment = urlsplit(f"http://{url}")
@@ -96,6 +100,10 @@ def sanitize(url: str) -> str:
 
 
 class HTTPError(Exception):
+    """\
+    TODO
+    """
+
     def __init__(self, code: int, msg: str) -> None:
         self.code = code
         self.msg = msg

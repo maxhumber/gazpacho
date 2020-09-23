@@ -12,6 +12,11 @@ soup tests:
   void tag images (original problem)
   get init cls method
 
+utils tests:
+  sanitize
+  HTTPError
+
+
 ----
 
 make sure types are working with mypy
