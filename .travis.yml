@@ -1,16 +1,23 @@
 language: python
-python:
-- '3.6'
+
+python: 3.6
+
+before_install:
+  - wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
+  - bash ~/miniconda.sh -b -p $HOME/miniconda
+  - source $HOME/miniconda/bin/activate
+  - conda init
+  - conda install conda-build -y
+
+install:
+  - "pip install -e '.[dev]'"
+
+script:
+  - pytest tests/
+
 deploy:
   provider: pypi
   user: maxhumber
   password: $PYPI_PASSWORD
   on:
     tags: true
-
-install:
-  - "pip install -e ."
-  - "pip install pytest"
-
-script:
-  - pytest tests/

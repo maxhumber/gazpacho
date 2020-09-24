@@ -1,12 +1,12 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 with open("README.md", encoding="utf8") as f:
     long_description = f.read()
 
 setup(
     name="gazpacho",
-    version="0.9.4",
-    description="gazpacho is a web scraping library",
+    version="1.0-alpha",
+    description="The simple, fast, and modern web scraping library",
     long_description=long_description,
     long_description_content_type="text/markdown",
     classifiers=[
@@ -18,14 +18,16 @@ setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
-        "Programming Language :: Python :: 3.9"
     ],
-    keywords=["web scraping", "web", "scraping", "BeautifulSoup", "requests"],
+    keywords=["web scraping", "BeautifulSoup", "requests"],
     url="https://github.com/maxhumber/gazpacho",
     author="Max Humber",
     author_email="max.humber@gmail.com",
     license="MIT",
-    packages=["gazpacho"],
+    packages=find_packages(),
+    extras_require={
+        "dev": ["black>=20.8b1", "mypy>=0.782", "portray>=1.4.0", "pytest>=6.0.2"],
+    },
     python_requires=">=3.6",
     setup_requires=["setuptools>=38.6.0"],
 )

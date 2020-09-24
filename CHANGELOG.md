@@ -6,9 +6,15 @@ To install the latest version of gazpacho run:
 pip install -U gazpacho
 ```
 
-
-
 ### Changelog
+
+#### 1.0-alpha
+- void tag / malformed html capture
+- type hints!
+- Soup.get() class method
+- 3.6, .7, .8, testing
+- partial over strict
+- strip instead of remove_tags
 
 ---
 
@@ -24,11 +30,11 @@ pip install -U gazpacho
 
 #### 0.9.2 (2020-04-21)
 
-- Fixed `find(..., mode='first')` to return `None` and not an `IndexError` (thanks, [psyonara](https://github.com/maxhumber/gazpacho/issues/14)!)
+- Fixed `find(..., mode='first')` to return `None` and not an `IndexError` (thanks, [@psyonara](https://github.com/maxhumber/gazpacho/issues/14)!)
 
 #### 0.9.1 (2020-02-16)
 
-- Fixed `UnicodeEncodeError` lurking beneath `get` (thanks for the "Issue" [mlehotay](https://github.com/mlehotay)!)
+- Fixed `UnicodeEncodeError` lurking beneath `get` (thanks for the "Issue" [@mlehotay](https://github.com/mlehotay)!)
 - Fixed `find` method to properly handle non-closing HTML tags
 
 #### 0.9 (2019-11-25)

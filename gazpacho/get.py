@@ -1,11 +1,12 @@
 import json
+from typing import Dict, Optional, Union
 from urllib.error import HTTPError as UrllibHTTPError
 from urllib.parse import quote, urlencode, urlsplit, urlunsplit
 from urllib.request import build_opener
 
 
 class HTTPError(Exception):
-    def __init__(self, code, msg):
+    def __init__(self, code: int, msg: str) -> None:
         self.code = code
         self.msg = msg
 
@@ -13,14 +14,34 @@ class HTTPError(Exception):
         return f"{self.code} - {self.msg}"
 
 
-def get(url, params=None, headers=None):
-    """Return the contents from a URL
+def sanitize(url: str) -> str:
+    """\
+    Sanitize and format a URL
+
+    Arguments:
+
+    - url: target page
+    """
+    scheme, netloc, path, query, fragment = urlsplit(url)
+    if not scheme:
+        scheme, netloc, path, query, fragment = urlsplit(f"http://{url}")
+    path = quote(path)
+    url = urlunsplit((scheme, netloc, path, query, fragment))
+    return url
+
+
+def get(
+    url: str,
+    params: Optional[Dict[str, str]] = None,
+    headers: Optional[Dict[str, str]] = None,
+) -> Union[str, dict]:
+    """Retrive url contents
 
     Params:
 
-    - url (str): Target website URL
-    - params (dict, optional): Param payload to add to the GET request
-    - headers (dict, optional): Headers to add to the GET request
+    - url: target page
+    - params: GET request payload
+    - headers: GET request headers
 
     Example:
 
@@ -28,11 +49,7 @@ def get(url, params=None, headers=None):
     get('https://httpbin.org/anything', {'soup': 'gazpacho'})
     ```
     """
-    scheme, netloc, path, query, fragment = urlsplit(url)
-    if not scheme:
-        scheme, netloc, path, query, fragment = urlsplit(f"http://{url}")
-    path = quote(path)
-    url = urlunsplit((scheme, netloc, path, query, fragment))
+    url = sanitize(url)
     opener = build_opener()
     if params:
         url += "?" + urlencode(params)
@@ -40,7 +57,7 @@ def get(url, params=None, headers=None):
         for h in headers.items():
             opener.addheaders = [h]
     if (headers and not headers.get("User-Agent")) or not headers:
-        UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0) Gecko/20100101 Firefox/78.0"
+        UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:80.0) Gecko/20100101 Firefox/80.0"
         opener.addheaders = [("User-Agent", UA)]
     try:
         with opener.open(url) as response:

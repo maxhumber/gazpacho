@@ -1,5 +1,5 @@
 import pytest
-from gazpacho import get
+from gazpacho.get import get, HTTPError, sanitize
 
 
 def test_get():
@@ -23,19 +23,17 @@ def test_get_params():
     assert params == content["args"]
 
 
-def test_weird_characters():
-    url = "https://httpbin.org/anything/drãke"
-    content = get(url)
-    assert url == content["url"]
-
-
 def test_HTTPError_404():
     url = "https://httpstat.us/404"
-    with pytest.raises(Exception) as e:
+    with pytest.raises(HTTPError):
         get(url)
 
 
-def test_missing_protocol():
-    url = "wikipedia.org"
-    content = get(url)
-    assert "Wikipedia" in content
+def test_sanitize_weird_characters():
+    url = sanitize("https://httpbin.org/anything/drãke")
+    assert url == "https://httpbin.org/anything/dr%C3%A3ke"
+
+
+def test_sanitize_missing_protocol():
+    url = sanitize("gazpacho.xyz")
+    assert url == "http://gazpacho.xyz"

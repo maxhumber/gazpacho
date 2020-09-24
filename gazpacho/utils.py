@@ -1,23 +1,26 @@
-def match(a, b, strict=False):
-    """Utility function to match two dictionaries
+from typing import Any, Dict, List, Optional, Tuple, Union
 
-    Params:
 
-    - a (dict): Query dictionary
-    - b (dict): Dictionary to match
-    - strict (bool): Require exact matching
+def match(a: Dict[Any, Any], b: Dict[Any, Any], *, partial: bool = False) -> bool:
+    """Match two dictionaries
+
+    Arguments:
+
+    - a: query dict
+    - b: dict to match
+    - partial: allow partial match
 
     Examples:
 
     ```
     a = {'foo': 'bar'}
     b = {'foo': 'bar baz'}
-    match(a, b)
+    match(a, b, partial=True)
     # True
 
     a = {'foo': 'bar'}
     b = {'foo': 'bar baz'}
-    match(a, b, strict=True)
+    match(a, b)
     # False
 
     a = {}
@@ -31,52 +34,54 @@ def match(a, b, strict=False):
     # True
     ```
     """
-    if not a:
+    if (not a) or (not a and not b):
         return True
-    if not a and not b:
-        return True
-    if a and not b:
+    if a and (not b):
         return False
-    for k, v in a.items():
-        if not b.get(k):
+    for key, lhs in a.items():
+        rhs = b.get(key)
+        if not rhs:
             return False
-        if strict:
-            if v == b.get(k):
+        if not partial:
+            if lhs == rhs:
                 continue
             else:
                 return False
-        if v in b.get(k):
+        if lhs in rhs:
             continue
         else:
             return False
     return True
 
 
-def html_starttag_and_attrs(tag, attrs, startendtag=False):
-    """Utility functon to reconstruct starttag and attrs
+def recover_html_and_attrs(
+    tag: str, attrs: List[Tuple[str, Optional[str]]], startendtag: bool = False
+) -> Tuple[str, Dict[Any, Any]]:
+    """\
+    Recover html and attrs from HTMLParser feed
 
-    Params:
+    Arguments:
 
-    - tag (str): HTML element tag
-    - attrs (list): HTML element attributes formatted as a list of tuples
-    - startendtag (bool, False): Flag to handle startend tags
+    - tag: element tag
+    - attrs: element attributes
+    - startendtag: if startend tag
 
     Example:
 
     ```
-    html_starttag_and_attrs('a', [('href', 'localhost:8000')])
-    # ('<a href="localhost:8000">', {'href': 'localhost:8000'})
+    recover_html_and_attrs('img', [('src', 'example.png')])
+    # ("<img src='example.png'>", {'src': 'example.png'})
     ```
     """
     if attrs:
-        attrs = dict(attrs)
-        af = [f'{k}="{v}"' for k, v in attrs.items()]
-        af = f' {" ".join(af)}'
+        attrs_dict = dict(attrs)
+        attrs_list = [f'{key}="{value}"' for key, value in attrs_dict.items()]
+        attrs_str = f' {" ".join(attrs_list)}'
     else:
-        attrs = {}
-        af = ""
+        attrs_dict = {}
+        attrs_str = ""
     if startendtag:
-        html = f"<{tag}{af} />"
+        html = f"<{tag}{attrs_str} />"
     else:
-        html = f"<{tag}{af}>"
-    return html, attrs
+        html = f"<{tag}{attrs_str}>"
+    return html, attrs_dict

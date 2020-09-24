@@ -1,65 +1,87 @@
+from collections import Counter
 from html.parser import HTMLParser
+from random import sample
 import re
-from .utils import match, html_starttag_and_attrs
+from typing import Any, Dict, Optional, Tuple, Union, List
+import warnings
+
+from .get import get
+from .utils import match, recover_html_and_attrs
 
 
 class Soup(HTMLParser):
-    """HTML Soup Parser
+    """\
+    HTML Soup Parser
 
     Attributes:
 
-    - html (str): HTML content to parse
-    - tag (str, None): HTML element tag returned by find
-    - attrs (dict, None): HTML element attributes returned by find
-    - text (str, None): HTML element text returned by find
+    - html: content to parse
+    - tag: element to match
+    - attrs: element attributes to match
+    - text: inner data
 
     Methods:
 
-    - find: return matching HTML elements {'auto', 'all', 'first'}
+    - find: matching content by element tag (and attributes)
+    - strip: brackets, tags, and attributes from inner data
+    - get: alternate initializer
+
+    Deprecations:
+
+    - remove_tags: (as of 1.0) use strip
 
     Examples:
 
     ```
     from gazpacho import Soup
 
-    html = "<div><p id='foo'>bar</p><p id='foo'>baz</p><p id='zoo'>bat</p></div>"
+    html = "<div><p class='a'>1</p><p class='a'>2</p><p class='b'>3</p></div>"
+    url = "https://www.gazpacho.xyz"
+
     soup = Soup(html)
-
-    soup.find('p', {'id': 'foo'})
-    # [<p id="foo">bar</p>, <p id="foo">baz</p>]
-
-    result = soup.find('p', {'id': 'foo'}, mode='first')
-    print(result)
-    # <p id="foo">bar</p>
-
-    result = soup.find('p', {'id': 'zoo'}, mode='auto')
-    print(result)
-    # <p id="zoo">bat</p>
-
-    print(result.text)
-    # bat
+    soup = Soup.get(url)
     ```
     """
 
-    def __init__(self, html):
-        """Params:
+    def __init__(self, html: Optional[str] = None) -> None:
+        """\
+        Arguments:
 
-        - html (str): HTML content to parse
+        - html: content to parse
         """
         super().__init__()
-        self.html = html
-        self.tag = None
-        self.attrs = None
-        self.text = None
+        self.html = "" if not html else html
+        self.tag: Optional[str] = None
+        self.attrs: Optional[Dict[Any, Any]] = None
+        self.text: Optional[str] = None
 
     def __dir__(self):
-        return ["html", "tag", "attrs", "text", "find"]
+        return ["attrs", "find", "get", "html", "strip", "tag", "text"]
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return self.html
 
+    @classmethod
+    def get(
+        cls,
+        url: str,
+        params: Optional[Dict[str, str]] = None,
+        headers: Optional[Dict[str, str]] = None,
+    ) -> "Soup":
+        """\
+        Intialize with gazpacho.get
+        """
+        html = get(url, params, headers)
+        if not isinstance(html, str):
+            raise Exception(f"Unable to retrieve contents from {url}")
+        return cls(html)
+
+    @property
+    def _active(self) -> bool:
+        return sum(self.counter.values()) > 0
+
     @staticmethod
-    def _empty_tag(tag):
+    def _void(tag: str) -> bool:
         return tag in [
             "area",
             "base",
@@ -78,110 +100,155 @@ class Soup(HTMLParser):
             "wbr",
         ]
 
-    def handle_starttag(self, tag, attrs):
-        html, attrs = html_starttag_and_attrs(tag, attrs)
-        matching = match(self.attrs, attrs, self.strict)
-        if tag == self.tag and matching and not self.count:
-            if not self._empty_tag(tag):
-                self.count += 1
-            self.group += 1
-            self.groups.append(Soup(""))
-            self.groups[self.group - 1].html += html
-            self.groups[self.group - 1].tag = tag
-            self.groups[self.group - 1].attrs = attrs
+    def _handle_start(self, tag: str, attrs: List[Tuple[str, Optional[str]]]) -> None:
+        html, attrs_dict = recover_html_and_attrs(tag, attrs)
+        query_attrs = {} if not self.attrs else self.attrs
+        matching = match(query_attrs, attrs_dict, partial=self.partial)
+
+        if (tag == self.tag) and (matching) and (not self._active):
+            self.groups.append(Soup())
+            self.groups[-1].tag = tag
+            self.groups[-1].attrs = attrs_dict
+            self.groups[-1].html += html
+            self.counter[tag] += 1
             return
-        if self.count:
-            if not self._empty_tag(tag):
-                self.count += 1
-            self.groups[self.group - 1].html += html
-        return
 
-    def handle_startendtag(self, tag, attrs):
-        html, attrs = html_starttag_and_attrs(tag, attrs, True)
-        if self.count:
-            self.groups[self.group - 1].html += html
-        return
+        if self._active:
+            self.groups[-1].html += html
+            self.counter[tag] += 1
 
-    def handle_data(self, data):
-        if self.count:
-            if self.groups[self.group - 1].text is None:
-                self.groups[self.group - 1].text = data.strip()
-            self.groups[self.group - 1].html += data
-        return
+    def handle_starttag(self, tag: str, attrs: List[Tuple[str, Optional[str]]]) -> None:
+        self._handle_start(tag, attrs)
+        if self._active:
+            if self._void(tag):
+                self.counter[tag] -= 1
 
-    def handle_endtag(self, tag):
-        if self.count:
-            end_tag = f"</{tag}>"
-            self.groups[self.group - 1].html += end_tag
-            self.count -= 1
-        return
+    def handle_startendtag(
+        self, tag: str, attrs: List[Tuple[str, Optional[str]]]
+    ) -> None:
+        self._handle_start(tag, attrs)
+        if self._active:
+            self.counter[tag] -= 1
 
-    def remove_tags(self, strip=True):
-        """Remove all HTML element tags
+    def handle_data(self, data: str) -> None:
+        if self._active:
+            if self.groups[-1].text is None:
+                self.groups[-1].text = data.strip()
+            self.groups[-1].html += data
 
-        Params:
+    def handle_endtag(self, tag: str) -> None:
+        if self._active:
+            self.groups[-1].html += f"</{tag}>"
+            self.counter[tag] -= 1
 
-        - strip (bool, True): Strip all extra whitespace
+    def strip(self, whitespace: bool = True) -> str:
+        """\
+        Strip brackets, tags, and attributes from inner text
+
+        Arguments:
+
+        - whitespace: remove extra whitespace characters
 
         Example:
 
         ```
-        html = '<span>Hi! I like <b>soup</b>.</span>'
+        html = "<span>AB<b>C</b>D</span>"
         soup = Soup(html)
-        soup.remove_tags()
-
-        # Hi! I like soup.
+        soup.find("span").text
+        # AB
+        soup.strip()
+        # ABCD
         ```
         """
         text = re.sub("<[^>]+>", "", self.html)
-        if strip:
+        if whitespace:
             text = " ".join(text.split())
         return text
 
-    def find(self, tag, attrs=None, mode="auto", strict=False):
-        """Return matching HTML elements
+    def remove_tags(self, strip: bool = True) -> str:
+        """\
+        Now: .strip()
+        """
+        message = "Marked for removal; use .strip()"
+        warnings.warn(message, category=FutureWarning, stacklevel=2)
+        return self.strip(whitespace=strip)
 
-        Params:
+    def find(
+        self,
+        tag: str,
+        attrs: Optional[Dict[str, str]] = None,
+        *,
+        partial: bool = True,
+        mode: str = "automatic",
+        strict: Optional[bool] = None,
+    ) -> Optional[Union[List["Soup"], "Soup"]]:
+        """\
+        Return matching HTML elements
 
-        - tag (str): HTML element tag to find
-        - attrs (dict, optional): HTML element attributes to match
-        - mode (str, 'auto'): Element(s) to return {'auto', 'all', 'first'}
-        - strict (bool, False): Require exact attribute matching
+        Arguments:
+
+        - tag: target element tag
+        - attrs: target element attributes
+        - partial: match on attributes
+        - mode: override return behavior {'auto/automatic', 'all/list', 'first'}
+
+        Deprecations:
+
+        - strict: (as of 1.0) use partial=
 
         Examples:
 
         ```
-        html = "<div><p id='foo foo-striped'>bar</p><p id='foo'>baz</p><p id='zoo'>bat</p></div>"
-        soup = Soup(html)
+        soup.find('p', {'class': 'a'})
+        # [<p class="a">1</p>, <p class="a">2</p>]
 
-        soup.find('p')
-        # [<p id="foo foo-striped">bar</p>, <p id="foo">baz</p>, <p id="zoo">bat</p>]
+        soup.find('p', {'class': 'a'}, mode='first')
+        # <p class="a">1</p>
 
-        soup.find('p', {'id': 'foo'})
-        # [<p id="foo foo-striped">bar</p>, <p id="foo">baz</p>]
-
-        result = soup.find('p', {'id': 'foo'}, mode='first')
+        result = soup.find('p', {'class': 'b'}, mode='auto')
         print(result)
-        # <p id="foo">bar</p>
+        # <p class="b">3</p>
 
-        soup.find('p', {'id': 'foo'}, strict=True)
-        # [<p id="foo">baz</p>]
+        print(result.text)
+        # 3
         ```
         """
+        self.counter: Counter = Counter()
+        self.groups: List = []
         self.tag = tag
         self.attrs = attrs
-        self.strict = strict
-        self.count = 0
-        self.group = 0
-        self.groups = []
+        self.partial = partial
+
+        if strict is not None:
+            message = "Marked for removal; use partial="
+            warnings.warn(message, category=FutureWarning, stacklevel=2)
+            partial = not strict
+
         self.feed(self.html)
-        if mode in ["auto", "first"] and not self.groups:
-            return None
-        if mode == "all":
-            return self.groups
-        if mode == "first":
-            return self.groups[0]
-        if mode == "auto":
+
+        automatic = ["auto", "automatic"]
+        all = ["all", "list"]
+        first = ["first"]
+        last = ["last"]  # undocumented
+        random = ["random"]  # undocumented
+
+        if not self.groups:
+            if mode in all:
+                return []
+            else:
+                return None
+        elif mode in automatic:
             if len(self.groups) == 1:
                 return self.groups[0]
+            else:
+                return self.groups
+        elif mode in all:
             return self.groups
+        elif mode in first:
+            return self.groups[0]
+        elif mode in last:
+            return self.groups[-1]
+        elif mode in random:
+            return sample(self.groups, k=1)[0]
+        else:
+            raise ValueError(mode)

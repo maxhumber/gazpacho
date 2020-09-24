@@ -1,4 +1,4 @@
-from gazpacho import match
+from gazpacho.utils import match, recover_html_and_attrs
 
 
 def test_attr_match():
@@ -28,7 +28,7 @@ def test_match_empty_attrs_fail():
 def test_match_partial():
     a = {"foo": "bar"}
     b = {"foo": "bar baz"}
-    assert match(a, b)
+    assert match(a, b, partial=True)
 
 
 def test_match_multiple():
@@ -52,10 +52,15 @@ def test_match_query_too_much_fail():
 def test_match_multiple_partial():
     a = {"foo1": "bar1", "foo2": "bar2"}
     b = {"foo1": "bar1 baz1", "foo2": "bar2"}
-    assert match(a, b)
+    assert match(a, b, partial=True)
 
 
-def test_multiple_strict_fail():
+def test_multiple_partial_fail():
     a = {"foo1": "bar1", "foo2": "bar2"}
     b = {"foo1": "bar1 baz1", "foo2": "bar2"}
-    assert not match(a, b, strict=True)
+    assert not match(a, b, partial=False)
+
+
+def test_recover_html_and_attrs():
+    html, attrs = recover_html_and_attrs("img", [("src", "example.png")])
+    assert html == '<img src="example.png">' and attrs == {"src": "example.png"}
