@@ -6,8 +6,9 @@ move off pipenv for docs
 mypy auto checking
 black auto
 conda releases
+auto publish docs
 
--- future:
+-- punt to the future:
 post
 download
 auto reverse matching?

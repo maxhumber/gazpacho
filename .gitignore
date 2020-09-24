@@ -4,6 +4,7 @@ sandbox.py
 alt.psd
 TODO
 survey
+auto_sandbox.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

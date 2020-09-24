@@ -1,5 +1,5 @@
 import pytest
-from gazpacho.get import get, sanitize, HTTPError
+from gazpacho.get import get, HTTPError, sanitize
 
 
 def test_get():
