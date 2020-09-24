@@ -1,5 +1,4 @@
 from typing import Any, Dict, List, Optional, Tuple, Union
-from urllib.parse import quote, urlsplit, urlunsplit
 
 
 def match(a: Dict[Any, Any], b: Dict[Any, Any], *, partial: bool = False) -> bool:
@@ -86,28 +85,3 @@ def recover_html_and_attrs(
     else:
         html = f"<{tag}{attrs_str}>"
     return html, attrs_dict
-
-
-def sanitize(url: str) -> str:
-    """\
-    TODO
-    """
-    scheme, netloc, path, query, fragment = urlsplit(url)
-    if not scheme:
-        scheme, netloc, path, query, fragment = urlsplit(f"http://{url}")
-    path = quote(path)
-    url = urlunsplit((scheme, netloc, path, query, fragment))
-    return url
-
-
-class HTTPError(Exception):
-    """\
-    TODO
-    """
-
-    def __init__(self, code: int, msg: str) -> None:
-        self.code = code
-        self.msg = msg
-
-    def __str__(self):
-        return f"{self.code} - {self.msg}"

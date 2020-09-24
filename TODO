@@ -1,10 +1,6 @@
 fix mypy - msg?
 move off pipenv for docs
 
-utils tests:
-  sanitize
-  HTTPError
-
 ----
 
 mypy auto checking

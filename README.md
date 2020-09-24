@@ -35,7 +35,8 @@ Give this a try:
 from gazpacho import get, Soup
 
 url = 'https://scrape.world/books'
-soup = Soup.get(url)
+html = get(url)
+soup = Soup(html)
 books = soup.find('div', {'class': 'book-'}, partial=True)
 
 def parse(book):
@@ -91,6 +92,12 @@ Use the `Soup` wrapper on raw html to enable parsing:
 soup = Soup(html)
 ```
 
+Soup objects can alternatively be initialized with the  `.get` classmethod:
+
+```python
+soup = Soup.get(url)
+```
+
 
 
 #### .find
@@ -117,7 +124,7 @@ soup.find('div', attrs={'class': 'section-'})
 
 #### partial=
 
-By default element attributes will be partially matched. To turn this off set `partial` to `False`:  
+Element attributes are partially matched by default. Turn this off by setting `partial` to `False`:  
 
 ```python
 soup.find('div', {'class': 'soup'}, partial=False)

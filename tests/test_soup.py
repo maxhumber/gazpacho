@@ -209,7 +209,7 @@ def test_find_strict(fake_html_2):
 
 def test_soup_get_cls_method():
     soup = Soup.get("www.google.com")
-    assert '<!doctype html>' in str(soup).lower()
+    assert "<!doctype html>" in str(soup).lower()
 
 
 def test_bad_mode_argument(fake_html_1):

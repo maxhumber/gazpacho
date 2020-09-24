@@ -1,10 +1,33 @@
 import json
 from typing import Dict, Optional, Union
 from urllib.error import HTTPError as UrllibHTTPError
-from urllib.parse import urlencode
+from urllib.parse import quote, urlencode, urlsplit, urlunsplit
 from urllib.request import build_opener
 
-from .utils import sanitize, HTTPError
+
+class HTTPError(Exception):
+    def __init__(self, code: int, msg: str) -> None:
+        self.code = code
+        self.msg = msg
+
+    def __str__(self):
+        return f"{self.code} - {self.msg}"
+
+
+def sanitize(url: str) -> str:
+    """\
+    Sanitize and format a URL
+
+    Arguments:
+
+    - url: target page
+    """
+    scheme, netloc, path, query, fragment = urlsplit(url)
+    if not scheme:
+        scheme, netloc, path, query, fragment = urlsplit(f"http://{url}")
+    path = quote(path)
+    url = urlunsplit((scheme, netloc, path, query, fragment))
+    return url
 
 
 def get(

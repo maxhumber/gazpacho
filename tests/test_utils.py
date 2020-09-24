@@ -1,4 +1,4 @@
-from gazpacho.utils import match
+from gazpacho.utils import match, recover_html_and_attrs
 
 
 def test_attr_match():
@@ -59,3 +59,8 @@ def test_multiple_partial_fail():
     a = {"foo1": "bar1", "foo2": "bar2"}
     b = {"foo1": "bar1 baz1", "foo2": "bar2"}
     assert not match(a, b, partial=False)
+
+
+def test_recover_html_and_attrs():
+    html, attrs = recover_html_and_attrs("img", [("src", "example.png")])
+    assert html == '<img src="example.png">' and attrs == {"src": "example.png"}
