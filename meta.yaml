@@ -1,0 +1,22 @@
+package:
+  name: "gazpacho"
+  version: "1.0-alpha"
+
+source:
+  git_rev: "https://github.com/maxhumber/gazpacho/releases"
+  git_url: "https://github.com/maxhumber/gazpacho.git"
+
+requirements:
+  host:
+    - python
+    - setuptools
+  run:
+    - python
+
+test:
+  imports:
+    - gazpacho
+
+about:
+  home: "https://github.com/maxhumber/gazpacho"
+  summary: "The simple, fast, and modern web scraping library"
