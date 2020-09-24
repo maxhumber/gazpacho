@@ -7,6 +7,7 @@ survey
 auto_sandbox.py
 survey.txt
 TODO.txt
+prototype_auto.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
