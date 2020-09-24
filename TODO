@@ -1,6 +1,5 @@
 fix mypy
-
-post request (dont add to soup get)
+move off pipenv for docs
 
 soup tests:
   fix all old remove_tags references

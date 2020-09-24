@@ -57,7 +57,7 @@ def match(a: Dict[Any, Any], b: Dict[Any, Any], *, partial: bool = False) -> boo
 
 def recover_html_and_attrs(
     tag: str, attrs: List[Tuple[str, Optional[str]]], startendtag: bool = False
-) -> Tuple[str, Dict[str, str]]:
+) -> Tuple[str, Dict[str, Optional[str]]]:
     """\
     Recover html and attrs from HTMLParser feed
 

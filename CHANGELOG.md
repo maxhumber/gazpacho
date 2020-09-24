@@ -10,10 +10,8 @@ pip install -U gazpacho
 
 #### 1.0-alpha
 - void tag / malformed html capture
-- post/download
 - Soup.get() class method
 - 3.6, .7, .8, .9 testing
-- download function
 - partial over strict
 
 ---
