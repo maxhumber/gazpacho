@@ -1,4 +1,3 @@
-from __future__ import annotations
 from collections import Counter
 from html.parser import HTMLParser
 from random import sample
@@ -68,7 +67,7 @@ class Soup(HTMLParser):
         url: str,
         params: Optional[Dict[str, str]] = None,
         headers: Optional[Dict[str, str]] = None,
-    ) -> Soup:
+    ) -> "Soup":
         """\
         Intialize with gazpacho.get
         """
@@ -182,7 +181,7 @@ class Soup(HTMLParser):
         partial: bool = True,
         mode: str = "automatic",
         strict: Optional[bool] = None,
-    ) -> Optional[Union[List[Soup], Soup]]:
+    ) -> Optional[Union[List["Soup"], "Soup"]]:
         """\
         Return matching HTML elements
 

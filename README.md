@@ -3,16 +3,17 @@
 </h3>
 <p align="center">
   <a href="https://travis-ci.org/maxhumber/gazpacho"><img alt="Travis" src="https://img.shields.io/travis/maxhumber/gazpacho.svg"></a>
-  <a href="https://github.com/maxhumber/gazpacho/blob/master/setup.py"><img alt="Dependencies" src="https://img.shields.io/badge/dependencies-0-brightgreen"></a>
   <a href="https://pypi.python.org/pypi/gazpacho"><img alt="PyPI" src="https://img.shields.io/pypi/v/gazpacho.svg"></a>
+	<a href="https://pypi.python.org/pypi/gazpacho"><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/gazpacho.svg"></a>
   <a href="https://pepy.tech/project/gazpacho"><img alt="Downloads" src="https://pepy.tech/badge/gazpacho"></a>  
 </p>
 
 
 
+
 ## About
 
-gazpacho is a simple, fast, and modern web scraping library. The library is stable, actively maintained, and installed with zero dependencies.
+gazpacho is a simple, fast, and modern web scraping library. The library is stable, actively maintained, and installed with **zero** dependencies.
 
 
 
@@ -34,9 +35,8 @@ Give this a try:
 from gazpacho import get, Soup
 
 url = 'https://scrape.world/books'
-html = get(url)
-soup = Soup(html)
-books = soup.find('div', {'class': 'book-'}, strict=False)
+soup = Soup.get(url)
+books = soup.find('div', {'class': 'book-'}, partial=True)
 
 def parse(book):
     name = book.find('h4').text
@@ -110,17 +110,17 @@ print(h1)
 Use the `attrs` argument to isolate tags that contain specific HTML element attributes:
 
 ```python
-soup.find('div', attrs={'class': 'section-soup'})
+soup.find('div', attrs={'class': 'section-'})
 ```
 
 
 
-#### strict=
+#### partial=
 
-Adjust the `strict` argument to partial match element attributes:
+By default element attributes will be partially matched. To turn this off set `partial` to `False`:  
 
 ```python
-soup.find('div', {'class': 'section-'}, strict=False)
+soup.find('div', {'class': 'soup'}, partial=False)
 ```
 
 
@@ -144,7 +144,7 @@ len(soup.find('span', mode='all'))
 
 ```python
 dir(h1)
-['attrs', 'find', 'html', 'tag', 'text']
+# ['attrs', 'find', 'get', 'html', 'strip', 'tag', 'text']
 ```
 
 Use them accordingly:
