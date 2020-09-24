@@ -1,27 +1,17 @@
-fix mypy
+fix mypy - msg?
 move off pipenv for docs
-
-soup tests:
-  fix all old remove_tags references
-  deprecation for remove_tags
-  deprecation for strict
-  new .strip()
-  new random return type
-  new last return type
-  test value error return
-  void tag images (original problem)
-  get init cls method
 
 utils tests:
   sanitize
   HTTPError
 
-
 ----
 
 mypy auto checking
 black auto
-
 conda releases
 
+-- future:
+post
+download
 auto reverse matching?

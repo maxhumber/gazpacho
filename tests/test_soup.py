@@ -83,6 +83,22 @@ def fake_html_5():
     return html
 
 
+@pytest.fixture
+def fake_html_6():
+    html = """\
+    <div>
+        <p id=1>A</p>
+        <p id=2>B</p>
+        <p id=3>C</p>
+        <p id=4>D</p>
+        <p id=5>E</p>
+        <p id=6>F</p>
+        <p id=7>G</p>
+    </div>
+    """
+    return html
+
+
 def test_find(fake_html_1):
     soup = Soup(fake_html_1)
     result = soup.find("span")
@@ -120,13 +136,7 @@ def test_find_nested_groups(fake_html_2):
     assert len(results) == 2
 
 
-# def test_find_strict(fake_html_2):
-#     soup = Soup(fake_html_2)
-#     result = soup.find("div", {"class": "foo"}, strict=True, mode="all")
-#     assert len(result) == 1
-
-
-def test_find_strict(fake_html_2):
+def test_find_partial_false(fake_html_2):
     soup = Soup(fake_html_2)
     result = soup.find("div", {"class": "foo"}, partial=False, mode="all")
     assert len(result) == 1
@@ -140,19 +150,19 @@ def test_find_nested_empty_tag(fake_html_3):
 
 def test_find_mutliple_imgs(fake_html_3):
     soup = Soup(fake_html_3)
-    result = soup.find("img")
-    assert result[1].attrs["src"] == "bye.jpg"
+    middle = soup.find("img")[1]
+    assert middle.attrs["src"] == "bye.jpg"
 
 
-def test_remove_tags(fake_html_4):
+def test_strip(fake_html_4):
     soup = Soup(fake_html_4)
-    result = soup.remove_tags()
+    result = soup.strip()
     assert (
         result == "I like soup and I really like cold soup I guess hot soup is okay too"
     )
 
 
-def test_remove_tags_no_strip(fake_html_4):
+def test_strip_keep_whitespace(fake_html_4):
     soup = Soup(fake_html_4)
     result = soup.strip(whitespace=False)
     assert (
@@ -183,3 +193,37 @@ def test_malformed_void_tags(fake_html_5):
     soup = Soup(fake_html_5)
     result = soup.find("img")
     assert len(result) == 3
+
+
+def test_remove_tags_warning(fake_html_4):
+    with pytest.warns(FutureWarning):
+        soup = Soup(fake_html_4)
+        soup.remove_tags()
+
+
+def test_find_strict(fake_html_2):
+    with pytest.warns(FutureWarning):
+        soup = Soup(fake_html_2)
+        soup.find("div", {"class": "foo"}, strict=True)
+
+
+def test_soup_get_cls_method():
+    soup = Soup.get("www.google.com")
+    assert '<!doctype html>' in str(soup).lower()
+
+
+def test_bad_mode_argument(fake_html_1):
+    with pytest.raises(ValueError):
+        soup = Soup(fake_html_1)
+        soup.find("div", mode="bad")
+
+
+def test_undocumented_random_mode(fake_html_6):
+    soup = Soup(fake_html_6)
+    pset = set([soup.find("p", mode="random").attrs["id"] for _ in range(10)])
+    assert len(pset) > 1
+
+
+def test_undocumented_last_mode(fake_html_6):
+    soup = Soup(fake_html_6)
+    assert soup.find("p", mode="last").text == "G"

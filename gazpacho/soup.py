@@ -1,7 +1,7 @@
 from __future__ import annotations
 from collections import Counter
 from html.parser import HTMLParser
-import random
+from random import sample
 import re
 from typing import Any, Dict, Optional, Tuple, Union, List
 import warnings
@@ -57,7 +57,7 @@ class Soup(HTMLParser):
         self.text: Optional[str] = None
 
     def __dir__(self):
-        return ["html", "tag", "attrs", "text", "find", "strip", "get"]
+        return ["attrs", "find", "get", "html", "strip", "tag", "text"]
 
     def __repr__(self) -> str:
         return self.html
@@ -103,12 +103,13 @@ class Soup(HTMLParser):
 
     def _handle_start(self, tag: str, attrs: List[Tuple[str, Optional[str]]]) -> None:
         html, attrs_dict = recover_html_and_attrs(tag, attrs)
-        matching = match(self.attrs, attrs_dict, partial=self.partial)
+        query_attrs = {} if not self.attrs else self.attrs
+        matching = match(query_attrs, attrs_dict, partial=self.partial)
 
         if (tag == self.tag) and (matching) and (not self._active):
             self.groups.append(Soup())
             self.groups[-1].tag = tag
-            self.groups[-1].attrs = attrs
+            self.groups[-1].attrs = attrs_dict
             self.groups[-1].html += html
             self.counter[tag] += 1
             return
@@ -166,6 +167,9 @@ class Soup(HTMLParser):
         return text
 
     def remove_tags(self, strip: bool = True) -> str:
+        """\
+        Now: .strip()
+        """
         message = "Marked for removal; use .strip()"
         warnings.warn(message, category=FutureWarning, stacklevel=2)
         return self.strip(whitespace=strip)
@@ -187,7 +191,7 @@ class Soup(HTMLParser):
         - tag: target element tag
         - attrs: target element attributes
         - partial: match on attributes
-        - mode: modify return type {'auto/automatic', 'all/list', 'first'}
+        - mode: override return behavior {'auto/automatic', 'all/list', 'first'}
 
         Deprecations:
 
@@ -211,7 +215,7 @@ class Soup(HTMLParser):
         ```
         """
         self.counter: Counter = Counter()
-        self.groups = []
+        self.groups: List = []
         self.tag = tag
         self.attrs = attrs
         self.partial = partial
@@ -246,6 +250,6 @@ class Soup(HTMLParser):
         elif mode in last:
             return self.groups[-1]
         elif mode in random:
-            return random.choice(self.groups)
+            return sample(self.groups, k=1)[0]
         else:
             raise ValueError(mode)

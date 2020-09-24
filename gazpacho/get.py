@@ -34,7 +34,7 @@ def get(
         for h in headers.items():
             opener.addheaders = [h]
     if (headers and not headers.get("User-Agent")) or not headers:
-        UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0) Gecko/20100101 Firefox/78.0"
+        UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:80.0) Gecko/20100101 Firefox/80.0"
         opener.addheaders = [("User-Agent", UA)]
     try:
         with opener.open(url) as response:
