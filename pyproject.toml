@@ -1,8 +1,0 @@
-[tool.portray]
-output_dir = "site"
-
-[tool.portray.mkdocs.theme]
-favicon = "images/icon.png"
-logo = "images/icon.png"
-name = "material"
-palette = {primary = "white", accent = "cyan"}
