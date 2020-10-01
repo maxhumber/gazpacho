@@ -2,7 +2,7 @@ from collections import Counter
 from html.parser import HTMLParser
 from random import sample
 import re
-from typing import Any, Dict, Optional, Tuple, Union, List
+from typing import List, Optional, Tuple, Union
 import warnings
 
 from .get import get
@@ -51,9 +51,9 @@ class Soup(HTMLParser):
         """
         super().__init__()
         self.html = "" if not html else html
-        self.tag: Optional[str] = None
-        self.attrs: Optional[Dict[Any, Any]] = None
-        self.text: Optional[str] = None
+        self.tag: str = ""
+        self.attrs: Optional[dict] = None
+        self.text: str = ""
 
     def __dir__(self):
         return ["attrs", "find", "get", "html", "strip", "tag", "text"]
@@ -65,8 +65,8 @@ class Soup(HTMLParser):
     def get(
         cls,
         url: str,
-        params: Optional[Dict[str, str]] = None,
-        headers: Optional[Dict[str, str]] = None,
+        params: Optional[dict] = None,
+        headers: Optional[dict] = None,
     ) -> "Soup":
         """\
         Intialize with gazpacho.get
@@ -132,7 +132,7 @@ class Soup(HTMLParser):
 
     def handle_data(self, data: str) -> None:
         if self._active:
-            if self.groups[-1].text is None:
+            if not self.groups[-1].text:
                 self.groups[-1].text = data.strip()
             self.groups[-1].html += data
 
@@ -176,7 +176,7 @@ class Soup(HTMLParser):
     def find(
         self,
         tag: str,
-        attrs: Optional[Dict[str, str]] = None,
+        attrs: Optional[dict] = None,
         *,
         partial: bool = True,
         mode: str = "automatic",
