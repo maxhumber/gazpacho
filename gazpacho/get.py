@@ -1,5 +1,5 @@
 import json
-from typing import Dict, Optional, Union
+from typing import Optional, Union
 from urllib.error import HTTPError as UrllibHTTPError
 from urllib.parse import quote, urlencode, urlsplit, urlunsplit
 from urllib.request import build_opener
@@ -32,8 +32,8 @@ def sanitize(url: str) -> str:
 
 def get(
     url: str,
-    params: Optional[Dict[str, str]] = None,
-    headers: Optional[Dict[str, str]] = None,
+    params: Optional[dict] = None,
+    headers: Optional[dict] = None,
 ) -> Union[str, dict]:
     """Retrive url contents
 
@@ -65,5 +65,5 @@ def get(
             if response.headers.get_content_type() == "application/json":
                 content = json.loads(content)
     except UrllibHTTPError as e:
-        raise HTTPError(e.code, e.msg) from None
+        raise HTTPError(e.code, e.msg) from None # type: ignore
     return content
