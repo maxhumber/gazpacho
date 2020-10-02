@@ -65,5 +65,5 @@ def get(
             if response.headers.get_content_type() == "application/json":
                 content = json.loads(content)
     except UrllibHTTPError as e:
-        raise HTTPError(e.code, e.msg) from None # type: ignore
+        raise HTTPError(e.code, e.msg) from None  # type: ignore
     return content

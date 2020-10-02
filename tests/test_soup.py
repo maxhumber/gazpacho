@@ -227,3 +227,15 @@ def test_undocumented_random_mode(fake_html_6):
 def test_undocumented_last_mode(fake_html_6):
     soup = Soup(fake_html_6)
     assert soup.find("p", mode="last").text == "G"
+
+
+def test_html_format_in_soup():
+    html = """<ul><li>Item</li><li>Item</li></ul>"""
+    soup = Soup(html)
+    assert soup.html == '<ul>\n  <li>Item</li>\n  <li>Item</li>\n</ul>'
+
+
+def test_bad_html_not_formatted_in_soup():
+    html = """<div><ul><li>Item</li><li>Item</li></ul>"""
+    soup = Soup(html)
+    assert soup.html == html

@@ -1,8 +1,60 @@
 from typing import Any, Dict, List, Optional, Tuple, Union
+from xml.dom.minidom import parseString as string_to_dom
+from xml.parsers.expat import ExpatError
+
+
+VOID_TAGS = [
+    "area",
+    "base",
+    "br",
+    "col",
+    "embed",
+    "hr",
+    "img",
+    "input",
+    "keygen",
+    "link",
+    "meta",
+    "param",
+    "source",
+    "track",
+    "wbr",
+]
+
+
+def format(html: str, fail: bool = False) -> str:
+    """\
+    Properly format and indent html
+
+    Arguments:
+
+    - html: to format
+    - fail: allowed to fail
+
+    Example:
+    ```
+    html = "<ul><li>Item</li><li>Item</li></ul>"
+    print(format(html))
+    # <ul>
+    #   <li>Item</li>
+    #   <li>Item</li>
+    # </ul>
+    ```
+    """
+    try:
+        dom = string_to_dom(html)
+        ugly = dom.toprettyxml(indent="  ")
+        split = list(filter(lambda x: len(x.strip()), ugly.split("\n")))[1:]
+        html = "\n".join(split)
+    except ExpatError as error:
+        if fail:
+            raise error
+    return html
 
 
 def match(a: Dict[Any, Any], b: Dict[Any, Any], *, partial: bool = False) -> bool:
-    """Match two dictionaries
+    """\
+    Match two dictionaries
 
     Arguments:
 

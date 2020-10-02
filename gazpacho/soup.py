@@ -6,7 +6,11 @@ from typing import List, Optional, Tuple, Union
 import warnings
 
 from .get import get
-from .utils import match, recover_html_and_attrs
+from .utils import format, match, recover_html_and_attrs, VOID_TAGS
+
+
+ParserAttrs = List[Tuple[str, Optional[str]]]
+DependentOnMode = Optional[Union[List["Soup"], "Soup"]]
 
 
 class Soup(HTMLParser):
@@ -43,6 +47,9 @@ class Soup(HTMLParser):
     ```
     """
 
+    def __dir__(self):
+        return ["attrs", "find", "get", "html", "strip", "tag", "text"]
+
     def __init__(self, html: Optional[str] = None) -> None:
         """\
         Arguments:
@@ -50,16 +57,18 @@ class Soup(HTMLParser):
         - html: content to parse
         """
         super().__init__()
-        self.html = "" if not html else html
+        self._html = "" if not html else html
         self.tag: str = ""
         self.attrs: Optional[dict] = None
         self.text: str = ""
 
-    def __dir__(self):
-        return ["attrs", "find", "get", "html", "strip", "tag", "text"]
-
     def __repr__(self) -> str:
         return self.html
+
+    @property
+    def html(self) -> str:
+        html = format(self._html)
+        return html
 
     @classmethod
     def get(
@@ -76,70 +85,60 @@ class Soup(HTMLParser):
             raise Exception(f"Unable to retrieve contents from {url}")
         return cls(html)
 
-    @property
-    def _active(self) -> bool:
-        return sum(self.counter.values()) > 0
-
     @staticmethod
     def _void(tag: str) -> bool:
-        return tag in [
-            "area",
-            "base",
-            "br",
-            "col",
-            "embed",
-            "hr",
-            "img",
-            "input",
-            "keygen",
-            "link",
-            "meta",
-            "param",
-            "source",
-            "track",
-            "wbr",
-        ]
+        return tag in VOID_TAGS
 
-    def _handle_start(self, tag: str, attrs: List[Tuple[str, Optional[str]]]) -> None:
+    @property
+    def _active(self) -> bool:
+        return sum(self._counter.values()) > 0
+
+    def _handle_start(self, tag: str, attrs: ParserAttrs) -> None:
         html, attrs_dict = recover_html_and_attrs(tag, attrs)
         query_attrs = {} if not self.attrs else self.attrs
-        matching = match(query_attrs, attrs_dict, partial=self.partial)
+        matching = match(query_attrs, attrs_dict, partial=self._partial)
 
         if (tag == self.tag) and (matching) and (not self._active):
-            self.groups.append(Soup())
-            self.groups[-1].tag = tag
-            self.groups[-1].attrs = attrs_dict
-            self.groups[-1].html += html
-            self.counter[tag] += 1
+            self._groups.append(Soup())
+            self._groups[-1].tag = tag
+            self._groups[-1].attrs = attrs_dict
+            self._groups[-1]._html += html
+            self._counter[tag] += 1
             return
 
         if self._active:
-            self.groups[-1].html += html
-            self.counter[tag] += 1
+            self._groups[-1]._html += html
+            self._counter[tag] += 1
 
-    def handle_starttag(self, tag: str, attrs: List[Tuple[str, Optional[str]]]) -> None:
+    def handle_starttag(self, tag: str, attrs: ParserAttrs) -> None:
         self._handle_start(tag, attrs)
         if self._active:
             if self._void(tag):
-                self.counter[tag] -= 1
+                self._counter[tag] -= 1
 
-    def handle_startendtag(
-        self, tag: str, attrs: List[Tuple[str, Optional[str]]]
-    ) -> None:
+    def handle_startendtag(self, tag: str, attrs: ParserAttrs) -> None:
         self._handle_start(tag, attrs)
         if self._active:
-            self.counter[tag] -= 1
+            self._counter[tag] -= 1
 
     def handle_data(self, data: str) -> None:
         if self._active:
-            if not self.groups[-1].text:
-                self.groups[-1].text = data.strip()
-            self.groups[-1].html += data
+            if not self._groups[-1].text:
+                self._groups[-1].text = data.strip()
+            self._groups[-1]._html += data
 
     def handle_endtag(self, tag: str) -> None:
         if self._active:
-            self.groups[-1].html += f"</{tag}>"
-            self.counter[tag] -= 1
+            self._groups[-1]._html += f"</{tag}>"
+            self._counter[tag] -= 1
+
+    def remove_tags(self, strip: bool = True) -> str:
+        """\
+        Now: .strip()
+        """
+        message = "Marked for removal; use .strip()"
+        warnings.warn(message, category=FutureWarning, stacklevel=2)
+        return self.strip(whitespace=strip)
 
     def strip(self, whitespace: bool = True) -> str:
         """\
@@ -160,18 +159,41 @@ class Soup(HTMLParser):
         # ABCD
         ```
         """
-        text = re.sub("<[^>]+>", "", self.html)
+        text = re.sub("<[^>]+>", "", self._html)
         if whitespace:
             text = " ".join(text.split())
         return text
 
-    def remove_tags(self, strip: bool = True) -> str:
+    def _triage(self, groups: List, mode: str) -> DependentOnMode:
         """\
-        Now: .strip()
+        Private method for .find -> return
         """
-        message = "Marked for removal; use .strip()"
-        warnings.warn(message, category=FutureWarning, stacklevel=2)
-        return self.strip(whitespace=strip)
+        automatic = ["auto", "automatic"]
+        all = ["all", "list"]
+        first = ["first"]
+        last = ["last"]  # undocumented
+        random = ["random"]  # undocumented
+
+        if not groups:
+            if mode in all:
+                return []
+            else:
+                return None
+        elif mode in automatic:
+            if len(groups) == 1:
+                return groups[0]
+            else:
+                return groups
+        elif mode in all:
+            return groups
+        elif mode in first:
+            return groups[0]
+        elif mode in last:
+            return groups[-1]
+        elif mode in random:
+            return sample(groups, k=1)[0]
+        else:
+            raise ValueError(mode)
 
     def find(
         self,
@@ -181,7 +203,7 @@ class Soup(HTMLParser):
         partial: bool = True,
         mode: str = "automatic",
         strict: Optional[bool] = None,
-    ) -> Optional[Union[List["Soup"], "Soup"]]:
+    ) -> DependentOnMode:
         """\
         Return matching HTML elements
 
@@ -190,7 +212,7 @@ class Soup(HTMLParser):
         - tag: target element tag
         - attrs: target element attributes
         - partial: match on attributes
-        - mode: override return behavior {'auto/automatic', 'all/list', 'first'}
+        - mode: dependent return behavior {'auto/automatic', 'all/list', 'first'}
 
         Deprecations:
 
@@ -213,42 +235,18 @@ class Soup(HTMLParser):
         # 3
         ```
         """
-        self.counter: Counter = Counter()
-        self.groups: List = []
         self.tag = tag
         self.attrs = attrs
-        self.partial = partial
+        self._partial = partial
+        self._counter: Counter = Counter()
+        self._groups: List = []
 
         if strict is not None:
             message = "Marked for removal; use partial="
             warnings.warn(message, category=FutureWarning, stacklevel=2)
             partial = not strict
 
-        self.feed(self.html)
+        self.feed(self._html)
+        found = self._triage(self._groups, mode)
 
-        automatic = ["auto", "automatic"]
-        all = ["all", "list"]
-        first = ["first"]
-        last = ["last"]  # undocumented
-        random = ["random"]  # undocumented
-
-        if not self.groups:
-            if mode in all:
-                return []
-            else:
-                return None
-        elif mode in automatic:
-            if len(self.groups) == 1:
-                return self.groups[0]
-            else:
-                return self.groups
-        elif mode in all:
-            return self.groups
-        elif mode in first:
-            return self.groups[0]
-        elif mode in last:
-            return self.groups[-1]
-        elif mode in random:
-            return sample(self.groups, k=1)[0]
-        else:
-            raise ValueError(mode)
+        return found
