@@ -1,4 +1,6 @@
-from gazpacho.utils import match, recover_html_and_attrs
+from xml.parsers.expat import ExpatError
+import pytest
+from gazpacho.utils import format, match, recover_html_and_attrs
 
 
 def test_attr_match():
@@ -64,3 +66,14 @@ def test_multiple_partial_fail():
 def test_recover_html_and_attrs():
     html, attrs = recover_html_and_attrs("img", [("src", "example.png")])
     assert html == '<img src="example.png">' and attrs == {"src": "example.png"}
+
+
+def test_format():
+    html = """<ul><li>Item</li><li>Item</li></ul>"""
+    assert format(html) == "<ul>\n  <li>Item</li>\n  <li>Item</li>\n</ul>"
+
+
+def test_format_fail():
+    html = """<div><ul><li>Item</li><li>Item</li></ul>"""
+    with pytest.raises(ExpatError):
+        format(html, fail=True)
