@@ -1,5 +1,7 @@
 from xml.parsers.expat import ExpatError
+
 import pytest
+
 from gazpacho.utils import format, match, recover_html_and_attrs
 
 

@@ -1,16 +1,12 @@
+import re
+import warnings
 from collections import Counter
 from html.parser import HTMLParser
 from random import sample
-import re
-from typing import List, Optional, Tuple, Union
-import warnings
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 from .get import get
-from .utils import format, match, recover_html_and_attrs, VOID_TAGS
-
-
-ParserAttrs = List[Tuple[str, Optional[str]]]
-DependentOnMode = Optional[Union[List["Soup"], "Soup"]]
+from .utils import VOID_TAGS, ParserAttrs, format, match, recover_html_and_attrs
 
 
 class Soup(HTMLParser):
@@ -59,7 +55,7 @@ class Soup(HTMLParser):
         super().__init__()
         self._html = "" if not html else html
         self.tag: str = ""
-        self.attrs: Optional[dict] = None
+        self.attrs: Optional[Dict[str, Any]] = None
         self.text: str = ""
 
     def __repr__(self) -> str:
@@ -74,8 +70,8 @@ class Soup(HTMLParser):
     def get(
         cls,
         url: str,
-        params: Optional[dict] = None,
-        headers: Optional[dict] = None,
+        params: Optional[Dict[str, Any]] = None,
+        headers: Optional[Dict[str, Any]] = None,
     ) -> "Soup":
         """\
         Intialize with gazpacho.get
@@ -164,7 +160,9 @@ class Soup(HTMLParser):
             text = " ".join(text.split())
         return text
 
-    def _triage(self, groups: List, mode: str) -> DependentOnMode:
+    def _triage(
+        self, groups: List["Soup"], mode: str
+    ) -> Optional[Union[List["Soup"], "Soup"]]:
         """\
         Private method for .find -> return
         """
@@ -198,12 +196,12 @@ class Soup(HTMLParser):
     def find(
         self,
         tag: str,
-        attrs: Optional[dict] = None,
+        attrs: Optional[Dict[str, Any]] = None,
         *,
         partial: bool = True,
         mode: str = "automatic",
         strict: Optional[bool] = None,
-    ) -> DependentOnMode:
+    ) -> Optional[Union[List["Soup"], "Soup"]]:
         """\
         Return matching HTML elements
 
@@ -239,7 +237,7 @@ class Soup(HTMLParser):
         self.attrs = attrs
         self._partial = partial
         self._counter: Counter = Counter()
-        self._groups: List = []
+        self._groups: List["Soup"] = []
 
         if strict is not None:
             message = "Marked for removal; use partial="

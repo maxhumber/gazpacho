@@ -1,4 +1,5 @@
 import pytest
+
 from gazpacho.soup import Soup
 
 
@@ -232,7 +233,7 @@ def test_undocumented_last_mode(fake_html_6):
 def test_html_format_in_soup():
     html = """<ul><li>Item</li><li>Item</li></ul>"""
     soup = Soup(html)
-    assert soup.html == '<ul>\n  <li>Item</li>\n  <li>Item</li>\n</ul>'
+    assert soup.html == "<ul>\n  <li>Item</li>\n  <li>Item</li>\n</ul>"
 
 
 def test_bad_html_not_formatted_in_soup():

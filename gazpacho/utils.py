@@ -1,7 +1,9 @@
 from typing import Any, Dict, List, Optional, Tuple, Union
+from urllib.parse import quote, urlsplit, urlunsplit
 from xml.dom.minidom import parseString as string_to_dom
 from xml.parsers.expat import ExpatError
 
+ParserAttrs = List[Tuple[str, Optional[str]]]
 
 VOID_TAGS = [
     "area",
@@ -20,6 +22,15 @@ VOID_TAGS = [
     "track",
     "wbr",
 ]
+
+
+class HTTPError(Exception):
+    def __init__(self, code: int, msg: str) -> None:
+        self.code = code
+        self.msg = msg
+
+    def __str__(self):
+        return f"{self.code} - {self.msg}"
 
 
 def format(html: str, fail: bool = False) -> str:
@@ -106,9 +117,25 @@ def match(a: Dict[Any, Any], b: Dict[Any, Any], *, partial: bool = False) -> boo
     return True
 
 
+def sanitize(url: str) -> str:
+    """\
+    Sanitize and format a URL
+
+    Arguments:
+
+    - url: target page
+    """
+    scheme, netloc, path, query, fragment = urlsplit(url)
+    if not scheme:
+        scheme, netloc, path, query, fragment = urlsplit(f"http://{url}")
+    path = quote(path)
+    url = urlunsplit((scheme, netloc, path, query, fragment))
+    return url
+
+
 def recover_html_and_attrs(
-    tag: str, attrs: List[Tuple[str, Optional[str]]], startendtag: bool = False
-) -> Tuple[str, Dict[Any, Any]]:
+    tag: str, attrs: ParserAttrs, startendtag: bool = False
+) -> Tuple[str, Dict[str, Any]]:
     """\
     Recover html and attrs from HTMLParser feed
 
