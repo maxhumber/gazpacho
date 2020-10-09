@@ -81,6 +81,17 @@ def test_format_fail():
         format(html, fail=True)
 
 
+def test_format_void_tag():
+    html = """<body><img src="self-closing.png"/><img src="void.png"></body>"""
+    assert format(html) == """<body>\n  <img src="self-closing.png"/>\n  <img src="void.png">\n</body>"""
+
+
+def test_format_invalid_void_tag_fail():
+    html = """<body><xxx src="void.png"></body>"""
+    with pytest.raises(ExpatError):
+        format(html, fail=True)
+
+
 def test_sanitize_weird_characters():
     url = sanitize("https://httpbin.org/anything/drãke")
     assert url == "https://httpbin.org/anything/dr%C3%A3ke"
