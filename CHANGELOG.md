@@ -8,6 +8,11 @@ pip install -U gazpacho
 
 ### Changelog
 
+#### 1.1 (2020-10-09)
+
+- Feature: now [PEP 561](https://www.python.org/dev/peps/pep-0561/) compliant
+- Feature: `Soup` now automatically formats and indents (pretty print) HTML where possible
+
 #### 1.0 (2020-09-24)
 
 - Feature: gazpacho is now fully baked with type hints (thanks for the suggestion [**@ju-sh**](https://github.com/ju-sh)!)
