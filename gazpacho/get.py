@@ -28,14 +28,15 @@ def get(
     """
     url = sanitize(url)
     opener = build_opener()
+    ua = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:80.0) Gecko/20100101 Firefox/80.0"
     if params:
         url += "?" + urlencode(params)
-    if headers:
-        for h in headers.items():
-            opener.addheaders = [h]
-    if (headers and not headers.get("User-Agent")) or not headers:
-        ua = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:80.0) Gecko/20100101 Firefox/80.0"
+    if not headers:
         opener.addheaders = [("User-Agent", ua)]
+    elif headers and not headers.get("User-Agent"):
+        opener.addheaders = list(headers.items()) + [("User-Agent", ua)]
+    else:
+        opener.addheaders = list(headers.items())
     try:
         with opener.open(url) as response:
             content = response.read().decode("utf-8")
