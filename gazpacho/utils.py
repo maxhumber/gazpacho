@@ -65,7 +65,7 @@ def format(html: str, fail: bool = False) -> str:
         self_closing_html = sub(VOID_TAGS_RE, fr'\1 {placeholder}=""/\3', html)
         dom = string_to_dom(self_closing_html)
         ugly = dom.toprettyxml(indent="  ")
-        split = list(map(lambda x: x.replace(f' {placeholder}=""/', ''), filter(lambda x: len(x.strip()), ugly.split("\n"))))[1:]
+        split = [line.replace(f' {placeholder}=""/', '') for line in ugly.split("\n") if len(line.strip())][1:]
         html = "\n".join(split)
     except ExpatError as error:
         if fail:
