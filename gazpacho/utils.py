@@ -1,3 +1,6 @@
+from random import choice
+from re import sub
+from string import ascii_letters
 from typing import Any, Dict, List, Optional, Tuple, Union
 from urllib.parse import quote, urlsplit, urlunsplit
 from xml.dom.minidom import parseString as string_to_dom
@@ -23,6 +26,7 @@ VOID_TAGS = [
     "wbr",
 ]
 
+VOID_TAGS_RE = fr'(<({"|".join(VOID_TAGS)})[^/>]*)(>)'
 
 class HTTPError(Exception):
     def __init__(self, code: int, msg: str) -> None:
@@ -53,9 +57,15 @@ def format(html: str, fail: bool = False) -> str:
     ```
     """
     try:
-        dom = string_to_dom(html)
+        # attribute placeholder as a mark to transform back
+        while True:        
+            placeholder = ''.join(choice(ascii_letters) for i in range(8))        
+            if placeholder not in html:
+                break
+        self_closing_html = sub(VOID_TAGS_RE, fr'\1 {placeholder}=""/\3', html)
+        dom = string_to_dom(self_closing_html)
         ugly = dom.toprettyxml(indent="  ")
-        split = list(filter(lambda x: len(x.strip()), ugly.split("\n")))[1:]
+        split = list(map(lambda x: x.replace(f' {placeholder}=""/', ''), filter(lambda x: len(x.strip()), ugly.split("\n"))))[1:]
         html = "\n".join(split)
     except ExpatError as error:
         if fail:
