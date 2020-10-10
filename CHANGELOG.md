@@ -8,6 +8,11 @@ pip install -U gazpacho
 
 ### Changelog
 
+#### 1.1.1-beta (Unreleased)
+
+- Fix: headers issue (user agent) /u/lazerwarrior
+- Fix: format() with void tags **@mickm3n**
+
 #### 1.1 (2020-10-09)
 
 - Feature: now [PEP 561](https://www.python.org/dev/peps/pep-0561/) compliant

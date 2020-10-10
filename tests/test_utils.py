@@ -83,7 +83,10 @@ def test_format_fail():
 
 def test_format_void_tag():
     html = """<body><img src="self-closing.png"/><img src="void.png"></body>"""
-    assert format(html) == """<body>\n  <img src="self-closing.png"/>\n  <img src="void.png">\n</body>"""
+    assert (
+        format(html)
+        == """<body>\n  <img src="self-closing.png">\n  <img src="void.png">\n</body>"""
+    )
 
 
 def test_format_invalid_void_tag_fail():

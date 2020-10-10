@@ -1,9 +1,7 @@
-from random import choice
-from re import sub
-from string import ascii_letters
-from typing import Any, Dict, List, Optional, Tuple, Union, Callable
+import re
+from typing import Any, Dict, List, Optional, Tuple, Union
 from urllib.parse import quote, urlsplit, urlunsplit
-from xml.dom.minidom import Document, parseString as string_to_dom
+from xml.dom.minidom import parseString as string_to_dom
 from xml.parsers.expat import ExpatError
 
 ParserAttrs = List[Tuple[str, Optional[str]]]
@@ -26,7 +24,6 @@ VOID_TAGS = [
     "wbr",
 ]
 
-VOID_TAGS_RE = fr'(<({"|".join(VOID_TAGS)})[^/>]*)(>)'
 
 class HTTPError(Exception):
     def __init__(self, code: int, msg: str) -> None:
@@ -57,12 +54,14 @@ def format(html: str, fail: bool = False) -> str:
     ```
     """
     try:
-        dom, back_transform = _string_to_dom(html)
+        html_closed_voids = re.sub(
+            fr'(<({"|".join(VOID_TAGS)})[^/>]*)(>)', fr"\1/\3", html
+        )
+        dom = string_to_dom(html_closed_voids)
         ugly = dom.toprettyxml(indent="  ")
-        if back_transform:
-            ugly = back_transform(ugly)
         split = list(filter(lambda x: len(x.strip()), ugly.split("\n")))[1:]
-        html = "\n".join(split)
+        html_joined = "\n".join(split)
+        html = re.sub(fr'(<)({"|".join(VOID_TAGS)})(.*)(\/>)', fr"\1\2\3>", html_joined)
     except ExpatError as error:
         if fail:
             raise error
@@ -170,17 +169,3 @@ def recover_html_and_attrs(
     else:
         html = f"<{tag}{attrs_str}>"
     return html, attrs_dict
-
-
-def _string_to_dom(html: str) -> Tuple[Document, Union[Callable[[str], str], None]]:
-    try:
-        return string_to_dom(html), None
-    except ExpatError:
-        # try to transform void tags to self-closing tags and try again
-        # attribute placeholder as a mark to transform back
-        while True:
-            placeholder = ''.join(choice(ascii_letters) for i in range(8))
-            if placeholder not in html:
-                break
-        self_closing_html = sub(VOID_TAGS_RE, fr'\1 {placeholder}=""/\3', html)
-        return string_to_dom(self_closing_html), lambda s: s.replace(f' {placeholder}=""/', '')
