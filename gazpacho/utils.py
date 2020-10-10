@@ -1,9 +1,9 @@
 from random import choice
 from re import sub
 from string import ascii_letters
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union, Callable
 from urllib.parse import quote, urlsplit, urlunsplit
-from xml.dom.minidom import parseString as string_to_dom
+from xml.dom.minidom import Document, parseString as string_to_dom
 from xml.parsers.expat import ExpatError
 
 ParserAttrs = List[Tuple[str, Optional[str]]]
@@ -57,15 +57,11 @@ def format(html: str, fail: bool = False) -> str:
     ```
     """
     try:
-        # attribute placeholder as a mark to transform back
-        while True:        
-            placeholder = ''.join(choice(ascii_letters) for i in range(8))        
-            if placeholder not in html:
-                break
-        self_closing_html = sub(VOID_TAGS_RE, fr'\1 {placeholder}=""/\3', html)
-        dom = string_to_dom(self_closing_html)
+        dom, back_transform = _string_to_dom(html)
         ugly = dom.toprettyxml(indent="  ")
-        split = [line.replace(f' {placeholder}=""/', '') for line in ugly.split("\n") if len(line.strip())][1:]
+        if back_transform:
+            ugly = back_transform(ugly)
+        split = list(filter(lambda x: len(x.strip()), ugly.split("\n")))[1:]
         html = "\n".join(split)
     except ExpatError as error:
         if fail:
@@ -174,3 +170,17 @@ def recover_html_and_attrs(
     else:
         html = f"<{tag}{attrs_str}>"
     return html, attrs_dict
+
+
+def _string_to_dom(html: str) -> Tuple[Document, Union[Callable[[str], str], None]]:
+    try:
+        return string_to_dom(html), None
+    except ExpatError:
+        # try to transform void tags to self-closing tags and try again
+        # attribute placeholder as a mark to transform back
+        while True:
+            placeholder = ''.join(choice(ascii_letters) for i in range(8))
+            if placeholder not in html:
+                break
+        self_closing_html = sub(VOID_TAGS_RE, fr'\1 {placeholder}=""/\3', html)
+        return string_to_dom(self_closing_html), lambda s: s.replace(f' {placeholder}=""/', '')
