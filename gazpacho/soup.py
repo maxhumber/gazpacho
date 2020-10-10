@@ -70,8 +70,8 @@ class Soup(HTMLParser):
     def get(
         cls,
         url: str,
-        params: Optional[Dict[str, Any]] = None,
-        headers: Optional[Dict[str, Any]] = None,
+        params: Optional[Dict[str, Any]] = {},
+        headers: Optional[Dict[str, Any]] = {},
     ) -> "Soup":
         """\
         Intialize with gazpacho.get

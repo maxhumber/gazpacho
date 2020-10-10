@@ -6,11 +6,15 @@ from urllib.request import build_opener
 
 from .utils import HTTPError, sanitize
 
+USER_AGENT = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:80.0) Gecko/20100101 Firefox/80.0"
+)
+
 
 def get(
     url: str,
-    params: Optional[Dict[str, Any]] = None,
-    headers: Optional[Dict[str, Any]] = None,
+    params: Optional[Dict[str, Any]] = {},
+    headers: Optional[Dict[str, Any]] = {},
 ) -> Union[str, Dict[str, Any]]:
     """Retrive url contents
 
@@ -28,15 +32,9 @@ def get(
     """
     url = sanitize(url)
     opener = build_opener()
-    ua = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:80.0) Gecko/20100101 Firefox/80.0"
+    opener.addheaders = list({**{"User-Agent": USER_AGENT}, **headers}.items())
     if params:
         url += "?" + urlencode(params)
-    if not headers:
-        opener.addheaders = [("User-Agent", ua)]
-    elif headers and not headers.get("User-Agent"):
-        opener.addheaders = list(headers.items()) + [("User-Agent", ua)]
-    else:
-        opener.addheaders = list(headers.items())
     try:
         with opener.open(url) as response:
             content = response.read().decode("utf-8")
