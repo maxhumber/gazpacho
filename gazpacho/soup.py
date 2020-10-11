@@ -56,10 +56,16 @@ class Soup(HTMLParser):
         self._html = "" if not html else html
         self.tag: str = ""
         self.attrs: Optional[Dict[str, Any]] = None
-        self.text: str = ""
+        self.text: str = self.inner_text()
 
     def __repr__(self) -> str:
         return self.html
+
+    def inner_text(self):
+        element = re.match('<(.+)>.*>', self._html)
+        if element is None or self.find(element.group(1)) is None:
+            return ""
+        return self.find(element.group(1)).text
 
     @property
     def html(self) -> str:

@@ -103,7 +103,7 @@ def fake_html_6():
 def test_find_inner_text():
     html = """<p>&pound;600m</p>"""
     soup = Soup(html)
-    result = soup.find("p").text
+    result = soup.text
     assert result == "£600m"
 
 
