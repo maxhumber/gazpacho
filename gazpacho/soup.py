@@ -56,7 +56,7 @@ class Soup(HTMLParser):
         self._html = "" if not html else html
         self.tag: str = ""
         self.attrs: Optional[Dict[str, Any]] = None
-        self.text: str = ""
+        self.text: str = self.unescape(self.strip(html)) if html else ""
 
     def __repr__(self) -> str:
         return self.html
