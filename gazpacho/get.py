@@ -13,8 +13,8 @@ USER_AGENT = (
 
 def get(
     url: str,
-    params: Optional[Dict[str, Any]] = {},
-    headers: Optional[Dict[str, Any]] = {},
+    params: Dict[str, Any] = {},
+    headers: Dict[str, Any] = {},
 ) -> Union[str, Dict[str, Any]]:
     """Retrive url contents
 
