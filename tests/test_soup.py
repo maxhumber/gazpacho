@@ -107,6 +107,19 @@ def test_find_inner_text():
     assert result == "£600m"
 
 
+def test_find_inner_text_for_nested_html():
+    html = """
+                <html>
+                    <div>
+                        <p>&pound;600m</p>
+                    </div>
+                </html>
+            """
+    soup = Soup(html)
+    result = soup.text
+    assert result == "£600m"
+    
+
 def test_find(fake_html_1):
     soup = Soup(fake_html_1)
     result = soup.find("span")
