@@ -100,13 +100,6 @@ def fake_html_6():
     return html
 
 
-def test_find_inner_text():
-    html = """<p>&pound;600m</p>"""
-    soup = Soup(html)
-    result = soup.text
-    assert result == "£600m"
-
-
 def test_find(fake_html_1):
     soup = Soup(fake_html_1)
     result = soup.find("span")
@@ -247,3 +240,10 @@ def test_bad_html_not_formatted_in_soup():
     html = """<div><ul><li>Item</li><li>Item</li></ul>"""
     soup = Soup(html)
     assert soup.html == html
+
+
+def test_find_inner_text():
+    html = """<p>&pound;600m</p>"""
+    soup = Soup(html)
+    result = soup.text
+    assert result == "£600m"
