@@ -5,7 +5,7 @@ from html.parser import HTMLParser
 from random import sample
 from typing import Any, Dict, List, Optional, Tuple, Union
 
-from .get import get
+from .http.get import get
 from .utils import VOID_TAGS, ParserAttrs, format, match, recover_html_and_attrs
 
 
@@ -62,7 +62,7 @@ class Soup(HTMLParser):
         return self.html
 
     def inner_text(self):
-        element = re.match('<(.+)>.*>', self._html)
+        element = re.match("<(.+)>.*>", self._html)
         if element is None or self.find(element.group(1)) is None:
             return ""
         return self.find(element.group(1)).text

@@ -4,7 +4,7 @@ from urllib.error import HTTPError as UrllibHTTPError
 from urllib.parse import urlencode
 from urllib.request import build_opener
 
-from .utils import HTTPError, sanitize
+from ..utils import HTTPError, sanitize
 
 USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:80.0) Gecko/20100101 Firefox/80.0"
