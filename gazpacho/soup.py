@@ -5,7 +5,7 @@ from html.parser import HTMLParser
 from random import sample
 from typing import Any, Dict, List, Optional, Tuple, Union
 
-from .http.get import get
+from .get import get
 from .utils import VOID_TAGS, ParserAttrs, format, match, recover_html_and_attrs
 
 

@@ -1,8 +1,10 @@
 import json
+import sys
 from json.decoder import JSONDecodeError
+from unittest.mock import patch
 
 import pytest
-from gazpacho.http.get import HTTPError, UrllibHTTPError, get
+from gazpacho.get import HTTPError, UrllibHTTPError, build_opener, get
 
 
 def test_get(create_mock_responses):
