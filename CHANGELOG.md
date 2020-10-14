@@ -8,12 +8,13 @@ pip install -U gazpacho
 
 ### Changelog
 
-#### 1.1.1-beta (Unreleased)
+#### 1.2-beta (Unreleased)
 
 - Fix: headers issue (user agent) thanks for pointing out /u/lazerwarrior
 - Fix: format() with void tags, credit: **@mickm3n**
 - Fix: mypy typing issue in get, credit: **@mickm3n**
 - Fix: .text works immediately on object creation now, credit: **@vyshakhj**
+- Improvement: mocking courtesy of @saibot94
 
 #### 1.1 (2020-10-09)
 

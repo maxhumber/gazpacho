@@ -61,6 +61,15 @@ class Soup(HTMLParser):
     def __repr__(self) -> str:
         return self.html
 
+<<<<<<< HEAD
+=======
+    def inner_text(self):
+        element = re.match("<(.+)>.*>", self._html)
+        if element is None or self.find(element.group(1)) is None:
+            return ""
+        return self.find(element.group(1)).text
+
+>>>>>>> 3a912a0749cbf7ca9e55123408fe87ae8bc6e6f4
     @property
     def html(self) -> str:
         html = format(self._html)
