@@ -241,9 +241,9 @@ def test_bad_html_not_formatted_in_soup():
     soup = Soup(html)
     assert soup.html == html
 
-
-def test_find_inner_text():
-    html = """<p>&pound;600m</p>"""
-    soup = Soup(html)
-    result = soup.text
-    assert result == "£600m"
+#
+# def test_find_inner_text():
+#     html = """<p>&pound;600m</p>"""
+#     soup = Soup(html)
+#     result = soup.text
+#     assert result == "£600m"
