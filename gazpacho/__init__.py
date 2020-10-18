@@ -1,2 +1,2 @@
-from .get import get
-from .soup import Soup
+from .get import get # noqa
+from .soup import Soup # noqa
