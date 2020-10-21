@@ -136,6 +136,7 @@ class Soup(HTMLParser):
     def handle_endtag(self, tag: str) -> None:
         if self._active:
             self._groups[-1]._html += f"</{tag}>"
+            self._groups[-1].text = self._groups[-1].inner_text()
             self._counter[tag] -= 1
 
     def remove_tags(self, strip: bool = True) -> str:
