@@ -26,4 +26,6 @@ deploy:
   password: $PYPI_PASSWORD
   on:
     tags: true
-  distributions: "sdist bdist_wheel"
+
+after_success:
+  - portray on_github_pages
