@@ -3,7 +3,7 @@ import warnings
 from collections import Counter
 from html.parser import HTMLParser
 from random import sample
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Union
 
 from .get import get
 from .utils import VOID_TAGS, ParserAttrs, format, match, recover_html_and_attrs
@@ -62,7 +62,7 @@ class Soup(HTMLParser):
         return self.html
 
     def inner_text(self):
-        element = re.match('<(.+)>.*>', self._html)
+        element = re.match(r'<(.*)>(.*?)</\1>', re.sub(r"[\n\t\s]*", "", self._html))
         if element is None or self.find(element.group(1)) is None:
             return ""
         return self.find(element.group(1)).text
@@ -128,10 +128,12 @@ class Soup(HTMLParser):
             if not self._groups[-1].text:
                 self._groups[-1].text = data.strip()
             self._groups[-1]._html += data
+            self._groups[-1].text = self._groups[-1].inner_text()
 
     def handle_endtag(self, tag: str) -> None:
         if self._active:
             self._groups[-1]._html += f"</{tag}>"
+            self._groups[-1].text = self._groups[-1].inner_text()
             self._counter[tag] -= 1
 
     def remove_tags(self, strip: bool = True) -> str:
