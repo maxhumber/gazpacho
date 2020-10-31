@@ -37,7 +37,7 @@ If you answer a question please submit a PR!
 | [Fetch all href link using selenium in python](https://stackoverflow.com/questions/34759787/fetch-all-href-link-using-selenium-in-python/64288868#64288868) | 🥫      |
 | [Python BeautifulSoup scrape tables](https://stackoverflow.com/questions/18966368/python-beautifulsoup-scrape-tables/64289447#64289447) | 🥫      |
 | [Getting the nth element using BeautifulSoup](https://stackoverflow.com/questions/8724352/getting-the-nth-element-using-beautifulsoup/64289530#64289530) | 🥫      |
-| [Extracting an attribute value with beautifulsoup](https://stackoverflow.com/questions/2612548/extracting-an-attribute-value-with-beautifulsoup) |        |
+| [Extracting an attribute value with beautifulsoup](https://stackoverflow.com/questions/2612548/extracting-an-attribute-value-with-beautifulsoup/64566792#64566792) |     🥫   |
 | [BeautifulSoup Grab Visible Webpage Text](https://stackoverflow.com/questions/1936466/beautifulsoup-grab-visible-webpage-text) |        |
 | [Parsing HTML using Python](https://stackoverflow.com/questions/11709079/parsing-html-using-python) |        |
 | [How to find children of nodes using BeautifulSoup](https://stackoverflow.com/questions/6287529/how-to-find-children-of-nodes-using-beautifulsoup) |        |
