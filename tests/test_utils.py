@@ -75,9 +75,39 @@ def test_format():
     assert format(html) == "<ul>\n  <li>Item</li>\n  <li>Item</li>\n</ul>"
 
 
-def test_format_fail():
-    html = """<div><ul><li>Item</li><li>Item</li></ul>"""
+def test_format_whitespace():
+    html = """<ul>                <li>Item</li           ><li>Item</li>
+
+    </ul       >"""
+    assert format(html) == "<ul>\n  <li>Item</li>\n  <li>Item</li>\n</ul>"
+
+
+def test_format_whitespace_inside_tag():
+    html = """<ul><li>Item</li><li>I t e m</li></ul>"""
+    assert format(html) == "<ul>\n  <li>Item</li>\n  <li>I t e m</li>\n</ul>"
+
+
+def test_format_fail_missing_closing():
     with pytest.raises(ExpatError):
+        html = """<div><ul><li>Item</li><li>Item</li></ul>"""
+        format(html, fail=True)
+
+
+def test_format_fail_closing_order():
+    with pytest.raises(ExpatError):
+        html = """<div><ul><li>Item</li><li>Item</li></div></ul>"""
+        format(html, fail=True)
+
+
+def test_format_leading_text():
+    with pytest.raises(ExpatError):
+        html = """Leading Text<ul><li>Item</li><li>Item</li></ul>"""
+        format(html, fail=True)
+
+
+def test_format_trailing_text():
+    with pytest.raises(ExpatError):
+        html = """<ul><li>Item</li><li>Item</li></ul>Trailing Text"""
         format(html, fail=True)
 
 
