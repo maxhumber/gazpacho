@@ -1,5 +1,5 @@
 import json
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, Union
 from urllib.error import HTTPError as UrllibHTTPError
 from urllib.parse import urlencode
 from urllib.request import build_opener
