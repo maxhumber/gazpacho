@@ -62,13 +62,10 @@ class Soup(HTMLParser):
         return self.html
 
     def inner_text(self):
-        without_tag = re.match(r"^<.*?>(.*)<\/.*?>$", self._html)
-        if without_tag is None:
-            without_tag = self._html
-        else:
-            without_tag = without_tag.group(1)
-        element = re.sub(r"(<.*?>.*?(?:<\/.*?>)+)", "", without_tag)
-        return self.unescape(element)
+        element = re.match(r'<(.*)>(.*?)</\1>', re.sub(r"[\n\t\s]*", "", self._html))
+        if element is None or self.find(element.group(1)) is None:
+            return ""
+        return self.find(element.group(1)).text
 
     @property
     def html(self) -> str:
