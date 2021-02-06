@@ -76,12 +76,16 @@ class Soup(HTMLParser):
     def get(
         cls,
         url: str,
-        params: Dict[str, Any] = {},
-        headers: Dict[str, Any] = {},
+        params: Dict[str, Any] = None,
+        headers: Dict[str, Any] = None,
     ) -> "Soup":
         """\
         Intialize with gazpacho.get
         """
+        if params is None:
+            params = {}
+        if headers is None:
+            headers = {}
         html = get(url, params, headers)
         if not isinstance(html, str):
             raise Exception(f"Unable to retrieve contents from {url}")
