@@ -113,12 +113,10 @@ def match(a: Dict[Any, Any], b: Dict[Any, Any], *, partial: bool = False) -> boo
         if not partial:
             if lhs == rhs:
                 continue
-            else:
-                return False
+            return False
         if lhs in rhs:
             continue
-        else:
-            return False
+        return False
     return True
 
 
