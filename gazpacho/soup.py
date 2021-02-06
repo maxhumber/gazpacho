@@ -183,13 +183,11 @@ class Soup(HTMLParser):
         if not groups:
             if mode in all:
                 return []
-            else:
-                return None
+            return None
         elif mode in automatic:
             if len(groups) == 1:
                 return groups[0]
-            else:
-                return groups
+            return groups
         elif mode in all:
             return groups
         elif mode in first:
