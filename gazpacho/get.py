@@ -24,8 +24,8 @@ def random_ua(string):
 
 def get(
     url: str,
-    params: Dict[str, Any] = {},
-    headers: Dict[str, Any] = {},
+    params: Dict[str, Any] = None,
+    headers: Dict[str, Any] = None,
 ) -> Union[str, Dict[str, Any]]:
     """Retrive url contents
 
@@ -41,6 +41,10 @@ def get(
     get('https://httpbin.org/anything', {'soup': 'gazpacho'})
     ```
     """
+    if params is None:
+        params = {}
+    if headers is None:
+        headers = {}
     url = sanitize(url)
     opener = build_opener()
     opener.addheaders = list({**{"User-Agent": random_ua(USER_AGENT)}, **headers}.items())
