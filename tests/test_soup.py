@@ -104,7 +104,8 @@ def test_find_inner_text():
     html = """<p>&pound;600m</p>"""
     soup = Soup(html)
     result = soup.text
-    assert result == "£600m"
+    if result != "£600m":
+        raise AssertionError
 
 
 def test_find_inner_text_for_nested_html():
@@ -117,103 +118,119 @@ def test_find_inner_text_for_nested_html():
             """
     soup = Soup(html)
     result = soup.text
-    assert result == "£600m"
+    if result != "£600m":
+        raise AssertionError
     
 
 def test_find(fake_html_1):
     soup = Soup(fake_html_1)
     result = soup.find("span")
-    assert str(result) == "<span>Hi</span>"
+    if str(result) != "<span>Hi</span>":
+        raise AssertionError
 
 
 def test_find_first(fake_html_1):
     soup = Soup(fake_html_1)
     result = soup.find("p", mode="first")
-    assert str(result) == "<p>'IDK!'</p>"
+    if str(result) != "<p>'IDK!'</p>":
+        raise AssertionError
 
 
 def test_find_with_attrs(fake_html_1):
     soup = Soup(fake_html_1)
     result = soup.find("p", {"id": "blarg"})
-    assert str(result) == '<p id="blarg">Try for 2</p>'
+    if str(result) != '<p id="blarg">Try for 2</p>':
+        raise AssertionError
 
 
 def test_find_multiple(fake_html_1):
     soup = Soup(fake_html_1)
     result = soup.find("div", {"class": "baz"})
-    assert len(result) == 2
-    assert str(result[1]) == '<div class="baz">Oh No!</div>'
+    if len(result) != 2:
+        raise AssertionError
+    if str(result[1]) != '<div class="baz">Oh No!</div>':
+        raise AssertionError
 
 
 def test_find_text(fake_html_1):
     soup = Soup(fake_html_1)
     result = soup.find("p", {"id": "blarg"})
-    assert result.text == "Try for 2"
+    if result.text != "Try for 2":
+        raise AssertionError
 
 
 def test_find_nested_groups(fake_html_2):
     soup = Soup(fake_html_2)
     results = soup.find("div", {"class": "foo"})
-    assert len(results) == 2
+    if len(results) != 2:
+        raise AssertionError
 
 
 def test_find_partial_false(fake_html_2):
     soup = Soup(fake_html_2)
     result = soup.find("div", {"class": "foo"}, partial=False, mode="all")
-    assert len(result) == 1
+    if len(result) != 1:
+        raise AssertionError
 
 
 def test_find_nested_empty_tag(fake_html_3):
     soup = Soup(fake_html_3)
     result = soup.find("a", {"class": "foo"})
-    assert len(result) == 2
+    if len(result) != 2:
+        raise AssertionError
 
 
 def test_find_mutliple_imgs(fake_html_3):
     soup = Soup(fake_html_3)
     middle = soup.find("img")[1]
-    assert middle.attrs["src"] == "bye.jpg"
+    if middle.attrs["src"] != "bye.jpg":
+        raise AssertionError
 
 
 def test_strip(fake_html_4):
     soup = Soup(fake_html_4)
     result = soup.strip()
-    assert (
-        result == "I like soup and I really like cold soup I guess hot soup is okay too"
-    )
+    if (
+        result != "I like soup and I really like cold soup I guess hot soup is okay too"
+    ):
+        raise AssertionError
 
 
 def test_strip_keep_whitespace(fake_html_4):
     soup = Soup(fake_html_4)
     result = soup.strip(whitespace=False)
-    assert (
-        result
-        == "    \n      I like soup and I really like cold soup\n      I guess hot soup is okay too\n    \n    "
-    )
+    if (
+        result != "    \n      I like soup and I really like cold soup\n      I guess hot soup is okay too\n    \n    "
+    ):
+        raise AssertionError
 
 
 def test_find_no_match_first(fake_html_1):
     soup = Soup(fake_html_1)
     result = soup.find("a", mode="first")
-    assert result is None
+    if result is not None:
+        raise AssertionError
 
 
 def test_find_no_match_all(fake_html_1):
     soup = Soup(fake_html_1)
     result = soup.find("a", mode="all")
-    assert result == []
+    if result != []:
+        raise AssertionError
 
 
 def test_find_no_match_auto(fake_html_1):
     soup = Soup(fake_html_1)
     result = soup.find("a", mode="auto")
-    assert result is None
+    if result is not None:
+        raise AssertionError
 
 
 def test_malformed_void_tags(fake_html_5):
     soup = Soup(fake_html_5)
     result = soup.find("img")
-    assert len(result) == 3
+    if len(result) != 3:
+        raise AssertionError
 
 
 def test_remove_tags_warning(fake_html_4):
@@ -230,7 +247,8 @@ def test_find_strict(fake_html_2):
 
 def test_soup_get_cls_method():
     soup = Soup.get("www.google.com")
-    assert "<!doctype html>" in str(soup).lower()
+    if "<!doctype html>" not in str(soup).lower():
+        raise AssertionError
 
 
 def test_bad_mode_argument(fake_html_1):
@@ -242,21 +260,25 @@ def test_bad_mode_argument(fake_html_1):
 def test_undocumented_random_mode(fake_html_6):
     soup = Soup(fake_html_6)
     pset = set([soup.find("p", mode="random").attrs["id"] for _ in range(10)])
-    assert len(pset) > 1
+    if len(pset) <= 1:
+        raise AssertionError
 
 
 def test_undocumented_last_mode(fake_html_6):
     soup = Soup(fake_html_6)
-    assert soup.find("p", mode="last").text == "G"
+    if soup.find("p", mode="last").text != "G":
+        raise AssertionError
 
 
 def test_html_format_in_soup():
     html = """<ul><li>Item</li><li>Item</li></ul>"""
     soup = Soup(html)
-    assert soup.html == "<ul>\n  <li>Item</li>\n  <li>Item</li>\n</ul>"
+    if soup.html != "<ul>\n  <li>Item</li>\n  <li>Item</li>\n</ul>":
+        raise AssertionError
 
 
 def test_bad_html_not_formatted_in_soup():
     html = """<div><ul><li>Item</li><li>Item</li></ul>"""
     soup = Soup(html)
-    assert soup.html == html
+    if soup.html != html:
+        raise AssertionError
