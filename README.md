@@ -2,7 +2,6 @@
   <img src="https://raw.githubusercontent.com/maxhumber/gazpacho/master/images/gazpacho.png" height="300px" alt="gazpacho">
 </h3>
 <p align="center">
-  <a href="https://travis-ci.org/maxhumber/gazpacho"><img alt="Travis" src="https://img.shields.io/travis/maxhumber/gazpacho.svg"></a>
   <a href="https://pypi.python.org/pypi/gazpacho"><img alt="PyPI" src="https://img.shields.io/pypi/v/gazpacho.svg"></a>
 	<a href="https://pypi.python.org/pypi/gazpacho"><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/gazpacho.svg"></a>
   <a href="https://pepy.tech/project/gazpacho"><img alt="Downloads" src="https://pepy.tech/badge/gazpacho"></a>  
