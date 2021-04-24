@@ -12,7 +12,8 @@ def test_get(create_mock_responses):
     url = "https://en.wikipedia.org/wiki/Gazpacho"
 
     content = get(url)
-    assert title in content
+    if title not in content:
+        raise AssertionError
 
 
 def test_get_invalid_content_type(create_mock_responses):
@@ -30,7 +31,8 @@ def test_get_headers(create_mock_responses):
     url = "https://httpbin.org/headers"
 
     content = get(url, headers=headers)
-    assert UA == content["headers"]["User-Agent"]
+    if UA != content["headers"]["User-Agent"]:
+        raise AssertionError
 
 
 def test_get_multiple_headers(create_mock_responses):
@@ -41,7 +43,8 @@ def test_get_multiple_headers(create_mock_responses):
     content = get(url, headers=headers)
     headers_set = set(headers.values())
     response_set = set(content["headers"].values())
-    assert headers_set.intersection(response_set) == {"Mozilla/5.0", "gzip"}
+    if headers_set.intersection(response_set) != {"Mozilla/5.0", "gzip"}:
+        raise AssertionError
 
 
 def test_get_params(create_mock_responses):
@@ -50,7 +53,8 @@ def test_get_params(create_mock_responses):
     url = "https://httpbin.org/anything"
 
     content = get(url, params)
-    assert params == content["args"]
+    if params != content["args"]:
+        raise AssertionError
 
 
 def test_HTTPError_404(create_mock_responses):

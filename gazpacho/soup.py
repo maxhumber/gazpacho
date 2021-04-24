@@ -76,12 +76,16 @@ class Soup(HTMLParser):
     def get(
         cls,
         url: str,
-        params: Dict[str, Any] = {},
-        headers: Dict[str, Any] = {},
+        params: Dict[str, Any] = None,
+        headers: Dict[str, Any] = None,
     ) -> "Soup":
         """\
         Intialize with gazpacho.get
         """
+        if params is None:
+            params = {}
+        if headers is None:
+            headers = {}
         html = get(url, params, headers)
         if not isinstance(html, str):
             raise Exception(f"Unable to retrieve contents from {url}")
@@ -183,13 +187,11 @@ class Soup(HTMLParser):
         if not groups:
             if mode in all:
                 return []
-            else:
-                return None
+            return None
         elif mode in automatic:
             if len(groups) == 1:
                 return groups[0]
-            else:
-                return groups
+            return groups
         elif mode in all:
             return groups
         elif mode in first:
