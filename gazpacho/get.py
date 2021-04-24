@@ -1,5 +1,5 @@
 import json
-from urllib.error import HTTPError as ULHError
+from urllib.error import HTTPError as UnderlyingError
 from urllib.parse import quote, urlencode, urlsplit, urlunsplit
 from urllib.request import build_opener
 
@@ -75,20 +75,24 @@ def get(url, params={}, *, headers={}, encoding="utf-8"):
 
     Params:
 
-    - url: target page
-    - params: GET request payload formatted as a dict
-    - headers: GET request headers formatted as a dict
-    - encoding: target page encoding
+    - url (str): target
+    - params (dict): GET request payload
+    - headers (dict): GET request headers
+    - encoding (str): content encoding
+
+    Returns:
+
+    - str/dict/None
 
     Example:
 
     ```
-    get('https://httpbin.org/anything', {'soup': 'gazpacho'})
+    get("https://httpbin.org/anything", {"soup": "gazpacho"})
     ```
     """
     url = URL(url, params)
     opener = Opener(headers, encoding)
     try:
         return opener.read(url)
-    except ULHError as e:
+    except UnderlyingError as e:
         raise HTTPError(e.code, e.msg) from None

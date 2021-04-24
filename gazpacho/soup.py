@@ -4,49 +4,137 @@ from collections import Counter
 from html.parser import HTMLParser
 from random import sample
 
-from .get import get
-from .utils import (VOID_TAGS, ParserAttrs, format, match,
-                    recover_html_and_attrs)
+
+class Parser(HTMLParser):
+    def __init__(self, html=""):
+        super().__init__()
+        self._html = "" if not html else html
+        self.tag = ""
+        self.attrs = None
+        self.text = ""
+
+    @staticmethod
+    def match(a, b, *, partial=False):
+        if (not a) or (not a and not b):
+            return True
+        if a and (not b):
+            return False
+        for key, lhs in a.items():
+            rhs = b.get(key)
+            if not rhs:
+                return False
+            if not partial:
+                if lhs == rhs:
+                    continue
+                return False
+            if lhs in rhs:
+                continue
+            return False
+        return True
+
+    @staticmethod
+    def recover_html_and_attrs(tag, attrs, startendtag=False):
+        if attrs:
+            attrs_dict = dict(attrs)
+            attrs_list = [f'{key}="{value}"' for key, value in attrs_dict.items()]
+            attrs_str = f' {" ".join(attrs_list)}'
+        else:
+            attrs_dict = {}
+            attrs_str = ""
+        if startendtag:
+            html = f"<{tag}{attrs_str} />"
+        else:
+            html = f"<{tag}{attrs_str}>"
+        return html, attrs_dict
+
+    @staticmethod
+    def is_void(tag):
+        return tag in [
+            "area",
+            "base",
+            "br",
+            "col",
+            "embed",
+            "hr",
+            "img",
+            "input",
+            "keygen",
+            "link",
+            "meta",
+            "param",
+            "source",
+            "track",
+            "wbr",
+        ]
+
+    @property
+    def is_active(self):
+        return sum(self._counter.values()) > 0
+
+    def handle_start(self, tag, attrs):
+        html, attrs_dict = recover_html_and_attrs(tag, attrs)
+        query_attrs = {} if not self.attrs else self.attrs
+        matching = match(query_attrs, attrs_dict, partial=self._partial)
+
+        if (tag == self.tag) and (matching) and (not self.is_active):
+            self._groups.append(Soup())
+            self._groups[-1].tag = tag
+            self._groups[-1].attrs = attrs_dict
+            self._groups[-1]._html += html
+            self._counter[tag] += 1
+            return
+
+        if self.is_active:
+            self._groups[-1]._html += html
+            self._counter[tag] += 1
+
+    def handle_starttag(self, tag, attrs):
+        self.handle_start(tag, attrs)
+        if self.is_active:
+            if self.is_void(tag):
+                self._counter[tag] -= 1
+
+    def handle_startendtag(self, tag, attrs):
+        self.handle_start(tag, attrs)
+        if self.is_active:
+            self._counter[tag] -= 1
+
+    def handle_data(self, data):
+        if self.is_active:
+            if not self._groups[-1].text:
+                self._groups[-1].text = data.strip()
+            self._groups[-1]._html += data
+            self._groups[-1].text = self._groups[-1].inner_text()
+
+    def handle_endtag(self, tag):
+        if self.is_active:
+            self._groups[-1]._html += f"</{tag}>"
+            self._groups[-1].text = self._groups[-1].inner_text()
+            self._counter[tag] -= 1
+
+    def find(
+        self,
+        tag,
+        attrs={},
+        *,
+        partial=True,
+        mode="automatic",
+        strict=None,
+    ):
+        self.tag = tag
+        self.attrs = attrs
+        self._partial = partial
+        self._counter = Counter()
+        self._groups = []
+        self.feed(self._html)
+        return self._groups
 
 
-class Soup(HTMLParser):
-    """\
-    HTML Soup Parser
-
-    Attributes:
-
-    - html: content to parse
-    - tag: element to match
-    - attrs: element attributes to match
-    - text: inner data
-
-    Methods:
-
-    - find: matching content by element tag (and attributes)
-    - strip: brackets, tags, and attributes from inner data
-    - get: alternate initializer
-
-    Deprecations:
-
-    - remove_tags: (as of 1.0) use strip
-
-    Examples:
-
-    ```
-    from gazpacho import Soup
-
-    html = "<div><p class='a'>1</p><p class='a'>2</p><p class='b'>3</p></div>"
-    url = "https://www.gazpacho.xyz"
-
-    soup = Soup(html)
-    soup = Soup.get(url)
-    ```
-    """
-
+class Parser(HTMLParser):
     def __dir__(self):
         return ["attrs", "find", "get", "html", "strip", "tag", "text"]
 
-    def __init__(self, html: Optional[str] = None) -> None:
+    def __init__(self, html=None):
         """\
         Arguments:
 
@@ -54,11 +142,11 @@ class Soup(HTMLParser):
         """
         super().__init__()
         self._html = "" if not html else html
-        self.tag: str = ""
-        self.attrs: Optional[Dict[str, Any]] = None
-        self.text: str = ""
+        self.tag = ""
+        self.attrs = None
+        self.text = ""
 
-    def __repr__(self) -> str:
+    def __repr__(self):
         return self.html
 
     def inner_text(self):
@@ -68,43 +156,39 @@ class Soup(HTMLParser):
         return self.find(element.group(1)).text
 
     @property
-    def html(self) -> str:
+    def html(self):
         html = format(self._html)
         return html
 
     @classmethod
     def get(
         cls,
-        url: str,
-        params: Dict[str, Any] = None,
-        headers: Dict[str, Any] = None,
-    ) -> "Soup":
+        url,
+        params={},
+        headers={},
+    ):
         """\
         Intialize with gazpacho.get
         """
-        if params is None:
-            params = {}
-        if headers is None:
-            headers = {}
         html = get(url, params, headers)
         if not isinstance(html, str):
             raise Exception(f"Unable to retrieve contents from {url}")
         return cls(html)
 
     @staticmethod
-    def _void(tag: str) -> bool:
+    def is_void(tag):
         return tag in VOID_TAGS
 
     @property
-    def _active(self) -> bool:
+    def is_active(self):
         return sum(self._counter.values()) > 0
 
-    def _handle_start(self, tag: str, attrs: ParserAttrs) -> None:
+    def handle_start(self, tag, attrs):
         html, attrs_dict = recover_html_and_attrs(tag, attrs)
         query_attrs = {} if not self.attrs else self.attrs
         matching = match(query_attrs, attrs_dict, partial=self._partial)
 
-        if (tag == self.tag) and (matching) and (not self._active):
+        if (tag == self.tag) and (matching) and (not self.is_active):
             self._groups.append(Soup())
             self._groups[-1].tag = tag
             self._groups[-1].attrs = attrs_dict
@@ -112,43 +196,35 @@ class Soup(HTMLParser):
             self._counter[tag] += 1
             return
 
-        if self._active:
+        if self.is_active:
             self._groups[-1]._html += html
             self._counter[tag] += 1
 
-    def handle_starttag(self, tag: str, attrs: ParserAttrs) -> None:
-        self._handle_start(tag, attrs)
-        if self._active:
-            if self._void(tag):
+    def handle_starttag(self, tag, attrs):
+        self.handle_start(tag, attrs)
+        if self.is_active:
+            if self.is_void(tag):
                 self._counter[tag] -= 1
 
-    def handle_startendtag(self, tag: str, attrs: ParserAttrs) -> None:
-        self._handle_start(tag, attrs)
-        if self._active:
+    def handle_startendtag(self, tag, attrs):
+        self.handle_start(tag, attrs)
+        if self.is_active:
             self._counter[tag] -= 1
 
-    def handle_data(self, data: str) -> None:
-        if self._active:
+    def handle_data(self, data):
+        if self.is_active:
             if not self._groups[-1].text:
                 self._groups[-1].text = data.strip()
             self._groups[-1]._html += data
             self._groups[-1].text = self._groups[-1].inner_text()
 
-    def handle_endtag(self, tag: str) -> None:
-        if self._active:
+    def handle_endtag(self, tag):
+        if self.is_active:
             self._groups[-1]._html += f"</{tag}>"
             self._groups[-1].text = self._groups[-1].inner_text()
             self._counter[tag] -= 1
 
-    def remove_tags(self, strip: bool = True) -> str:
-        """\
-        Now: .strip()
-        """
-        message = "Marked for removal; use .strip()"
-        warnings.warn(message, category=FutureWarning, stacklevel=2)
-        return self.strip(whitespace=strip)
-
-    def strip(self, whitespace: bool = True) -> str:
+    def strip(self, whitespace=True):
         """\
         Strip brackets, tags, and attributes from inner text
 
@@ -172,9 +248,7 @@ class Soup(HTMLParser):
             text = " ".join(text.split())
         return text
 
-    def _triage(
-        self, groups: List["Soup"], mode: str
-    ) -> Optional[Union[List["Soup"], "Soup"]]:
+    def _triage(self, groups, mode):
         """\
         Private method for .find -> return
         """
@@ -205,13 +279,13 @@ class Soup(HTMLParser):
 
     def find(
         self,
-        tag: str,
-        attrs: Optional[Dict[str, Any]] = None,
+        tag,
+        attrs={},
         *,
-        partial: bool = True,
-        mode: str = "automatic",
-        strict: Optional[bool] = None,
-    ) -> Optional[Union[List["Soup"], "Soup"]]:
+        partial=True,
+        mode="automatic",
+        strict=None,
+    ):
         """\
         Return matching HTML elements
 
@@ -248,13 +322,6 @@ class Soup(HTMLParser):
         self._partial = partial
         self._counter: Counter = Counter()
         self._groups: List["Soup"] = []
-
-        if strict is not None:
-            message = "Marked for removal; use partial="
-            warnings.warn(message, category=FutureWarning, stacklevel=2)
-            partial = not strict
-
         self.feed(self._html)
         found = self._triage(self._groups, mode)
-
         return found
