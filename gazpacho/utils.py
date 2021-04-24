@@ -1,10 +1,6 @@
 import re
-from typing import Any, Dict, List, Optional, Tuple
-from urllib.parse import quote, urlsplit, urlunsplit
 from xml.dom.minidom import parseString as string_to_dom
 from xml.parsers.expat import ExpatError
-
-ParserAttrs = List[Tuple[str, Optional[str]]]
 
 VOID_TAGS = [
     "area",
@@ -25,23 +21,14 @@ VOID_TAGS = [
 ]
 
 
-class HTTPError(Exception):
-    def __init__(self, code: int, msg: str) -> None:
-        self.code = code
-        self.msg = msg
-
-    def __str__(self):
-        return f"{self.code} - {self.msg}"
-
-
-def format(html: str, fail: bool = False) -> str:
+def format(html, fail=False):
     """\
-    Properly format and indent html
+    Indent and format html
 
     Arguments:
 
-    - html: to format
-    - fail: allowed to fail
+    - html: string to format
+    - fail: allowed to fail as a boolean
 
     Example:
     ```
@@ -68,7 +55,7 @@ def format(html: str, fail: bool = False) -> str:
     return html
 
 
-def match(a: Dict[Any, Any], b: Dict[Any, Any], *, partial: bool = False) -> bool:
+def match(a, b, *, partial=False):
     """\
     Match two dictionaries
 
@@ -120,33 +107,15 @@ def match(a: Dict[Any, Any], b: Dict[Any, Any], *, partial: bool = False) -> boo
     return True
 
 
-def sanitize(url: str) -> str:
-    """\
-    Sanitize and format a URL
-
-    Arguments:
-
-    - url: target page
-    """
-    scheme, netloc, path, query, fragment = urlsplit(url)
-    if not scheme:
-        scheme, netloc, path, query, fragment = urlsplit(f"http://{url}")
-    path = quote(path)
-    url = urlunsplit((scheme, netloc, path, query, fragment))
-    return url
-
-
-def recover_html_and_attrs(
-    tag: str, attrs: ParserAttrs, startendtag: bool = False
-) -> Tuple[str, Dict[str, Any]]:
+def recover_html_and_attrs(tag, attrs, startendtag=False):
     """\
     Recover html and attrs from HTMLParser feed
 
     Arguments:
 
     - tag: element tag
-    - attrs: element attributes
-    - startendtag: if startend tag
+    - attrs: element attributes formatted as a dict
+    - startendtag: boolean if start-end tag
 
     Example:
 

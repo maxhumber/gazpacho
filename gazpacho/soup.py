@@ -3,10 +3,10 @@ import warnings
 from collections import Counter
 from html.parser import HTMLParser
 from random import sample
-from typing import Any, Dict, List, Optional, Union
 
 from .get import get
-from .utils import VOID_TAGS, ParserAttrs, format, match, recover_html_and_attrs
+from .utils import (VOID_TAGS, ParserAttrs, format, match,
+                    recover_html_and_attrs)
 
 
 class Soup(HTMLParser):
@@ -61,15 +61,12 @@ class Soup(HTMLParser):
     def __repr__(self) -> str:
         return self.html
 
-<<<<<<< HEAD
-=======
     def inner_text(self):
-        element = re.match(r'<(.*)>(.*?)</\1>', re.sub(r"[\n\t\s]*", "", self._html))
+        element = re.match(r"<(.*)>(.*?)</\1>", re.sub(r"[\n\t\s]*", "", self._html))
         if element is None or self.find(element.group(1)) is None:
             return ""
         return self.find(element.group(1)).text
 
->>>>>>> b2e870de2639ba21c9929e6ab966c6e532cc74b8
     @property
     def html(self) -> str:
         html = format(self._html)

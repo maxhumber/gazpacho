@@ -128,7 +128,8 @@ def test_format_trailing_text():
 def test_format_void_tag():
     html = """<body><img src="self-closing.png"/><img src="void.png"></body>"""
     if (
-        format(html) != """<body>\n  <img src="self-closing.png">\n  <img src="void.png">\n</body>"""
+        format(html)
+        != """<body>\n  <img src="self-closing.png">\n  <img src="void.png">\n</body>"""
     ):
         raise AssertionError
 

@@ -1,39 +1,84 @@
 import json
-import random
-from typing import Any, Dict, Union
-from urllib.error import HTTPError as UrllibHTTPError
-from urllib.parse import urlencode
+from urllib.error import HTTPError as ULHError
+from urllib.parse import quote, urlencode, urlsplit, urlunsplit
 from urllib.request import build_opener
 
-from .utils import HTTPError, sanitize
 
-USER_AGENT = [
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:80.0) Gecko/20100101 Firefox/80.0",
-    "AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/61.0.3163.98 Mobile Safari/537.36",
-    "Mozilla/5.0 (Linux; Android 6.0.1; SM-G920V Build/MMB29K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.98 Mobile Safari/537.36",
-    "Mozilla/5.0 (Apple-iPhone7C2/1202.466; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A543 Safari/419.3"
-]
+class HTTPError(Exception):
+    def __init__(self, code, msg):
+        self.code = code
+        self.message = msg
 
-
-def random_ua(string):
-    list_length = len(string)
-    agent = random.randrange(list_length)
-    random_agent = string[agent]
-    return random_agent
+    def __str__(self):
+        return f"{self.code} - {self.message}"
 
 
-def get(
-    url: str,
-    params: Dict[str, Any] = None,
-    headers: Dict[str, Any] = None,
-) -> Union[str, Dict[str, Any]]:
-    """Retrive url contents
+class URL:
+    def __init__(self, url, params={}):
+        self._url = url
+        self._params = params
+        if not url.startswith("http://") or not url.startswith("https://"):
+            url = f"http://{url}"
+        scheme, netloc, path, query, fragment = urlsplit(url)
+        path = quote(path)
+        self.scheme = scheme
+        self.netloc = netloc
+        self.path = path
+        self.fragment = fragment
+        if params:
+            self.query = urlencode(params)
+        else:
+            self.query = query
+
+    def __repr__(self):
+        return f"{self.url}"
+
+    @property
+    def params(self):
+        if self._params:
+            return self._params
+        else:
+            return dict(parse.parse_qsl(self.query))
+
+    @property
+    def url(self):
+        return urlunsplit(
+            (self.scheme, self.netloc, self.path, self.query, self.fragment)
+        )
+
+
+class Opener:
+    USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:87.0) Gecko/20100101 Firefox/87.0"
+
+    def __init__(self, headers={}, encoding="utf-8"):
+        self.opener_director = build_opener()
+        self._headers = headers
+        self.encoding = encoding
+
+    @property
+    def headers(self):
+        headers = {**{"User-Agent": self.USER_AGENT}, **self._headers}
+        return list(headers.items())
+
+    def read(self, url):
+        opener = self.opener_director
+        opener.addheaders = self.headers
+        with opener.open(str(url)) as r:
+            content = r.read().decode(self.encoding)
+            if r.headers.get_content_type() == "application/json":
+                content = json.loads(content)
+        return content
+
+
+def get(url, params={}, *, headers={}, encoding="utf-8"):
+    """Retrieve the contents of a URL
 
     Params:
 
     - url: target page
-    - params: GET request payload
-    - headers: GET request headers
+    - params: GET request payload formatted as a dict
+    - headers: GET request headers formatted as a dict
+    - encoding: target page encoding
 
     Example:
 
@@ -41,20 +86,9 @@ def get(
     get('https://httpbin.org/anything', {'soup': 'gazpacho'})
     ```
     """
-    if params is None:
-        params = {}
-    if headers is None:
-        headers = {}
-    url = sanitize(url)
-    opener = build_opener()
-    opener.addheaders = list({**{"User-Agent": random_ua(USER_AGENT)}, **headers}.items())
-    if params:
-        url += "?" + urlencode(params)
+    url = URL(url, params)
+    opener = Opener(headers, encoding)
     try:
-        with opener.open(url) as response:
-            content = response.read().decode("utf-8")
-            if response.headers.get_content_type() == "application/json":
-                content = json.loads(content)
-    except UrllibHTTPError as e:
-        raise HTTPError(e.code, e.msg) from None  # type: ignore
-    return content
+        return opener.read(url)
+    except ULHError as e:
+        raise HTTPError(e.code, e.msg) from None

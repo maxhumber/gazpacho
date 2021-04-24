@@ -100,8 +100,6 @@ def fake_html_6():
     return html
 
 
-<<<<<<< HEAD
-=======
 def test_find_inner_text():
     html = """<p>&pound;600m</p>"""
     soup = Soup(html)
@@ -122,9 +120,8 @@ def test_find_inner_text_for_nested_html():
     result = soup.text
     if result != "£600m":
         raise AssertionError
-    
 
->>>>>>> b2e870de2639ba21c9929e6ab966c6e532cc74b8
+
 def test_find(fake_html_1):
     soup = Soup(fake_html_1)
     result = soup.find("span")
@@ -193,9 +190,7 @@ def test_find_mutliple_imgs(fake_html_3):
 def test_strip(fake_html_4):
     soup = Soup(fake_html_4)
     result = soup.strip()
-    if (
-        result != "I like soup and I really like cold soup I guess hot soup is okay too"
-    ):
+    if result != "I like soup and I really like cold soup I guess hot soup is okay too":
         raise AssertionError
 
 
@@ -203,7 +198,8 @@ def test_strip_keep_whitespace(fake_html_4):
     soup = Soup(fake_html_4)
     result = soup.strip(whitespace=False)
     if (
-        result != "    \n      I like soup and I really like cold soup\n      I guess hot soup is okay too\n    \n    "
+        result
+        != "    \n      I like soup and I really like cold soup\n      I guess hot soup is okay too\n    \n    "
     ):
         raise AssertionError
 
@@ -283,16 +279,5 @@ def test_html_format_in_soup():
 def test_bad_html_not_formatted_in_soup():
     html = """<div><ul><li>Item</li><li>Item</li></ul>"""
     soup = Soup(html)
-<<<<<<< HEAD
-    assert soup.html == html
-
-#
-# def test_find_inner_text():
-#     html = """<p>&pound;600m</p>"""
-#     soup = Soup(html)
-#     result = soup.text
-#     assert result == "£600m"
-=======
     if soup.html != html:
         raise AssertionError
->>>>>>> b2e870de2639ba21c9929e6ab966c6e532cc74b8
