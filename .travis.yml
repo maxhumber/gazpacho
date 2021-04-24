@@ -26,3 +26,6 @@ deploy:
   password: $PYPI_PASSWORD
   on:
     tags: true
+
+after_success:
+  - portray on_github_pages

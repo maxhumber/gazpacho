@@ -3,7 +3,7 @@ import warnings
 from collections import Counter
 from html.parser import HTMLParser
 from random import sample
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Union
 
 from .get import get
 from .utils import VOID_TAGS, ParserAttrs, format, match, recover_html_and_attrs
@@ -61,6 +61,15 @@ class Soup(HTMLParser):
     def __repr__(self) -> str:
         return self.html
 
+<<<<<<< HEAD
+=======
+    def inner_text(self):
+        element = re.match(r'<(.*)>(.*?)</\1>', re.sub(r"[\n\t\s]*", "", self._html))
+        if element is None or self.find(element.group(1)) is None:
+            return ""
+        return self.find(element.group(1)).text
+
+>>>>>>> b2e870de2639ba21c9929e6ab966c6e532cc74b8
     @property
     def html(self) -> str:
         html = format(self._html)
@@ -70,12 +79,16 @@ class Soup(HTMLParser):
     def get(
         cls,
         url: str,
-        params: Dict[str, Any] = {},
-        headers: Dict[str, Any] = {},
+        params: Dict[str, Any] = None,
+        headers: Dict[str, Any] = None,
     ) -> "Soup":
         """\
         Intialize with gazpacho.get
         """
+        if params is None:
+            params = {}
+        if headers is None:
+            headers = {}
         html = get(url, params, headers)
         if not isinstance(html, str):
             raise Exception(f"Unable to retrieve contents from {url}")
@@ -122,10 +135,12 @@ class Soup(HTMLParser):
             if not self._groups[-1].text:
                 self._groups[-1].text = data.strip()
             self._groups[-1]._html += data
+            self._groups[-1].text = self._groups[-1].inner_text()
 
     def handle_endtag(self, tag: str) -> None:
         if self._active:
             self._groups[-1]._html += f"</{tag}>"
+            self._groups[-1].text = self._groups[-1].inner_text()
             self._counter[tag] -= 1
 
     def remove_tags(self, strip: bool = True) -> str:
@@ -175,13 +190,11 @@ class Soup(HTMLParser):
         if not groups:
             if mode in all:
                 return []
-            else:
-                return None
+            return None
         elif mode in automatic:
             if len(groups) == 1:
                 return groups[0]
-            else:
-                return groups
+            return groups
         elif mode in all:
             return groups
         elif mode in first:

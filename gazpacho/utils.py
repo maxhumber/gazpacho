@@ -1,5 +1,5 @@
 import re
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple
 from urllib.parse import quote, urlsplit, urlunsplit
 from xml.dom.minidom import parseString as string_to_dom
 from xml.parsers.expat import ExpatError
@@ -113,12 +113,10 @@ def match(a: Dict[Any, Any], b: Dict[Any, Any], *, partial: bool = False) -> boo
         if not partial:
             if lhs == rhs:
                 continue
-            else:
-                return False
+            return False
         if lhs in rhs:
             continue
-        else:
-            return False
+        return False
     return True
 
 
