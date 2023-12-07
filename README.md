@@ -12,7 +12,7 @@
 
 ## About
 
-gazpacho is a simple, fast, and modern web scraping library. The library is stable, actively maintained, and installed with **zero** dependencies.
+gazpacho is a simple, fast, and modern web scraping library. The library is stable, and installed with **zero** dependencies.
 
 
 
